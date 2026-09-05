@@ -38,7 +38,7 @@
     "status": "DONE",
     "note": "Bootstrap increment, not in weighted features.json. 8% derived from foundation completeness of Phase B scope."
   },
-  "last_verified_commit": "PENDING_THIS_COMMIT",
+  "last_verified_commit": "b9ab8a2",
   "last_verified_at": "2026-09-06",
   "tests": {
     "unit": "PASS",
@@ -49,6 +49,8 @@
   },
   "ci": "NOT_RUN",
   "release_gate": "NOT_READY",
-  "blockers": ["BLOCK-001"],
+  "blockers": [
+    "BLOCK-001"
+  ],
   "next_action": "Implement P1-F-001 Authentication (users table exists; add login endpoint, JWT issuing, bcrypt hashing, middleware, unit+integration tests). Then P1-F-002/003 orgs+workspaces."
 }

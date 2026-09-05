@@ -44,7 +44,7 @@ NOT_STARTED (foundation P1-F-000 is DONE)
 
 ## Last Verified Commit
 
-see git log (foundation commit pushed 2026-09-06; verified green before push)
+b9ab8a2
 
 ## Next Exact Action
 
