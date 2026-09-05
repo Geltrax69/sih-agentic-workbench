@@ -1,0 +1,40 @@
+# env / secrets
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# build outputs
+bin/
+dist/
+build/
+*.exe
+apps/api/workbench-api
+apps/api/api
+
+# dependencies
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+
+# test / coverage
+coverage/
+*.out
+coverage.html
+
+# editors / os
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# local data
+data/
+logs/
+*.db
+*.sqlite

@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "project": "sih-agentic-workbench",
+  "project_number": 1,
+  "phase": "FOUNDATION",
+  "overall_status": "IN_PROGRESS",
+  "completion_percent": 8,
+  "current_feature": {
+    "id": "P1-F-001",
+    "name": "Authentication",
+    "status": "NOT_STARTED"
+  },
+  "completed_features": [],
+  "pending_features": [
+    "P1-F-001",
+    "P1-F-002",
+    "P1-F-003",
+    "P1-F-004",
+    "P1-F-005",
+    "P1-F-006",
+    "P1-F-007",
+    "P1-F-008",
+    "P1-F-009",
+    "P1-F-010",
+    "P1-F-011",
+    "P1-F-012",
+    "P1-F-013",
+    "P1-F-014",
+    "P1-F-015",
+    "P1-F-016",
+    "P1-F-017",
+    "P1-F-018",
+    "P1-F-019"
+  ],
+  "bootstrap": {
+    "id": "P1-F-000",
+    "name": "Repository foundation (compose, CI, migrations, service skeletons)",
+    "status": "DONE",
+    "note": "Bootstrap increment, not in weighted features.json. 8% derived from foundation completeness of Phase B scope."
+  },
+  "last_verified_commit": "PENDING_THIS_COMMIT",
+  "last_verified_at": "2026-09-06",
+  "tests": {
+    "unit": "PASS",
+    "integration": "PASS",
+    "e2e": "NOT_RUN",
+    "security": "NOT_RUN",
+    "performance": "NOT_RUN"
+  },
+  "ci": "NOT_RUN",
+  "release_gate": "NOT_READY",
+  "blockers": ["BLOCK-001"],
+  "next_action": "Implement P1-F-001 Authentication (users table exists; add login endpoint, JWT issuing, bcrypt hashing, middleware, unit+integration tests). Then P1-F-002/003 orgs+workspaces."
+}
