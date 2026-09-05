@@ -66,3 +66,10 @@ If green: update tracker, feature-done "feat: add organizations and workspaces w
 NOT READY
 
 Do not begin Project 2.
+
+## 2026-09-06 — SEQUENCE WAIVED BY USER
+
+User ordered Project 2 start before P1 release gate. This project is PAUSED,
+not complete. All work committed and pushed (102677f, CI green). A future
+session must resume here and finish the release gate before Project 1 can be
+declared complete — see next_action above.

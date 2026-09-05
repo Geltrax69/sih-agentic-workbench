@@ -82,3 +82,9 @@ Commit: P1-F-001 feature-done commit (this push)
 Notes:
 Bootstrap admin semantics: only when users table empty. Test data pollution of
 dev DB caused a false negative — resolved via dedicated workbench_test DB.
+
+## 2026-09-06 — Project 1 PAUSED by user decision
+
+The user ordered the program to move to Project 2 before the P1 release gate.
+Gate status: NOT_READY (1 of 19 features done; no waiver of quality — only of sequence).
+Resume path: .project-track/handoff.md next_action (P1-F-002/003 orgs+workspaces).
