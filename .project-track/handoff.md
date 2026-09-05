@@ -9,57 +9,57 @@ Project 1 of 5 (program tracker: ~/PROJECTS/sih-build-control)
 
 ## Current State
 
-Foundation (P1-F-000) is complete and was verified green before commit:
-full docker compose stack boots, migrations apply at API boot, all unit and
-integration tests pass, `make lint` and `make test` are green from repo root.
+P1-F-001 Authentication is DONE and verified: unit + integration green,
+live end-to-end login verified against the running compose stack
+(bootstrap admin → token → /auth/me), audit rows confirmed.
 
-Next feature: P1-F-001 Authentication.
+Next feature: P1-F-002 Organizations (+ P1-F-003 Workspaces, P1-F-004 RBAC).
 
 ## Work Completed This Session
 
-- Phase A discovery docs (requirements, user-stories, architecture, threat-model, testing)
-- Forge baseline (docs/forge-baseline.md) + migration plan (docs/forge-migration.md)
-- docker-compose.yml (postgres+pgvector, redis, minio, api, ai, web)
-- migrations/0001_init.sql — 16 core tables
-- Go API skeleton: config, db, migrate runner, health server, main (build/vet/test green)
-- Python AI service skeleton: sovereign-mode config policy + FastAPI healthz (8 tests green)
-- Web shell: Vite+React+TS+Tailwind+TanStack Query (build green)
-- GitHub Actions CI workflow (4 jobs)
-- Makefile contract (dev/build/lint/test/test-integration/seed/clean), venv-aware
+- internal/auth: password.go (bcrypt + timing equalizer), jwt.go (HS256 issue/parse),
+  service.go (Login, BootstrapAdmin), middleware.go (Bearer middleware + context keys),
+  handler.go (login + /auth/me routes)
+- internal/users store, internal/audit append-only recorder
+- main.go: bootstrap admin on startup, public /api/v1/auth/login, protected /api/v1 group
+- config: JWT_TTL_HOURS
+- tests: 10 auth unit tests; integration TestLoginFlow (6 subtests incl. audit verification)
+- Makefile: reads .env; test-integration uses dedicated workbench_test DB
+  (dev DB stays clean; CI parity)
 
-## Work Not Yet Completed
+## Gotchas Discovered
 
-- P1-F-001 Authentication (next)
-- P1-F-002..019 per features.json
-- CI not yet observed on GitHub (runs on first push)
+- Bootstrap admin only created when users table is EMPTY. Integration tests
+  seeding users into the dev DB previously blocked it — tests now run against
+  workbench_test via `make test-integration`.
+- Host port for postgres is 5433 locally (5432 occupied) — recorded in .env,
+  Makefile includes it.
 
 ## Files Most Relevant Next
 
-- apps/api/internal/httpapi/server.go (add /api/v1/auth/login + protected routes)
-- apps/api/internal/config/config.go (bootstrap admin envs already present)
-- migrations/ (users table exists in 0001)
-- docs/architecture.md (responsibility split)
+- apps/api/cmd/api/main.go (route wiring pattern: public group + protected group)
+- apps/api/internal/auth/middleware.go (context keys to reuse for RBAC)
+- migrations/0001_init.sql (organizations, organization_members, workspaces, workspace_members exist)
+- docs/architecture.md (Go owns authorization)
 
 ## Do Not Change
 
-- Go owns authorization / Python owns reasoning boundary (ADR-002)
-- pgvector before Qdrant (ADR-001)
-- health semantics: ai_service/model endpoint are OPTIONAL dependencies (must stay honest, not fatal)
-- task state names and audit append-only design (migration 0001)
+- Go owns authorization / Python owns reasoning (ADR-002)
+- audit is append-only (no update/delete paths)
+- login errors are generic (no user enumeration)
+- health semantics: model endpoint optional, postgres/redis required
 
 ## Next Exact Task
 
-Implement P1-F-001 Authentication:
-1. apps/api/internal/auth: bcrypt hashing, JWT issue/verify with unit tests
-2. POST /api/v1/auth/login (rate-limit later), bootstrap admin on startup
-3. Auth middleware protecting /api/v1/*
-4. Integration test: login ok → 200 + token; wrong password → 401; no token on protected route → 401
+P1-F-002/003: organizations + workspaces CRUD with membership middleware.
+Integration test must include cross-workspace denial (403) + audit event.
 
 Then run:
 make lint
 make test
+make test-integration
 
-If green: update tracker, feature-done "feat: add authentication with jwt and bootstrap admin"
+If green: update tracker, feature-done "feat: add organizations and workspaces with membership checks"
 
 ## Release Gate
 

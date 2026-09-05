@@ -2,17 +2,18 @@
   "schema_version": 1,
   "project": "sih-agentic-workbench",
   "project_number": 1,
-  "phase": "FOUNDATION",
+  "phase": "CORE_DOMAIN",
   "overall_status": "IN_PROGRESS",
-  "completion_percent": 8,
+  "completion_percent": 6,
   "current_feature": {
-    "id": "P1-F-001",
-    "name": "Authentication",
+    "id": "P1-F-002",
+    "name": "Organizations",
     "status": "NOT_STARTED"
   },
-  "completed_features": [],
+  "completed_features": [
+    "P1-F-001"
+  ],
   "pending_features": [
-    "P1-F-001",
     "P1-F-002",
     "P1-F-003",
     "P1-F-004",
@@ -38,13 +39,13 @@
     "status": "DONE",
     "note": "Bootstrap increment, not in weighted features.json. 8% derived from foundation completeness of Phase B scope."
   },
-  "last_verified_commit": "e765ac5",
+  "last_verified_commit": "PENDING_THIS_COMMIT",
   "last_verified_at": "2026-09-06",
   "tests": {
     "unit": "PASS",
     "integration": "PASS",
     "e2e": "NOT_RUN",
-    "security": "NOT_RUN",
+    "security": "PARTIAL",
     "performance": "NOT_RUN"
   },
   "ci": "PASS",
@@ -52,5 +53,5 @@
   "blockers": [
     "BLOCK-001"
   ],
-  "next_action": "Implement P1-F-001 Authentication (users table exists; add login endpoint, JWT issuing, bcrypt hashing, middleware, unit+integration tests). Then P1-F-002/003 orgs+workspaces."
+  "next_action": "Implement P1-F-002 Organizations + P1-F-003 Workspaces (CRUD + membership, protected routes, workspace isolation groundwork). Then P1-F-004 RBAC."
 }

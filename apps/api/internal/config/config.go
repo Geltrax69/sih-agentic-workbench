@@ -4,7 +4,9 @@ package config
 import (
 	"fmt"
 	"os"
+	"strconv"
 	"strings"
+	"time"
 )
 
 type Config struct {
@@ -23,6 +25,7 @@ type Config struct {
 	MigrationsDir       string
 	BootstrapAdminEmail string
 	BootstrapAdminPass  string
+	TokenTTL            time.Duration
 }
 
 func Load() (Config, error) {
@@ -43,6 +46,12 @@ func Load() (Config, error) {
 		BootstrapAdminEmail: envOr("BOOTSTRAP_ADMIN_EMAIL", "admin@example.com"),
 		BootstrapAdminPass:  os.Getenv("BOOTSTRAP_ADMIN_PASSWORD"),
 	}
+
+	ttlHours, err := strconv.Atoi(envOr("JWT_TTL_HOURS", "24"))
+	if err != nil || ttlHours <= 0 {
+		return c, fmt.Errorf("JWT_TTL_HOURS must be a positive integer")
+	}
+	c.TokenTTL = time.Duration(ttlHours) * time.Hour
 
 	if c.DatabaseURL == "" {
 		return c, fmt.Errorf("DATABASE_URL is required")

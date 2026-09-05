@@ -63,3 +63,22 @@ Notes:
 - Fixed gofmt check expression in ci.yml and gofmt-formatted 3 Go files
 - CI run 33991436900: all 4 jobs PASS (api, ai, web, integration)
 - Verified commit: e765ac5
+
+## 2026-09-06 — P1-F-001 Authentication DONE
+
+Completed:
+- bcrypt + JWT (HS256, TTL configurable), generic 401 with timing equalization
+- login endpoint + auth middleware + /auth/me; bootstrap admin on empty users table
+- append-only audit on login success/failure
+- 10 auth unit tests; integration TestLoginFlow (6 subtests) vs live postgres
+- live verification through running container (token → /auth/me roundtrip)
+- Makefile: .env-aware; integration tests isolated to workbench_test DB
+
+Tests:
+- unit PASS, integration PASS, CI PASS (prior commit e765ac5)
+
+Commit: P1-F-001 feature-done commit (this push)
+
+Notes:
+Bootstrap admin semantics: only when users table empty. Test data pollution of
+dev DB caused a false negative — resolved via dedicated workbench_test DB.

@@ -1,21 +1,192 @@
 [
-  {"id": "P1-F-001", "name": "Authentication", "weight": 5, "status": "NOT_STARTED", "acceptance_criteria_total": 0, "acceptance_criteria_passed": 0, "tests": "NOT_RUN", "commit": null},
-  {"id": "P1-F-002", "name": "Organizations", "weight": 3, "status": "NOT_STARTED", "acceptance_criteria_total": 0, "acceptance_criteria_passed": 0, "tests": "NOT_RUN", "commit": null},
-  {"id": "P1-F-003", "name": "Workspaces", "weight": 3, "status": "NOT_STARTED", "acceptance_criteria_total": 0, "acceptance_criteria_passed": 0, "tests": "NOT_RUN", "commit": null},
-  {"id": "P1-F-004", "name": "RBAC", "weight": 5, "status": "NOT_STARTED", "acceptance_criteria_total": 0, "acceptance_criteria_passed": 0, "tests": "NOT_RUN", "commit": null},
-  {"id": "P1-F-005", "name": "Model adapter", "weight": 4, "status": "NOT_STARTED", "acceptance_criteria_total": 0, "acceptance_criteria_passed": 0, "tests": "NOT_RUN", "commit": null},
-  {"id": "P1-F-006", "name": "Document storage", "weight": 3, "status": "NOT_STARTED", "acceptance_criteria_total": 0, "acceptance_criteria_passed": 0, "tests": "NOT_RUN", "commit": null},
-  {"id": "P1-F-007", "name": "Ingestion", "weight": 6, "status": "NOT_STARTED", "acceptance_criteria_total": 0, "acceptance_criteria_passed": 0, "tests": "NOT_RUN", "commit": null},
-  {"id": "P1-F-008", "name": "Vector retrieval", "weight": 5, "status": "NOT_STARTED", "acceptance_criteria_total": 0, "acceptance_criteria_passed": 0, "tests": "NOT_RUN", "commit": null},
-  {"id": "P1-F-009", "name": "Knowledge graph", "weight": 4, "status": "NOT_STARTED", "acceptance_criteria_total": 0, "acceptance_criteria_passed": 0, "tests": "NOT_RUN", "commit": null},
-  {"id": "P1-F-010", "name": "Confidence gate", "weight": 4, "status": "NOT_STARTED", "acceptance_criteria_total": 0, "acceptance_criteria_passed": 0, "tests": "NOT_RUN", "commit": null},
-  {"id": "P1-F-011", "name": "Planner", "weight": 5, "status": "NOT_STARTED", "acceptance_criteria_total": 0, "acceptance_criteria_passed": 0, "tests": "NOT_RUN", "commit": null},
-  {"id": "P1-F-012", "name": "Executor", "weight": 5, "status": "NOT_STARTED", "acceptance_criteria_total": 0, "acceptance_criteria_passed": 0, "tests": "NOT_RUN", "commit": null},
-  {"id": "P1-F-013", "name": "Tool registry", "weight": 5, "status": "NOT_STARTED", "acceptance_criteria_total": 0, "acceptance_criteria_passed": 0, "tests": "NOT_RUN", "commit": null},
-  {"id": "P1-F-014", "name": "Approval workflow", "weight": 4, "status": "NOT_STARTED", "acceptance_criteria_total": 0, "acceptance_criteria_passed": 0, "tests": "NOT_RUN", "commit": null},
-  {"id": "P1-F-015", "name": "Audit", "weight": 3, "status": "NOT_STARTED", "acceptance_criteria_total": 0, "acceptance_criteria_passed": 0, "tests": "NOT_RUN", "commit": null},
-  {"id": "P1-F-016", "name": "Memory", "weight": 3, "status": "NOT_STARTED", "acceptance_criteria_total": 0, "acceptance_criteria_passed": 0, "tests": "NOT_RUN", "commit": null},
-  {"id": "P1-F-017", "name": "Workbench UI", "weight": 6, "status": "NOT_STARTED", "acceptance_criteria_total": 0, "acceptance_criteria_passed": 0, "tests": "NOT_RUN", "commit": null},
-  {"id": "P1-F-018", "name": "Evaluation suite", "weight": 4, "status": "NOT_STARTED", "acceptance_criteria_total": 0, "acceptance_criteria_passed": 0, "tests": "NOT_RUN", "commit": null},
-  {"id": "P1-F-019", "name": "Demo", "weight": 4, "status": "NOT_STARTED", "acceptance_criteria_total": 0, "acceptance_criteria_passed": 0, "tests": "NOT_RUN", "commit": null}
+  {
+    "id": "P1-F-001",
+    "name": "Authentication",
+    "weight": 5,
+    "status": "DONE",
+    "acceptance_criteria_total": 3,
+    "acceptance_criteria_passed": 3,
+    "tests": "PASS",
+    "commit": "PENDING"
+  },
+  {
+    "id": "P1-F-002",
+    "name": "Organizations",
+    "weight": 3,
+    "status": "NOT_STARTED",
+    "acceptance_criteria_total": 0,
+    "acceptance_criteria_passed": 0,
+    "tests": "NOT_RUN",
+    "commit": null
+  },
+  {
+    "id": "P1-F-003",
+    "name": "Workspaces",
+    "weight": 3,
+    "status": "NOT_STARTED",
+    "acceptance_criteria_total": 0,
+    "acceptance_criteria_passed": 0,
+    "tests": "NOT_RUN",
+    "commit": null
+  },
+  {
+    "id": "P1-F-004",
+    "name": "RBAC",
+    "weight": 5,
+    "status": "NOT_STARTED",
+    "acceptance_criteria_total": 0,
+    "acceptance_criteria_passed": 0,
+    "tests": "NOT_RUN",
+    "commit": null
+  },
+  {
+    "id": "P1-F-005",
+    "name": "Model adapter",
+    "weight": 4,
+    "status": "NOT_STARTED",
+    "acceptance_criteria_total": 0,
+    "acceptance_criteria_passed": 0,
+    "tests": "NOT_RUN",
+    "commit": null
+  },
+  {
+    "id": "P1-F-006",
+    "name": "Document storage",
+    "weight": 3,
+    "status": "NOT_STARTED",
+    "acceptance_criteria_total": 0,
+    "acceptance_criteria_passed": 0,
+    "tests": "NOT_RUN",
+    "commit": null
+  },
+  {
+    "id": "P1-F-007",
+    "name": "Ingestion",
+    "weight": 6,
+    "status": "NOT_STARTED",
+    "acceptance_criteria_total": 0,
+    "acceptance_criteria_passed": 0,
+    "tests": "NOT_RUN",
+    "commit": null
+  },
+  {
+    "id": "P1-F-008",
+    "name": "Vector retrieval",
+    "weight": 5,
+    "status": "NOT_STARTED",
+    "acceptance_criteria_total": 0,
+    "acceptance_criteria_passed": 0,
+    "tests": "NOT_RUN",
+    "commit": null
+  },
+  {
+    "id": "P1-F-009",
+    "name": "Knowledge graph",
+    "weight": 4,
+    "status": "NOT_STARTED",
+    "acceptance_criteria_total": 0,
+    "acceptance_criteria_passed": 0,
+    "tests": "NOT_RUN",
+    "commit": null
+  },
+  {
+    "id": "P1-F-010",
+    "name": "Confidence gate",
+    "weight": 4,
+    "status": "NOT_STARTED",
+    "acceptance_criteria_total": 0,
+    "acceptance_criteria_passed": 0,
+    "tests": "NOT_RUN",
+    "commit": null
+  },
+  {
+    "id": "P1-F-011",
+    "name": "Planner",
+    "weight": 5,
+    "status": "NOT_STARTED",
+    "acceptance_criteria_total": 0,
+    "acceptance_criteria_passed": 0,
+    "tests": "NOT_RUN",
+    "commit": null
+  },
+  {
+    "id": "P1-F-012",
+    "name": "Executor",
+    "weight": 5,
+    "status": "NOT_STARTED",
+    "acceptance_criteria_total": 0,
+    "acceptance_criteria_passed": 0,
+    "tests": "NOT_RUN",
+    "commit": null
+  },
+  {
+    "id": "P1-F-013",
+    "name": "Tool registry",
+    "weight": 5,
+    "status": "NOT_STARTED",
+    "acceptance_criteria_total": 0,
+    "acceptance_criteria_passed": 0,
+    "tests": "NOT_RUN",
+    "commit": null
+  },
+  {
+    "id": "P1-F-014",
+    "name": "Approval workflow",
+    "weight": 4,
+    "status": "NOT_STARTED",
+    "acceptance_criteria_total": 0,
+    "acceptance_criteria_passed": 0,
+    "tests": "NOT_RUN",
+    "commit": null
+  },
+  {
+    "id": "P1-F-015",
+    "name": "Audit",
+    "weight": 3,
+    "status": "NOT_STARTED",
+    "acceptance_criteria_total": 0,
+    "acceptance_criteria_passed": 0,
+    "tests": "NOT_RUN",
+    "commit": null
+  },
+  {
+    "id": "P1-F-016",
+    "name": "Memory",
+    "weight": 3,
+    "status": "NOT_STARTED",
+    "acceptance_criteria_total": 0,
+    "acceptance_criteria_passed": 0,
+    "tests": "NOT_RUN",
+    "commit": null
+  },
+  {
+    "id": "P1-F-017",
+    "name": "Workbench UI",
+    "weight": 6,
+    "status": "NOT_STARTED",
+    "acceptance_criteria_total": 0,
+    "acceptance_criteria_passed": 0,
+    "tests": "NOT_RUN",
+    "commit": null
+  },
+  {
+    "id": "P1-F-018",
+    "name": "Evaluation suite",
+    "weight": 4,
+    "status": "NOT_STARTED",
+    "acceptance_criteria_total": 0,
+    "acceptance_criteria_passed": 0,
+    "tests": "NOT_RUN",
+    "commit": null
+  },
+  {
+    "id": "P1-F-019",
+    "name": "Demo",
+    "weight": 4,
+    "status": "NOT_STARTED",
+    "acceptance_criteria_total": 0,
+    "acceptance_criteria_passed": 0,
+    "tests": "NOT_RUN",
+    "commit": null
+  }
 ]

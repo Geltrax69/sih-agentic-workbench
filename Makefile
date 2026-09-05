@@ -1,5 +1,14 @@
 AI_PY := $(shell cd services/ai && if [ -x .venv/bin/python ]; then echo .venv/bin/python; else echo python3; fi)
 
+# Local overrides (ports, credentials) live in .env; git-ignored.
+ifneq (,$(wildcard .env))
+include .env
+endif
+
+POSTGRES_USER ?= workbench
+POSTGRES_PASSWORD ?= workbench-dev-only
+POSTGRES_PORT ?= 5432
+
 .PHONY: dev dev-build dev-down dev-logs build lint test test-unit test-integration test-e2e test-security test-performance seed clean
 
 # ---------- development ----------
@@ -57,8 +66,10 @@ test-unit-ai:
 test-unit-web:
 	cd apps/web && npm run build
 
-test-integration: ## requires running services (make dev)
-	cd apps/api && DATABASE_URL="$${DATABASE_URL:-postgres://workbench:workbench-dev-only@localhost:$${POSTGRES_PORT:-5432}/workbench?sslmode=disable}" go test -tags=integration ./tests/integration/... -count=1
+test-integration: ## uses dedicated workbench_test DB (keeps dev data clean)
+	@docker compose exec -T postgres psql -U $(POSTGRES_USER) -d workbench -tAc "SELECT 1 FROM pg_database WHERE datname='workbench_test'" | grep -q 1 || \
+		docker compose exec -T postgres psql -U $(POSTGRES_USER) -d workbench -c "CREATE DATABASE workbench_test"
+	cd apps/api && DATABASE_URL="postgres://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@localhost:$(POSTGRES_PORT)/workbench_test?sslmode=disable" go test -tags=integration ./tests/integration/... -count=1
 	cd services/ai && $(AI_PY) -m pytest tests/integration -q
 
 

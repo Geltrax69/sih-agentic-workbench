@@ -13,10 +13,13 @@ import (
 
 	"github.com/redis/go-redis/v9"
 
+	"github.com/Geltrax69/sih-agentic-workbench/apps/api/internal/audit"
+	"github.com/Geltrax69/sih-agentic-workbench/apps/api/internal/auth"
 	"github.com/Geltrax69/sih-agentic-workbench/apps/api/internal/config"
 	"github.com/Geltrax69/sih-agentic-workbench/apps/api/internal/db"
 	"github.com/Geltrax69/sih-agentic-workbench/apps/api/internal/httpapi"
 	"github.com/Geltrax69/sih-agentic-workbench/apps/api/internal/migrate"
+	"github.com/Geltrax69/sih-agentic-workbench/apps/api/internal/users"
 )
 
 func main() {
@@ -62,6 +65,19 @@ func run() error {
 	rdb := redis.NewClient(redisOpts)
 	defer rdb.Close()
 
+	// --- identity: bootstrap admin, then auth service + routes ---
+	auditRec := audit.NewRecorder(pool)
+	userStore := users.NewStore(pool)
+	authSvc := auth.NewService(userStore, auditRec, cfg.JWTSecret, cfg.TokenTTL)
+
+	created, err := authSvc.BootstrapAdmin(ctx, cfg.BootstrapAdminEmail, cfg.BootstrapAdminPass, "Platform Admin")
+	if err != nil {
+		return err
+	}
+	if created {
+		slog.Info("bootstrap admin created", "email", cfg.BootstrapAdminEmail)
+	}
+
 	ginMode := ginModeFor(cfg.Env)
 	srv := httpapi.NewServer(ginMode)
 	srv.AddRequired(httpapi.CheckerFunc{N: "postgres", F: pool.Ping})
@@ -84,9 +100,19 @@ func run() error {
 		return nil
 	}})
 
+	engine := srv.Router()
+
+	// /api/v1/auth/login is public; everything in the protected group
+	// requires a valid bearer token. Future features mount here.
+	auth.RegisterRoutes(
+		engine.Group("/api/v1"),
+		engine.Group("/api/v1", auth.Middleware(cfg.JWTSecret)),
+		authSvc,
+	)
+
 	httpServer := &http.Server{
 		Addr:              ":" + cfg.APIPort,
-		Handler:           srv.Router(),
+		Handler:           engine,
 		ReadHeaderTimeout: 10 * time.Second,
 	}
 
