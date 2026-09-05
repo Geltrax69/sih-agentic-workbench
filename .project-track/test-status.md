@@ -9,7 +9,7 @@ PASS
 Commands:
 make test-unit  (go test ./..., pytest tests/unit, npm run build)
 
-Last verified: foundation commit 2026-09-06
+Last verified: e765ac5 (2026-09-06)
 
 ## Integration
 

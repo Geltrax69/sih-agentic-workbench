@@ -57,3 +57,9 @@ Notes:
 - Local postgres already occupied 5432; compose host port remapped to 5433 in
   local .env (not committed).
 - AI service health honestly reports model_endpoint down — BLOCK-001 confirmed live.
+
+## 2026-09-06 — CI green
+
+- Fixed gofmt check expression in ci.yml and gofmt-formatted 3 Go files
+- CI run 33991436900: all 4 jobs PASS (api, ai, web, integration)
+- Verified commit: e765ac5

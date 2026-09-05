@@ -36,7 +36,7 @@ NOT_STARTED (foundation P1-F-000 is DONE)
 - integration: PASS (go migration test vs live postgres; python healthz via TestClient)
 - E2E: NOT_RUN
 - security: NOT_RUN
-- CI: NOT_RUN (workflow file exists; first push will run it)
+- CI: PASS (all 4 jobs green at e765ac5)
 
 ## Known Issues
 

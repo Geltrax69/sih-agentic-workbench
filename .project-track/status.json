@@ -38,7 +38,7 @@
     "status": "DONE",
     "note": "Bootstrap increment, not in weighted features.json. 8% derived from foundation completeness of Phase B scope."
   },
-  "last_verified_commit": "b9ab8a2",
+  "last_verified_commit": "e765ac5",
   "last_verified_at": "2026-09-06",
   "tests": {
     "unit": "PASS",
@@ -47,7 +47,7 @@
     "security": "NOT_RUN",
     "performance": "NOT_RUN"
   },
-  "ci": "NOT_RUN",
+  "ci": "PASS",
   "release_gate": "NOT_READY",
   "blockers": [
     "BLOCK-001"
