@@ -16,8 +16,8 @@ type stubChecker struct {
 	err error
 }
 
-func (s stubChecker) Name() string                    { return s.n }
-func (s stubChecker) Check(_ context.Context) error   { return s.err }
+func (s stubChecker) Name() string                  { return s.n }
+func (s stubChecker) Check(_ context.Context) error { return s.err }
 
 func performHealth(t *testing.T, s *Server) (int, map[string]any) {
 	t.Helper()

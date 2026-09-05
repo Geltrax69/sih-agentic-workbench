@@ -132,7 +132,7 @@ func TestApplyRunsNewMigrationsOnly(t *testing.T) {
 
 func TestApplySkipsAlreadyAppliedAndStopsOnFailure(t *testing.T) {
 	dir := writeMigrations(t, map[string]string{
-		"0001_ok.sql": "CREATE TABLE ok();",
+		"0001_ok.sql":  "CREATE TABLE ok();",
 		"0002_bad.sql": "CREATE TABLE bad(",
 	})
 	fe := &fakeExec{

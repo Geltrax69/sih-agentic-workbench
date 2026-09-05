@@ -8,21 +8,21 @@ import (
 )
 
 type Config struct {
-	Env                  string
-	LogLevel             string
-	APIPort              string
-	DatabaseURL          string
-	RedisURL             string
-	JWTSecret            string
-	InternalAPISecret    string
-	AIServiceURL         string
-	S3Endpoint           string
-	S3Bucket             string
-	S3AccessKey          string
-	S3SecretKey          string
-	MigrationsDir        string
-	BootstrapAdminEmail  string
-	BootstrapAdminPass   string
+	Env                 string
+	LogLevel            string
+	APIPort             string
+	DatabaseURL         string
+	RedisURL            string
+	JWTSecret           string
+	InternalAPISecret   string
+	AIServiceURL        string
+	S3Endpoint          string
+	S3Bucket            string
+	S3AccessKey         string
+	S3SecretKey         string
+	MigrationsDir       string
+	BootstrapAdminEmail string
+	BootstrapAdminPass  string
 }
 
 func Load() (Config, error) {

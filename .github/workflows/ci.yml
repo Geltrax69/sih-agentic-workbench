@@ -17,7 +17,7 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version-file: apps/api/go.mod
-      - run: gofmt -l . && test -z "$$(gofmt -l .)"
+      - run: test -z "$(gofmt -l .)"
         name: gofmt check
       - run: go vet ./...
       - run: go test ./... -count=1
