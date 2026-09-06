@@ -5,6 +5,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/gin-gonic/gin"
 	"log/slog"
 	"net/http"
 	"os"
@@ -115,7 +116,8 @@ func run() error {
 	publicAPI := engine.Group("/api/v1")
 	protectedAPI := engine.Group("/api/v1", auth.Middleware(cfg.JWTSecret))
 	auth.RegisterRoutes(publicAPI, protectedAPI, authSvc)
-	wsHandler := workspaces.NewHandler(workspaces.NewStore(pool), auditRec)
+	wsStore := workspaces.NewStore(pool)
+	wsHandler := workspaces.NewHandler(wsStore, auditRec)
 	wsHandler.Register(protectedAPI)
 
 	minioClient, err := minio.New(strings.TrimPrefix(cfg.S3Endpoint, "http://"), &minio.Options{
@@ -136,6 +138,9 @@ func run() error {
 		if err := aiSvc.TriggerIngestion(context.Background()); err != nil {
 			slog.Warn("ingestion trigger failed", "err", err)
 		}
+	})
+	docHandler.SetWsRoleResolver(func(c *gin.Context, wsID string) (string, error) {
+		return wsStore.WorkspaceRole(c.Request.Context(), wsID, auth.UserID(c))
 	})
 	ask.NewHandler(aiSvc, auditRec).Register(protectedAPI, wsHandler.RequireWsRole)
 	tasks.NewHandler(aiSvc, auditRec).Register(protectedAPI, wsHandler.RequireWsRole)

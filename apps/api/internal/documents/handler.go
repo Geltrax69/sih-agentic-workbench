@@ -5,6 +5,8 @@ import (
 	"io"
 	"net/http"
 
+	"github.com/Geltrax69/sih-agentic-workbench/apps/api/internal/workspaces"
+
 	"github.com/gin-gonic/gin"
 
 	"github.com/Geltrax69/sih-agentic-workbench/apps/api/internal/audit"
@@ -17,6 +19,7 @@ type Handler struct {
 	storage  Storage
 	audit    *audit.Recorder
 	ingestFn func()
+	wsRole   func(c *gin.Context, wsID string) (string, error)
 }
 
 func NewHandler(store *Store, storage Storage, auditRecorder *audit.Recorder) *Handler {
@@ -27,13 +30,50 @@ func NewHandler(store *Store, storage Storage, auditRecorder *audit.Recorder) *H
 // upload so the AI service processes the ingestion queue.
 func (h *Handler) SetIngestTrigger(fn func()) { h.ingestFn = fn }
 
+// SetWsRoleResolver injects the workspace-role lookup (owned by the
+// workspaces package) used to authorize document-scoped routes.
+func (h *Handler) SetWsRoleResolver(fn func(c *gin.Context, wsID string) (string, error)) {
+	h.wsRole = fn
+}
+
 // Register mounts document routes. requireWsRole is the workspace-role
 // middleware provided by the workspaces package (shared :wsId param).
 func (h *Handler) Register(protected *gin.RouterGroup, requireWsRole func(string) gin.HandlerFunc) {
 	protected.POST("/workspaces/:wsId/documents", requireWsRole("member"), h.upload)
 	protected.GET("/workspaces/:wsId/documents", requireWsRole("viewer"), h.list)
-	protected.GET("/documents/:docId", requireWsRole("viewer"), h.byID)
-	protected.DELETE("/documents/:docId", requireWsRole("workspace_owner"), h.delete)
+	// /documents/:docId has no :wsId param, so authorization resolves the
+	// document first and checks the caller's role in ITS workspace.
+	protected.GET("/documents/:docId", h.withDocRole("viewer"), h.byID)
+	protected.DELETE("/documents/:docId", h.withDocRole("workspace_owner"), h.delete)
+}
+
+// withDocRole authorizes a /documents/:docId route by resolving the document
+// and checking the caller's role in the document's workspace.
+func (h *Handler) withDocRole(minRole string) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		doc, err := h.store.ByID(c.Request.Context(), c.Param("docId"))
+		if err == ErrNotFound {
+			c.AbortWithStatusJSON(http.StatusNotFound, gin.H{"error": "not found"})
+			return
+		}
+		if err != nil {
+			c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": "query failed"})
+			return
+		}
+		if h.wsRole == nil {
+			c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": "role resolver not configured"})
+			return
+		}
+		role, roleErr := h.wsRole(c, doc.WorkspaceID)
+		_ = workspaces.RoleViewer // package reference guard
+		if roleErr != nil || !workspaces.RoleAtLeast(role, minRole) {
+			h.audit.Event(c.Request.Context(), auth.UserID(c), "", doc.WorkspaceID,
+				"document.access.denied", "document", doc.ID, map[string]any{"need": minRole})
+			c.AbortWithStatusJSON(http.StatusForbidden, gin.H{"error": "forbidden"})
+			return
+		}
+		c.Next()
+	}
 }
 
 func (h *Handler) upload(c *gin.Context) {
