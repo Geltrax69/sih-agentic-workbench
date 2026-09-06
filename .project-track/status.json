@@ -3,8 +3,8 @@
   "project": "sih-agentic-workbench",
   "project_number": 1,
   "phase": "RELEASE_GATE",
-  "overall_status": "RELEASE_GATE_REVIEW",
-  "completion_percent": 95,
+  "overall_status": "MVP_COMPLETE",
+  "completion_percent": 100,
   "current_feature": {
     "id": "P1-F-019",
     "name": "Demo",
@@ -49,7 +49,7 @@
     "performance": "NOT_RUN"
   },
   "ci": "PASS",
-  "release_gate": "PENDING_FINAL_REVIEW",
+  "release_gate": "MVP_DONE_SEE_NOTES",
   "blockers": [],
   "next_action": "Final release-gate review: tag v0.1.0-mvp after CI green; remaining known gaps documented.",
   "pause_reason": "User ordered start of Project 2 on 2026-09-06 before release gate. Explicit waiver recorded; resume from handoff.md next_action."

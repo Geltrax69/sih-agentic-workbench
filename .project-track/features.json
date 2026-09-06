@@ -43,11 +43,11 @@
     "id": "P1-F-005",
     "name": "Model adapter",
     "weight": 4,
-    "status": "NOT_STARTED",
-    "acceptance_criteria_total": 0,
-    "acceptance_criteria_passed": 0,
-    "tests": "NOT_RUN",
-    "commit": null
+    "status": "DONE",
+    "acceptance_criteria_total": 4,
+    "acceptance_criteria_passed": 4,
+    "tests": "PASS",
+    "commit": "1f6f7a7"
   },
   {
     "id": "P1-F-006",
