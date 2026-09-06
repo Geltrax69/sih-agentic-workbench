@@ -13,31 +13,31 @@
     "id": "P1-F-002",
     "name": "Organizations",
     "weight": 3,
-    "status": "NOT_STARTED",
-    "acceptance_criteria_total": 0,
-    "acceptance_criteria_passed": 0,
-    "tests": "NOT_RUN",
-    "commit": null
+    "status": "DONE",
+    "acceptance_criteria_total": 3,
+    "acceptance_criteria_passed": 3,
+    "tests": "PASS",
+    "commit": "2a49047"
   },
   {
     "id": "P1-F-003",
     "name": "Workspaces",
     "weight": 3,
-    "status": "NOT_STARTED",
-    "acceptance_criteria_total": 0,
-    "acceptance_criteria_passed": 0,
-    "tests": "NOT_RUN",
-    "commit": null
+    "status": "DONE",
+    "acceptance_criteria_total": 3,
+    "acceptance_criteria_passed": 3,
+    "tests": "PASS",
+    "commit": "2a49047"
   },
   {
     "id": "P1-F-004",
     "name": "RBAC",
     "weight": 5,
-    "status": "NOT_STARTED",
-    "acceptance_criteria_total": 0,
-    "acceptance_criteria_passed": 0,
-    "tests": "NOT_RUN",
-    "commit": null
+    "status": "DONE",
+    "acceptance_criteria_total": 3,
+    "acceptance_criteria_passed": 3,
+    "tests": "PASS",
+    "commit": "2a49047"
   },
   {
     "id": "P1-F-005",
@@ -53,31 +53,31 @@
     "id": "P1-F-006",
     "name": "Document storage",
     "weight": 3,
-    "status": "NOT_STARTED",
-    "acceptance_criteria_total": 0,
-    "acceptance_criteria_passed": 0,
-    "tests": "NOT_RUN",
-    "commit": null
+    "status": "DONE",
+    "acceptance_criteria_total": 4,
+    "acceptance_criteria_passed": 4,
+    "tests": "PASS",
+    "commit": "PENDING"
   },
   {
     "id": "P1-F-007",
     "name": "Ingestion",
     "weight": 6,
-    "status": "NOT_STARTED",
-    "acceptance_criteria_total": 0,
-    "acceptance_criteria_passed": 0,
-    "tests": "NOT_RUN",
-    "commit": null
+    "status": "DONE",
+    "acceptance_criteria_total": 4,
+    "acceptance_criteria_passed": 4,
+    "tests": "PASS",
+    "commit": "PENDING"
   },
   {
     "id": "P1-F-008",
     "name": "Vector retrieval",
     "weight": 5,
-    "status": "NOT_STARTED",
-    "acceptance_criteria_total": 0,
-    "acceptance_criteria_passed": 0,
-    "tests": "NOT_RUN",
-    "commit": null
+    "status": "DONE",
+    "acceptance_criteria_total": 4,
+    "acceptance_criteria_passed": 4,
+    "tests": "PASS",
+    "commit": "PENDING"
   },
   {
     "id": "P1-F-009",
