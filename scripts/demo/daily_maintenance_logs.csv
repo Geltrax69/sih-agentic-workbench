@@ -1,0 +1,6 @@
+date,equipment_id,technician,event,temperature_c,duration_min,notes
+2026-07-02,P-17,j.reyes,routine_check,71,15,within normal range
+2026-08-01,P-17,j.reyes,over_temperature_shutdown,94,0,auto shutdown; reset ok
+2026-08-14,P-17,m.chen,bearing_replacement,20,180,replaced with BRG-4210
+2026-08-15,P-17,m.chen,post_repair_check,68,20,temperatures normal
+2026-09-01,P-17,j.reyes,over_temperature_shutdown,93,0,recurred 18 days after bearing replacement

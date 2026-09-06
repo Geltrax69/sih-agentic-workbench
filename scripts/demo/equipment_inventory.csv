@@ -1,0 +1,4 @@
+equipment_id,model,location,installed,criticality
+P-17,P-Series 300,Plant 2 - Line A,2019-03-12,high
+P-18,P-Series 300,Plant 2 - Line B,2019-03-12,medium
+C-04,Compressor 900,Plant 1,2021-07-01,high
