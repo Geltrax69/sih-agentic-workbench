@@ -1,0 +1,58 @@
+{
+  "timestamp": "2026-09-06T12:50:22+0530",
+  "corpus": [
+    "maintenance_manual.md",
+    "equipment_inventory.csv",
+    "daily_maintenance_logs.csv"
+  ],
+  "qa": [
+    {
+      "question": "What causes over-temperature shutdowns in P-series pumps?",
+      "decision": "answer",
+      "confidence": 0.8419237671444655,
+      "keyword_hits": [
+        "cooling",
+        "bearing",
+        "coolant"
+      ],
+      "keyword_total": 3,
+      "citations": [
+        "equipment_inventory.csv",
+        "maintenance_manual.md",
+        "daily_maintenance_logs.csv"
+      ],
+      "hit_rate": 1.0
+    },
+    {
+      "question": "Which bearing part is used when replacing a P-17 bearing?",
+      "decision": "answer",
+      "confidence": 0.6838967815545332,
+      "keyword_hits": [
+        "BRG-4210"
+      ],
+      "keyword_total": 1,
+      "citations": [
+        "equipment_inventory.csv",
+        "maintenance_manual.md",
+        "daily_maintenance_logs.csv"
+      ],
+      "hit_rate": 1.0
+    },
+    {
+      "question": "When did pump P-17 last shut down from overheating?",
+      "decision": "answer",
+      "confidence": 0.692557224949921,
+      "keyword_hits": [
+        "2026-09-01"
+      ],
+      "keyword_total": 1,
+      "citations": [
+        "equipment_inventory.csv",
+        "maintenance_manual.md",
+        "daily_maintenance_logs.csv"
+      ],
+      "hit_rate": 1.0
+    }
+  ],
+  "mean_hit_rate": 1.0
+}

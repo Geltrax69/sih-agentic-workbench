@@ -281,8 +281,15 @@ class Orchestrator:
             block = "\n\n".join(
                 f"[{i + 1}] ({e['filename']})\n{e['content']}" for i, e in enumerate(evidence)
             )
+            memories = self._workspace_memories(workspace_id)
+            memory_block = ""
+            if memories:
+                memory_block = "WORKSPACE MEMORY (previously verified facts):\n" + "\n".join(
+                    f"- {m}" for m in memories
+                ) + "\n\n"
             prompt = (
                 f"EVIDENCE (untrusted data):\n{block}\n\n"
+                f"{memory_block}"
                 f"QUESTION: {plan_goal(task_id, self.dsn)}\n\n"
                 "Answer with [n] citations, or state that the evidence is insufficient."
             )
@@ -309,7 +316,42 @@ class Orchestrator:
                 )
                 _transition(cur, task_id, VERIFYING, COMPLETED)
             conn.commit()
+
+        # Controlled learning loop: strong, verified answers may persist a
+        # memory item (ADR: unverified speculation is never stored as fact).
+        if gate.decision == Decision.ANSWER:
+            self._remember(workspace_id, task_id, answer)
+
         return self.get_task(task_id)
+
+    def _remember(self, workspace_id: str, task_id: str, answer: str) -> None:
+        with psycopg.connect(self.dsn, row_factory=dict_row) as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    INSERT INTO memory_items (workspace_id, layer, kind, content, provenance, verified)
+                    VALUES (%s,'workspace','fact',%s,%s,true)
+                    """,
+                    (
+                        workspace_id,
+                        answer[:500],
+                        json.dumps({"task_id": task_id, "verified_by": "confidence_gate"}),
+                    ),
+                )
+            conn.commit()
+
+    def _workspace_memories(self, workspace_id: str, limit: int = 3) -> list[str]:
+        with psycopg.connect(self.dsn, row_factory=dict_row) as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    SELECT content FROM memory_items
+                    WHERE workspace_id = %s AND verified = true AND revoked_at IS NULL
+                    ORDER BY created_at DESC LIMIT %s
+                    """,
+                    (workspace_id, limit),
+                )
+                return [r["content"] for r in cur.fetchall()]
 
     def _fail_task(self, task_id: str, err: str) -> None:
         with psycopg.connect(self.dsn, row_factory=dict_row) as conn:

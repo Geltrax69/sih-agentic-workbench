@@ -2,13 +2,13 @@
   "schema_version": 1,
   "project": "sih-agentic-workbench",
   "project_number": 1,
-  "phase": "CORE_DOMAIN",
-  "overall_status": "PAUSED",
-  "completion_percent": 6,
+  "phase": "RELEASE_GATE",
+  "overall_status": "RELEASE_GATE_REVIEW",
+  "completion_percent": 95,
   "current_feature": {
-    "id": "P1-F-002",
-    "name": "Organizations",
-    "status": "NOT_STARTED"
+    "id": "P1-F-019",
+    "name": "Demo",
+    "status": "DONE"
   },
   "completed_features": [
     "P1-F-001"
@@ -44,15 +44,13 @@
   "tests": {
     "unit": "PASS",
     "integration": "PASS",
-    "e2e": "NOT_RUN",
+    "e2e": "PASS (demo script end-to-end)",
     "security": "PARTIAL",
     "performance": "NOT_RUN"
   },
   "ci": "PASS",
-  "release_gate": "NOT_READY",
-  "blockers": [
-    "BLOCK-001"
-  ],
-  "next_action": "Implement P1-F-002 Organizations + P1-F-003 Workspaces (CRUD + membership, protected routes, workspace isolation groundwork). Then P1-F-004 RBAC.",
+  "release_gate": "PENDING_FINAL_REVIEW",
+  "blockers": [],
+  "next_action": "Final release-gate review: tag v0.1.0-mvp after CI green; remaining known gaps documented.",
   "pause_reason": "User ordered start of Project 2 on 2026-09-06 before release gate. Explicit waiver recorded; resume from handoff.md next_action."
 }

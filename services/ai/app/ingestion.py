@@ -42,7 +42,7 @@ class IngestPipeline:
                 cur.execute(
                     """
                     SELECT j.id AS job_id, d.id AS document_id, d.workspace_id,
-                           d.mime_type, d.storage_key, d.status AS doc_status
+                           d.mime_type, d.storage_key, d.filename, d.status AS doc_status
                     FROM ingestion_jobs j
                     JOIN documents d ON d.id = j.document_id
                     WHERE j.status = 'PENDING' AND d.status = 'UPLOADED' AND d.deleted_at IS NULL
@@ -77,7 +77,16 @@ class IngestPipeline:
             vectors = await embed_fn(chunks)
             if len(vectors) != len(chunks):
                 raise ValueError("embedding count mismatch")
-            self._store_chunks(job["document_id"], job["workspace_id"], chunks, vectors)
+            chunk_ids = self._store_chunks(job["document_id"], job["workspace_id"], chunks, vectors)
+            try:
+                from app.knowledge.graph import record_document_graph
+
+                record_document_graph(
+                    self.dsn, job["document_id"], job["workspace_id"],
+                    job.get("filename", ""), chunk_ids,
+                )
+            except Exception as exc:  # noqa: BLE001 — graph is additive, must not fail ingestion
+                log.warning("graph recording failed for %s: %s", job["document_id"], exc)
             self._finish(job, "INDEXED", "")
             return IngestResult(job["document_id"], "INDEXED", len(chunks))
         except Exception as exc:  # noqa: BLE001 — pipeline must record failure, not crash
@@ -105,18 +114,20 @@ class IngestPipeline:
         data = obj["Body"].read()
         return extract_text(mime_type, data)
 
-    def _store_chunks(self, document_id: str, workspace_id: str, chunks: list[str], vectors: list[list[float]]) -> None:
+    def _store_chunks(self, document_id: str, workspace_id: str, chunks: list[str], vectors: list[list[float]]) -> list[str]:
+        chunk_ids: list[str] = []
         with self._connect() as conn:
             with conn.cursor() as cur:
                 cur.execute("DELETE FROM document_chunks WHERE document_id = %s", (document_id,))
                 for idx, (content, vec) in enumerate(zip(chunks, vectors, strict=True)):
+                    chunk_ids.append(str(uuid.uuid4()))
                     cur.execute(
                         """
                         INSERT INTO document_chunks (id, document_id, workspace_id, chunk_index, content, token_count, embedding)
                         VALUES (%s, %s, %s, %s, %s, %s, %s::vector)
                         """,
                         (
-                            str(uuid.uuid4()),
+                            chunk_ids[-1],
                             document_id,
                             workspace_id,
                             idx,
@@ -126,6 +137,7 @@ class IngestPipeline:
                         ),
                     )
             conn.commit()
+        return chunk_ids
 
     def _finish(self, job: dict, status: str, err: str) -> None:
         with self._connect() as conn:
