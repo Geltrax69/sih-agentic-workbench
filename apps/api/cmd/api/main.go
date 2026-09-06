@@ -25,6 +25,7 @@ import (
 	"github.com/Geltrax69/sih-agentic-workbench/apps/api/internal/documents"
 	"github.com/Geltrax69/sih-agentic-workbench/apps/api/internal/httpapi"
 	"github.com/Geltrax69/sih-agentic-workbench/apps/api/internal/migrate"
+	"github.com/Geltrax69/sih-agentic-workbench/apps/api/internal/tasks"
 	"github.com/Geltrax69/sih-agentic-workbench/apps/api/internal/users"
 	"github.com/Geltrax69/sih-agentic-workbench/apps/api/internal/workspaces"
 )
@@ -137,6 +138,7 @@ func run() error {
 		}
 	})
 	ask.NewHandler(aiSvc, auditRec).Register(protectedAPI, wsHandler.RequireWsRole)
+	tasks.NewHandler(aiSvc, auditRec).Register(protectedAPI, wsHandler.RequireWsRole)
 
 	httpServer := &http.Server{
 		Addr:              ":" + cfg.APIPort,

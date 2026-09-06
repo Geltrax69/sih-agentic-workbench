@@ -32,7 +32,34 @@ func NewAIService(baseURL, secret string) *AIService {
 	}
 }
 
+// Get exposes the internal GET proxy for other packages (tasks).
+func (a *AIService) Get(ctx context.Context, path string, out any) error {
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, a.BaseURL+path, nil)
+	if err != nil {
+		return err
+	}
+	req.Header.Set("X-Internal-Secret", a.InternalSecret)
+	resp, err := a.Client.Do(req)
+	if err != nil {
+		return fmt.Errorf("ai service unreachable: %w", err)
+	}
+	defer resp.Body.Close()
+	raw, _ := io.ReadAll(io.LimitReader(resp.Body, 4<<20))
+	if resp.StatusCode != http.StatusOK {
+		return fmt.Errorf("ai service %s: HTTP %d: %s", path, resp.StatusCode, truncate(raw, 200))
+	}
+	return json.Unmarshal(raw, out)
+}
+
+// Post exposes the internal POST proxy for other packages (tasks).
+func (a *AIService) Post(ctx context.Context, path string, payload any, out any) error {
+	return a.post(ctx, path, payload, out)
+}
+
 func (a *AIService) post(ctx context.Context, path string, payload any, out any) error {
+	if payload == nil {
+		payload = map[string]any{}
+	}
 	body, err := json.Marshal(payload)
 	if err != nil {
 		return err

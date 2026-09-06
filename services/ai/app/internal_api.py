@@ -13,6 +13,7 @@ from pydantic import BaseModel, Field
 
 from app import ingestion, models_client
 from app.config import settings
+from app.orchestration.executor import Orchestrator
 
 
 def require_internal(secret_header: str = fastapi.Header(alias="X-Internal-Secret")) -> None:
@@ -40,8 +41,20 @@ class QueryResponse(BaseModel):
     evidence: list[Evidence]
 
 
+class TaskRequest(BaseModel):
+    workspace_id: str = Field(min_length=1)
+    user_id: str = Field(min_length=1)
+    question: str = Field(min_length=1, max_length=4000)
+
+
+class ApprovalRequest(BaseModel):
+    approved: bool
+    decided_by: str = Field(min_length=1)
+
+
 def register_internal(app: FastAPI) -> None:
     pipeline = ingestion.IngestPipeline(settings.database_url)
+    orchestrator = Orchestrator(settings.database_url)
 
     @app.post("/internal/ingest/run", dependencies=[Depends(require_internal)])
     async def run_ingestion() -> dict:
@@ -57,6 +70,18 @@ def register_internal(app: FastAPI) -> None:
         "evidence numbers. If the evidence is insufficient, say exactly that and "
         "stop. Do not invent facts, names, or numbers."
     )
+
+    @app.post("/internal/tasks", dependencies=[Depends(require_internal)])
+    async def start_task(req: TaskRequest) -> dict:
+        return await orchestrator.start_task(req.workspace_id, req.user_id, req.question)
+
+    @app.get("/internal/tasks/{task_id}", dependencies=[Depends(require_internal)])
+    async def get_task(task_id: str) -> dict:
+        return orchestrator.get_task(task_id)
+
+    @app.post("/internal/tasks/{task_id}/approval", dependencies=[Depends(require_internal)])
+    async def decide_approval(task_id: str, req: ApprovalRequest) -> dict:
+        return await orchestrator.resume_after_approval(task_id, req.approved, req.decided_by)
 
     @app.post("/internal/query", response_model=QueryResponse, dependencies=[Depends(require_internal)])
     async def query_workspace(req: QueryRequest) -> QueryResponse:
