@@ -20,6 +20,7 @@ import (
 	"github.com/Geltrax69/sih-agentic-workbench/apps/api/internal/httpapi"
 	"github.com/Geltrax69/sih-agentic-workbench/apps/api/internal/migrate"
 	"github.com/Geltrax69/sih-agentic-workbench/apps/api/internal/users"
+	"github.com/Geltrax69/sih-agentic-workbench/apps/api/internal/workspaces"
 )
 
 func main() {
@@ -104,11 +105,10 @@ func run() error {
 
 	// /api/v1/auth/login is public; everything in the protected group
 	// requires a valid bearer token. Future features mount here.
-	auth.RegisterRoutes(
-		engine.Group("/api/v1"),
-		engine.Group("/api/v1", auth.Middleware(cfg.JWTSecret)),
-		authSvc,
-	)
+	publicAPI := engine.Group("/api/v1")
+	protectedAPI := engine.Group("/api/v1", auth.Middleware(cfg.JWTSecret))
+	auth.RegisterRoutes(publicAPI, protectedAPI, authSvc)
+	workspaces.NewHandler(workspaces.NewStore(pool), auditRec).Register(protectedAPI)
 
 	httpServer := &http.Server{
 		Addr:              ":" + cfg.APIPort,
