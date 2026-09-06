@@ -17,6 +17,7 @@ import (
 	"github.com/minio/minio-go/v7/pkg/credentials"
 	"github.com/redis/go-redis/v9"
 
+	"github.com/Geltrax69/sih-agentic-workbench/apps/api/internal/ask"
 	"github.com/Geltrax69/sih-agentic-workbench/apps/api/internal/audit"
 	"github.com/Geltrax69/sih-agentic-workbench/apps/api/internal/auth"
 	"github.com/Geltrax69/sih-agentic-workbench/apps/api/internal/config"
@@ -127,8 +128,15 @@ func run() error {
 	if err := docStorage.EnsureBucket(ctx); err != nil {
 		slog.Warn("bucket ensure failed", "bucket", cfg.S3Bucket, "err", err)
 	}
-	documents.NewHandler(documents.NewStore(pool), docStorage, auditRec).
-		Register(protectedAPI, wsHandler.RequireWsRole)
+	aiSvc := ask.NewAIService(cfg.AIServiceURL, cfg.InternalAPISecret)
+	docHandler := documents.NewHandler(documents.NewStore(pool), docStorage, auditRec)
+	docHandler.Register(protectedAPI, wsHandler.RequireWsRole)
+	docHandler.SetIngestTrigger(func() {
+		if err := aiSvc.TriggerIngestion(context.Background()); err != nil {
+			slog.Warn("ingestion trigger failed", "err", err)
+		}
+	})
+	ask.NewHandler(aiSvc, auditRec).Register(protectedAPI, wsHandler.RequireWsRole)
 
 	httpServer := &http.Server{
 		Addr:              ":" + cfg.APIPort,

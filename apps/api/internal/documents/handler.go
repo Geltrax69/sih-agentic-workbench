@@ -13,14 +13,19 @@ import (
 
 // Handler exposes document routes on protected groups.
 type Handler struct {
-	store   *Store
-	storage Storage
-	audit   *audit.Recorder
+	store    *Store
+	storage  Storage
+	audit    *audit.Recorder
+	ingestFn func()
 }
 
 func NewHandler(store *Store, storage Storage, auditRecorder *audit.Recorder) *Handler {
 	return &Handler{store: store, storage: storage, audit: auditRecorder}
 }
+
+// SetIngestTrigger registers a non-blocking callback fired after a successful
+// upload so the AI service processes the ingestion queue.
+func (h *Handler) SetIngestTrigger(fn func()) { h.ingestFn = fn }
 
 // Register mounts document routes. requireWsRole is the workspace-role
 // middleware provided by the workspaces package (shared :wsId param).
@@ -79,6 +84,9 @@ func (h *Handler) upload(c *gin.Context) {
 	}
 	h.audit.Event(c.Request.Context(), auth.UserID(c), "", c.Param("wsId"),
 		"document.uploaded", "document", doc.ID, map[string]any{"filename": doc.Filename, "size": doc.SizeBytes})
+	if h.ingestFn != nil {
+		go h.ingestFn()
+	}
 	c.JSON(http.StatusCreated, doc)
 }
 

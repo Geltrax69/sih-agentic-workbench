@@ -12,6 +12,7 @@ import httpx
 from fastapi import FastAPI
 
 from app.config import settings
+from app.internal_api import register_internal
 
 
 @asynccontextmanager
@@ -49,6 +50,9 @@ async def healthz() -> dict:
         components["sovereign_policy"] = {"status": "violated", "problems": violations}
 
     return {"status": status, "components": components}
+
+
+register_internal(app)
 
 
 @app.get("/api/v1/ai/ping")

@@ -22,6 +22,12 @@ class Settings(BaseSettings):
     # PostgreSQL (AI-side tables: chunks, embeddings, graph, memory)
     database_url: str = ""
 
+    # MinIO (document objects)
+    s3_endpoint: str = "http://localhost:9000"
+    s3_bucket: str = "workbench-documents"
+    s3_access_key: str = ""
+    s3_secret_key: str = ""
+
     @property
     def is_local_endpoint(self) -> bool:
         """Sovereign mode: only loopback/private hosts qualify as local."""
