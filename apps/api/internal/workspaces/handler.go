@@ -46,6 +46,12 @@ func (h *Handler) Register(protected *gin.RouterGroup) {
 }
 
 // requireOrgRole authorizes by :orgId. Denials are audited.
+// RequireOrgRole returns middleware authorizing by :orgId (exported for reuse).
+func (h *Handler) RequireOrgRole(minRole string) gin.HandlerFunc { return h.requireOrgRole(minRole) }
+
+// RequireWsRole returns middleware authorizing by :wsId (exported for reuse).
+func (h *Handler) RequireWsRole(minRole string) gin.HandlerFunc { return h.requireWsRole(minRole) }
+
 func (h *Handler) requireOrgRole(minRole string) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		userID := auth.UserID(c)

@@ -49,18 +49,18 @@ var (
 )
 
 type Organization struct {
-	ID        string
-	Name      string
-	CreatedBy string
-	CreatedAt time.Time
+	ID        string    `json:"id"`
+	Name      string    `json:"name"`
+	CreatedBy string    `json:"created_by"`
+	CreatedAt time.Time `json:"created_at"`
 }
 
 type Workspace struct {
-	ID             string
-	OrganizationID string
-	Name           string
-	Description    string
-	CreatedAt      time.Time
+	ID             string    `json:"id"`
+	OrganizationID string    `json:"organization_id"`
+	Name           string    `json:"name"`
+	Description    string    `json:"description"`
+	CreatedAt      time.Time `json:"created_at"`
 }
 
 // Store owns all membership queries. Every query is scoped by user where

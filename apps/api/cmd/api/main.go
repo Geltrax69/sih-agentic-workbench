@@ -4,19 +4,24 @@ package main
 import (
 	"context"
 	"errors"
+	"fmt"
 	"log/slog"
 	"net/http"
 	"os"
 	"os/signal"
+	"strings"
 	"syscall"
 	"time"
 
+	"github.com/minio/minio-go/v7"
+	"github.com/minio/minio-go/v7/pkg/credentials"
 	"github.com/redis/go-redis/v9"
 
 	"github.com/Geltrax69/sih-agentic-workbench/apps/api/internal/audit"
 	"github.com/Geltrax69/sih-agentic-workbench/apps/api/internal/auth"
 	"github.com/Geltrax69/sih-agentic-workbench/apps/api/internal/config"
 	"github.com/Geltrax69/sih-agentic-workbench/apps/api/internal/db"
+	"github.com/Geltrax69/sih-agentic-workbench/apps/api/internal/documents"
 	"github.com/Geltrax69/sih-agentic-workbench/apps/api/internal/httpapi"
 	"github.com/Geltrax69/sih-agentic-workbench/apps/api/internal/migrate"
 	"github.com/Geltrax69/sih-agentic-workbench/apps/api/internal/users"
@@ -108,7 +113,22 @@ func run() error {
 	publicAPI := engine.Group("/api/v1")
 	protectedAPI := engine.Group("/api/v1", auth.Middleware(cfg.JWTSecret))
 	auth.RegisterRoutes(publicAPI, protectedAPI, authSvc)
-	workspaces.NewHandler(workspaces.NewStore(pool), auditRec).Register(protectedAPI)
+	wsHandler := workspaces.NewHandler(workspaces.NewStore(pool), auditRec)
+	wsHandler.Register(protectedAPI)
+
+	minioClient, err := minio.New(strings.TrimPrefix(cfg.S3Endpoint, "http://"), &minio.Options{
+		Creds:  credentials.NewStaticV4(cfg.S3AccessKey, cfg.S3SecretKey, ""),
+		Secure: false,
+	})
+	if err != nil {
+		return fmt.Errorf("minio client: %w", err)
+	}
+	docStorage := &documents.MinioStorage{Client: minioClient, Bucket: cfg.S3Bucket}
+	if err := docStorage.EnsureBucket(ctx); err != nil {
+		slog.Warn("bucket ensure failed", "bucket", cfg.S3Bucket, "err", err)
+	}
+	documents.NewHandler(documents.NewStore(pool), docStorage, auditRec).
+		Register(protectedAPI, wsHandler.RequireWsRole)
 
 	httpServer := &http.Server{
 		Addr:              ":" + cfg.APIPort,
