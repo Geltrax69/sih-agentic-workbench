@@ -47,6 +47,13 @@ func (h *Handler) upload(c *gin.Context) {
 		return
 	}
 	contentType := fh.Header.Get("Content-Type")
+	// Many clients send application/octet-stream; trust the extension for
+	// that case (the extension allowlist still applies in store.Create).
+	if contentType == "application/octet-stream" {
+		if ext, ok := extByFilename(fh.Filename); ok {
+			contentType = mimeByExt(ext)
+		}
+	}
 	if _, ok := AllowedContentTypes[contentType]; !ok {
 		h.audit.Event(c.Request.Context(), auth.UserID(c), "", c.Param("wsId"),
 			"document.upload.rejected", "document", fh.Filename, map[string]any{"mime": contentType})
@@ -88,6 +95,15 @@ func (h *Handler) upload(c *gin.Context) {
 		go h.ingestFn()
 	}
 	c.JSON(http.StatusCreated, doc)
+}
+
+func mimeByExt(ext string) string {
+	for mime, e := range AllowedContentTypes {
+		if e == ext {
+			return mime
+		}
+	}
+	return "application/octet-stream"
 }
 
 func (h *Handler) list(c *gin.Context) {

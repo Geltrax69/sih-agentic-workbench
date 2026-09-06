@@ -15,10 +15,13 @@ ORG=$(curl -s -X POST "$API/api/v1/organizations" -H "Authorization: Bearer $TOK
 WS=$(curl -s -X POST "$API/api/v1/organizations/$ORG/workspaces" -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/json' -d '{"name":"Pump P-17 Evidence"}' | python3 -c 'import json,sys;print(json.load(sys.stdin)["id"])')
 
 echo "==> 3. ingest confidential sources (no cloud, ever)"
+declare -A TYPES=( [maintenance_manual.md]=text/markdown [equipment_inventory.csv]=text/csv [daily_maintenance_logs.csv]=text/csv )
 for f in maintenance_manual.md equipment_inventory.csv daily_maintenance_logs.csv; do
-  curl -s -X POST "$API/api/v1/workspaces/$WS/documents" -H "Authorization: Bearer $TOKEN" -F "file=@$DIR/$f" > /dev/null
+  HTTP=$(curl -s -o /tmp/demo-upload.json -w "%{http_code}" -X POST "$API/api/v1/workspaces/$WS/documents" -H "Authorization: Bearer $TOKEN" -F "file=@$DIR/$f;type=${TYPES[$f]}")
+  if [[ "$HTTP" != "201" ]]; then echo "UPLOAD FAILED ($HTTP): $(cat /tmp/demo-upload.json)"; exit 1; fi
   curl -s -X POST "${AI_URL:-http://localhost:8000}/internal/ingest/run" -H 'X-Internal-Secret: internal-dev-only-change-me' > /dev/null
 done
+for i in 1 2 3; do curl -s -X POST "${AI_URL:-http://localhost:8000}/internal/ingest/run" -H 'X-Internal-Secret: internal-dev-only-change-me' > /dev/null; done
 echo "    3 documents ingested into workspace $WS"
 
 echo "==> 4. grounded question (citations, local model)"
