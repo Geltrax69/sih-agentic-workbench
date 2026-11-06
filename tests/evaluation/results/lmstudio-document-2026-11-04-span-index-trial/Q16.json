@@ -1,0 +1,113 @@
+{
+  "case": {
+    "id": "Q16",
+    "category": "limitation",
+    "question": "Does the manuscript establish an air-gapped or legally certified environment just because the workbench is called sovereign?",
+    "expected": "No. Sovereign refers to intended institution-controlled local hosting; the implementation does not establish air-gap or legal certification.",
+    "pages": [
+      2,
+      9
+    ]
+  },
+  "wall_seconds": 8.366340124979615,
+  "result": {
+    "question": "Does the manuscript establish an air-gapped or legally certified environment just because the workbench is called sovereign?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-4",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 4,
+        "location": "page 2",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\n\n1. Introduction\n\nA user investigating equipment failure may need to connect a manual, an inventory record and an incident log.\nDocument search identifies candidate files, while a language model can synthesize a response. However, an\ninstitution also needs to know whether the user is allowed to access those documents, whether the answer is\nsupported and whether a requested action requires authorization. These concerns belong to different parts of the\nsystem and need different tests.\n\nThe Sovereign Agentic AI Workbench addresses this workflow through local document ingestion, scoped retrieval and\nconstrained orchestration. \u201cSovereign\u201d denotes the intended ability to host the model endpoint within an\ninstitution-controlled environment.",
+        "score": 0.7452261375762902,
+        "lexical_score": 3.362887884397501,
+        "selection_score": 0.09109730848861283
+      },
+      {
+        "chunk_id": "pilot-5",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 5,
+        "location": "page 2",
+        "content": "institution-controlled environment. The present implementation checks configured endpoint locality and runs in a local\ncontainer deployment; it does not establish an air-gapped or legally certified environment.\n\nThe motivating domain in the evaluated prototype is synthetic pump maintenance. Part identifiers, event dates and\nfailure causes provide inspectable facts. We do not claim that this corpus represents the complexity of a real industrial\nknowledge base. Its role is to support functional and exploratory tests, including missing evidence and adversarial\ninstructions embedded in a source.\n\n1.1 Research questions\n\nRQ1: Can a bounded local document workflow combine workspace-scoped retrieval with a deterministic",
+        "score": 0.6789963995301106,
+        "lexical_score": 15.319060089459613,
+        "selection_score": 0.08465608465608465
+      },
+      {
+        "chunk_id": "pilot-0",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 0,
+        "location": "page 1",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\n\n\nEvidence-Gated Local Retrieval and\nHuman-Approved Workflows for an\nInstitutional AI Workbench\n\nA systems prototype and exploratory evaluation\n\n\nAuthors and affiliations: Pending confirmation\n\nResearch manuscript draft | 8 September 2026 | Project 1: Sovereign Agentic AI Workbench\n\nThis is an unpublished manuscript draft based on inspected implementation and retained experiments. It makes no\nvenue acceptance, peer-review or official SIH endorsement claim. Author order, affiliations, corresponding-author\ncontact and target-venue formatting remain to be completed.\n\nAbstract\n\nInstitutional document assistants must connect natural-language answers to accessible evidence while controlling\nactions that affect organizational workflows.",
+        "score": 0.726938506948469,
+        "lexical_score": 1.5282682603289408,
+        "selection_score": 0.08391608391608392
+      },
+      {
+        "chunk_id": "pilot-45",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 45,
+        "location": "page 9",
+        "content": "development log. Real deployments should review document ownership, retention, access revocation, model-host\ntrust and user reliance. Local inference and a confidence score do not establish regulatory compliance or factual\nsafety.\n\n9. Conclusion and future work\n\nThe workbench demonstrates a bounded local RAG workflow with application-controlled workspace access and\nhuman approval. Its retained benchmarks establish successful selected local checks and high throughput for a narrow\nauthenticated-read workload. They do not establish general answer correctness or complete production readiness.\nThe new fixed-evidence pilot shows why model and temperature changes require direct inspection: a correct factual\nanswer can still adopt an unsupported adversarial premise.",
+        "score": 0.6854042610323936,
+        "lexical_score": 2.8387778957254985,
+        "selection_score": 0.08166666666666667
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "The provided sources do not contain enough information to answer this question.",
+        "citations": [],
+        "latency_ms": 3275,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "Document search identifies candidate files, while a language model can synthesize a response. [1]\nIt makes no venue acceptance, peer-review or official SIH endorsement claim. [3]",
+        "citations": [
+          "Research_Paper.pdf, page 2",
+          "Research_Paper.pdf, page 1"
+        ],
+        "latency_ms": 8196,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.0
+        }
+      ],
+      "mean_overlap": 0.0,
+      "n_answered": 2
+    },
+    "combined_answer": "Document search identifies candidate files, while a language model can synthesize a response. [1]\nIt makes no venue acceptance, peer-review or official SIH endorsement claim. [3]",
+    "synthesizer": "eval-gemma4-e4b",
+    "verification": {
+      "model": "eval-gemma4-e4b",
+      "claims": [
+        {
+          "claim": "Document search identifies candidate files, while a language model can synthesize a response. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "It makes no venue acceptance, peer-review or official SIH endorsement claim. [3]",
+          "source": 3,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        }
+      ],
+      "confidence": 1.0,
+      "decision": "verified"
+    }
+  }
+}

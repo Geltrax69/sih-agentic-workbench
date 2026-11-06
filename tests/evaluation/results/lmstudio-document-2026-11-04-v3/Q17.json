@@ -1,0 +1,95 @@
+{
+  "case": {
+    "id": "Q17",
+    "category": "unanswerable",
+    "question": "What is the exact annual commercial subscription price of this workbench in Indian rupees?",
+    "expected": "Not stated in this document; refuse to invent a price.",
+    "pages": []
+  },
+  "wall_seconds": 0.08169379195896909,
+  "result": {
+    "question": "What is the exact annual commercial subscription price of this workbench in Indian rupees?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-47",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 47,
+        "location": "page 10",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\n\n\nImplementation priorities are memory provenance invalidation, approval-content binding, durable job recovery, report\ndelivery and public operational validation. These steps would support stronger claims than the present exploratory\nevidence allows.\n\nData and code availability\n\nThe accompanying package includes original-result copies with hashes, a current source hash map, editable\nmanuscript/dossier text, diagrams, model-pilot requests and outputs, and scripts. The inspected local repository is\n/Users/lalitsingh/PROJECTS/sih-agentic-workbench. Public archival access and a frozen release commit remain to be\narranged by the authors; no public dataset or repository release is claimed here.\n\nAuthor contributions and declarations\n\nNamed author contributions, institutional affiliations, funding and competing-interest declarations are pending\nconfirmation. The documentation was prepared with an AI coding assistant using repository inspection and local\nexperiments; the pilot's post-hoc labels were produced by that assistant. Human authors must review the manuscript,\nresults, attribution and any venue-specific disclosure requirements before submission.\n\nReferences\n\n[1] P. Lewis et al., \u201cRetrieval-Augmented Generation for Knowledge-Intensive NLP Tasks,\u201d NeurIPS, 2020.\nhttps://arxiv.org/abs/2005.11401\n\n[2] S. Yao et al., \u201cReAct: Synergizing Reasoning and Acting in Language Models,\u201d arXiv:2210.03629, 2022.\nhttps://arxiv.org/abs/2210.03629\n\n[3] K.",
+        "score": 0.5717966689955594,
+        "lexical_score": 0.6183770609206001,
+        "selection_score": 0.09109730848861283
+      },
+      {
+        "chunk_id": "pilot-10",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 10,
+        "location": "page 3",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\n\n3. System design\n\n\n\n\n                                                               Browser + Nginx\n                                                            Static React UI; /api proxy\n\n\n\n                                                                               Bearer token\n\n\n                                                                 Go public API                                         PostgreSQL\n                                                          JWT; workspace roles; HTTP                             Metadata, vectors, tasks,\n                                                                                                                    approvals, memory\n\nOriginal file read                                                  Internal secret\n\n\n\n                 MinIO                                        Python AI service\n         Original uploaded bytes                           Ingestion; retrieval; task flow                                 Redis\n\n                                                                                                               Required health dependency\n\n\n                                                                                       Private endpoint policy\n\n\n\n\n                                                              Local model host\n                                                          Embedding + generation calls",
+        "score": 0.5680396502082733,
+        "lexical_score": 0.6172590630201812,
+        "selection_score": 0.08712121212121213
+      },
+      {
+        "chunk_id": "pilot-4",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 4,
+        "location": "page 2",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\n\n1. Introduction\n\nA user investigating equipment failure may need to connect a manual, an inventory record and an incident log.\nDocument search identifies candidate files, while a language model can synthesize a response. However, an\ninstitution also needs to know whether the user is allowed to access those documents, whether the answer is\nsupported and whether a requested action requires authorization. These concerns belong to different parts of the\nsystem and need different tests.\n\nThe Sovereign Agentic AI Workbench addresses this workflow through local document ingestion, scoped retrieval and\nconstrained orchestration. \u201cSovereign\u201d denotes the intended ability to host the model endpoint within an\ninstitution-controlled environment. The present implementation checks configured endpoint locality and runs in a local\ncontainer deployment; it does not establish an air-gapped or legally certified environment.\n\nThe motivating domain in the evaluated prototype is synthetic pump maintenance. Part identifiers, event dates and\nfailure causes provide inspectable facts. We do not claim that this corpus represents the complexity of a real industrial\nknowledge base. Its role is to support functional and exploratory tests, including missing evidence and adversarial\ninstructions embedded in a source.\n\n1.1 Research questions\n\nRQ1: Can a bounded local document workflow combine workspace-scoped retrieval with a deterministic",
+        "score": 0.546962560669561,
+        "lexical_score": 0.6236483896315124,
+        "selection_score": 0.08391608391608392
+      },
+      {
+        "chunk_id": "pilot-0",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 0,
+        "location": "page 1",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\n\n\nEvidence-Gated Local Retrieval and\nHuman-Approved Workflows for an\nInstitutional AI Workbench\n\nA systems prototype and exploratory evaluation\n\n\nAuthors and affiliations: Pending confirmation\n\nResearch manuscript draft | 8 September 2026 | Project 1: Sovereign Agentic AI Workbench\n\nThis is an unpublished manuscript draft based on inspected implementation and retained experiments. It makes no\nvenue acceptance, peer-review or official SIH endorsement claim. Author order, affiliations, corresponding-author\ncontact and target-venue formatting remain to be completed.\n\nAbstract\n\nInstitutional document assistants must connect natural-language answers to accessible evidence while controlling\nactions that affect organizational workflows. We describe a local AI workbench integrating workspace-scoped\ndocument retrieval, a deterministic evidence threshold, persisted task execution and owner approval for a report tool.\nThe implementation uses a Go API, Python AI service, PostgreSQL/pgvector, object storage and a locally configured\nmodel endpoint. Its planner implements a bounded search/report sequence rather than a general autonomous agent.\nWe analyze retained local validation and conduct an additional controlled generation pilot. A historical\nauthenticated-read workload completed 80,000 requests without observed errors and reached a peak of 2,823.4\nrequests/s at 50 concurrent clients. A separate 12-task model workload recorded a 25.12-second p95 latency. An",
+        "score": 0.5416058049100454,
+        "lexical_score": 0.7274421438717948,
+        "selection_score": 0.08333333333333333
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "The provided sources do not contain enough information to answer this question.",
+        "citations": [],
+        "latency_ms": 0,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "The provided sources do not contain enough information to answer this question.",
+        "citations": [],
+        "latency_ms": 0,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 1.0
+        }
+      ],
+      "mean_overlap": 1.0,
+      "n_answered": 2
+    },
+    "combined_answer": "The provided sources do not contain enough information to answer this question.",
+    "synthesizer": "source_union",
+    "verification": {
+      "model": "eval-gemma4-e4b",
+      "claims": [],
+      "confidence": 0.0,
+      "decision": "not_found",
+      "method": "cited_claim_checks"
+    }
+  }
+}

@@ -18,6 +18,12 @@ class Settings(BaseSettings):
     ai_model: str = "llama3.2"
     ai_embedding_model: str = "nomic-embed-text"
     ai_allow_cloud: bool = False
+    # Reasoning models (e.g. MiniCPM5 on LM Studio) burn max_tokens on thinking; "none" disables it
+    ai_reasoning_effort: str = ""
+    # Model that double-checks answers against the sources; empty = same as ai_model
+    ai_verifier_model: str = ""
+    # Multi-model pipeline: comma-separated model ids to fan out to; empty = single model
+    ai_multi_models: str = ""
 
     # PostgreSQL (AI-side tables: chunks, embeddings, graph, memory)
     database_url: str = ""

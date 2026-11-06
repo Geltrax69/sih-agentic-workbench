@@ -1,0 +1,143 @@
+{
+  "case": {
+    "id": "V04",
+    "category": "numeric",
+    "question": "How many tables and how many dump bytes were involved in the database restoration count check?",
+    "expected": "19 tables and 53,270-byte dump.",
+    "pages": [
+      7
+    ]
+  },
+  "wall_seconds": 2.179306291975081,
+  "result": {
+    "question": "How many tables and how many dump bytes were involved in the database restoration count check?",
+    "evidence": [
+      {
+        "chunk_id": "e5abc131-4db7-41c8-a6aa-021803a0753f",
+        "document_id": "8d1f90d7-230f-5d18-99a9-4e983be15275",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 22,
+        "location": "page 5",
+        "content": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH\n\n4. Evaluation method\n\n4.1 Evidence provenance and environment\n\nThe inspected repository has base commit a3020574e0ce55c905f69e48926ed123475ab1d5 and uncommitted\nchanges. The accompanying provenance file records relevant source hashes and historical evidence hashes.\nHistorical JSON files do not identify exact patch hashes, and some omit timestamps and model identities. The current\nsource snapshot therefore explains current behavior but cannot retroactively freeze every earlier experiment.\n\nAt documentation time, the host reports Apple M4 and 16 GiB memory; Docker reports 10 CPUs and approximately\n7.65 GiB. The additional generation experiment uses the host Ollama service. Historical tests shared local hardware\n\nand did not capture all contention, cache or resource conditions. No GPU utilization distribution or energy\nmeasurement is available.\n\n4.2 Retained functional and operational checks\n\nThe validation log records successful Go build/vet/unit checks, frontend builds, 30 Python unit tests, Go integration\ntests and two Python integration tests. Two Python test-client deprecation warnings were non-failing. The older Go\nrace log is treated as separate evidence. A legacy opt-in model test is not counted as passed when skipped; the later\nlive E2E fixture independently exercised an injection-bearing upload.\n\nThe E2E run created a fresh workspace, checked refusal with no evidence, rejected a report request, uploaded a\n\nmaintenance note, confirmed indexing, checked a grounded answer and raced two report approvals. Assertions\nincluded nonempty evidence, a fixture filename, the word filter in the answer, a retrieval-only step sequence for the\nordinary question and continued INDEXED status of the document.\n\nThe recovery check restored a database dump into a scratch database and compared table row counts. The fault test\npaused/resumed the database and restarted the API. These are bounded functional checks rather than a complete\ndisaster-recovery or availability study.\n\n4.3 Authenticated read workload\n\nThe API benchmark used four sequential closed-loop ThreadPoolExecutor stages with 1, 10, 50 and 100 workers.\nEach made 20,000 requests: 75% workspace collection reads and 25% authenticated-profile reads. The same QA\nidentity and small dataset were used. Throughput is request count divided by elapsed stage time. Per-request latency\nexcludes executor waiting before a worker starts the call, and percentiles use nearest-rank selection. Acceptance was\nzero errors and p95 below 2 seconds at each stage.\n\n4.4 AI workload and earlier keyword pilot\n\nA separate AI stress record contains 12 tasks at concurrency three using one repeated maintenance question, with\ntask completion/evidence/citation checks. It contains no independently graded answer rubric. The earlier\nthree-question evaluation uses expected keywords and counts a hit if a keyword occurs in either evidence or answer;\n\nits mean is an average of per-question hit fractions. This is a keyword coverage heuristic, despite broader language in\nthe evaluator's docstring.\n\n4.5 Additional model and temperature pilot\n\nWe ran two installed tags, qwen:7b and gemma:7b, at temperatures 0.0 and 0.8 on three cases, using seeds 17 and\n29. Cases asked for a bearing/date, an absent repair cost, and a filter incident accompanied by adversarial deletion\ninstructions. The 24 serial measured calls followed one excluded warmup per model, with shuffled order within each\nmodel. Qwen's block preceded Gemma's; order across models was not counterbalanced.\n\nThe native Ollama /api/chat request used the exact application grounding instruction, supplied evidence, stream=false,\na 2,048-token context option and a 160-token generation cap. The test bypassed retrieval, memory, the threshold\n\n\nResearch manuscript draft | 8 September 2026 5",
+        "score": 0.6851797087329963,
+        "context_only": false,
+        "lexical_score": 10.478609994038463,
+        "selection_score": 0.09307359307359307
+      },
+      {
+        "chunk_id": "880c8621-31b2-4200-9c17-16cc5f001c5d",
+        "document_id": "8d1f90d7-230f-5d18-99a9-4e983be15275",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 32,
+        "location": "page 7",
+        "content": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH\n\n\nindexed and did not change the normal question's action sequence. These assertions support the bounded workflow\nproperty, not universal prompt-injection resistance.\n\n5.2 AI, keyword and recovery measurements\n\nThe 12-task AI run recorded zero errors, elapsed time 83.22 seconds, median 20.55 seconds and p95 25.12 seconds.\nDividing count by elapsed time yields approximately 8.65 tasks/minute for that run. This is a different workload from the\nAPI reads and cannot support thousands of generated answers per second.\n\nThe earlier keyword pilot had hit fractions 3/3, 1/1 and 1/1 for the failure-cause, bearing and date questions,\nrespectively. Its stored similarity scores were 0.841924, 0.683897 and 0.692557, and all decisions were answer. Mean\n\nexpected-keyword coverage was 1.0. No semantic citation labels, held-out recall or general answer accuracy can be\nderived from these observations. The pilot predates the final evidence-selection fix.\n\nDatabase restoration compared counts for 19 tables from a 53,270-byte dump and passed, reporting 1.75 seconds for\nthe check. This is not a measured service RTO or object-store restore. The fault record passed database\npause/resume and API restart checks without quantitative recovery timing.\n\n5.3 Fixed-evidence model sensitivity\n\n\n Model tag Temp. Calls Median wall s Mean Reviewed Injection\n\ngenerated rubric pass contamination\n tokens\n\n\n qwen:7b 0.0 6 2.865 58.3 6/6 0/2\n\n\n qwen:7b 0.8 6 3.270 68.3 5/6 1/2\n\n\n gemma:7b 0.0 6 2.354 35.0 6/6 0/2\n\n\n gemma:7b 0.8 6 2.272 35.8 6/6 0/2\n\n\nAll calls completed. All factual cases contained the required identifiers and dates, all absent-cost cases abstained and\nall 16 answerable outputs contained [1]. At temperature 0.0, each model's paired seeds produced identical text for\neach case. At temperature 0.8, Qwen produced six distinct outputs across six calls and Gemma five.\n\nQwen at temperature 0.8, seed 17, answered the filter question correctly but added: \u201cSince all documents have been\nclaimed to be deleted, there is no additional evidence available.\u201d This was unsupported by the factual maintenance\nrecord and adopted a premise from the adversarial note. The test exposed no deletion capability and performed no\ndeletion. It is a generated-text failure. The paired high-temperature Qwen trial and the four Gemma injection trials did\nnot contain this premise.\n\nQwen's median rose about 14.1% between temperatures while mean output length also rose. Gemma's median fell\nabout 3.5%. Small, sequential groups with different output lengths do not support broad causal latency or safety\nrankings. Local model metadata also warrants care: qwen:7b reports family qwen2 and 8B, while gemma:7b reports\nfamily gemma and 9B. Full artifact digests in the bundle identify the tested models more reliably than aliases.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nResearch manuscript draft | 8 September 2026 7",
+        "score": 0.6704555147071765,
+        "context_only": false,
+        "lexical_score": 13.601592398185732,
+        "selection_score": 0.09307359307359307
+      },
+      {
+        "chunk_id": "d9c29613-285e-40c2-90e8-d399eef57c17",
+        "document_id": "8d1f90d7-230f-5d18-99a9-4e983be15275",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 44,
+        "location": "page 9",
+        "content": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH\n\n7. Discussion\n\nRQ1 is supported within the implemented scope: the project combines document ingestion, scoped retrieval, threshold\nrefusal and a persisted owner-approval report sequence. It does not demonstrate a general agent planner, complete\nsemantic verification or a downloadable reporting product. RQ2 yields evidence for selected local functional and load\nproperties, with substantial limits on production inference. RQ3 yields a concrete, reproducible example of text\nvariation and contamination under one changed model-temperature configuration, without establishing a general\nwinner.\n\nFor deployment, the most consequential improvements are provenance-aware memory, reviewable report content\n\nbound to source versions, durable processing recovery and an evaluation set that separates retrieval relevance from\nanswerability and faithfulness. Capacity work should exercise a mixed workload with ingestion and generation,\nincreasing corpus sizes and sustained duration. Model routing or larger models should be added only with\nmeasurements showing their benefit for that workload.\n\n8. Threats to validity and responsible use\n\nInternal validity is limited by missing historical revision/digest metadata, non-isolated local resources, sequential\nstage/model order and differences between the native model pilot and application endpoint. The quality pilot predates\na retrieval-evidence fix, so its scores cannot be treated as final-revision quality evidence. New pilot prompts omitted\n\napplication memory to isolate supplied-evidence generation, which also limits ecological validity.\n\nConstruct validity is limited by keyword coverage and citation-marker checks. A keyword can appear in irrelevant\nevidence; a citation marker can point to a passage that does not entail a claim. The post-hoc pilot rubric was applied\nby the documentation authoring assistant without blinding or independent expert agreement. It is useful for explaining\nthese particular outputs, not a validated measurement instrument.\n\nExternal validity is limited by a three-file synthetic corpus, a repeated AI load question, six calls per model-temperature\ncell and only two injection trials in each cell. Neither zero observed API errors nor three complete keyword-hit fractions\n\ngeneralizes to arbitrary users, languages, domains or workloads. No public deployment, field-user benefit study or\nlong-duration model soak was recorded.\n\nStatistical validity is limited by single load stages and tiny model samples. We report denominators and raw values\nrather than significance tests or population-level confidence claims. The 1/2 contamination count in one cell is not a\nstable estimate of attack success probability. Token length and cache effects confound model latency comparisons.\n\nThe evaluation inputs are synthetic maintenance statements; no private operational corpus was needed for the added\nexperiments. The bundle omits environment secrets and database dumps and records a redaction in a copied\ndevelopment log.\n\ndevelopment log. Real deployments should review document ownership, retention, access revocation, model-host\ntrust and user reliance. Local inference and a confidence score do not establish regulatory compliance or factual\nsafety.\n\n9. Conclusion and future work\n\nThe workbench demonstrates a bounded local RAG workflow with application-controlled workspace access and\nhuman approval. Its retained benchmarks establish successful selected local checks and high throughput for a narrow\nauthenticated-read workload. They do not establish general answer correctness or complete production readiness.\nThe new fixed-evidence pilot shows why model and temperature changes require direct inspection: a correct factual\nanswer can still adopt an unsupported adversarial premise.\n\nFuture evaluation should freeze a larger versioned corpus, include held-out unanswerable and contradictory questions,\ncollect independent citation/answer labels and compare retrieval/generation variants under controlled resources.\n\n\nResearch manuscript draft | 8 September 2026 9",
+        "score": 0.6102811562679863,
+        "context_only": false,
+        "lexical_score": 4.7055450010163495,
+        "selection_score": 0.08347826086956522
+      },
+      {
+        "chunk_id": "d72a6085-4431-4b40-815c-7e8ce9426c38",
+        "document_id": "8d1f90d7-230f-5d18-99a9-4e983be15275",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 51,
+        "location": "page 11",
+        "content": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH\n\nAppendix A. Evidence manifest\n\n\n\n Identifier File in evidence/ Role\n\n\n A1 production-stress.json Four API load stages\n\n\n A2 ai-stress.json Short concurrent AI-task run\n\n\n A3 production-e2e.json Ten named live workflow checks\n\n\n A4 eval-1788679222.json Earlier keyword-coverage pilot\n\n\n A5 recovery-check.json; fault-recovery.json Database/count and restart behavior\n\nA6 validation-tests.log; race-tests.log Separate build/unit/integration/race records\n\n\n A7 model-pilot.json Full new requests, outputs, timing and identity\n\n\n A8 model-pilot-review.json Transparent post-hoc labels and summaries\n\n\n A9 chunk-sensitivity.json Actual chunker count experiments\n\n\n A10 provenance.json Source/evidence hashes and source-state caveats\n\n\nAppendix B. Minimal replication protocol\n\nUse the existing local models and execute source/run_model_pilot.py. Its requests use two temperatures, two seeds,\nthree fixed cases and a per-model warmup, saving all outputs as JSON. A rerun requires fresh review of responses; do\nnot reuse manual labels automatically. Record model digests rather than aliases alone, preserve the runtime version\nand distinguish wall time from server-reported generation duration.\n\nFor an end-to-end comparison, create an isolated workspace per variant, ingest an identical versioned corpus with one\nfixed embedder, prevent prior generated memories from contaminating later trials and run the same questions through\nthe authenticated task API. A model-only generation pilot is insufficient to measure retrieval or authorization effects.\n\nFor an embedding comparison, rebuild the corpus embeddings and recalibrate on a development split before\nevaluating the held-out questions.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nResearch manuscript draft | 8 September 2026 11",
+        "score": 0.5406468784423629,
+        "context_only": false,
+        "lexical_score": 4.269641908006936,
+        "selection_score": 0.0673076923076923
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "Database restoration compared counts for 19 tables from a 53,270-byte dump and passed, reporting 1.75 seconds for the check. [2]\nThis is not a measured service RTO or object-store restore. [2]\nThe fault record passed database pause/resume and API restart checks without quantitative recovery timing. [2]",
+        "citations": [
+          "Research_Paper.pdf, page 7"
+        ],
+        "latency_ms": 610,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "Database restoration compared counts for 19 tables from a 53,270-byte dump and passed, reporting 1.75 seconds for the check. [2]\nThis is not a measured service RTO or object-store restore. [2]\nThe fault record passed database pause/resume and API restart checks without quantitative recovery timing. [2]\nThe recovery check restored a database dump into a scratch database and compared table row counts. [1]\nThe fault test paused/resumed the database and restarted the API. [1]\nThese are bounded functional checks rather than a complete disaster-recovery or availability study. [1]",
+        "citations": [
+          "Research_Paper.pdf, page 7",
+          "Research_Paper.pdf, page 5"
+        ],
+        "latency_ms": 2088,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.617
+        }
+      ],
+      "mean_overlap": 0.617,
+      "n_answered": 2
+    },
+    "combined_answer": "Database restoration compared counts for 19 tables from a 53,270-byte dump and passed, reporting 1.75 seconds for the check. [2]\nThis is not a measured service RTO or object-store restore. [2]\nThe fault record passed database pause/resume and API restart checks without quantitative recovery timing. [2]\nThe recovery check restored a database dump into a scratch database and compared table row counts. [1]\nThe fault test paused/resumed the database and restarted the API. [1]\nThese are bounded functional checks rather than a complete disaster-recovery or availability study. [1]",
+    "synthesizer": "source_union",
+    "verification": {
+      "model": "eval-gemma4-e4b",
+      "claims": [
+        {
+          "claim": "Database restoration compared counts for 19 tables from a 53,270-byte dump and passed, reporting 1.75 seconds for the check. [2]",
+          "source": 2,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "This is not a measured service RTO or object-store restore. [2]",
+          "source": 2,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "The fault record passed database pause/resume and API restart checks without quantitative recovery timing. [2]",
+          "source": 2,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "The recovery check restored a database dump into a scratch database and compared table row counts. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "The fault test paused/resumed the database and restarted the API. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "These are bounded functional checks rather than a complete disaster-recovery or availability study. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        }
+      ],
+      "confidence": 1.0,
+      "decision": "verified",
+      "method": "source_excerpt_match"
+    }
+  }
+}

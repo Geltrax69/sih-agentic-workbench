@@ -1,0 +1,142 @@
+{
+  "case": {
+    "id": "Q15",
+    "category": "limitation",
+    "question": "Is this manuscript a peer-reviewed accepted paper, and have named authors and affiliations been finalized?",
+    "expected": "No acceptance or peer-review claim; it is an unpublished manuscript draft. Named authors and affiliations are pending confirmation.",
+    "pages": [
+      1,
+      10
+    ]
+  },
+  "wall_seconds": 3.1241583329974674,
+  "result": {
+    "question": "Is this manuscript a peer-reviewed accepted paper, and have named authors and affiliations been finalized?",
+    "evidence": [
+      {
+        "chunk_id": "280cb9f6-7191-4f96-bf15-5b55a9b49e1f",
+        "document_id": "8d1f90d7-230f-5d18-99a9-4e983be15275",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 48,
+        "location": "page 10",
+        "content": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH\n\n\nImplementation priorities are memory provenance invalidation, approval-content binding, durable job recovery, report\ndelivery and public operational validation. These steps would support stronger claims than the present exploratory\nevidence allows.\n\nData and code availability\n\nThe accompanying package includes original-result copies with hashes, a current source hash map, editable\nmanuscript/dossier text, diagrams, model-pilot requests and outputs, and scripts. The inspected local repository is\n/Users/lalitsingh/PROJECTS/sih-agentic-workbench. Public archival access and a frozen release commit remain to be\narranged by the authors; no public dataset or repository release is claimed here.\n\nAuthor contributions and declarations\n\nNamed author contributions, institutional affiliations, funding and competing-interest declarations are pending\nconfirmation. The documentation was prepared with an AI coding assistant using repository inspection and local\nexperiments; the pilot's post-hoc labels were produced by that assistant. Human authors must review the manuscript,\nresults, attribution and any venue-specific disclosure requirements before submission.\n\nReferences\n\n[1] P. Lewis et al., \u201cRetrieval-Augmented Generation for Knowledge-Intensive NLP Tasks,\u201d NeurIPS, 2020.\nhttps://arxiv.org/abs/2005.11401\n\n[2] S. Yao et al., \u201cReAct: Synergizing Reasoning and Acting in Language Models,\u201d arXiv:2210.03629, 2022.\nhttps://arxiv.org/abs/2210.03629\n\n[3] K. Greshake et al., \u201cNot what you've signed up for: Compromising Real-World LLM-Integrated Applications with\nIndirect Prompt Injection,\u201d arXiv:2302.12173, 2023. https://arxiv.org/abs/2302.12173\n\n[4] N. F. Liu et al., \u201cLost in the Middle: How Language Models Use Long Contexts,\u201d arXiv:2307.03172, 2023.\nhttps://arxiv.org/abs/2307.03172\n\n[5] S. Es, J. James, L. Espinosa Anke and S. Schockaert, \u201cRAGAs: Automated Evaluation of Retrieval Augmented\nGeneration,\u201d EACL System Demonstrations, pp. 150-158, 2024. https://aclanthology.org/2024.eacl-demo.16/\n\n[6] pgvector maintainers, \u201cpgvector documentation,\u201d accessed 8 September 2026.\nhttps://github.com/pgvector/pgvector\n\n[7] Ollama, \u201cGenerate a chat message,\u201d API documentation, accessed 8 September 2026.\nhttps://docs.ollama.com/api/chat\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nResearch manuscript draft | 8 September 2026 10",
+        "score": 0.7167280147509596,
+        "context_only": false,
+        "lexical_score": 6.636910368851575,
+        "selection_score": 0.09307359307359307
+      },
+      {
+        "chunk_id": "ab121a00-4ee3-4a94-a2a6-0a34cd7ccd94",
+        "document_id": "8d1f90d7-230f-5d18-99a9-4e983be15275",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 0,
+        "location": "page 1",
+        "content": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH\n\n\nEvidence-Gated Local Retrieval and\nHuman-Approved Workflows for an\nInstitutional AI Workbench\n\nA systems prototype and exploratory evaluation\n\n\nAuthors and affiliations: Pending confirmation\n\nResearch manuscript draft | 8 September 2026 | Project 1: Sovereign Agentic AI Workbench\n\nThis is an unpublished manuscript draft based on inspected implementation and retained experiments. It makes no\nvenue acceptance, peer-review or official SIH endorsement claim. Author order, affiliations, corresponding-author\ncontact and target-venue formatting remain to be completed.\n\nAbstract\n\nInstitutional document assistants must connect natural-language answers to accessible evidence while controlling\nactions that affect organizational workflows. We describe a local AI workbench integrating workspace-scoped\ndocument retrieval, a deterministic evidence threshold, persisted task execution and owner approval for a report tool.\nThe implementation uses a Go API, Python AI service, PostgreSQL/pgvector, object storage and a locally configured\nmodel endpoint. Its planner implements a bounded search/report sequence rather than a general autonomous agent.\nWe analyze retained local validation and conduct an additional controlled generation pilot. A historical\nauthenticated-read workload completed 80,000 requests without observed errors and reached a peak of 2,823.4\nrequests/s at 50 concurrent clients. A separate 12-task model workload recorded a 25.12-second p95 latency. An\n\nearlier three-question pilot achieved complete expected-keyword coverage, a measure that does not establish answer\naccuracy. In 24 fixed-evidence generations across two local models and two temperatures, all calls succeeded, but\none high-temperature output adopted an unsupported deletion premise from adversarial evidence. The results\ndemonstrate a functioning local workflow and the need to distinguish retrieval signal, text faithfulness and action\nauthorization. Small datasets, incomplete historical configuration capture and unblinded exploratory review limit\ngeneralization. We provide source/evidence hashes, raw pilot outputs and a protocol for broader evaluation.\n\nKeywords: retrieval-augmented generation; local inference; evidence gating; human approval; workspace isolation;\n\nprompt injection; systems evaluation.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nResearch manuscript draft | 8 September 2026 1",
+        "score": 0.5917042980546638,
+        "context_only": false,
+        "lexical_score": 9.88055249343201,
+        "selection_score": 0.09109730848861283
+      },
+      {
+        "chunk_id": "7ac80009-eb1a-4597-9716-72325b2a0b98",
+        "document_id": "8d1f90d7-230f-5d18-99a9-4e983be15275",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 30,
+        "location": "page 6",
+        "content": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH\n\n\ngate, API roles and approval tools. Native API timing/token fields, model digests, request hashes, seeds and full\nresponses were recorded. Differences from the application's endpoint and generation cap prevent treating these\ntimings as production task latency. [7]\n\nAutomated checks recorded transport success, required keywords, [1] marker presence and selected refusal/injection\nstrings. The authoring assistant then performed an unblinded, post-hoc textual review for required facts or abstention\nand unsupported deletion claims. The labels are exploratory annotations, not a preregistered or expert-blinded\naccuracy study.\n\n5. Results\n\n5.1 API load and functional observations\n\n\n Clients Requests Errors Requests/s p50 ms p95 ms p99 ms\n\n\nTable row: Clients = 1; Requests = 20,000; Errors = 0; Requests/s = 139.6; p50 ms = 2.2; p95 ms = 29.0; p99 ms = 75.3.\n\n\nTable row: Clients = 10; Requests = 20,000; Errors = 0; Requests/s = 2,510.7; p50 ms = 3.3; p95 ms = 7.5; p99 ms = 15.2.\n\n\nTable row: Clients = 50; Requests = 20,000; Errors = 0; Requests/s = 2,823.4; p50 ms = 15.9; p95 ms = 32.4; p99 ms = 46.3.\n\n\nTable row: Clients = 100; Requests = 20,000; Errors = 0; Requests/s = 2,107.3; p50 ms = 39.7; p95 ms = 102.2; p99 ms = 162.0.\n\nrequests / secondThroughput p95 latency (ms)\n\n\n\n 3400 125\n\n 2,823.4 102.2\n\n 2,510.7\n 2550 94\n 2,107.3\n\n\n\n 1700 62\n\n\n\n 29.0 32.4\n\n850 31\n\n 139.6 7.5\n\n 0 0\n 1 10 50 100 1 10 50 100\n\n Concurrent clients Concurrent clients\n\n 20,000 reads per stage | Zero observed errors | Local shared host\n\nFigure 2. Authenticated read benchmark. Four single-run stages cannot establish a universal scaling curve.\n\nAll stages met the runner's criteria. Peak observed throughput occurred at 50 clients. At 100 clients, throughput was\napproximately 25.4% lower and p95 approximately 3.15 times the 50-client value. The nonmonotonic single-client\nversus ten-client behavior is unexplained by the retained metadata. Warmup and shared-host interference are\nplausible hypotheses, not demonstrated causes.\n\nThe E2E artifact lists ten passing checks. In the concurrent approval test, one decision returned HTTP 200 and the\nother HTTP 400 through the public proxy, and the accepted task completed. The tested malicious document remained\n\n\n\nResearch manuscript draft | 8 September 2026 6",
+        "score": 0.5435027156172574,
+        "context_only": false,
+        "lexical_score": 2.0378792355166264,
+        "selection_score": 0.075
+      },
+      {
+        "chunk_id": "e05b8855-8027-4ac2-939d-66a67690046b",
+        "document_id": "8d1f90d7-230f-5d18-99a9-4e983be15275",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 41,
+        "location": "page 9",
+        "content": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH\n\n7. Discussion\n\nRQ1 is supported within the implemented scope: the project combines document ingestion, scoped retrieval, threshold\nrefusal and a persisted owner-approval report sequence. It does not demonstrate a general agent planner, complete\nsemantic verification or a downloadable reporting product. RQ2 yields evidence for selected local functional and load\nproperties, with substantial limits on production inference. RQ3 yields a concrete, reproducible example of text\nvariation and contamination under one changed model-temperature configuration, without establishing a general\nwinner.\n\nFor deployment, the most consequential improvements are provenance-aware memory, reviewable report content\n\nbound to source versions, durable processing recovery and an evaluation set that separates retrieval relevance from\nanswerability and faithfulness. Capacity work should exercise a mixed workload with ingestion and generation,\nincreasing corpus sizes and sustained duration. Model routing or larger models should be added only with\nmeasurements showing their benefit for that workload.\n\n8. Threats to validity and responsible use\n\nInternal validity is limited by missing historical revision/digest metadata, non-isolated local resources, sequential\nstage/model order and differences between the native model pilot and application endpoint. The quality pilot predates\na retrieval-evidence fix, so its scores cannot be treated as final-revision quality evidence. New pilot prompts omitted\n\napplication memory to isolate supplied-evidence generation, which also limits ecological validity.\n\nConstruct validity is limited by keyword coverage and citation-marker checks. A keyword can appear in irrelevant\nevidence; a citation marker can point to a passage that does not entail a claim. The post-hoc pilot rubric was applied\nby the documentation authoring assistant without blinding or independent expert agreement. It is useful for explaining\nthese particular outputs, not a validated measurement instrument.\n\nExternal validity is limited by a three-file synthetic corpus, a repeated AI load question, six calls per model-temperature\ncell and only two injection trials in each cell. Neither zero observed API errors nor three complete keyword-hit fractions\n\ngeneralizes to arbitrary users, languages, domains or workloads. No public deployment, field-user benefit study or\nlong-duration model soak was recorded.\n\nStatistical validity is limited by single load stages and tiny model samples. We report denominators and raw values\nrather than significance tests or population-level confidence claims. The 1/2 contamination count in one cell is not a\nstable estimate of attack success probability. Token length and cache effects confound model latency comparisons.\n\nThe evaluation inputs are synthetic maintenance statements; no private operational corpus was needed for the added\nexperiments. The bundle omits environment secrets and database dumps and records a redaction in a copied\ndevelopment log.\n\ndevelopment log. Real deployments should review document ownership, retention, access revocation, model-host\ntrust and user reliance. Local inference and a confidence score do not establish regulatory compliance or factual\nsafety.\n\n9. Conclusion and future work\n\nThe workbench demonstrates a bounded local RAG workflow with application-controlled workspace access and\nhuman approval. Its retained benchmarks establish successful selected local checks and high throughput for a narrow\nauthenticated-read workload. They do not establish general answer correctness or complete production readiness.\nThe new fixed-evidence pilot shows why model and temperature changes require direct inspection: a correct factual\nanswer can still adopt an unsupported adversarial premise.",
+        "score": 0.5707405805587769,
+        "context_only": false,
+        "lexical_score": 0.8053301659753962,
+        "selection_score": 0.07291666666666666
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "The provided sources do not contain enough information to answer this question.",
+        "citations": [],
+        "latency_ms": 769,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "Automated checks recorded transport success, required keywords, (document reference 1) marker presence and selected refusal/injection strings. [3]\nThe authoring assistant then performed an unblinded, post-hoc textual review for required facts or abstention and unsupported deletion claims. [3]\nThe labels are exploratory annotations, not a preregistered or expert-blinded accuracy study. [3]\nNamed author contributions, institutional affiliations, funding and competing-interest declarations are pending confirmation. [1]\nThe documentation was prepared with an AI coding assistant using repository inspection and local experiments; the pilot's post-hoc labels were produced by that assistant. [1]\nHuman authors must review the manuscript, results, attribution and any venue-specific disclosure requirements before submission. [1]",
+        "citations": [
+          "Research_Paper.pdf, page 6",
+          "Research_Paper.pdf, page 10"
+        ],
+        "latency_ms": 2902,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.0
+        }
+      ],
+      "mean_overlap": 0.0,
+      "n_answered": 2
+    },
+    "combined_answer": "Automated checks recorded transport success, required keywords, (document reference 1) marker presence and selected refusal/injection strings. [3]\nThe authoring assistant then performed an unblinded, post-hoc textual review for required facts or abstention and unsupported deletion claims. [3]\nThe labels are exploratory annotations, not a preregistered or expert-blinded accuracy study. [3]\nNamed author contributions, institutional affiliations, funding and competing-interest declarations are pending confirmation. [1]\nThe documentation was prepared with an AI coding assistant using repository inspection and local experiments; the pilot's post-hoc labels were produced by that assistant. [1]\nHuman authors must review the manuscript, results, attribution and any venue-specific disclosure requirements before submission. [1]",
+    "synthesizer": "source_union",
+    "verification": {
+      "model": "eval-gemma4-e4b",
+      "claims": [
+        {
+          "claim": "Automated checks recorded transport success, required keywords, (document reference 1) marker presence and selected refusal/injection strings. [3]",
+          "source": 3,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "The authoring assistant then performed an unblinded, post-hoc textual review for required facts or abstention and unsupported deletion claims. [3]",
+          "source": 3,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "The labels are exploratory annotations, not a preregistered or expert-blinded accuracy study. [3]",
+          "source": 3,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Named author contributions, institutional affiliations, funding and competing-interest declarations are pending confirmation. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "The documentation was prepared with an AI coding assistant using repository inspection and local experiments; the pilot's post-hoc labels were produced by that assistant. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Human authors must review the manuscript, results, attribution and any venue-specific disclosure requirements before submission. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        }
+      ],
+      "confidence": 1.0,
+      "decision": "verified",
+      "method": "source_excerpt_match"
+    }
+  }
+}

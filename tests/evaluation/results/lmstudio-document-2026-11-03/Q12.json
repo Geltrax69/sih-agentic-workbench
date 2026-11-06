@@ -1,0 +1,86 @@
+{
+  "case": {
+    "id": "Q12",
+    "category": "limitation",
+    "question": "Does the earlier three-question pilot's mean keyword coverage of 1.0 establish general answer accuracy?",
+    "expected": "No. Keywords could occur in evidence or answers; this is coverage, not independently graded correctness or semantic citation accuracy.",
+    "pages": [
+      5,
+      7,
+      9
+    ]
+  },
+  "wall_seconds": 29.54707316699205,
+  "result": {
+    "question": "Does the earlier three-question pilot's mean keyword coverage of 1.0 establish general answer accuracy?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-39",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 39,
+        "location": "page 9",
+        "content": "and differences between the native model pilot and application endpoint. The quality pilot predates\na retrieval-evidence fix, so its scores cannot be treated as final-revision quality evidence. New pilot prompts omitted\napplication memory to isolate supplied-evidence generation, which also limits ecological validity.\nConstruct validity is limited by keyword coverage and citation-marker checks. A keyword can appear in irrelevant\nevidence; a citation marker can point to a passage that does not entail a claim. The post-hoc pilot rubric was applied\nby the documentation authoring assistant without blinding or independent expert agreement. It is useful for explaining\nthese particular outputs, not a validated measurement instrument.",
+        "score": 0.7315130320950171
+      },
+      {
+        "chunk_id": "pilot-22",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 22,
+        "location": "page 5",
+        "content": "rrency three using one repeated maintenance question, with\ntask completion/evidence/citation checks. It contains no independently graded answer rubric. The earlier\nthree-question evaluation uses expected keywords and counts a hit if a keyword occurs in either evidence or answer;\nits mean is an average of per-question hit fractions. This is a keyword coverage heuristic, despite broader language in\nthe evaluator's docstring.\n4.5 Additional model and temperature pilot\nWe ran two installed tags, qwen:7b and gemma:7b, at temperatures 0.0 and 0.8 on three cases, using seeds 17 and\n29. Cases asked for a bearing/date, an absent repair cost, and a filter incident accompanied by adversarial deletion\ninstructions.",
+        "score": 0.7066816028457767
+      },
+      {
+        "chunk_id": "pilot-28",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 28,
+        "location": "page 7",
+        "content": "had hit fractions 3/3, 1/1 and 1/1 for the failure-cause, bearing and date questions,\nrespectively. Its stored similarity scores were 0.841924, 0.683897 and 0.692557, and all decisions were answer. Mean\nexpected-keyword coverage was 1.0. No semantic citation labels, held-out recall or general answer accuracy can be\nderived from these observations. The pilot predates the final evidence-selection fix.\nDatabase restoration compared counts for 19 tables from a 53,270-byte dump and passed, reporting 1.75 seconds for\nthe check. This is not a measured service RTO or object-store restore. The fault record passed database\npause/resume and API restart checks without quantitative recovery timing.\n5.3 Fixed-evidence model sensitivity\nModel tag\nTemp.\nCalls\nMedian wall s\nMean\ngenerated\ntokens\nReviewed",
+        "score": 0.6584920506353517
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "[2] The earlier three-question evaluation uses expected keywords and counts a hit if a keyword occurs in either evidence or answer; its mean is an average of per-question hit fractions.\n[3] No semantic citation labels, held-out recall, or general answer accuracy can be derived from these observations.\n[4.5 Additional model and temperature pilot: The pilot predates the final evidence-selection fix, so its scores cannot be treated as final-revision quality evidence.\n[1] The quality pilot predates a retrieval-evidence fix, so its scores cannot be treated as final-revision quality evidence.\n\nThe earlier three-question pilot's mean keyword coverage of 1.0 does not establish general answer accuracy because the sources do not provide information on whether this metric can be used to derive general answer accuracy.",
+        "citations": [
+          "Research_Paper.pdf, page 5",
+          "Research_Paper.pdf, page 7",
+          "Research_Paper.pdf, page 9"
+        ],
+        "latency_ms": 10593,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "There are two sets of information about a \"keyword coverage heuristic\":\n\n*   One set mentions that \"keyword coverage can appear in irrelevant evidence; a citation marker can point to a passage that does not entail a claim,\" and says there's no way to check for this across all cases, so it's not a general one. [1]\n*   Another place has a \"three-question evaluation uses expected keywords and counts a hit if a keyword occurs in either evidence or answer; its mean is an average of per-question hit fractions,\" which is called a keyword coverage heuristic. [2]\n\nThen, there's a section that says: \"no semantic citation labels, held-out recall or general answer accuracy can be derived from these observations.\" [3]\n\nSo, no, the sources do not contain this information.",
+        "citations": [
+          "Research_Paper.pdf, page 9",
+          "Research_Paper.pdf, page 5",
+          "Research_Paper.pdf, page 7"
+        ],
+        "latency_ms": 14914,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.398
+        }
+      ],
+      "mean_overlap": 0.398,
+      "n_answered": 2
+    },
+    "combined_answer": "No, \u00e7a means that there's no way to check for this across all cases, so it's not a general one, or you can't get it from here. Here are the details:\n\n*    The earlier three-question evaluation uses expected keywords and counts a hit if a keyword occurs in either evidence or answer; its mean is an average of per-question hit fractions, which is a keyword coverage heuristic [2].\n*    There's also a general issue where a keyword can appear in irrelevant evidence, or a citation marker can point to a passage that does not entail a claim, and this is why you can't check for it across all cases [1].\n*    Also, no semantic citation labels, held-out recall, or general answer accuracy can be derived from these observations [3].",
+    "synthesizer": "eval-gemma4-e4b",
+    "verification": {
+      "decision": "not_run_answer_accuracy_pilot"
+    }
+  }
+}

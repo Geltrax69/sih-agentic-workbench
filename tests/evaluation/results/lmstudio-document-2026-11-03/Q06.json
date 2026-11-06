@@ -1,0 +1,82 @@
+{
+  "case": {
+    "id": "Q06",
+    "category": "workflow",
+    "question": "Which workspace role can approve a report, and what task state pauses for that approval?",
+    "expected": "Owner role; WAITING_FOR_APPROVAL.",
+    "pages": [
+      4
+    ]
+  },
+  "wall_seconds": 20.6928495830507,
+  "result": {
+    "question": "Which workspace role can approve a report, and what task state pauses for that approval?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-15",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 15,
+        "location": "page 4",
+        "content": "ruction asks for evidence-only\nanswers, [n] citations and rejection of instructions inside evidence. Returned source filenames are evidence metadata,\nnot a semantic certificate for every claim.\n3.3 Bounded orchestration and approval\nThe task begins in PLANNING, enters RUNNING, executes document_search and proceeds to VERIFYING and\nCOMPLETED. Report-related keywords add report_generate, which pauses in WAITING_FOR_APPROVAL. The\npublic decision route resolves workspace scope from the stored task and requires an owner role. An approval claims\nRUNNING under a task-row lock before resuming execution, preventing the second concurrent decision in the tested\npath from executing the same transition.\nThe current report tool returns Markdown stored in a task step.",
+        "score": 0.756260380959261
+      },
+      {
+        "chunk_id": "pilot-42",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 42,
+        "location": "page 9",
+        "content": "trates a bounded local RAG workflow with application-controlled workspace access and\nhuman approval. Its retained benchmarks establish successful selected local checks and high throughput for a narrow\nauthenticated-read workload. They do not establish general answer correctness or complete production readiness.\nThe new fixed-evidence pilot shows why model and temperature changes require direct inspection: a correct factual\nanswer can still adopt an unsupported adversarial premise.\nFuture evaluation should freeze a larger versioned corpus, include held-out unanswerable and contradictory questions,\ncollect independent citation/answer labels and compare retrieval/generation variants under controlled resources.",
+        "score": 0.6440198481967045
+      },
+      {
+        "chunk_id": "pilot-24",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 24,
+        "location": "page 6",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\nResearch manuscript draft  |  8 September 2026\n6\ngate, API roles and approval tools. Native API timing/token fields, model digests, request hashes, seeds and full\nresponses were recorded. Differences from the application's endpoint and generation cap prevent treating these\ntimings as production task latency. [7]\nAutomated checks recorded transport success, required keywords, [1] marker presence and selected refusal/injection\nstrings. The authoring assistant then performed an unblinded, post-hoc textual review for required facts or abstention\nand unsupported deletion claims. The labels are exploratory annotations, not a preregistered or expert-blinded\naccuracy study.\n5. Results\n5.1 API load and functional observations\nClients\nRequests\nErrors",
+        "score": 0.6304795381670487
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "[3] The public decision route resolves workspace scope from the stored task and requires an owner role.\nThe current report tool returns Markdown stored in a task step.\n[2] The new fixed-evidence pilot shows why model and temperature changes require direct inspection: a correct factual answer can still adopt an unsupported adversarial premise.\n[1] (Research_Paper.pdf, page 4) Instruction asks for evidence-only answers, [n] citations and rejection of instructions inside evidence. Returned source filenames are evidence metadata, not a semantic certificate for every claim.\n\nAnswer:\nThe workspace role that can approve a report is the `owner` role. The task state that pauses for this approval is `WAITING_FOR_APPROVAL`.",
+        "citations": [
+          "Research_Paper.pdf, page 6",
+          "Research_Paper.pdf, page 9",
+          "Research_Paper.pdf, page 4"
+        ],
+        "latency_ms": 10101,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "*   A report can be approved by an owner role, which has a chance to select a workspace scope from a stored task and then claim it if it's under a task-row lock [1].\n*    The time that pauses for a report's approval is the WAITING_FOR_APPROVAL state, and this happens after the process goes through a step called report_generate, which is added to the keywords [1].",
+        "citations": [
+          "Research_Paper.pdf, page 4"
+        ],
+        "latency_ms": 10717,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.173
+        }
+      ],
+      "mean_overlap": 0.173,
+      "n_answered": 2
+    },
+    "combined_answer": "- Owner role can be used to select a workspace scope from a stored task and needs a chance to claim it if it's under a task-row lock [1].\n- The process of this can also be seen when there are report-related keywords, which add 'report_generate' to the step and cause it to pause in 'WAITING_FOR_APPROVAL', which is a possible state [1].",
+    "synthesizer": "eval-gemma4-e4b",
+    "verification": {
+      "decision": "not_run_answer_accuracy_pilot"
+    }
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "case": {
+    "id": "Q01",
+    "category": "numeric",
+    "question": "What decisions does the manuscript's evidence gate make at scores 0.29, 0.30, and 0.45?",
+    "expected": "0.29 refuses; 0.30 answers with a warning; 0.45 answers. These are retrieval gate decisions, not accuracy probabilities.",
+    "pages": [
+      4,
+      8
+    ]
+  },
+  "wall_seconds": 19.416029499960132,
+  "result": {
+    "question": "What decisions does the manuscript's evidence gate make at scores 0.29, 0.30, and 0.45?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-32",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 32,
+        "location": "page 8",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\nResearch manuscript draft  |  8 September 2026\n8\n6. Configuration sensitivity and failure analysis\n6.1 Discrete decision changes\nThe evidence threshold creates discontinuities. A best usable score of 0.29 refuses, 0.30 permits a warning answer\nand 0.45 permits an answer under current settings. Raising the strong threshold to 0.70 while retaining weak=0.30\nwould map the three historical pilot scores to one answer and two warning answers. This is a deterministic replay of\nrecorded scores, not evidence of improved correctness.\nA new generator changes conditional text behavior while fixed evidence scores leave the gate unchanged. An\nembedding-model replacement changes retrieval geometry and requires compatible corpus/query embeddings,",
+        "score": 0.7452600741758931
+      },
+      {
+        "chunk_id": "pilot-14",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 14,
+        "location": "page 4",
+        "content": "<= s* < 0.45\n       ANSWER                    if s* >= 0.45\nThe threshold function is deterministic. It does not estimate the probability of answer correctness. One high-scoring\npassage is sufficient for ANSWER, even if the requested detail is absent or other passages conflict. Stale evidence\nadds a reason string in the gate without reducing the score. Normal executor items are constructed after\nworkspace-scoped SQL retrieval; revoked/stale metadata is not comprehensively propagated.\nFor non-refused tasks, numbered evidence and up to three recent eligible memory items are sent to the generator. The\ntask path uses temperature 0.3 and a maximum output of 800 tokens. The system instruction asks for evidence-only\nanswers, [n] citations and rejection of instructions inside evidence.",
+        "score": 0.7243235943712134
+      },
+      {
+        "chunk_id": "pilot-29",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 29,
+        "location": "page 7",
+        "content": "Fixed-evidence model sensitivity\nModel tag\nTemp.\nCalls\nMedian wall s\nMean\ngenerated\ntokens\nReviewed\nrubric pass\nInjection\ncontamination\nqwen:7b\n0.0\n6\n2.865\n58.3\n6/6\n0/2\nqwen:7b\n0.8\n6\n3.270\n68.3\n5/6\n1/2\ngemma:7b\n0.0\n6\n2.354\n35.0\n6/6\n0/2\ngemma:7b\n0.8\n6\n2.272\n35.8\n6/6\n0/2\nAll calls completed. All factual cases contained the required identifiers and dates, all absent-cost cases abstained and\nall 16 answerable outputs contained [1]. At temperature 0.0, each model's paired seeds produced identical text for\neach case. At temperature 0.8, Qwen produced six distinct outputs across six calls and Gemma five.\nQwen at temperature 0.8, seed 17, answered the filter question correctly but added: \u201cSince all documents have been",
+        "score": 0.6864672099635765
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "The manuscript's evidence gate makes the following decisions at scores 0.29, 0.30, and 0.45:\n\n- **Score 0.29**: Denies any answer (best usable score).\n- **Score 0.30**: Allows a warning answer.\n- **Score 0.45**: Permits an answer under current settings.\n\nThese decisions are based on the evidence threshold analysis described in the sources, which maps historical pilot scores to one answer and two warning answers when the threshold is raised to 0.70, or simply allows an answer at 0.30 with a warning if the threshold is lower (e.g., 0.29). The gate does not estimate correctness probability, so high-scoring passages are sufficient for \"ANSWER\" without requiring details.\n\nSource numbers: [1], [2], [3].",
+        "citations": [
+          "Research_Paper.pdf, page 8",
+          "Research_Paper.pdf, page 4",
+          "Research_Paper.pdf, page 7"
+        ],
+        "latency_ms": 7132,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "*   **0.29:** Refuses [1]. Also shown as a score that gets no answer and no citation on its own, but can be added to a reason string if it's stale (score < 0.45) [2].\n*   **0.30:** Is a warning answer, or can be an answer if there are up to three recent eligible memory items [1], [2].\n*   **0.45:** Can be an answer, or is the point where no longer cited evidence gets rid of its score (score >= 0.45) [1], [2].",
+        "citations": [
+          "Research_Paper.pdf, page 8",
+          "Research_Paper.pdf, page 4"
+        ],
+        "latency_ms": 8523,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.057
+        }
+      ],
+      "mean_overlap": 0.057,
+      "n_answered": 2
+    },
+    "combined_answer": "- **Score 0.29**: Refuses any answer (best usable score) [1], or gets no answer and no citation on its own, but can be added to a reason string if it's stale (score < 0.45) [2].\n- **Score 0.30**: Allows a warning answer, or can be an answer if there are up to three recent eligible memory items [1], [2].\n- **Score 0.45**: Permits an answer under current settings, or is the point where no longer cited evidence gets rid of its score (score >= 0.45) [1], [2].",
+    "synthesizer": "eval-gemma4-e4b",
+    "verification": {
+      "decision": "not_run_answer_accuracy_pilot"
+    }
+  }
+}

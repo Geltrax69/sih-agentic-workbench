@@ -1,0 +1,166 @@
+{
+  "case": {
+    "id": "Q05",
+    "category": "limitation",
+    "question": "According to the manuscript, is Redis a demonstrated durable job transport, and is a durable retry worker implemented?",
+    "expected": "No to both. Redis participates in health checks; a durable retry worker for lost triggers or abandoned RUNNING jobs is absent.",
+    "pages": [
+      3
+    ]
+  },
+  "wall_seconds": 1.856657208991237,
+  "result": {
+    "question": "According to the manuscript, is Redis a demonstrated durable job transport, and is a durable retry worker implemented?",
+    "evidence": [
+      {
+        "chunk_id": "45bcce55-831f-4bd6-b87e-2948227821d0",
+        "document_id": "8d1f90d7-230f-5d18-99a9-4e983be15275",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 14,
+        "location": "page 3",
+        "content": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH\n\n3. System design\n\n\n\n\n Browser + Nginx\n Static React UI; /api proxy\n\n\n\n Bearer token\n\n\n Go public API PostgreSQL\n JWT; workspace roles; HTTP Metadata, vectors, tasks,\n approvals, memory\n\nOriginal file read Internal secret\n\n\n\n MinIO Python AI service\n Original uploaded bytes Ingestion; retrieval; task flow Redis\n\n Required health dependency\n\n\n Private endpoint policy\n\n\n\n\n Local model host\n Embedding + generation calls\n\n\n\n Application controls authorize actions; model output is untrusted text.\n\nFigure 1. Implemented system components and trust boundaries. Supporting Redis/graph components are not a demonstrated durable\ntask queue or graph-augmented retrieval path.\n\n3.1 Services and data ownership\n\nNginx serves a compiled React frontend and proxies requests to a Go API. The API authenticates bearer tokens and\nchecks workspace roles before calling an internal Python FastAPI service. PostgreSQL stores users, memberships,\ndocument metadata, chunks, tasks, steps, approvals and memory. MinIO stores uploaded bytes. A model adapter\n\ncalls a configured local endpoint for embeddings and generation.\n\nIngestion supports text-bearing PDF, DOCX, XLSX, TXT, Markdown and CSV inputs. The current chunker uses\n800-character windows with nominal 100-character overlap and prefers text boundaries where possible. Embeddings\nare stored in vector(768), with a cosine IVFFlat index configured with lists=100. This is a source configuration, not\nevidence that the approximate index has been optimally trained or used by the query planner on the tiny corpus. [6]\n\nThe ingestion service claims one pending PostgreSQL job under FOR UPDATE ... SKIP LOCKED, processes its\nobject and records success or failure. Uploads trigger this processing through an internal request. A durable retry\nworker for lost triggers or abandoned RUNNING jobs is absent. Redis participates in health checks but is not a\ndemonstrated job transport in the current execution path.\n\n\n\n\n\n\n\n\n\n\n\nResearch manuscript draft | 8 September 2026 3",
+        "score": 0.7930532693862915,
+        "context_only": false,
+        "lexical_score": 13.969874562803458,
+        "selection_score": 0.09523809523809523
+      },
+      {
+        "chunk_id": "7abf1f7e-edea-4277-b0b3-0722ffb7d548",
+        "document_id": "8d1f90d7-230f-5d18-99a9-4e983be15275",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 41,
+        "location": "page 9",
+        "content": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH\n\n7. Discussion\n\nRQ1 is supported within the implemented scope: the project combines document ingestion, scoped retrieval, threshold\nrefusal and a persisted owner-approval report sequence. It does not demonstrate a general agent planner, complete\nsemantic verification or a downloadable reporting product. RQ2 yields evidence for selected local functional and load\nproperties, with substantial limits on production inference. RQ3 yields a concrete, reproducible example of text\nvariation and contamination under one changed model-temperature configuration, without establishing a general\nwinner.\n\nFor deployment, the most consequential improvements are provenance-aware memory, reviewable report content\n\nbound to source versions, durable processing recovery and an evaluation set that separates retrieval relevance from\nanswerability and faithfulness. Capacity work should exercise a mixed workload with ingestion and generation,\nincreasing corpus sizes and sustained duration. Model routing or larger models should be added only with\nmeasurements showing their benefit for that workload.\n\n8. Threats to validity and responsible use\n\nInternal validity is limited by missing historical revision/digest metadata, non-isolated local resources, sequential\nstage/model order and differences between the native model pilot and application endpoint. The quality pilot predates\na retrieval-evidence fix, so its scores cannot be treated as final-revision quality evidence. New pilot prompts omitted\n\napplication memory to isolate supplied-evidence generation, which also limits ecological validity.\n\nConstruct validity is limited by keyword coverage and citation-marker checks. A keyword can appear in irrelevant\nevidence; a citation marker can point to a passage that does not entail a claim. The post-hoc pilot rubric was applied\nby the documentation authoring assistant without blinding or independent expert agreement. It is useful for explaining\nthese particular outputs, not a validated measurement instrument.\n\nExternal validity is limited by a three-file synthetic corpus, a repeated AI load question, six calls per model-temperature\ncell and only two injection trials in each cell. Neither zero observed API errors nor three complete keyword-hit fractions\n\ngeneralizes to arbitrary users, languages, domains or workloads. No public deployment, field-user benefit study or\nlong-duration model soak was recorded.\n\nStatistical validity is limited by single load stages and tiny model samples. We report denominators and raw values\nrather than significance tests or population-level confidence claims. The 1/2 contamination count in one cell is not a\nstable estimate of attack success probability. Token length and cache effects confound model latency comparisons.\n\nThe evaluation inputs are synthetic maintenance statements; no private operational corpus was needed for the added\nexperiments. The bundle omits environment secrets and database dumps and records a redaction in a copied\ndevelopment log.\n\ndevelopment log. Real deployments should review document ownership, retention, access revocation, model-host\ntrust and user reliance. Local inference and a confidence score do not establish regulatory compliance or factual\nsafety.\n\n9. Conclusion and future work\n\nThe workbench demonstrates a bounded local RAG workflow with application-controlled workspace access and\nhuman approval. Its retained benchmarks establish successful selected local checks and high throughput for a narrow\nauthenticated-read workload. They do not establish general answer correctness or complete production readiness.\nThe new fixed-evidence pilot shows why model and temperature changes require direct inspection: a correct factual\nanswer can still adopt an unsupported adversarial premise.",
+        "score": 0.6074510216712952,
+        "context_only": false,
+        "lexical_score": 2.5064925904971824,
+        "selection_score": 0.08012820512820512
+      },
+      {
+        "chunk_id": "3f876553-90b6-4b4b-aa2c-5c9e4cf71aa5",
+        "document_id": "8d1f90d7-230f-5d18-99a9-4e983be15275",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 47,
+        "location": "page 10",
+        "content": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH\n\n\nImplementation priorities are memory provenance invalidation, approval-content binding, durable job recovery, report\ndelivery and public operational validation. These steps would support stronger claims than the present exploratory\nevidence allows.\n\nData and code availability\n\nThe accompanying package includes original-result copies with hashes, a current source hash map, editable\nmanuscript/dossier text, diagrams, model-pilot requests and outputs, and scripts. The inspected local repository is\n/Users/lalitsingh/PROJECTS/sih-agentic-workbench. Public archival access and a frozen release commit remain to be\narranged by the authors; no public dataset or repository release is claimed here.\n\nAuthor contributions and declarations\n\nNamed author contributions, institutional affiliations, funding and competing-interest declarations are pending\nconfirmation. The documentation was prepared with an AI coding assistant using repository inspection and local\nexperiments; the pilot's post-hoc labels were produced by that assistant. Human authors must review the manuscript,\nresults, attribution and any venue-specific disclosure requirements before submission.\n\nReferences\n\n[1] P. Lewis et al., \u201cRetrieval-Augmented Generation for Knowledge-Intensive NLP Tasks,\u201d NeurIPS, 2020.\nhttps://arxiv.org/abs/2005.11401\n\n[2] S. Yao et al., \u201cReAct: Synergizing Reasoning and Acting in Language Models,\u201d arXiv:2210.03629, 2022.\nhttps://arxiv.org/abs/2210.03629\n\n[3] K. Greshake et al., \u201cNot what you've signed up for: Compromising Real-World LLM-Integrated Applications with\nIndirect Prompt Injection,\u201d arXiv:2302.12173, 2023. https://arxiv.org/abs/2302.12173\n\n[4] N. F. Liu et al., \u201cLost in the Middle: How Language Models Use Long Contexts,\u201d arXiv:2307.03172, 2023.\nhttps://arxiv.org/abs/2307.03172\n\n[5] S. Es, J. James, L. Espinosa Anke and S. Schockaert, \u201cRAGAs: Automated Evaluation of Retrieval Augmented\nGeneration,\u201d EACL System Demonstrations, pp. 150-158, 2024. https://aclanthology.org/2024.eacl-demo.16/\n\n[6] pgvector maintainers, \u201cpgvector documentation,\u201d accessed 8 September 2026.\nhttps://github.com/pgvector/pgvector\n\n[7] Ollama, \u201cGenerate a chat message,\u201d API documentation, accessed 8 September 2026.\nhttps://docs.ollama.com/api/chat\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nResearch manuscript draft | 8 September 2026 10",
+        "score": 0.5878089316005162,
+        "context_only": false,
+        "lexical_score": 4.882925492454748,
+        "selection_score": 0.07738095238095238
+      },
+      {
+        "chunk_id": "e87d802b-9ee7-444d-a870-b321664e96f4",
+        "document_id": "8d1f90d7-230f-5d18-99a9-4e983be15275",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 18,
+        "location": "page 4",
+        "content": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH\n\n\n3.2 Retrieval and evidence decision\n\nA question is embedded and searched against chunks satisfying the workspace predicate and a non-deleted source\npredicate. The default result limit is six. For a query vector q and chunk vector v_i, the recorded score is cosine\nsimilarity, equivalently one minus the cosine distance returned by pgvector. Let U be the set of evidence items\nmatching the expected workspace and not marked revoked, and let s* = max(s_i for i in U).\n\n D(U) = REFUSE if U is empty or s* < 0.30\n ANSWER_WITH_WARNING if 0.30 <= s* < 0.45\n ANSWER if s* >= 0.45\n\nThe threshold function is deterministic. It does not estimate the probability of answer correctness. One high-scoring\npassage is sufficient for ANSWER, even if the requested detail is absent or other passages conflict. Stale evidence\nadds a reason string in the gate without reducing the score. Normal executor items are constructed after\nworkspace-scoped SQL retrieval; revoked/stale metadata is not comprehensively propagated.\n\nFor non-refused tasks, numbered evidence and up to three recent eligible memory items are sent to the generator. The\ntask path uses temperature 0.3 and a maximum output of 800 tokens. The system instruction asks for evidence-only\nanswers, [n] citations and rejection of instructions inside evidence. Returned source filenames are evidence metadata,\n\nnot a semantic certificate for every claim.\n\n3.3 Bounded orchestration and approval\n\nThe task begins in PLANNING, enters RUNNING, executes document_search and proceeds to VERIFYING and\nCOMPLETED. Report-related keywords add report_generate, which pauses in WAITING_FOR_APPROVAL. The\npublic decision route resolves workspace scope from the stored task and requires an owner role. An approval claims\nRUNNING under a task-row lock before resuming execution, preventing the second concurrent decision in the tested\npath from executing the same transition.\n\nThe current report tool returns Markdown stored in a task step. A public report-download artifact is not exposed. The\nschema and step vocabulary are broader than the active workflow: dynamic model routing, general DAG planning,\n\ngraph retrieval expansion and complete tool-execution auditing remain outside the demonstrated implementation.\n\n3.4 Memory and residual trust\n\nAn ANSWER decision writes up to 500 characters of generated text into memory with verified=true, and later prompts\ndescribe these items as verified facts. This flag reflects the retrieval gate, not independent verification. Thus an\nunsupported generated claim can become later context. Source deletion also does not establish revocation of\nhistorical answer memories. These limitations are material because a model-comparison experiment that does not\nfreeze memory can confound model effects with previous generated content.\n\nResearch manuscript draft | 8 September 2026 4",
+        "score": 0.5910378694534302,
+        "context_only": false,
+        "lexical_score": 2.5482612790516086,
+        "selection_score": 0.07703703703703704
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "bound to source versions, durable processing recovery and an evaluation set that separates retrieval relevance from answerability and faithfulness. [2]\nCapacity work should exercise a mixed workload with ingestion and generation, increasing corpus sizes and sustained duration. [2]\nModel routing or larger models should be added only with measurements showing their benefit for that workload. [2]",
+        "citations": [
+          "Research_Paper.pdf, page 9"
+        ],
+        "latency_ms": 588,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "Figure 1. Implemented system components and trust boundaries. [1]\nSupporting Redis/graph components are not a demonstrated durable task queue or graph-augmented retrieval path. [1]\nThe ingestion service claims one pending PostgreSQL job under FOR UPDATE ... [1]\nSKIP LOCKED, processes its object and records success or failure. [1]\nUploads trigger this processing through an internal request. [1]\nA durable retry worker for lost triggers or abandoned RUNNING jobs is absent. [1]\nRedis participates in health checks but is not a demonstrated job transport in the current execution path. [1]",
+        "citations": [
+          "Research_Paper.pdf, page 3"
+        ],
+        "latency_ms": 1772,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.047
+        }
+      ],
+      "mean_overlap": 0.047,
+      "n_answered": 2
+    },
+    "combined_answer": "bound to source versions, durable processing recovery and an evaluation set that separates retrieval relevance from answerability and faithfulness. [2]\nCapacity work should exercise a mixed workload with ingestion and generation, increasing corpus sizes and sustained duration. [2]\nModel routing or larger models should be added only with measurements showing their benefit for that workload. [2]\nFigure 1. Implemented system components and trust boundaries. [1]\nSupporting Redis/graph components are not a demonstrated durable task queue or graph-augmented retrieval path. [1]\nThe ingestion service claims one pending PostgreSQL job under FOR UPDATE ... [1]\nSKIP LOCKED, processes its object and records success or failure. [1]\nUploads trigger this processing through an internal request. [1]\nA durable retry worker for lost triggers or abandoned RUNNING jobs is absent. [1]\nRedis participates in health checks but is not a demonstrated job transport in the current execution path. [1]",
+    "synthesizer": "source_union",
+    "verification": {
+      "model": "eval-gemma4-e4b",
+      "claims": [
+        {
+          "claim": "bound to source versions, durable processing recovery and an evaluation set that separates retrieval relevance from answerability and faithfulness. [2]",
+          "source": 2,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Capacity work should exercise a mixed workload with ingestion and generation, increasing corpus sizes and sustained duration. [2]",
+          "source": 2,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Model routing or larger models should be added only with measurements showing their benefit for that workload. [2]",
+          "source": 2,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Figure 1. Implemented system components and trust boundaries. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Supporting Redis/graph components are not a demonstrated durable task queue or graph-augmented retrieval path. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "The ingestion service claims one pending PostgreSQL job under FOR UPDATE ... [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "SKIP LOCKED, processes its object and records success or failure. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Uploads trigger this processing through an internal request. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "A durable retry worker for lost triggers or abandoned RUNNING jobs is absent. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Redis participates in health checks but is not a demonstrated job transport in the current execution path. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        }
+      ],
+      "confidence": 1.0,
+      "decision": "verified",
+      "method": "source_excerpt_match"
+    }
+  }
+}

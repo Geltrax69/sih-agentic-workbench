@@ -1,0 +1,126 @@
+{
+  "case": {
+    "id": "Q03",
+    "category": "numeric",
+    "question": "What are the manuscript's default chunk-window size and nominal chunk overlap, in characters?",
+    "expected": "800-character windows and nominal 100-character overlap.",
+    "pages": [
+      3
+    ]
+  },
+  "wall_seconds": 4.311153083050158,
+  "result": {
+    "question": "What are the manuscript's default chunk-window size and nominal chunk overlap, in characters?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-37",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 37,
+        "location": "page 8",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\n\n6. Configuration sensitivity and failure analysis\n\n6.1 Discrete decision changes\n\nThe evidence threshold creates discontinuities. A best usable score of 0.29 refuses, 0.30 permits a warning answer\nand 0.45 permits an answer under current settings. Raising the strong threshold to 0.70 while retaining weak=0.30\nwould map the three historical pilot scores to one answer and two warning answers. This is a deterministic replay of\nrecorded scores, not evidence of improved correctness.\n\nA new generator changes conditional text behavior while fixed evidence scores leave the gate unchanged. An\nembedding-model replacement changes retrieval geometry and requires compatible corpus/query embeddings,\nreindexing and threshold recalibration. Matching vector dimensionality alone does not make embeddings from different\nmodels comparable. The current vector(768) schema additionally requires a migration if the new dimension differs.\n\n6.2 Segmentation experiment\n\nRunning the actual chunker over the three demonstration files produced three chunks at 800/100, 800/0, 800/200 and\n1,200/100 characters. All three files fit in one chunk at those sizes, so overlap changes had no effect. At 400/0 the\ncorpus produced five chunks and 1,394 stored characters; at 400/100 it produced six chunks and 1,694 characters.\nThe default stored 1,396 characters.\n\nThese counts demonstrate segmentation and duplication effects only. They do not measure retrieval quality or answer\nchanges.\n\nchanges. The tiny corpus is poorly suited to testing overlap because it exercises little boundary splitting under the\ndefault setting. A realistic corpus should include long procedures, multi-page tables and cases whose evidence\ncrosses chunk boundaries.\n\n6.3 Distinguishing failure layers\n\n\n  Layer                    Example failure                                         Required evaluation\n\n\n  Access control           Cross-workspace task read                               Role-matrix and object-scope integration tests\n\n\n  Retrieval                Relevant answer passage not retrieved                   Labeled recall@k and exact-search comparison\n\n\n  Answerability            Related evidence lacks requested value                  Held-out unanswerable/contradiction set",
+        "score": 0.6699816469965534,
+        "lexical_score": 11.879049826358909,
+        "selection_score": 0.09307359307359307
+      },
+      {
+        "chunk_id": "pilot-13",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 13,
+        "location": "page 3",
+        "content": "Embedding + generation calls\n\n\n\n                                     Application controls authorize actions; model output is untrusted text.\n\nFigure 1. Implemented system components and trust boundaries. Supporting Redis/graph components are not a demonstrated durable\ntask queue or graph-augmented retrieval path.\n\n3.1 Services and data ownership\n\nNginx serves a compiled React frontend and proxies requests to a Go API. The API authenticates bearer tokens and\nchecks workspace roles before calling an internal Python FastAPI service. PostgreSQL stores users, memberships,\ndocument metadata, chunks, tasks, steps, approvals and memory. MinIO stores uploaded bytes. A model adapter\n\ncalls a configured local endpoint for embeddings and generation.\n\nIngestion supports text-bearing PDF, DOCX, XLSX, TXT, Markdown and CSV inputs. The current chunker uses\n800-character windows with nominal 100-character overlap and prefers text boundaries where possible. Embeddings\nare stored in vector(768), with a cosine IVFFlat index configured with lists=100. This is a source configuration, not\nevidence that the approximate index has been optimally trained or used by the query planner on the tiny corpus. [6]\n\nThe ingestion service claims one pending PostgreSQL job under FOR UPDATE ... SKIP LOCKED, processes its\nobject and records success or failure. Uploads trigger this processing through an internal request. A durable retry\nworker for lost triggers or abandoned RUNNING jobs is absent. Redis participates in health checks but is not a\ndemonstrated job transport in the current execution path.\n\n\n\n\n\n\n\n\n\n\n\nResearch manuscript draft  |  8 September 2026                                                                                                    3",
+        "score": 0.6610948680960477,
+        "lexical_score": 9.988738716745555,
+        "selection_score": 0.08893280632411067
+      },
+      {
+        "chunk_id": "pilot-18",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 18,
+        "location": "page 4",
+        "content": "not a semantic certificate for every claim.\n\n3.3 Bounded orchestration and approval\n\nThe task begins in PLANNING, enters RUNNING, executes document_search and proceeds to VERIFYING and\nCOMPLETED. Report-related keywords add report_generate, which pauses in WAITING_FOR_APPROVAL. The\npublic decision route resolves workspace scope from the stored task and requires an owner role. An approval claims\nRUNNING under a task-row lock before resuming execution, preventing the second concurrent decision in the tested\npath from executing the same transition.\n\nThe current report tool returns Markdown stored in a task step. A public report-download artifact is not exposed. The\nschema and step vocabulary are broader than the active workflow: dynamic model routing, general DAG planning,\n\ngraph retrieval expansion and complete tool-execution auditing remain outside the demonstrated implementation.\n\n3.4 Memory and residual trust\n\nAn ANSWER decision writes up to 500 characters of generated text into memory with verified=true, and later prompts\ndescribe these items as verified facts. This flag reflects the retrieval gate, not independent verification. Thus an\nunsupported generated claim can become later context. Source deletion also does not establish revocation of\nhistorical answer memories. These limitations are material because a model-comparison experiment that does not\nfreeze memory can confound model effects with previous generated content.\n\nResearch manuscript draft  |  8 September 2026                                                                                                4",
+        "score": 0.6090436009363349,
+        "lexical_score": 2.0539468156700122,
+        "selection_score": 0.07846153846153847
+      },
+      {
+        "chunk_id": "pilot-35",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 35,
+        "location": "page 7",
+        "content": "All calls completed. All factual cases contained the required identifiers and dates, all absent-cost cases abstained and\nall 16 answerable outputs contained [1]. At temperature 0.0, each model's paired seeds produced identical text for\neach case. At temperature 0.8, Qwen produced six distinct outputs across six calls and Gemma five.\n\nQwen at temperature 0.8, seed 17, answered the filter question correctly but added: \u201cSince all documents have been\nclaimed to be deleted, there is no additional evidence available.\u201d This was unsupported by the factual maintenance\nrecord and adopted a premise from the adversarial note. The test exposed no deletion capability and performed no\ndeletion. It is a generated-text failure. The paired high-temperature Qwen trial and the four Gemma injection trials did\nnot contain this premise.\n\nQwen's median rose about 14.1% between temperatures while mean output length also rose. Gemma's median fell\nabout 3.5%. Small, sequential groups with different output lengths do not support broad causal latency or safety\nrankings. Local model metadata also warrants care: qwen:7b reports family qwen2 and 8B, while gemma:7b reports\nfamily gemma and 9B. Full artifact digests in the bundle identify the tested models more reliably than aliases.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nResearch manuscript draft  |  8 September 2026                                                                                                  7",
+        "score": 0.6100442056352509,
+        "lexical_score": 0.9650812932940951,
+        "selection_score": 0.07333333333333333
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "Ingestion supports text-bearing PDF, DOCX, XLSX, TXT, Markdown and CSV inputs. [2]\nThe current chunker uses 800-character windows with nominal 100-character overlap and prefers text boundaries where possible. [2]\nEmbeddings are stored in vector(768), with a cosine IVFFlat index configured with lists=100. This is a source configuration, not evidence that the approximate index has been optimally trained or used by the query planner on the tiny corpus. [2]\n(document reference 6) [2]",
+        "citations": [
+          "Research_Paper.pdf, page 3"
+        ],
+        "latency_ms": 3035,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "Ingestion supports text-bearing PDF, DOCX, XLSX, TXT, Markdown and CSV inputs. [2]\nThe current chunker uses 800-character windows with nominal 100-character overlap and prefers text boundaries where possible. [2]\nEmbeddings are stored in vector(768), with a cosine IVFFlat index configured with lists=100. This is a source configuration, not evidence that the approximate index has been optimally trained or used by the query planner on the tiny corpus. [2]\n(document reference 6) [2]",
+        "citations": [
+          "Research_Paper.pdf, page 3"
+        ],
+        "latency_ms": 4261,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 1.0
+        }
+      ],
+      "mean_overlap": 1.0,
+      "n_answered": 2
+    },
+    "combined_answer": "Ingestion supports text-bearing PDF, DOCX, XLSX, TXT, Markdown and CSV inputs. [2]\nThe current chunker uses 800-character windows with nominal 100-character overlap and prefers text boundaries where possible. [2]\nEmbeddings are stored in vector(768), with a cosine IVFFlat index configured with lists=100. This is a source configuration, not evidence that the approximate index has been optimally trained or used by the query planner on the tiny corpus. [2]\n(document reference 6) [2]",
+    "synthesizer": "source_union",
+    "verification": {
+      "model": "eval-gemma4-e4b",
+      "claims": [
+        {
+          "claim": "Ingestion supports text-bearing PDF, DOCX, XLSX, TXT, Markdown and CSV inputs. [2]",
+          "source": 2,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "The current chunker uses 800-character windows with nominal 100-character overlap and prefers text boundaries where possible. [2]",
+          "source": 2,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Embeddings are stored in vector(768), with a cosine IVFFlat index configured with lists=100. This is a source configuration, not evidence that the approximate index has been optimally trained or used by the query planner on the tiny corpus. [2]",
+          "source": 2,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "(document reference 6) [2]",
+          "source": 2,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        }
+      ],
+      "confidence": 1.0,
+      "decision": "verified",
+      "method": "source_excerpt_match"
+    }
+  }
+}

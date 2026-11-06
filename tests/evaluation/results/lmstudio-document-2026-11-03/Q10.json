@@ -1,0 +1,81 @@
+{
+  "case": {
+    "id": "Q10",
+    "category": "numeric",
+    "question": "What was the peak authenticated-read throughput, and at how many concurrent clients did it occur?",
+    "expected": "2,823.4 requests per second at 50 concurrent clients.",
+    "pages": [
+      1,
+      6
+    ]
+  },
+  "wall_seconds": 20.238499417027924,
+  "result": {
+    "question": "What was the peak authenticated-read throughput, and at how many concurrent clients did it occur?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-25",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 25,
+        "location": "page 6",
+        "content": "blinded\naccuracy study.\n5. Results\n5.1 API load and functional observations\nClients\nRequests\nErrors\nRequests/s\np50 ms\np95 ms\np99 ms\n1\n20,000\n0\n139.6\n2.2\n29.0\n75.3\n10\n20,000\n0\n2,510.7\n3.3\n7.5\n15.2\n50\n20,000\n0\n2,823.4\n15.9\n32.4\n46.3\n100\n20,000\n0\n2,107.3\n39.7\n102.2\n162.0\nThroughput\n0\n850\n1700\n2550\n3400\n139.6\n1\n2,510.7\n10\n2,823.4\n50\n2,107.3\n100\nConcurrent clients\np95 latency (ms)\n0\n31\n62\n94\n125\n29.0\n1\n7.5\n10\n32.4\n50\n102.2\n100\nConcurrent clients\nrequests / second\n20,000 reads per stage | Zero observed errors | Local shared host\nFigure 2. Authenticated read benchmark. Four single-run stages cannot establish a universal scaling curve.\nAll stages met the runner's criteria. Peak observed throughput occurred at 50 clients. At 100 clients, throughput was",
+        "score": 0.7745655637995976
+      },
+      {
+        "chunk_id": "pilot-26",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 26,
+        "location": "page 6",
+        "content": "runner's criteria. Peak observed throughput occurred at 50 clients. At 100 clients, throughput was\napproximately 25.4% lower and p95 approximately 3.15 times the 50-client value. The nonmonotonic single-client\nversus ten-client behavior is unexplained by the retained metadata. Warmup and shared-host interference are\nplausible hypotheses, not demonstrated causes.\nThe E2E artifact lists ten passing checks. In the concurrent approval test, one decision returned HTTP 200 and the\nother HTTP 400 through the public proxy, and the accepted task completed. The tested malicious document remained",
+        "score": 0.7576459743719229
+      },
+      {
+        "chunk_id": "pilot-21",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 21,
+        "location": "page 5",
+        "content": "cks rather than a complete\ndisaster-recovery or availability study.\n4.3 Authenticated read workload\nThe API benchmark used four sequential closed-loop ThreadPoolExecutor stages with 1, 10, 50 and 100 workers.\nEach made 20,000 requests: 75% workspace collection reads and 25% authenticated-profile reads. The same QA\nidentity and small dataset were used. Throughput is request count divided by elapsed stage time. Per-request latency\nexcludes executor waiting before a worker starts the call, and percentiles use nearest-rank selection. Acceptance was\nzero errors and p95 below 2 seconds at each stage.\n4.4 AI workload and earlier keyword pilot\nA separate AI stress record contains 12 tasks at concurrency three using one repeated maintenance question, with\ntask completion/evidence/citation checks.",
+        "score": 0.7431658824974334
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "Based on the provided sources:\n\n[1] The peak observed throughput occurred at 50 clients.\n[2] The peak observed throughput occurred at approximately 25.4% lower and p95 approximately 3.15 times the 50-client value (at 100 clients).\n[3] The peak observed throughput occurred at 50 clients.\n[4] The peak observed throughput occurred at approximately 25.4% lower and p95 approximately 3.15 times the 50-client value (at 100 clients).",
+        "citations": [
+          "Research_Paper.pdf, page 6",
+          "Research_Paper.pdf, page 6",
+          "Research_Paper.pdf, page 5"
+        ],
+        "latency_ms": 10081,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "The peak observed throughput was 3,400 at 50 clients, and 100 clients, respectively, and this was done with a 20,000 reads per stage | zero observed errors | local shared host.\n\n*   - -",
+        "citations": [],
+        "latency_ms": 10672,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.185
+        }
+      ],
+      "mean_overlap": 0.185,
+      "n_answered": 2
+    },
+    "combined_answer": "* can't go over 2 seconds* [3]*, *100 clients was about 25.4% lower and 3.15 times faster than the 50 client value* [2], *there were 75% workspace collection reads and 25% authenticated-profile reads* [3].",
+    "synthesizer": "eval-gemma4-e4b",
+    "verification": {
+      "decision": "not_run_answer_accuracy_pilot"
+    }
+  }
+}

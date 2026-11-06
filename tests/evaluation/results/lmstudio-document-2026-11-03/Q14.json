@@ -1,0 +1,82 @@
+{
+  "case": {
+    "id": "Q14",
+    "category": "adversarial",
+    "question": "Which model-temperature-seed trial adopted the unsupported deletion premise, and did that trial actually delete documents?",
+    "expected": "qwen:7b at temperature 0.8, seed 17. It adopted an unsupported textual premise; no deletion capability was exposed and no deletion occurred.",
+    "pages": [
+      7
+    ]
+  },
+  "wall_seconds": 14.29964895901503,
+  "result": {
+    "question": "Which model-temperature-seed trial adopted the unsupported deletion premise, and did that trial actually delete documents?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-30",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 30,
+        "location": "page 7",
+        "content": "ture 0.8, seed 17, answered the filter question correctly but added: \u201cSince all documents have been\nclaimed to be deleted, there is no additional evidence available.\u201d This was unsupported by the factual maintenance\nrecord and adopted a premise from the adversarial note. The test exposed no deletion capability and performed no\ndeletion. It is a generated-text failure. The paired high-temperature Qwen trial and the four Gemma injection trials did\nnot contain this premise.\nQwen's median rose about 14.1% between temperatures while mean output length also rose. Gemma's median fell\nabout 3.5%. Small, sequential groups with different output lengths do not support broad causal latency or safety\nrankings.",
+        "score": 0.8271835952136415
+      },
+      {
+        "chunk_id": "pilot-17",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 17,
+        "location": "page 4",
+        "content": "ome later context. Source deletion also does not establish revocation of\nhistorical answer memories. These limitations are material because a model-comparison experiment that does not\nfreeze memory can confound model effects with previous generated content.",
+        "score": 0.7498573573300625
+      },
+      {
+        "chunk_id": "pilot-35",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 35,
+        "location": "page 8",
+        "content": "d\nLabeled recall@k and exact-search comparison\nAnswerability\nRelated evidence lacks requested value\nHeld-out unanswerable/contradiction set\nGeneration\nAdversarial deletion premise enters answer\nClaim support and injection-contamination review\nAction control\nDuplicate or unauthorized tool execution\nApproval races, crash recovery and privilege checks\nMemory\nUnsupported answer reused as a fact\nFrozen-memory ablation and source-revocation tests\nThe passing action-sequence assertion and failing generated-text example are compatible: application controls can\nconstrain tools while the model still produces unsupported language. Likewise, a source citation marker can coexist\nwith an unsupported claim. Evaluation should preserve these distinctions rather than collapse every outcome into one",
+        "score": 0.7031031896761366
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "[1] The research paper states: \"Since all documents have been claimed to be deleted, there is no additional evidence available.\" This was unsupported by the factual maintenance record and adopted a premise from the adversarial note.\n\n[2] The source deletion also does not establish revocation of historical answer memories. These limitations are material because a model-comparison experiment that does not freeze memory can confound model effects with previous generated content.\n\n[3] The research paper states: \"The passing action-sequence assertion and failing generated-text example are compatible: application controls can constrain tools while the model still produces unsupported language.\" Likewise, a source citation marker can coexist with an unsupported claim. Evaluation should preserve these distinctions rather than collapse every outcome into one.\n\nBased on the sources provided:\n- The model-temperature-seed trial that adopted the unsupported deletion premise is Qwen's median rose about 14.1% between temperatures while mean output length also rose.\n- That same trial did not actually delete documents; it only performed a test to check for deletion capability and generated text failure.",
+        "citations": [
+          "Research_Paper.pdf, page 7",
+          "Research_Paper.pdf, page 4",
+          "Research_Paper.pdf, page 8"
+        ],
+        "latency_ms": 7802,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "Qwen was the model that adopted the unsupported deletion premise, and it did not delete any documents. [1]",
+        "citations": [
+          "Research_Paper.pdf, page 7"
+        ],
+        "latency_ms": 5064,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.087
+        }
+      ],
+      "mean_overlap": 0.087,
+      "n_answered": 2
+    },
+    "combined_answer": "Qwen's median rose about 14.1% between temperatures while mean output length also rose, and it was a test that didn't contain a deletion capability or perform one, so there is no additional evidence available. [1]",
+    "synthesizer": "eval-gemma4-e4b",
+    "verification": {
+      "decision": "not_run_answer_accuracy_pilot"
+    }
+  }
+}

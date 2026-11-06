@@ -1,0 +1,83 @@
+{
+  "case": {
+    "id": "Q16",
+    "category": "limitation",
+    "question": "Does the manuscript establish an air-gapped or legally certified environment just because the workbench is called sovereign?",
+    "expected": "No. Sovereign refers to intended institution-controlled local hosting; the implementation does not establish air-gap or legal certification.",
+    "pages": [
+      2,
+      9
+    ]
+  },
+  "wall_seconds": 26.356169792008586,
+  "result": {
+    "question": "Does the manuscript establish an air-gapped or legally certified environment just because the workbench is called sovereign?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-5",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 5,
+        "location": "page 2",
+        "content": "rained orchestration. \u201cSovereign\u201d denotes the intended ability to host the model endpoint within an\ninstitution-controlled environment. The present implementation checks configured endpoint locality and runs in a local\ncontainer deployment; it does not establish an air-gapped or legally certified environment.\nThe motivating domain in the evaluated prototype is synthetic pump maintenance. Part identifiers, event dates and\nfailure causes provide inspectable facts. We do not claim that this corpus represents the complexity of a real industrial\nknowledge base. Its role is to support functional and exploratory tests, including missing evidence and adversarial\ninstructions embedded in a source.\n1.1 Research questions",
+        "score": 0.7698861071452394
+      },
+      {
+        "chunk_id": "pilot-4",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 4,
+        "location": "page 2",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\nResearch manuscript draft  |  8 September 2026\n2\n1. Introduction\nA user investigating equipment failure may need to connect a manual, an inventory record and an incident log.\nDocument search identifies candidate files, while a language model can synthesize a response. However, an\ninstitution also needs to know whether the user is allowed to access those documents, whether the answer is\nsupported and whether a requested action requires authorization. These concerns belong to different parts of the\nsystem and need different tests.\nThe Sovereign Agentic AI Workbench addresses this workflow through local document ingestion, scoped retrieval and\nconstrained orchestration. \u201cSovereign\u201d denotes the intended ability to host the model endpoint within an",
+        "score": 0.7365209496932247
+      },
+      {
+        "chunk_id": "pilot-0",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 0,
+        "location": "page 1",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\nResearch manuscript draft  |  8 September 2026\n1\nEvidence-Gated Local Retrieval and\nHuman-Approved Workflows for an\nInstitutional AI Workbench\nA systems prototype and exploratory evaluation\nAuthors and affiliations: Pending confirmation\nResearch manuscript draft | 8 September 2026 | Project 1: Sovereign Agentic AI Workbench\nThis is an unpublished manuscript draft based on inspected implementation and retained experiments. It makes no\nvenue acceptance, peer-review or official SIH endorsement claim. Author order, affiliations, corresponding-author\ncontact and target-venue formatting remain to be completed.\nAbstract\nInstitutional document assistants must connect natural-language answers to accessible evidence while controlling",
+        "score": 0.7296563583084131
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "The manuscript does **not** establish an air-gapped or legally certified environment just because the workbench is called \"Sovereign.\" The term \"Sovereign\" in this context refers to the intended capability of hosting the model endpoint within an institution-controlled environment (as defined in the research paper), not to a specific type of security like air-gapped or legally certified. The workbench operates with local container deployment and does not establish such environments.\n\nSource numbers: [1], [2]",
+        "citations": [
+          "Research_Paper.pdf, page 2",
+          "Research_Paper.pdf, page 2"
+        ],
+        "latency_ms": 7077,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "No, the documentation states that the current implementation does not establish an air-gapped or legally certified environment, even if it is a local container deployment with a configured endpoint locality, which is called \"sovereign\" [1, 2].\n\n* Source [1] has a section called \"Sovereign\" that means the intended ability to host a model endpoint within an institution-controlled environment, and notes that this can be done with a local container deployment, but no guarantee of air-gapped or legally certified status.\n* Source [2] also refers to \"Sovereign\" as the intended ability to host a model endpoint within an institution-controlled environment, which is called the Sovereign Agentic AI Workbench.",
+        "citations": [
+          "Research_Paper.pdf, page 2",
+          "Research_Paper.pdf, page 2"
+        ],
+        "latency_ms": 12243,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.345
+        }
+      ],
+      "mean_overlap": 0.345,
+      "n_answered": 2
+    },
+    "combined_answer": "No, this can't happen. The term \"Sovereign\" means the ability to host a model endpoint within an institution-controlled environment, and the current one can be a local container deployment that checks a configured endpoint locality, but it doesn't have to be an air-gapped or legally certified one; this is true for both the Sovereign Agentic AI Workbench and the general concept. [1], [2]\n\n*   [2] has a section called \"Sovereign\" that means the intended ability to host a model endpoint within an institution-controlled environment, which is also called the Sovereign Agentic AI Workbench.\n*   [1] refers to this as having a \"Sovereign\" status if it can be hosted in an institution-controlled environment and runs on a local container deployment by checking the endpoint locality.",
+    "synthesizer": "eval-gemma4-e4b",
+    "verification": {
+      "decision": "not_run_answer_accuracy_pilot"
+    }
+  }
+}

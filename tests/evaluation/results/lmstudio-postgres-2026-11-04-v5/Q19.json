@@ -1,0 +1,101 @@
+{
+  "case": {
+    "id": "Q19",
+    "category": "unanswerable",
+    "question": "How many real industrial customers have deployed this workbench in production?",
+    "expected": "Not stated; the manuscript reports no public deployment and uses a synthetic corpus, not customer-count data.",
+    "pages": [
+      9
+    ]
+  },
+  "wall_seconds": 0.03763808304211125,
+  "result": {
+    "question": "How many real industrial customers have deployed this workbench in production?",
+    "evidence": [
+      {
+        "chunk_id": "332861f3-9a2d-4afc-b096-1fb702f483d5",
+        "document_id": "8d1f90d7-230f-5d18-99a9-4e983be15275",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 45,
+        "location": "page 9",
+        "content": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH\n\n7. Discussion\n\nRQ1 is supported within the implemented scope: the project combines document ingestion, scoped retrieval, threshold\nrefusal and a persisted owner-approval report sequence. It does not demonstrate a general agent planner, complete\nsemantic verification or a downloadable reporting product. RQ2 yields evidence for selected local functional and load\nproperties, with substantial limits on production inference. RQ3 yields a concrete, reproducible example of text\nvariation and contamination under one changed model-temperature configuration, without establishing a general\nwinner.\n\nFor deployment, the most consequential improvements are provenance-aware memory, reviewable report content\n\nbound to source versions, durable processing recovery and an evaluation set that separates retrieval relevance from\nanswerability and faithfulness. Capacity work should exercise a mixed workload with ingestion and generation,\nincreasing corpus sizes and sustained duration. Model routing or larger models should be added only with\nmeasurements showing their benefit for that workload.\n\n8. Threats to validity and responsible use\n\nInternal validity is limited by missing historical revision/digest metadata, non-isolated local resources, sequential\nstage/model order and differences between the native model pilot and application endpoint. The quality pilot predates\na retrieval-evidence fix, so its scores cannot be treated as final-revision quality evidence. New pilot prompts omitted\n\napplication memory to isolate supplied-evidence generation, which also limits ecological validity.\n\nConstruct validity is limited by keyword coverage and citation-marker checks. A keyword can appear in irrelevant\nevidence; a citation marker can point to a passage that does not entail a claim. The post-hoc pilot rubric was applied\nby the documentation authoring assistant without blinding or independent expert agreement. It is useful for explaining\nthese particular outputs, not a validated measurement instrument.\n\nExternal validity is limited by a three-file synthetic corpus, a repeated AI load question, six calls per model-temperature\ncell and only two injection trials in each cell. Neither zero observed API errors nor three complete keyword-hit fractions\n\ngeneralizes to arbitrary users, languages, domains or workloads. No public deployment, field-user benefit study or\nlong-duration model soak was recorded.\n\nStatistical validity is limited by single load stages and tiny model samples. We report denominators and raw values\nrather than significance tests or population-level confidence claims. The 1/2 contamination count in one cell is not a\nstable estimate of attack success probability. Token length and cache effects confound model latency comparisons.\n\nThe evaluation inputs are synthetic maintenance statements; no private operational corpus was needed for the added\nexperiments. The bundle omits environment secrets and database dumps and records a redaction in a copied\ndevelopment log.\n\ndevelopment log. Real deployments should review document ownership, retention, access revocation, model-host\ntrust and user reliance. Local inference and a confidence score do not establish regulatory compliance or factual\nsafety.\n\n9. Conclusion and future work\n\nThe workbench demonstrates a bounded local RAG workflow with application-controlled workspace access and\nhuman approval. Its retained benchmarks establish successful selected local checks and high throughput for a narrow\nauthenticated-read workload. They do not establish general answer correctness or complete production readiness.\nThe new fixed-evidence pilot shows why model and temperature changes require direct inspection: a correct factual\nanswer can still adopt an unsupported adversarial premise.\n\nFuture evaluation should freeze a larger versioned corpus, include held-out unanswerable and contradictory questions,\ncollect independent citation/answer labels and compare retrieval/generation variants under controlled resources.\n\n\nResearch manuscript draft | 8 September 2026 9",
+        "score": 0.680948257446294,
+        "context_only": false,
+        "lexical_score": 4.830035524661901,
+        "selection_score": 0.09307359307359307
+      },
+      {
+        "chunk_id": "eff0142b-0345-43f0-a468-0df84e27dc6f",
+        "document_id": "8d1f90d7-230f-5d18-99a9-4e983be15275",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 51,
+        "location": "page 11",
+        "content": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH\n\nAppendix A. Evidence manifest\n\n\n\n Identifier File in evidence/ Role\n\n\n A1 production-stress.json Four API load stages\n\n\n A2 ai-stress.json Short concurrent AI-task run\n\n\n A3 production-e2e.json Ten named live workflow checks\n\n\n A4 eval-1788679222.json Earlier keyword-coverage pilot\n\n\n A5 recovery-check.json; fault-recovery.json Database/count and restart behavior\n\nA6 validation-tests.log; race-tests.log Separate build/unit/integration/race records\n\n\n A7 model-pilot.json Full new requests, outputs, timing and identity\n\n\n A8 model-pilot-review.json Transparent post-hoc labels and summaries\n\n\n A9 chunk-sensitivity.json Actual chunker count experiments\n\n\n A10 provenance.json Source/evidence hashes and source-state caveats\n\n\nAppendix B. Minimal replication protocol\n\nUse the existing local models and execute source/run_model_pilot.py. Its requests use two temperatures, two seeds,\nthree fixed cases and a per-model warmup, saving all outputs as JSON. A rerun requires fresh review of responses; do\nnot reuse manual labels automatically. Record model digests rather than aliases alone, preserve the runtime version\nand distinguish wall time from server-reported generation duration.\n\nFor an end-to-end comparison, create an isolated workspace per variant, ingest an identical versioned corpus with one\nfixed embedder, prevent prior generated memories from contaminating later trials and run the same questions through\nthe authenticated task API. A model-only generation pilot is insufficient to measure retrieval or authorization effects.\n\nFor an embedding comparison, rebuild the corpus embeddings and recalibrate on a development split before\nevaluating the held-out questions.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nResearch manuscript draft | 8 September 2026 11",
+        "score": 0.6120970845222516,
+        "context_only": false,
+        "lexical_score": 2.5023330765237026,
+        "selection_score": 0.08347826086956522
+      },
+      {
+        "chunk_id": "1e6f9326-2306-41db-9974-65c7de942236",
+        "document_id": "8d1f90d7-230f-5d18-99a9-4e983be15275",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 5,
+        "location": "page 2",
+        "content": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH\n\n1. Introduction\n\nA user investigating equipment failure may need to connect a manual, an inventory record and an incident log.\nDocument search identifies candidate files, while a language model can synthesize a response. However, an\ninstitution also needs to know whether the user is allowed to access those documents, whether the answer is\nsupported and whether a requested action requires authorization. These concerns belong to different parts of the\nsystem and need different tests.\n\nThe Sovereign Agentic AI Workbench addresses this workflow through local document ingestion, scoped retrieval and\nconstrained orchestration. \u201cSovereign\u201d denotes the intended ability to host the model endpoint within an\ninstitution-controlled environment. The present implementation checks configured endpoint locality and runs in a local\ncontainer deployment; it does not establish an air-gapped or legally certified environment.\n\nThe motivating domain in the evaluated prototype is synthetic pump maintenance. Part identifiers, event dates and\nfailure causes provide inspectable facts. We do not claim that this corpus represents the complexity of a real industrial\nknowledge base. Its role is to support functional and exploratory tests, including missing evidence and adversarial\ninstructions embedded in a source.\n\n1.1 Research questions\n\nRQ1: Can a bounded local document workflow combine workspace-scoped retrieval with a deterministic\nanswer/refusal gate and persisted human approval? RQ2: What do the retained functional, load and recovery\nmeasurements establish about the prototype, and what do they leave unmeasured? RQ3: With supplied evidence held\nfixed, how do local model choice and sampling temperature affect response content and latency in a small exploratory\ncomparison?\n\n1.2 Contributions and scope\n\nWe present an inspectable systems integration, a distinction between implemented and planned capabilities, an\nanalysis of retained test artifacts and a reproducible fixed-evidence sensitivity pilot. The contribution is not a new\nlanguage-model architecture or a state-of-the-art retrieval algorithm. It is also not a controlled study of operational\nproductivity. The associated technical dossier contains deployment, API, workflow and SIH presentation details; this\nmanuscript emphasizes method, evidence and validity limits.\n\n2. Related work and design rationale\n\nRetrieval-augmented generation separates model parameters from an external source of retrievable knowledge. Lewis\net al. provide a foundational formulation of this approach. We use the general retrieval-plus-generation pattern, without\nreproducing that paper's training procedure or claiming its benchmark improvements. [1]\n\nReAct explores interleaving language-model reasoning and actions. Our planner instead uses a fixed search step and\n\nan optional report step selected through keywords. This narrower design allows explicit tool and state inspection, but\noffers less general task decomposition than model-driven planning. [2]\n\nGreshake et al. show how instructions inserted into retrieved content can affect LLM-integrated applications. We\ntherefore treat evidence as untrusted data, constrain actions through application code and evaluate a malicious-note\ncase. These measures address different failure channels; the exploratory results still contain a text-contamination\nfailure. [3]\n\nLiu et al. document sensitivity to the position of relevant information in long contexts, motivating future tests of\nordering, distractors and retrieval depth. RAGAs separates dimensions of retrieval and generation evaluation,\n\nmotivating metrics beyond keyword coverage. Neither long-context benchmark replication nor RAGAs scoring was\nperformed in the retained project tests. [4,5]\n\n\n\nResearch manuscript draft | 8 September 2026 2",
+        "score": 0.5758571453137079,
+        "context_only": false,
+        "lexical_score": 6.071516324240596,
+        "selection_score": 0.07792207792207792
+      },
+      {
+        "chunk_id": "3f876553-90b6-4b4b-aa2c-5c9e4cf71aa5",
+        "document_id": "8d1f90d7-230f-5d18-99a9-4e983be15275",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 47,
+        "location": "page 10",
+        "content": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH\n\n\nImplementation priorities are memory provenance invalidation, approval-content binding, durable job recovery, report\ndelivery and public operational validation. These steps would support stronger claims than the present exploratory\nevidence allows.\n\nData and code availability\n\nThe accompanying package includes original-result copies with hashes, a current source hash map, editable\nmanuscript/dossier text, diagrams, model-pilot requests and outputs, and scripts. The inspected local repository is\n/Users/lalitsingh/PROJECTS/sih-agentic-workbench. Public archival access and a frozen release commit remain to be\narranged by the authors; no public dataset or repository release is claimed here.\n\nAuthor contributions and declarations\n\nNamed author contributions, institutional affiliations, funding and competing-interest declarations are pending\nconfirmation. The documentation was prepared with an AI coding assistant using repository inspection and local\nexperiments; the pilot's post-hoc labels were produced by that assistant. Human authors must review the manuscript,\nresults, attribution and any venue-specific disclosure requirements before submission.\n\nReferences\n\n[1] P. Lewis et al., \u201cRetrieval-Augmented Generation for Knowledge-Intensive NLP Tasks,\u201d NeurIPS, 2020.\nhttps://arxiv.org/abs/2005.11401\n\n[2] S. Yao et al., \u201cReAct: Synergizing Reasoning and Acting in Language Models,\u201d arXiv:2210.03629, 2022.\nhttps://arxiv.org/abs/2210.03629\n\n[3] K. Greshake et al., \u201cNot what you've signed up for: Compromising Real-World LLM-Integrated Applications with\nIndirect Prompt Injection,\u201d arXiv:2302.12173, 2023. https://arxiv.org/abs/2302.12173\n\n[4] N. F. Liu et al., \u201cLost in the Middle: How Language Models Use Long Contexts,\u201d arXiv:2307.03172, 2023.\nhttps://arxiv.org/abs/2307.03172\n\n[5] S. Es, J. James, L. Espinosa Anke and S. Schockaert, \u201cRAGAs: Automated Evaluation of Retrieval Augmented\nGeneration,\u201d EACL System Demonstrations, pp. 150-158, 2024. https://aclanthology.org/2024.eacl-demo.16/\n\n[6] pgvector maintainers, \u201cpgvector documentation,\u201d accessed 8 September 2026.\nhttps://github.com/pgvector/pgvector\n\n[7] Ollama, \u201cGenerate a chat message,\u201d API documentation, accessed 8 September 2026.\nhttps://docs.ollama.com/api/chat\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nResearch manuscript draft | 8 September 2026 10",
+        "score": 0.6149414044688458,
+        "context_only": false,
+        "lexical_score": 0.606770141906041,
+        "selection_score": 0.07771260997067449
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "The provided sources do not contain enough information to answer this question.",
+        "citations": [],
+        "latency_ms": 0,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "The provided sources do not contain enough information to answer this question.",
+        "citations": [],
+        "latency_ms": 0,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 1.0
+        }
+      ],
+      "mean_overlap": 1.0,
+      "n_answered": 2
+    },
+    "combined_answer": "The provided sources do not contain enough information to answer this question.",
+    "synthesizer": "source_union",
+    "verification": {
+      "model": "eval-gemma4-e4b",
+      "claims": [],
+      "confidence": 0.0,
+      "decision": "not_found",
+      "method": "cited_claim_checks"
+    }
+  }
+}

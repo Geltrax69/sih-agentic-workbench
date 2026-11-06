@@ -1,0 +1,144 @@
+{
+  "case": {
+    "id": "Q06",
+    "category": "workflow",
+    "question": "Which workspace role can approve a report, and what task state pauses for that approval?",
+    "expected": "Owner role; WAITING_FOR_APPROVAL.",
+    "pages": [
+      4
+    ]
+  },
+  "wall_seconds": 3.8423920000204816,
+  "result": {
+    "question": "Which workspace role can approve a report, and what task state pauses for that approval?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-17",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 17,
+        "location": "page 4",
+        "content": "The threshold function is deterministic. It does not estimate the probability of answer correctness. One high-scoring\npassage is sufficient for ANSWER, even if the requested detail is absent or other passages conflict. Stale evidence\nadds a reason string in the gate without reducing the score. Normal executor items are constructed after\nworkspace-scoped SQL retrieval; revoked/stale metadata is not comprehensively propagated.\n\nFor non-refused tasks, numbered evidence and up to three recent eligible memory items are sent to the generator. The\ntask path uses temperature 0.3 and a maximum output of 800 tokens. The system instruction asks for evidence-only\nanswers, [n] citations and rejection of instructions inside evidence. Returned source filenames are evidence metadata,\n\nnot a semantic certificate for every claim.\n\n3.3 Bounded orchestration and approval\n\nThe task begins in PLANNING, enters RUNNING, executes document_search and proceeds to VERIFYING and\nCOMPLETED. Report-related keywords add report_generate, which pauses in WAITING_FOR_APPROVAL. The\npublic decision route resolves workspace scope from the stored task and requires an owner role. An approval claims\nRUNNING under a task-row lock before resuming execution, preventing the second concurrent decision in the tested\npath from executing the same transition.\n\nThe current report tool returns Markdown stored in a task step. A public report-download artifact is not exposed. The\nschema and step vocabulary are broader than the active workflow: dynamic model routing, general DAG planning,\n\ngraph retrieval expansion and complete tool-execution auditing remain outside the demonstrated implementation.\n\n3.4 Memory and residual trust\n\nAn ANSWER decision writes up to 500 characters of generated text into memory with verified=true, and later prompts\ndescribe these items as verified facts. This flag reflects the retrieval gate, not independent verification. Thus an\nunsupported generated claim can become later context. Source deletion also does not establish revocation of\nhistorical answer memories. These limitations are material because a model-comparison experiment that does not\nfreeze memory can confound model effects with previous generated content.",
+        "score": 0.7580156176148026,
+        "lexical_score": 8.628878914368252,
+        "selection_score": 0.09523809523809523
+      },
+      {
+        "chunk_id": "pilot-1",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 1,
+        "location": "page 1",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\n\n\nEvidence-Gated Local Retrieval and\nHuman-Approved Workflows for an\nInstitutional AI Workbench\n\nA systems prototype and exploratory evaluation\n\n\nAuthors and affiliations: Pending confirmation\n\nResearch manuscript draft | 8 September 2026 | Project 1: Sovereign Agentic AI Workbench\n\nThis is an unpublished manuscript draft based on inspected implementation and retained experiments. It makes no\nvenue acceptance, peer-review or official SIH endorsement claim. Author order, affiliations, corresponding-author\ncontact and target-venue formatting remain to be completed.\n\nAbstract\n\nInstitutional document assistants must connect natural-language answers to accessible evidence while controlling\nactions that affect organizational workflows. We describe a local AI workbench integrating workspace-scoped\ndocument retrieval, a deterministic evidence threshold, persisted task execution and owner approval for a report tool.\nThe implementation uses a Go API, Python AI service, PostgreSQL/pgvector, object storage and a locally configured\nmodel endpoint. Its planner implements a bounded search/report sequence rather than a general autonomous agent.\nWe analyze retained local validation and conduct an additional controlled generation pilot. A historical\nauthenticated-read workload completed 80,000 requests without observed errors and reached a peak of 2,823.4\nrequests/s at 50 concurrent clients. A separate 12-task model workload recorded a 25.12-second p95 latency. An\n\nearlier three-question pilot achieved complete expected-keyword coverage, a measure that does not establish answer\naccuracy. In 24 fixed-evidence generations across two local models and two temperatures, all calls succeeded, but\none high-temperature output adopted an unsupported deletion premise from adversarial evidence. The results\ndemonstrate a functioning local workflow and the need to distinguish retrieval signal, text faithfulness and action\nauthorization. Small datasets, incomplete historical configuration capture and unblinded exploratory review limit\ngeneralization. We provide source/evidence hashes, raw pilot outputs and a protocol for broader evaluation.\n\nKeywords: retrieval-augmented generation; local inference; evidence gating; human approval; workspace isolation;",
+        "score": 0.6537075375569147,
+        "lexical_score": 3.67404878942797,
+        "selection_score": 0.08712121212121213
+      },
+      {
+        "chunk_id": "pilot-10",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 10,
+        "location": "page 3",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\n\n3. System design\n\n\n\n\n                                                               Browser + Nginx\n                                                            Static React UI; /api proxy\n\n\n\n                                                                               Bearer token\n\n\n                                                                 Go public API                                         PostgreSQL\n                                                          JWT; workspace roles; HTTP                             Metadata, vectors, tasks,\n                                                                                                                    approvals, memory\n\nOriginal file read                                                  Internal secret\n\n\n\n                 MinIO                                        Python AI service\n         Original uploaded bytes                           Ingestion; retrieval; task flow                                 Redis\n\n                                                                                                               Required health dependency\n\n\n                                                                                       Private endpoint policy\n\n\n\n\n                                                              Local model host\n                                                          Embedding + generation calls",
+        "score": 0.6136040185243959,
+        "lexical_score": 4.392643634643315,
+        "selection_score": 0.08391608391608392
+      },
+      {
+        "chunk_id": "pilot-26",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 26,
+        "location": "page 6",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\n\n\ngate, API roles and approval tools. Native API timing/token fields, model digests, request hashes, seeds and full\nresponses were recorded. Differences from the application's endpoint and generation cap prevent treating these\ntimings as production task latency. [7]\n\nAutomated checks recorded transport success, required keywords, [1] marker presence and selected refusal/injection\nstrings. The authoring assistant then performed an unblinded, post-hoc textual review for required facts or abstention\nand unsupported deletion claims. The labels are exploratory annotations, not a preregistered or expert-blinded\naccuracy study.\n\n5. Results\n\n5.1 API load and functional observations\n\n\n  Clients              Requests             Errors               Requests/s           p50 ms               p95 ms               p99 ms\n\n\nTable row: Clients = 1; Requests = 20,000; Errors = 0; Requests/s = 139.6; p50 ms = 2.2; p95 ms = 29.0; p99 ms = 75.3.\n\n\nTable row: Clients = 10; Requests = 20,000; Errors = 0; Requests/s = 2,510.7; p50 ms = 3.3; p95 ms = 7.5; p99 ms = 15.2.\n\n\nTable row: Clients = 50; Requests = 20,000; Errors = 0; Requests/s = 2,823.4; p50 ms = 15.9; p95 ms = 32.4; p99 ms = 46.3.\n\n\nTable row: Clients = 100; Requests = 20,000; Errors = 0; Requests/s = 2,107.3; p50 ms = 39.7; p95 ms = 102.2; p99 ms = 162.0.",
+        "score": 0.6279543947674942,
+        "lexical_score": 2.706144992345303,
+        "selection_score": 0.07870370370370369
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "The task begins in PLANNING, enters RUNNING, executes document_search and proceeds to VERIFYING and COMPLETED. [1]\nReport-related keywords add report_generate, which pauses in WAITING_FOR_APPROVAL. [1]\nThe public decision route resolves workspace scope from the stored task and requires an owner role. [1]\nAn approval claims RUNNING under a task-row lock before resuming execution, preventing the second concurrent decision in the tested path from executing the same transition. [1]",
+        "citations": [
+          "Research_Paper.pdf, page 4"
+        ],
+        "latency_ms": 2708,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "The task begins in PLANNING, enters RUNNING, executes document_search and proceeds to VERIFYING and COMPLETED. [1]\nReport-related keywords add report_generate, which pauses in WAITING_FOR_APPROVAL. [1]\nThe public decision route resolves workspace scope from the stored task and requires an owner role. [1]\nAn approval claims RUNNING under a task-row lock before resuming execution, preventing the second concurrent decision in the tested path from executing the same transition. [1]\nThe current report tool returns Markdown stored in a task step. [1]\nA public report-download artifact is not exposed. [1]\nThe schema and step vocabulary are broader than the active workflow: dynamic model routing, general DAG planning, [1]",
+        "citations": [
+          "Research_Paper.pdf, page 4"
+        ],
+        "latency_ms": 3794,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.698
+        }
+      ],
+      "mean_overlap": 0.698,
+      "n_answered": 2
+    },
+    "combined_answer": "The task begins in PLANNING, enters RUNNING, executes document_search and proceeds to VERIFYING and COMPLETED. [1]\nReport-related keywords add report_generate, which pauses in WAITING_FOR_APPROVAL. [1]\nThe public decision route resolves workspace scope from the stored task and requires an owner role. [1]\nAn approval claims RUNNING under a task-row lock before resuming execution, preventing the second concurrent decision in the tested path from executing the same transition. [1]\nThe current report tool returns Markdown stored in a task step. [1]\nA public report-download artifact is not exposed. [1]\nThe schema and step vocabulary are broader than the active workflow: dynamic model routing, general DAG planning, [1]",
+    "synthesizer": "source_union",
+    "verification": {
+      "model": "eval-gemma4-e4b",
+      "claims": [
+        {
+          "claim": "The task begins in PLANNING, enters RUNNING, executes document_search and proceeds to VERIFYING and COMPLETED. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Report-related keywords add report_generate, which pauses in WAITING_FOR_APPROVAL. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "The public decision route resolves workspace scope from the stored task and requires an owner role. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "An approval claims RUNNING under a task-row lock before resuming execution, preventing the second concurrent decision in the tested path from executing the same transition. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "The current report tool returns Markdown stored in a task step. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "A public report-download artifact is not exposed. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "The schema and step vocabulary are broader than the active workflow: dynamic model routing, general DAG planning, [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        }
+      ],
+      "confidence": 1.0,
+      "decision": "verified",
+      "method": "source_excerpt_match"
+    }
+  }
+}

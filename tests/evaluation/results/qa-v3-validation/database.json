@@ -1,0 +1,11 @@
+{
+  "real_database": "PostgreSQL 16 + pgvector in a disposable loopback-only container",
+  "hybrid_sql_executes": true,
+  "english_inflection_search": true,
+  "same_page_neighbor_included": true,
+  "foreign_workspace_excluded": true,
+  "deleted_document_excluded": true,
+  "vector_only_scope_preserved": true,
+  "source_context_includes_low_vector_neighbor": true,
+  "scope": "Real retrieval SQL and page expansion only; not a Go authentication or full application deployment test."
+}

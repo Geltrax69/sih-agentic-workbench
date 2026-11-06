@@ -1,0 +1,78 @@
+{
+  "case": {
+    "id": "Q17",
+    "category": "unanswerable",
+    "question": "What is the exact annual commercial subscription price of this workbench in Indian rupees?",
+    "expected": "Not stated in this document; refuse to invent a price.",
+    "pages": []
+  },
+  "wall_seconds": 25.912729208997916,
+  "result": {
+    "question": "What is the exact annual commercial subscription price of this workbench in Indian rupees?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-43",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 43,
+        "location": "page 10",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\nResearch manuscript draft  |  8 September 2026\n10\nImplementation priorities are memory provenance invalidation, approval-content binding, durable job recovery, report\ndelivery and public operational validation. These steps would support stronger claims than the present exploratory\nevidence allows.\nData and code availability\nThe accompanying package includes original-result copies with hashes, a current source hash map, editable\nmanuscript/dossier text, diagrams, model-pilot requests and outputs, and scripts. The inspected local repository is\n/Users/lalitsingh/PROJECTS/sih-agentic-workbench. Public archival access and a frozen release commit remain to be\narranged by the authors; no public dataset or repository release is claimed here.",
+        "score": 0.5729182535971502
+      },
+      {
+        "chunk_id": "pilot-46",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 46,
+        "location": "page 10",
+        "content": "ration,\u201d EACL System Demonstrations, pp. 150-158, 2024. https://aclanthology.org/2024.eacl-demo.16/\n[6] pgvector maintainers, \u201cpgvector documentation,\u201d accessed 8 September 2026.\nhttps://github.com/pgvector/pgvector\n[7] Ollama, \u201cGenerate a chat message,\u201d API documentation, accessed 8 September 2026.\nhttps://docs.ollama.com/api/chat",
+        "score": 0.5640822812324284
+      },
+      {
+        "chunk_id": "pilot-18",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 18,
+        "location": "page 5",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\nResearch manuscript draft  |  8 September 2026\n5\n4. Evaluation method\n4.1 Evidence provenance and environment\nThe inspected repository has base commit a3020574e0ce55c905f69e48926ed123475ab1d5 and uncommitted\nchanges. The accompanying provenance file records relevant source hashes and historical evidence hashes.\nHistorical JSON files do not identify exact patch hashes, and some omit timestamps and model identities. The current\nsource snapshot therefore explains current behavior but cannot retroactively freeze every earlier experiment.\nAt documentation time, the host reports Apple M4 and 16 GiB memory; Docker reports 10 CPUs and approximately\n7.65 GiB. The additional generation experiment uses the host Ollama service.",
+        "score": 0.5610647437716605
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "[1] The text does not provide any information about the annual commercial subscription price of this workbench in Indian rupees.\n\n[2] The text provides a citation for an EACL System Demonstration by pgvector maintainers, but it does not mention the price of the workbench or its commercial subscription.\n\n[3] The text mentions that the project is \"PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH\" and provides details about implementation priorities, but it does not provide a price for this workbench in Indian rupees.\n\n[6] The text provides a link to pgvector documentation, but it does not mention the price of the workbench or its commercial subscription.\n\n[7] The text provides links to Ollama API documentation and chat message generation, but it does not mention the price of the workbench or its commercial subscription.",
+        "citations": [
+          "Research_Paper.pdf, page 10",
+          "Research_Paper.pdf, page 10",
+          "Research_Paper.pdf, page 5"
+        ],
+        "latency_ms": 7675,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "no-source",
+        "citations": [],
+        "latency_ms": 5065,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.0
+        }
+      ],
+      "mean_overlap": 0.0,
+      "n_answered": 2
+    },
+    "combined_answer": "- One can check out the \"pgvector documentation\" on GitHub, which is a source of information about the project [6].\n- There are also \"Ollama API documentation\" and \"chat message generation\" pages available, which can be used with the Ollama service [7].\n- The latest version of the project is called \"SOVEREIGN AGENTIC AI WORKBENCH,\" and it has a lot of features like \"memory provenance invalidation, approval-content binding, durable job recovery, report delivery and public operational validation\" [1].\n- There are also other available resources such as \"original-result copies with hashes, a current source hash map, editable manuscript/dossier text, diagrams, model-pilot requests and outputs, and scripts\" that can be used for the project [1].\n- The project has been listed on different platforms like \"EACL System Demonstrations,\" which is a place to find other people's work [2].\n- There are also some general details about the computer hardware that was used, such as having an \"Apple M4\" and \"16 GiB memory,\" or \"Docker\" with 10 CPUs and 7.65 GiB of memory [3].\n\nSo far, there is no information available about the price of this workbench in Indian rupees.",
+    "synthesizer": "eval-gemma4-e4b",
+    "verification": {
+      "decision": "not_run_answer_accuracy_pilot"
+    }
+  }
+}

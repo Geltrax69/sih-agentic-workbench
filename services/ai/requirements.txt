@@ -9,3 +9,4 @@ openpyxl==3.1.5
 psycopg[binary]==3.2.3
 python-multipart==0.0.19
 boto3==1.35.81
+snowballstemmer==2.2.0

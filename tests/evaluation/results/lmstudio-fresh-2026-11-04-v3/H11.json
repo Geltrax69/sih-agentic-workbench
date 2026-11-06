@@ -1,0 +1,97 @@
+{
+  "case": {
+    "id": "H11",
+    "category": "unanswerable",
+    "question": "How many kilowatt-hours did the experiment consume?",
+    "expected": "Energy consumption is not measured/reported; do not invent a value.",
+    "pages": [
+      5
+    ]
+  },
+  "wall_seconds": 0.061793458997271955,
+  "result": {
+    "question": "How many kilowatt-hours did the experiment consume?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-52",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 52,
+        "location": "page 11",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\n\nAppendix A. Evidence manifest\n\n\n\n  Identifier                 File in evidence/                                       Role\n\n\n  A1                         production-stress.json                                  Four API load stages\n\n\n  A2                         ai-stress.json                                          Short concurrent AI-task run\n\n\n  A3                         production-e2e.json                                     Ten named live workflow checks\n\n\n  A4                         eval-1788679222.json                                    Earlier keyword-coverage pilot\n\n\n  A5                         recovery-check.json; fault-recovery.json                Database/count and restart behavior\n\nA6                         validation-tests.log; race-tests.log                    Separate build/unit/integration/race records\n\n\n  A7                         model-pilot.json                                        Full new requests, outputs, timing and identity\n\n\n  A8                         model-pilot-review.json                                 Transparent post-hoc labels and summaries\n\n\n  A9                         chunk-sensitivity.json                                  Actual chunker count experiments\n\n\n  A10                        provenance.json                                         Source/evidence hashes and source-state caveats\n\n\nAppendix B. Minimal replication protocol\n\nUse the existing local models and execute source/run_model_pilot.py. Its requests use two temperatures, two seeds,\nthree fixed cases and a per-model warmup, saving all outputs as JSON. A rerun requires fresh review of responses; do\nnot reuse manual labels automatically. Record model digests rather than aliases alone, preserve the runtime version\nand distinguish wall time from server-reported generation duration.\n\nFor an end-to-end comparison, create an isolated workspace per variant, ingest an identical versioned corpus with one\nfixed embedder, prevent prior generated memories from contaminating later trials and run the same questions through\nthe authenticated task API. A model-only generation pilot is insufficient to measure retrieval or authorization effects.",
+        "score": 0.536884434894903,
+        "lexical_score": 1.3865815411305544,
+        "selection_score": 0.08545454545454545
+      },
+      {
+        "chunk_id": "pilot-20",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 20,
+        "location": "page 5",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\n\n4. Evaluation method\n\n4.1 Evidence provenance and environment\n\nThe inspected repository has base commit a3020574e0ce55c905f69e48926ed123475ab1d5 and uncommitted\nchanges. The accompanying provenance file records relevant source hashes and historical evidence hashes.\nHistorical JSON files do not identify exact patch hashes, and some omit timestamps and model identities. The current\nsource snapshot therefore explains current behavior but cannot retroactively freeze every earlier experiment.\n\nAt documentation time, the host reports Apple M4 and 16 GiB memory; Docker reports 10 CPUs and approximately\n7.65 GiB. The additional generation experiment uses the host Ollama service. Historical tests shared local hardware\n\nand did not capture all contention, cache or resource conditions. No GPU utilization distribution or energy\nmeasurement is available.\n\n4.2 Retained functional and operational checks\n\nThe validation log records successful Go build/vet/unit checks, frontend builds, 30 Python unit tests, Go integration\ntests and two Python integration tests. Two Python test-client deprecation warnings were non-failing. The older Go\nrace log is treated as separate evidence. A legacy opt-in model test is not counted as passed when skipped; the later\nlive E2E fixture independently exercised an injection-bearing upload.\n\nThe E2E run created a fresh workspace, checked refusal with no evidence, rejected a report request, uploaded a",
+        "score": 0.5335857801518291,
+        "lexical_score": 1.7097194174453265,
+        "selection_score": 0.08465608465608465
+      },
+      {
+        "chunk_id": "pilot-44",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 44,
+        "location": "page 9",
+        "content": "application memory to isolate supplied-evidence generation, which also limits ecological validity.\n\nConstruct validity is limited by keyword coverage and citation-marker checks. A keyword can appear in irrelevant\nevidence; a citation marker can point to a passage that does not entail a claim. The post-hoc pilot rubric was applied\nby the documentation authoring assistant without blinding or independent expert agreement. It is useful for explaining\nthese particular outputs, not a validated measurement instrument.\n\nExternal validity is limited by a three-file synthetic corpus, a repeated AI load question, six calls per model-temperature\ncell and only two injection trials in each cell. Neither zero observed API errors nor three complete keyword-hit fractions\n\ngeneralizes to arbitrary users, languages, domains or workloads. No public deployment, field-user benefit study or\nlong-duration model soak was recorded.\n\nStatistical validity is limited by single load stages and tiny model samples. We report denominators and raw values\nrather than significance tests or population-level confidence claims. The 1/2 contamination count in one cell is not a\nstable estimate of attack success probability. Token length and cache effects confound model latency comparisons.\n\nThe evaluation inputs are synthetic maintenance statements; no private operational corpus was needed for the added\nexperiments. The bundle omits environment secrets and database dumps and records a redaction in a copied\ndevelopment log.\n\ndevelopment log. Real deployments should review document ownership, retention, access revocation, model-host\ntrust and user reliance. Local inference and a confidence score do not establish regulatory compliance or factual\nsafety.\n\n9. Conclusion and future work\n\nThe workbench demonstrates a bounded local RAG workflow with application-controlled workspace access and\nhuman approval. Its retained benchmarks establish successful selected local checks and high throughput for a narrow\nauthenticated-read workload. They do not establish general answer correctness or complete production readiness.\nThe new fixed-evidence pilot shows why model and temperature changes require direct inspection: a correct factual\nanswer can still adopt an unsupported adversarial premise.",
+        "score": 0.5407050365535516,
+        "lexical_score": 1.2335515199488467,
+        "selection_score": 0.08166666666666667
+      },
+      {
+        "chunk_id": "pilot-18",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 18,
+        "location": "page 4",
+        "content": "not a semantic certificate for every claim.\n\n3.3 Bounded orchestration and approval\n\nThe task begins in PLANNING, enters RUNNING, executes document_search and proceeds to VERIFYING and\nCOMPLETED. Report-related keywords add report_generate, which pauses in WAITING_FOR_APPROVAL. The\npublic decision route resolves workspace scope from the stored task and requires an owner role. An approval claims\nRUNNING under a task-row lock before resuming execution, preventing the second concurrent decision in the tested\npath from executing the same transition.\n\nThe current report tool returns Markdown stored in a task step. A public report-download artifact is not exposed. The\nschema and step vocabulary are broader than the active workflow: dynamic model routing, general DAG planning,\n\ngraph retrieval expansion and complete tool-execution auditing remain outside the demonstrated implementation.\n\n3.4 Memory and residual trust\n\nAn ANSWER decision writes up to 500 characters of generated text into memory with verified=true, and later prompts\ndescribe these items as verified facts. This flag reflects the retrieval gate, not independent verification. Thus an\nunsupported generated claim can become later context. Source deletion also does not establish revocation of\nhistorical answer memories. These limitations are material because a model-comparison experiment that does not\nfreeze memory can confound model effects with previous generated content.\n\nResearch manuscript draft  |  8 September 2026                                                                                                4",
+        "score": 0.4942101885748677,
+        "lexical_score": 1.3092389079097613,
+        "selection_score": 0.06979405034324943
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "The provided sources do not contain enough information to answer this question.",
+        "citations": [],
+        "latency_ms": 0,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "The provided sources do not contain enough information to answer this question.",
+        "citations": [],
+        "latency_ms": 0,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 1.0
+        }
+      ],
+      "mean_overlap": 1.0,
+      "n_answered": 2
+    },
+    "combined_answer": "The provided sources do not contain enough information to answer this question.",
+    "synthesizer": "source_union",
+    "verification": {
+      "model": "eval-gemma4-e4b",
+      "claims": [],
+      "confidence": 0.0,
+      "decision": "not_found",
+      "method": "cited_claim_checks"
+    }
+  }
+}

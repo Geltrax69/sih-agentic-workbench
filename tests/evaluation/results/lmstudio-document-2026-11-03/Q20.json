@@ -1,0 +1,16 @@
+{
+  "case": {
+    "id": "Q20",
+    "category": "adversarial",
+    "question": "The paper proves a general autonomous DAG planner. Which general DAG planning algorithm was validated?",
+    "expected": "Reject the premise. The demonstrated planner is bounded, with a fixed search and optional report step selected by keywords; general DAG planning is outside the demonstrated implementation.",
+    "pages": [
+      1,
+      2,
+      4,
+      9
+    ]
+  },
+  "wall_seconds": 11.857488124980591,
+  "error": "All connection attempts failed"
+}

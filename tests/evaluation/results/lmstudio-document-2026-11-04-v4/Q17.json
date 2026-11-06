@@ -1,0 +1,95 @@
+{
+  "case": {
+    "id": "Q17",
+    "category": "unanswerable",
+    "question": "What is the exact annual commercial subscription price of this workbench in Indian rupees?",
+    "expected": "Not stated in this document; refuse to invent a price.",
+    "pages": []
+  },
+  "wall_seconds": 0.10361774999182671,
+  "result": {
+    "question": "What is the exact annual commercial subscription price of this workbench in Indian rupees?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-47",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 47,
+        "location": "page 10",
+        "content": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH\n\n\nImplementation priorities are memory provenance invalidation, approval-content binding, durable job recovery, report\ndelivery and public operational validation. These steps would support stronger claims than the present exploratory\nevidence allows.\n\nData and code availability\n\nThe accompanying package includes original-result copies with hashes, a current source hash map, editable\nmanuscript/dossier text, diagrams, model-pilot requests and outputs, and scripts. The inspected local repository is\n/Users/lalitsingh/PROJECTS/sih-agentic-workbench. Public archival access and a frozen release commit remain to be\narranged by the authors; no public dataset or repository release is claimed here.\n\nAuthor contributions and declarations\n\nNamed author contributions, institutional affiliations, funding and competing-interest declarations are pending\nconfirmation. The documentation was prepared with an AI coding assistant using repository inspection and local\nexperiments; the pilot's post-hoc labels were produced by that assistant. Human authors must review the manuscript,\nresults, attribution and any venue-specific disclosure requirements before submission.\n\nReferences\n\n[1] P. Lewis et al., \u201cRetrieval-Augmented Generation for Knowledge-Intensive NLP Tasks,\u201d NeurIPS, 2020.\nhttps://arxiv.org/abs/2005.11401\n\n[2] S. Yao et al., \u201cReAct: Synergizing Reasoning and Acting in Language Models,\u201d arXiv:2210.03629, 2022.\nhttps://arxiv.org/abs/2210.03629\n\n[3] K. Greshake et al., \u201cNot what you've signed up for: Compromising Real-World LLM-Integrated Applications with\nIndirect Prompt Injection,\u201d arXiv:2302.12173, 2023. https://arxiv.org/abs/2302.12173\n\n[4] N. F. Liu et al., \u201cLost in the Middle: How Language Models Use Long Contexts,\u201d arXiv:2307.03172, 2023.\nhttps://arxiv.org/abs/2307.03172\n\n[5] S. Es, J. James, L. Espinosa Anke and S. Schockaert, \u201cRAGAs: Automated Evaluation of Retrieval Augmented\nGeneration,\u201d EACL System Demonstrations, pp. 150-158, 2024. https://aclanthology.org/2024.eacl-demo.16/\n\n[6] pgvector maintainers, \u201cpgvector documentation,\u201d accessed 8 September 2026.\nhttps://github.com/pgvector/pgvector\n\n[7] Ollama, \u201cGenerate a chat message,\u201d API documentation, accessed 8 September 2026.\nhttps://docs.ollama.com/api/chat\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nResearch manuscript draft | 8 September 2026 10",
+        "score": 0.5717966689955594,
+        "lexical_score": 0.6187016236291594,
+        "selection_score": 0.09109730848861283
+      },
+      {
+        "chunk_id": "pilot-10",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 10,
+        "location": "page 3",
+        "content": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH\n\n3. System design\n\n\n\n\n Browser + Nginx\n Static React UI; /api proxy\n\n\n\n Bearer token\n\n\n Go public API PostgreSQL\n JWT; workspace roles; HTTP Metadata, vectors, tasks,\n approvals, memory\n\nOriginal file read Internal secret\n\n\n\n MinIO Python AI service\n Original uploaded bytes Ingestion; retrieval; task flow Redis\n\n Required health dependency\n\n\n Private endpoint policy\n\n\n\n\n Local model host\n Embedding + generation calls\n\n\n\n Application controls authorize actions; model output is untrusted text.\n\nFigure 1. Implemented system components and trust boundaries. Supporting Redis/graph components are not a demonstrated durable\ntask queue or graph-augmented retrieval path.\n\n3.1 Services and data ownership\n\nNginx serves a compiled React frontend and proxies requests to a Go API. The API authenticates bearer tokens and\nchecks workspace roles before calling an internal Python FastAPI service. PostgreSQL stores users, memberships,\ndocument metadata, chunks, tasks, steps, approvals and memory. MinIO stores uploaded bytes. A model adapter\n\ncalls a configured local endpoint for embeddings and generation.\n\nIngestion supports text-bearing PDF, DOCX, XLSX, TXT, Markdown and CSV inputs. The current chunker uses\n800-character windows with nominal 100-character overlap and prefers text boundaries where possible. Embeddings\nare stored in vector(768), with a cosine IVFFlat index configured with lists=100. This is a source configuration, not\nevidence that the approximate index has been optimally trained or used by the query planner on the tiny corpus. [6]\n\nThe ingestion service claims one pending PostgreSQL job under FOR UPDATE ... SKIP LOCKED, processes its\nobject and records success or failure. Uploads trigger this processing through an internal request. A durable retry\nworker for lost triggers or abandoned RUNNING jobs is absent. Redis participates in health checks but is not a\ndemonstrated job transport in the current execution path.\n\n\n\n\n\n\n\n\n\n\n\nResearch manuscript draft | 8 September 2026 3",
+        "score": 0.5680396502082733,
+        "lexical_score": 0.6175015736613587,
+        "selection_score": 0.08712121212121213
+      },
+      {
+        "chunk_id": "pilot-4",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 4,
+        "location": "page 2",
+        "content": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH\n\n1. Introduction\n\nA user investigating equipment failure may need to connect a manual, an inventory record and an incident log.\nDocument search identifies candidate files, while a language model can synthesize a response. However, an\ninstitution also needs to know whether the user is allowed to access those documents, whether the answer is\nsupported and whether a requested action requires authorization. These concerns belong to different parts of the\nsystem and need different tests.\n\nThe Sovereign Agentic AI Workbench addresses this workflow through local document ingestion, scoped retrieval and\nconstrained orchestration. \u201cSovereign\u201d denotes the intended ability to host the model endpoint within an\ninstitution-controlled environment. The present implementation checks configured endpoint locality and runs in a local\ncontainer deployment; it does not establish an air-gapped or legally certified environment.\n\nThe motivating domain in the evaluated prototype is synthetic pump maintenance. Part identifiers, event dates and\nfailure causes provide inspectable facts. We do not claim that this corpus represents the complexity of a real industrial\nknowledge base. Its role is to support functional and exploratory tests, including missing evidence and adversarial\ninstructions embedded in a source.\n\n1.1 Research questions\n\nRQ1: Can a bounded local document workflow combine workspace-scoped retrieval with a deterministic\nanswer/refusal gate and persisted human approval? RQ2: What do the retained functional, load and recovery\nmeasurements establish about the prototype, and what do they leave unmeasured? RQ3: With supplied evidence held\nfixed, how do local model choice and sampling temperature affect response content and latency in a small exploratory\ncomparison?\n\n1.2 Contributions and scope\n\nWe present an inspectable systems integration, a distinction between implemented and planned capabilities, an\nanalysis of retained test artifacts and a reproducible fixed-evidence sensitivity pilot. The contribution is not a new\nlanguage-model architecture or a state-of-the-art retrieval algorithm. It is also not a controlled study of operational\nproductivity. The associated technical dossier contains deployment, API, workflow and SIH presentation details; this\nmanuscript emphasizes method, evidence and validity limits.\n\n2. Related work and design rationale\n\nRetrieval-augmented generation separates model parameters from an external source of retrievable knowledge. Lewis\net al. provide a foundational formulation of this approach. We use the general retrieval-plus-generation pattern, without\nreproducing that paper's training procedure or claiming its benchmark improvements. [1]\n\nReAct explores interleaving language-model reasoning and actions. Our planner instead uses a fixed search step and\n\nan optional report step selected through keywords. This narrower design allows explicit tool and state inspection, but\noffers less general task decomposition than model-driven planning. [2]\n\nGreshake et al. show how instructions inserted into retrieved content can affect LLM-integrated applications. We\ntherefore treat evidence as untrusted data, constrain actions through application code and evaluate a malicious-note\ncase. These measures address different failure channels; the exploratory results still contain a text-contamination\nfailure. [3]\n\nLiu et al. document sensitivity to the position of relevant information in long contexts, motivating future tests of\nordering, distractors and retrieval depth. RAGAs separates dimensions of retrieval and generation evaluation,",
+        "score": 0.546962560669561,
+        "lexical_score": 0.6239702535539566,
+        "selection_score": 0.08391608391608392
+      },
+      {
+        "chunk_id": "pilot-0",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 0,
+        "location": "page 1",
+        "content": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH\n\n\nEvidence-Gated Local Retrieval and\nHuman-Approved Workflows for an\nInstitutional AI Workbench\n\nA systems prototype and exploratory evaluation\n\n\nAuthors and affiliations: Pending confirmation\n\nResearch manuscript draft | 8 September 2026 | Project 1: Sovereign Agentic AI Workbench\n\nThis is an unpublished manuscript draft based on inspected implementation and retained experiments. It makes no\nvenue acceptance, peer-review or official SIH endorsement claim. Author order, affiliations, corresponding-author\ncontact and target-venue formatting remain to be completed.\n\nAbstract\n\nInstitutional document assistants must connect natural-language answers to accessible evidence while controlling\nactions that affect organizational workflows. We describe a local AI workbench integrating workspace-scoped\ndocument retrieval, a deterministic evidence threshold, persisted task execution and owner approval for a report tool.\nThe implementation uses a Go API, Python AI service, PostgreSQL/pgvector, object storage and a locally configured\nmodel endpoint. Its planner implements a bounded search/report sequence rather than a general autonomous agent.\nWe analyze retained local validation and conduct an additional controlled generation pilot. A historical\nauthenticated-read workload completed 80,000 requests without observed errors and reached a peak of 2,823.4\nrequests/s at 50 concurrent clients. A separate 12-task model workload recorded a 25.12-second p95 latency. An\n\nearlier three-question pilot achieved complete expected-keyword coverage, a measure that does not establish answer\naccuracy. In 24 fixed-evidence generations across two local models and two temperatures, all calls succeeded, but\none high-temperature output adopted an unsupported deletion premise from adversarial evidence. The results\ndemonstrate a functioning local workflow and the need to distinguish retrieval signal, text faithfulness and action\nauthorization. Small datasets, incomplete historical configuration capture and unblinded exploratory review limit\ngeneralization. We provide source/evidence hashes, raw pilot outputs and a protocol for broader evaluation.\n\nKeywords: retrieval-augmented generation; local inference; evidence gating; human approval; workspace isolation;\n\nprompt injection; systems evaluation.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nResearch manuscript draft | 8 September 2026 1",
+        "score": 0.5416058049100454,
+        "lexical_score": 0.7277303096428424,
+        "selection_score": 0.08333333333333333
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "The provided sources do not contain enough information to answer this question.",
+        "citations": [],
+        "latency_ms": 0,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "The provided sources do not contain enough information to answer this question.",
+        "citations": [],
+        "latency_ms": 0,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 1.0
+        }
+      ],
+      "mean_overlap": 1.0,
+      "n_answered": 2
+    },
+    "combined_answer": "The provided sources do not contain enough information to answer this question.",
+    "synthesizer": "source_union",
+    "verification": {
+      "model": "eval-gemma4-e4b",
+      "claims": [],
+      "confidence": 0.0,
+      "decision": "not_found",
+      "method": "cited_claim_checks"
+    }
+  }
+}

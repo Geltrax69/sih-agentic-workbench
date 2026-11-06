@@ -1,0 +1,83 @@
+{
+  "case": {
+    "id": "Q13",
+    "category": "numeric",
+    "question": "Which two model tags and two temperatures were used in the manuscript's fixed-evidence pilot, and how many measured generations were run?",
+    "expected": "qwen:7b and gemma:7b; temperatures 0.0 and 0.8; 24 measured generations.",
+    "pages": [
+      5,
+      7
+    ]
+  },
+  "wall_seconds": 35.3425156250014,
+  "result": {
+    "question": "Which two model tags and two temperatures were used in the manuscript's fixed-evidence pilot, and how many measured generations were run?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-29",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 29,
+        "location": "page 7",
+        "content": "Fixed-evidence model sensitivity\nModel tag\nTemp.\nCalls\nMedian wall s\nMean\ngenerated\ntokens\nReviewed\nrubric pass\nInjection\ncontamination\nqwen:7b\n0.0\n6\n2.865\n58.3\n6/6\n0/2\nqwen:7b\n0.8\n6\n3.270\n68.3\n5/6\n1/2\ngemma:7b\n0.0\n6\n2.354\n35.0\n6/6\n0/2\ngemma:7b\n0.8\n6\n2.272\n35.8\n6/6\n0/2\nAll calls completed. All factual cases contained the required identifiers and dates, all absent-cost cases abstained and\nall 16 answerable outputs contained [1]. At temperature 0.0, each model's paired seeds produced identical text for\neach case. At temperature 0.8, Qwen produced six distinct outputs across six calls and Gemma five.\nQwen at temperature 0.8, seed 17, answered the filter question correctly but added: \u201cSince all documents have been",
+        "score": 0.7868627501058785
+      },
+      {
+        "chunk_id": "pilot-48",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 48,
+        "location": "page 11",
+        "content": "ctual chunker count experiments\nA10\nprovenance.json\nSource/evidence hashes and source-state caveats\nAppendix B. Minimal replication protocol\nUse the existing local models and execute source/run_model_pilot.py. Its requests use two temperatures, two seeds,\nthree fixed cases and a per-model warmup, saving all outputs as JSON. A rerun requires fresh review of responses; do\nnot reuse manual labels automatically. Record model digests rather than aliases alone, preserve the runtime version\nand distinguish wall time from server-reported generation duration.\nFor an end-to-end comparison, create an isolated workspace per variant, ingest an identical versioned corpus with one\nfixed embedder, prevent prior generated memories from contaminating later trials and run the same questions through",
+        "score": 0.7392899141192351
+      },
+      {
+        "chunk_id": "pilot-39",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 39,
+        "location": "page 9",
+        "content": "and differences between the native model pilot and application endpoint. The quality pilot predates\na retrieval-evidence fix, so its scores cannot be treated as final-revision quality evidence. New pilot prompts omitted\napplication memory to isolate supplied-evidence generation, which also limits ecological validity.\nConstruct validity is limited by keyword coverage and citation-marker checks. A keyword can appear in irrelevant\nevidence; a citation marker can point to a passage that does not entail a claim. The post-hoc pilot rubric was applied\nby the documentation authoring assistant without blinding or independent expert agreement. It is useful for explaining\nthese particular outputs, not a validated measurement instrument.",
+        "score": 0.7354341478694537
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "[1] Fixed-evidence model sensitivity Model tag Temp. Calls Median wall s Mean generated tokens Reviewed rubric pass Injection contamination qwen:7b 0.0 6 2.865 58.3 6/6 0/2 gemma:7b 0.0 6 2.354 35.0 6/6 0/2 gemma:7b 0.8 6 3.270 68.3 5/6 1/2 All calls completed. All factual cases contained the required identifiers and dates, all absent-cost cases abstained and all 16 answerable outputs contained [1]. At temperature 0.0, each model's paired seeds produced identical text for each case. At temperature 0.8, Qwen produced six distinct outputs across six calls and Gemma five. Qwen at temperature 0.8, seed 17, answered the filter question correctly but added: \u201cSince all documents have been [2] (Research_Paper.pdf, page 11) ctaual chunker count experiments A10 provenance.json Source/evidence hashes and source-state caveats Appendix B. Minimal replication protocol Use the existing local models and execute source/run_model_pilot.py. Its requests use two temperatures, two seeds, three fixed cases and a per-model warmup, saving all outputs as JSON. A rerun requires fresh review of responses; do not reuse manual labels automatically. Record model digests rather than aliases alone, preserve the runtime version and distinguish wall time from server-reported generation duration. For an end-to-end comparison, create an isolated workspace per variant, ingest an identical versioned corpus with one fixed embedder, prevent prior generated memories from contaminating later trials and run the same questions through [3] (Research_Paper.pdf, page 9) and differences between the native model pilot and application endpoint. The quality pilot predates a retrieval-evidence fix, so its scores cannot be treated as final-revision quality evidence. New pilot prompts omitted application memory to isolate supplied-evidence generation, which also limits ecological validity. Construct validity is limited by keyword coverage and citation-marker checks. A keyword can appear in irrelevant evidence; a citation marker can point to a passage that does not entail a claim. The post-hoc pilot rubric was applied by the documentation authoring assistant without blinding or independent expert agreement. It is useful for explaining these particular outputs, not a validated measurement instrument.]\n\n[1] Fixed-evidence model sensitivity Model tag Temp. Calls Median wall s Mean generated tokens Reviewed rubric pass Injection contamination qwen:7b 0.0 6 2.865 58.3 6/6 0/2 gemma:7b 0.0 6 2.354 35.0 6/6 0/2 gemma:7b 0.8 6 3.270 68.3 5/6 1/2 All calls completed. All factual cases contained the required identifiers and dates, all absent-cost cases abstained and all 16 answerable outputs contained [1]. At temperature 0.0, each model's paired seeds produced identical text for each case. At temperature 0.8, Qwen produced six distinct outputs across six calls and Gemma five. Qwen at temperature 0.8, seed 17, answered the filter question correctly but added: \u201cSince all documents have been [2] (Research_Paper.pdf, page 11) ctaual chunker count experiments A10 provenance.json Source/evidence hashes and source-state caveats Appendix B. Minimal replication protocol Use the existing local models and execute source/run_model_pilot.py. Its requests use two temperatures, two seeds, three fixed cases and a per-model warmup, saving all outputs as JSON. A rerun requires fresh review of responses; do not reuse manual",
+        "citations": [
+          "Research_Paper.pdf, page 7",
+          "Research_Paper.pdf, page 11",
+          "Research_Paper.pdf, page 9"
+        ],
+        "latency_ms": 24393,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "The two models compared were qwen:7b and gemma:7b, and the temps used were 0.0 and 0.8, with 6 median wall s runs for each pair of settings. [1]",
+        "citations": [
+          "Research_Paper.pdf, page 7"
+        ],
+        "latency_ms": 9583,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.035
+        }
+      ],
+      "mean_overlap": 0.035,
+      "n_answered": 2
+    },
+    "combined_answer": "- eval-minicpm5-1b: [1]\n- eval-gemma4-e4b: [2]",
+    "synthesizer": "eval-gemma4-e4b",
+    "verification": {
+      "decision": "not_run_answer_accuracy_pilot"
+    }
+  }
+}

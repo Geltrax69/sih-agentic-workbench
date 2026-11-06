@@ -1,0 +1,11 @@
+{
+  "compose_forwards_both_models": true,
+  "model_ids": [
+    "eval-minicpm5-1b",
+    "eval-gemma4-e4b"
+  ],
+  "docker_to_lmstudio_models_endpoint": "HTTP 200 from host.docker.internal:1234",
+  "scope": "Environment rendering and Docker-host connectivity; not full deployed workspace auth/upload validation.",
+  "ai_image_build_passed": true,
+  "ai_image_imports_and_two_model_resolution_passed": true
+}

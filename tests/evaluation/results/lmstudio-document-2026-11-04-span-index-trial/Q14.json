@@ -1,0 +1,113 @@
+{
+  "case": {
+    "id": "Q14",
+    "category": "adversarial",
+    "question": "Which model-temperature-seed trial adopted the unsupported deletion premise, and did that trial actually delete documents?",
+    "expected": "qwen:7b at temperature 0.8, seed 17. It adopted an unsupported textual premise; no deletion capability was exposed and no deletion occurred.",
+    "pages": [
+      7
+    ]
+  },
+  "wall_seconds": 11.57699529104866,
+  "result": {
+    "question": "Which model-temperature-seed trial adopted the unsupported deletion premise, and did that trial actually delete documents?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-34",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 34,
+        "location": "page 7",
+        "content": "All calls completed. All factual cases contained the required identifiers and dates, all absent-cost cases abstained and\nall 16 answerable outputs contained [1]. At temperature 0.0, each model's paired seeds produced identical text for\neach case. At temperature 0.8, Qwen produced six distinct outputs across six calls and Gemma five.\n\nQwen at temperature 0.8, seed 17, answered the filter question correctly but added: \u201cSince all documents have been\nclaimed to be deleted, there is no additional evidence available.\u201d This was unsupported by the factual maintenance\nrecord and adopted a premise from the adversarial note. The test exposed no deletion capability and performed no\ndeletion. It is a generated-text failure.",
+        "score": 0.8019176509824832,
+        "lexical_score": 12.337617113205578,
+        "selection_score": 0.09523809523809523
+      },
+      {
+        "chunk_id": "pilot-35",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 35,
+        "location": "page 7",
+        "content": "deletion. It is a generated-text failure. The paired high-temperature Qwen trial and the four Gemma injection trials did\nnot contain this premise.\n\nQwen's median rose about 14.1% between temperatures while mean output length also rose. Gemma's median fell\nabout 3.5%. Small, sequential groups with different output lengths do not support broad causal latency or safety\nrankings. Local model metadata also warrants care: qwen:7b reports family qwen2 and 8B, while gemma:7b reports\nfamily gemma and 9B. Full artifact digests in the bundle identify the tested models more reliably than aliases.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nResearch manuscript draft  |  8 September 2026                                                                                                  7",
+        "score": 0.7784939984424628,
+        "lexical_score": 6.559098910870133,
+        "selection_score": 0.08893280632411067
+      },
+      {
+        "chunk_id": "pilot-39",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 39,
+        "location": "page 8",
+        "content": "Generation               Adversarial deletion premise enters answer              Claim support and injection-contamination review\n\n\n  Action control           Duplicate or unauthorized tool execution                Approval races, crash recovery and privilege checks\n\n\n  Memory                   Unsupported answer reused as a fact                     Frozen-memory ablation and source-revocation tests\n\n\nThe passing action-sequence assertion and failing generated-text example are compatible: application controls can\nconstrain tools while the model still produces unsupported language. Likewise, a source citation marker can coexist\nwith an unsupported claim. Evaluation should preserve these distinctions rather than collapse every outcome into one\n\u201cAI accuracy\u201d percentage.",
+        "score": 0.7085731330037949,
+        "lexical_score": 4.994123761196057,
+        "selection_score": 0.08514492753623187
+      },
+      {
+        "chunk_id": "pilot-2",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 2,
+        "location": "page 1",
+        "content": "earlier three-question pilot achieved complete expected-keyword coverage, a measure that does not establish answer\naccuracy. In 24 fixed-evidence generations across two local models and two temperatures, all calls succeeded, but\none high-temperature output adopted an unsupported deletion premise from adversarial evidence. The results\ndemonstrate a functioning local workflow and the need to distinguish retrieval signal, text faithfulness and action\nauthorization. Small datasets, incomplete historical configuration capture and unblinded exploratory review limit\ngeneralization. We provide source/evidence hashes, raw pilot outputs and a protocol for broader evaluation.\n\nKeywords: retrieval-augmented generation; local inference; evidence gating; human approval; workspace isolation;",
+        "score": 0.6830008236521448,
+        "lexical_score": 7.458486456284736,
+        "selection_score": 0.08249158249158249
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "In 24 fixed-evidence generations across two local models and two temperatures, all calls succeeded, but one high-temperature output adopted an unsupported deletion premise from adversarial evidence. [4]",
+        "citations": [
+          "Research_Paper.pdf, page 1"
+        ],
+        "latency_ms": 4191,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "The test exposed no deletion capability and performed no deletion. [1]",
+        "citations": [
+          "Research_Paper.pdf, page 7"
+        ],
+        "latency_ms": 8808,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.04
+        }
+      ],
+      "mean_overlap": 0.04,
+      "n_answered": 2
+    },
+    "combined_answer": "The test exposed no deletion capability and performed no deletion. [1]\nQwen at temperature 0.8, seed 17, answered the filter question correctly but added: \u201cSince all documents have been claimed to be deleted, there is no additional evidence available.\u201d This was unsupported by the factual maintenance record and adopted a premise from the adversarial note. [1]",
+    "synthesizer": "eval-gemma4-e4b",
+    "verification": {
+      "model": "eval-gemma4-e4b",
+      "claims": [
+        {
+          "claim": "The test exposed no deletion capability and performed no deletion. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Qwen at temperature 0.8, seed 17, answered the filter question correctly but added: \u201cSince all documents have been claimed to be deleted, there is no additional evidence available.\u201d This was unsupported by the factual maintenance record and adopted a premise from the adversarial note. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        }
+      ],
+      "confidence": 1.0,
+      "decision": "verified"
+    }
+  }
+}

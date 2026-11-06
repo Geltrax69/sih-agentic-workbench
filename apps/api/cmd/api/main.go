@@ -144,6 +144,8 @@ func run() error {
 	})
 	ask.NewHandler(aiSvc, auditRec).Register(protectedAPI, wsHandler.RequireWsRole)
 	tasks.NewHandler(aiSvc, auditRec).Register(protectedAPI, wsHandler.RequireWsRole)
+	ask.NewMultiModelHandler(aiSvc, auditRec).Register(protectedAPI, wsHandler.RequireWsRole)
+	ask.NewModelsHandler(aiSvc, auditRec).Register(protectedAPI)
 
 	httpServer := &http.Server{
 		Addr:              ":" + cfg.APIPort,

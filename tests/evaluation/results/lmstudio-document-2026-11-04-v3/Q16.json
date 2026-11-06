@@ -1,0 +1,127 @@
+{
+  "case": {
+    "id": "Q16",
+    "category": "limitation",
+    "question": "Does the manuscript establish an air-gapped or legally certified environment just because the workbench is called sovereign?",
+    "expected": "No. Sovereign refers to intended institution-controlled local hosting; the implementation does not establish air-gap or legal certification.",
+    "pages": [
+      2,
+      9
+    ]
+  },
+  "wall_seconds": 3.5331972499843687,
+  "result": {
+    "question": "Does the manuscript establish an air-gapped or legally certified environment just because the workbench is called sovereign?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-4",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 4,
+        "location": "page 2",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\n\n1. Introduction\n\nA user investigating equipment failure may need to connect a manual, an inventory record and an incident log.\nDocument search identifies candidate files, while a language model can synthesize a response. However, an\ninstitution also needs to know whether the user is allowed to access those documents, whether the answer is\nsupported and whether a requested action requires authorization. These concerns belong to different parts of the\nsystem and need different tests.\n\nThe Sovereign Agentic AI Workbench addresses this workflow through local document ingestion, scoped retrieval and\nconstrained orchestration. \u201cSovereign\u201d denotes the intended ability to host the model endpoint within an\ninstitution-controlled environment. The present implementation checks configured endpoint locality and runs in a local\ncontainer deployment; it does not establish an air-gapped or legally certified environment.\n\nThe motivating domain in the evaluated prototype is synthetic pump maintenance. Part identifiers, event dates and\nfailure causes provide inspectable facts. We do not claim that this corpus represents the complexity of a real industrial\nknowledge base. Its role is to support functional and exploratory tests, including missing evidence and adversarial\ninstructions embedded in a source.\n\n1.1 Research questions\n\nRQ1: Can a bounded local document workflow combine workspace-scoped retrieval with a deterministic",
+        "score": 0.7452261375762902,
+        "lexical_score": 3.6479385992412166,
+        "selection_score": 0.09109730848861283
+      },
+      {
+        "chunk_id": "pilot-20",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 20,
+        "location": "page 5",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\n\n4. Evaluation method\n\n4.1 Evidence provenance and environment\n\nThe inspected repository has base commit a3020574e0ce55c905f69e48926ed123475ab1d5 and uncommitted\nchanges. The accompanying provenance file records relevant source hashes and historical evidence hashes.\nHistorical JSON files do not identify exact patch hashes, and some omit timestamps and model identities. The current\nsource snapshot therefore explains current behavior but cannot retroactively freeze every earlier experiment.\n\nAt documentation time, the host reports Apple M4 and 16 GiB memory; Docker reports 10 CPUs and approximately\n7.65 GiB. The additional generation experiment uses the host Ollama service. Historical tests shared local hardware\n\nand did not capture all contention, cache or resource conditions. No GPU utilization distribution or energy\nmeasurement is available.\n\n4.2 Retained functional and operational checks\n\nThe validation log records successful Go build/vet/unit checks, frontend builds, 30 Python unit tests, Go integration\ntests and two Python integration tests. Two Python test-client deprecation warnings were non-failing. The older Go\nrace log is treated as separate evidence. A legacy opt-in model test is not counted as passed when skipped; the later\nlive E2E fixture independently exercised an injection-bearing upload.\n\nThe E2E run created a fresh workspace, checked refusal with no evidence, rejected a report request, uploaded a",
+        "score": 0.6811434039626367,
+        "lexical_score": 2.98806885266742,
+        "selection_score": 0.08012820512820512
+      },
+      {
+        "chunk_id": "pilot-0",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 0,
+        "location": "page 1",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\n\n\nEvidence-Gated Local Retrieval and\nHuman-Approved Workflows for an\nInstitutional AI Workbench\n\nA systems prototype and exploratory evaluation\n\n\nAuthors and affiliations: Pending confirmation\n\nResearch manuscript draft | 8 September 2026 | Project 1: Sovereign Agentic AI Workbench\n\nThis is an unpublished manuscript draft based on inspected implementation and retained experiments. It makes no\nvenue acceptance, peer-review or official SIH endorsement claim. Author order, affiliations, corresponding-author\ncontact and target-venue formatting remain to be completed.\n\nAbstract\n\nInstitutional document assistants must connect natural-language answers to accessible evidence while controlling\nactions that affect organizational workflows. We describe a local AI workbench integrating workspace-scoped\ndocument retrieval, a deterministic evidence threshold, persisted task execution and owner approval for a report tool.\nThe implementation uses a Go API, Python AI service, PostgreSQL/pgvector, object storage and a locally configured\nmodel endpoint. Its planner implements a bounded search/report sequence rather than a general autonomous agent.\nWe analyze retained local validation and conduct an additional controlled generation pilot. A historical\nauthenticated-read workload completed 80,000 requests without observed errors and reached a peak of 2,823.4\nrequests/s at 50 concurrent clients. A separate 12-task model workload recorded a 25.12-second p95 latency. An",
+        "score": 0.726938506948469,
+        "lexical_score": 1.790759735813777,
+        "selection_score": 0.0787878787878788
+      },
+      {
+        "chunk_id": "pilot-41",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 41,
+        "location": "page 9",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\n\n7. Discussion\n\nRQ1 is supported within the implemented scope: the project combines document ingestion, scoped retrieval, threshold\nrefusal and a persisted owner-approval report sequence. It does not demonstrate a general agent planner, complete\nsemantic verification or a downloadable reporting product. RQ2 yields evidence for selected local functional and load\nproperties, with substantial limits on production inference. RQ3 yields a concrete, reproducible example of text\nvariation and contamination under one changed model-temperature configuration, without establishing a general\nwinner.\n\nFor deployment, the most consequential improvements are provenance-aware memory, reviewable report content\n\nbound to source versions, durable processing recovery and an evaluation set that separates retrieval relevance from\nanswerability and faithfulness. Capacity work should exercise a mixed workload with ingestion and generation,\nincreasing corpus sizes and sustained duration. Model routing or larger models should be added only with\nmeasurements showing their benefit for that workload.\n\n8. Threats to validity and responsible use\n\nInternal validity is limited by missing historical revision/digest metadata, non-isolated local resources, sequential\nstage/model order and differences between the native model pilot and application endpoint. The quality pilot predates\na retrieval-evidence fix, so its scores cannot be treated as final-revision quality evidence. New pilot prompts omitted",
+        "score": 0.7041102983948221,
+        "lexical_score": 2.6675187341276954,
+        "selection_score": 0.07870370370370369
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "The Sovereign Agentic AI Workbench addresses this workflow through local document ingestion, scoped retrieval and constrained orchestration. [1]\n\u201cSovereign\u201d denotes the intended ability to host the model endpoint within an institution-controlled environment. [1]\nThe present implementation checks configured endpoint locality and runs in a local container deployment; it does not establish an air-gapped or legally certified environment. [1]",
+        "citations": [
+          "Research_Paper.pdf, page 2"
+        ],
+        "latency_ms": 2573,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH [4]",
+        "citations": [
+          "Research_Paper.pdf, page 9"
+        ],
+        "latency_ms": 3467,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.081
+        }
+      ],
+      "mean_overlap": 0.081,
+      "n_answered": 2
+    },
+    "combined_answer": "The Sovereign Agentic AI Workbench addresses this workflow through local document ingestion, scoped retrieval and constrained orchestration. [1]\n\u201cSovereign\u201d denotes the intended ability to host the model endpoint within an institution-controlled environment. [1]\nThe present implementation checks configured endpoint locality and runs in a local container deployment; it does not establish an air-gapped or legally certified environment. [1]\nPROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH [4]",
+    "synthesizer": "source_union",
+    "verification": {
+      "model": "eval-gemma4-e4b",
+      "claims": [
+        {
+          "claim": "The Sovereign Agentic AI Workbench addresses this workflow through local document ingestion, scoped retrieval and constrained orchestration. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "\u201cSovereign\u201d denotes the intended ability to host the model endpoint within an institution-controlled environment. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "The present implementation checks configured endpoint locality and runs in a local container deployment; it does not establish an air-gapped or legally certified environment. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH [4]",
+          "source": 4,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        }
+      ],
+      "confidence": 1.0,
+      "decision": "verified",
+      "method": "source_excerpt_match"
+    }
+  }
+}

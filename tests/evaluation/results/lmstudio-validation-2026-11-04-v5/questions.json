@@ -1,0 +1,91 @@
+[
+  {
+    "id": "V01",
+    "category": "limitation",
+    "question": "Can embeddings from a replacement model be treated as compatible merely because their vector dimensions match?",
+    "expected": "No. Changing embedder requires compatible corpus/query embeddings, reindexing and threshold recalibration; equal dimensions alone are insufficient.",
+    "pages": [
+      8
+    ]
+  },
+  {
+    "id": "V02",
+    "category": "workflow",
+    "question": "In what format and location does the report tool currently store its output?",
+    "expected": "Markdown stored in a task step.",
+    "pages": [
+      4
+    ]
+  },
+  {
+    "id": "V03",
+    "category": "workflow",
+    "question": "Which PostgreSQL locking clause claims pending ingestion jobs?",
+    "expected": "FOR UPDATE ... SKIP LOCKED.",
+    "pages": [
+      3
+    ]
+  },
+  {
+    "id": "V04",
+    "category": "numeric",
+    "question": "How many tables and how many dump bytes were involved in the database restoration count check?",
+    "expected": "19 tables and 53,270-byte dump.",
+    "pages": [
+      7
+    ]
+  },
+  {
+    "id": "V05",
+    "category": "numeric",
+    "question": "How many recent eligible memory items can be added to a non-refused task prompt?",
+    "expected": "Up to three.",
+    "pages": [
+      4
+    ]
+  },
+  {
+    "id": "V06",
+    "category": "numeric",
+    "question": "What HTTP statuses did the two concurrent public report-approval decisions return in the recorded test?",
+    "expected": "One HTTP 200 and one HTTP 400.",
+    "pages": [
+      6
+    ]
+  },
+  {
+    "id": "V07",
+    "category": "numeric",
+    "question": "With chunking at 400 characters and 100-character overlap, how many chunks and stored characters were produced?",
+    "expected": "Six chunks and 1,694 stored characters.",
+    "pages": [
+      8
+    ]
+  },
+  {
+    "id": "V08",
+    "category": "unanswerable",
+    "question": "What is the corresponding author's email address?",
+    "expected": "Not supplied; corresponding-author contact remains to be completed/pending.",
+    "pages": [
+      1,
+      10
+    ]
+  },
+  {
+    "id": "V09",
+    "category": "numeric",
+    "question": "What is the default number of chunks returned by the manuscript's retrieval query?",
+    "expected": "Six.",
+    "pages": [
+      4
+    ]
+  },
+  {
+    "id": "V10",
+    "category": "unanswerable",
+    "question": "What is the pump supplier's postal address?",
+    "expected": "The document does not supply a pump supplier postal address; explicitly abstain.",
+    "pages": []
+  }
+]

@@ -1,0 +1,107 @@
+{
+  "case": {
+    "id": "Q03",
+    "category": "numeric",
+    "question": "What are the manuscript's default chunk-window size and nominal chunk overlap, in characters?",
+    "expected": "800-character windows and nominal 100-character overlap.",
+    "pages": [
+      3
+    ]
+  },
+  "wall_seconds": 8.411908041976858,
+  "result": {
+    "question": "What are the manuscript's default chunk-window size and nominal chunk overlap, in characters?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-37",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 37,
+        "location": "page 8",
+        "content": "reindexing and threshold recalibration. Matching vector dimensionality alone does not make embeddings from different\nmodels comparable. The current vector(768) schema additionally requires a migration if the new dimension differs.\n\n6.2 Segmentation experiment\n\nRunning the actual chunker over the three demonstration files produced three chunks at 800/100, 800/0, 800/200 and\n1,200/100 characters. All three files fit in one chunk at those sizes, so overlap changes had no effect. At 400/0 the\ncorpus produced five chunks and 1,394 stored characters; at 400/100 it produced six chunks and 1,694 characters.\nThe default stored 1,396 characters.\n\nThese counts demonstrate segmentation and duplication effects only. They do not measure retrieval quality or answer\nchanges.",
+        "score": 0.6699816469965534,
+        "lexical_score": 11.774901854600543,
+        "selection_score": 0.09307359307359307
+      },
+      {
+        "chunk_id": "pilot-38",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 38,
+        "location": "page 8",
+        "content": "changes. The tiny corpus is poorly suited to testing overlap because it exercises little boundary splitting under the\ndefault setting. A realistic corpus should include long procedures, multi-page tables and cases whose evidence\ncrosses chunk boundaries.\n\n6.3 Distinguishing failure layers\n\n\n  Layer                    Example failure                                         Required evaluation\n\n\n  Access control           Cross-workspace task read                               Role-matrix and object-scope integration tests\n\n\n  Retrieval                Relevant answer passage not retrieved                   Labeled recall@k and exact-search comparison\n\n\n  Answerability            Related evidence lacks requested value                  Held-out unanswerable/contradiction set",
+        "score": 0.6963298485332471,
+        "lexical_score": 5.517325690586251,
+        "selection_score": 0.09109730848861283
+      },
+      {
+        "chunk_id": "pilot-13",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 13,
+        "location": "page 3",
+        "content": "calls a configured local endpoint for embeddings and generation.\n\nIngestion supports text-bearing PDF, DOCX, XLSX, TXT, Markdown and CSV inputs. The current chunker uses\n800-character windows with nominal 100-character overlap and prefers text boundaries where possible. Embeddings\nare stored in vector(768), with a cosine IVFFlat index configured with lists=100. This is a source configuration, not\nevidence that the approximate index has been optimally trained or used by the query planner on the tiny corpus. [6]\n\nThe ingestion service claims one pending PostgreSQL job under FOR UPDATE ... SKIP LOCKED, processes its\nobject and records success or failure. Uploads trigger this processing through an internal request. A durable retry\nworker for lost triggers or abandoned RUNNING jobs is absent.",
+        "score": 0.6610948680960477,
+        "lexical_score": 9.886761040427782,
+        "selection_score": 0.08893280632411067
+      },
+      {
+        "chunk_id": "pilot-18",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 18,
+        "location": "page 4",
+        "content": "graph retrieval expansion and complete tool-execution auditing remain outside the demonstrated implementation.\n\n3.4 Memory and residual trust\n\nAn ANSWER decision writes up to 500 characters of generated text into memory with verified=true, and later prompts\ndescribe these items as verified facts. This flag reflects the retrieval gate, not independent verification. Thus an\nunsupported generated claim can become later context. Source deletion also does not establish revocation of\nhistorical answer memories. These limitations are material because a model-comparison experiment that does not\nfreeze memory can confound model effects with previous generated content.",
+        "score": 0.6090436009363349,
+        "lexical_score": 2.0334090445310213,
+        "selection_score": 0.07846153846153847
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "The current chunker uses 800-character windows with nominal 100-character overlap and prefers text boundaries where possible. [3]",
+        "citations": [
+          "Research_Paper.pdf, page 3"
+        ],
+        "latency_ms": 3799,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "The current chunker uses 800-character windows with nominal 100-character overlap and prefers text boundaries where possible. [3]",
+        "citations": [
+          "Research_Paper.pdf, page 3"
+        ],
+        "latency_ms": 8215,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 1.0
+        }
+      ],
+      "mean_overlap": 1.0,
+      "n_answered": 2
+    },
+    "combined_answer": "The current chunker uses 800-character windows with nominal 100-character overlap and prefers text boundaries where possible. [3]",
+    "synthesizer": "eval-gemma4-e4b",
+    "verification": {
+      "model": "eval-gemma4-e4b",
+      "claims": [
+        {
+          "claim": "The current chunker uses 800-character windows with nominal 100-character overlap and prefers text boundaries where possible. [3]",
+          "source": 3,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        }
+      ],
+      "confidence": 1.0,
+      "decision": "verified"
+    }
+  }
+}

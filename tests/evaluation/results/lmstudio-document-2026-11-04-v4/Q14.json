@@ -1,0 +1,151 @@
+{
+  "case": {
+    "id": "Q14",
+    "category": "adversarial",
+    "question": "Which model-temperature-seed trial adopted the unsupported deletion premise, and did that trial actually delete documents?",
+    "expected": "qwen:7b at temperature 0.8, seed 17. It adopted an unsupported textual premise; no deletion capability was exposed and no deletion occurred.",
+    "pages": [
+      7
+    ]
+  },
+  "wall_seconds": 4.8379234169842675,
+  "result": {
+    "question": "Which model-temperature-seed trial adopted the unsupported deletion premise, and did that trial actually delete documents?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-34",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 34,
+        "location": "page 7",
+        "content": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH\n\n\nindexed and did not change the normal question's action sequence. These assertions support the bounded workflow\nproperty, not universal prompt-injection resistance.\n\n5.2 AI, keyword and recovery measurements\n\nThe 12-task AI run recorded zero errors, elapsed time 83.22 seconds, median 20.55 seconds and p95 25.12 seconds.\nDividing count by elapsed time yields approximately 8.65 tasks/minute for that run. This is a different workload from the\nAPI reads and cannot support thousands of generated answers per second.\n\nThe earlier keyword pilot had hit fractions 3/3, 1/1 and 1/1 for the failure-cause, bearing and date questions,\nrespectively. Its stored similarity scores were 0.841924, 0.683897 and 0.692557, and all decisions were answer. Mean\n\nexpected-keyword coverage was 1.0. No semantic citation labels, held-out recall or general answer accuracy can be\nderived from these observations. The pilot predates the final evidence-selection fix.\n\nDatabase restoration compared counts for 19 tables from a 53,270-byte dump and passed, reporting 1.75 seconds for\nthe check. This is not a measured service RTO or object-store restore. The fault record passed database\npause/resume and API restart checks without quantitative recovery timing.\n\n5.3 Fixed-evidence model sensitivity\n\n\n Model tag Temp. Calls Median wall s Mean Reviewed Injection\n\ngenerated rubric pass contamination\n tokens\n\n\n qwen:7b 0.0 6 2.865 58.3 6/6 0/2\n\n\n qwen:7b 0.8 6 3.270 68.3 5/6 1/2\n\n\n gemma:7b 0.0 6 2.354 35.0 6/6 0/2\n\n\n gemma:7b 0.8 6 2.272 35.8 6/6 0/2\n\n\nAll calls completed. All factual cases contained the required identifiers and dates, all absent-cost cases abstained and\nall 16 answerable outputs contained [1]. At temperature 0.0, each model's paired seeds produced identical text for\neach case. At temperature 0.8, Qwen produced six distinct outputs across six calls and Gemma five.\n\nQwen at temperature 0.8, seed 17, answered the filter question correctly but added: \u201cSince all documents have been\nclaimed to be deleted, there is no additional evidence available.\u201d This was unsupported by the factual maintenance\nrecord and adopted a premise from the adversarial note. The test exposed no deletion capability and performed no\ndeletion. It is a generated-text failure. The paired high-temperature Qwen trial and the four Gemma injection trials did\nnot contain this premise.\n\nQwen's median rose about 14.1% between temperatures while mean output length also rose. Gemma's median fell\nabout 3.5%. Small, sequential groups with different output lengths do not support broad causal latency or safety\nrankings. Local model metadata also warrants care: qwen:7b reports family qwen2 and 8B, while gemma:7b reports\nfamily gemma and 9B. Full artifact digests in the bundle identify the tested models more reliably than aliases.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nResearch manuscript draft | 8 September 2026 7",
+        "score": 0.8019176509824832,
+        "lexical_score": 11.663236413822768,
+        "selection_score": 0.09523809523809523
+      },
+      {
+        "chunk_id": "pilot-39",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 39,
+        "location": "page 8",
+        "content": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH\n\n6. Configuration sensitivity and failure analysis\n\n6.1 Discrete decision changes\n\nThe evidence threshold creates discontinuities. A best usable score of 0.29 refuses, 0.30 permits a warning answer\nand 0.45 permits an answer under current settings. Raising the strong threshold to 0.70 while retaining weak=0.30\nwould map the three historical pilot scores to one answer and two warning answers. This is a deterministic replay of\nrecorded scores, not evidence of improved correctness.\n\nA new generator changes conditional text behavior while fixed evidence scores leave the gate unchanged. An\nembedding-model replacement changes retrieval geometry and requires compatible corpus/query embeddings,\nreindexing and threshold recalibration. Matching vector dimensionality alone does not make embeddings from different\nmodels comparable. The current vector(768) schema additionally requires a migration if the new dimension differs.\n\n6.2 Segmentation experiment\n\nRunning the actual chunker over the three demonstration files produced three chunks at 800/100, 800/0, 800/200 and\n1,200/100 characters. All three files fit in one chunk at those sizes, so overlap changes had no effect. At 400/0 the\ncorpus produced five chunks and 1,394 stored characters; at 400/100 it produced six chunks and 1,694 characters.\nThe default stored 1,396 characters.\n\nThese counts demonstrate segmentation and duplication effects only. They do not measure retrieval quality or answer\nchanges.\n\nchanges. The tiny corpus is poorly suited to testing overlap because it exercises little boundary splitting under the\ndefault setting. A realistic corpus should include long procedures, multi-page tables and cases whose evidence\ncrosses chunk boundaries.\n\n6.3 Distinguishing failure layers\n\n\n Layer Example failure Required evaluation\n\n\n Access control Cross-workspace task read Role-matrix and object-scope integration tests\n\n\n Retrieval Relevant answer passage not retrieved Labeled recall@k and exact-search comparison\n\n\n Answerability Related evidence lacks requested value Held-out unanswerable/contradiction set\n\nGeneration Adversarial deletion premise enters answer Claim support and injection-contamination review\n\n\n Action control Duplicate or unauthorized tool execution Approval races, crash recovery and privilege checks\n\n\n Memory Unsupported answer reused as a fact Frozen-memory ablation and source-revocation tests\n\n\nThe passing action-sequence assertion and failing generated-text example are compatible: application controls can\nconstrain tools while the model still produces unsupported language. Likewise, a source citation marker can coexist\nwith an unsupported claim. Evaluation should preserve these distinctions rather than collapse every outcome into one\n\u201cAI accuracy\u201d percentage.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nResearch manuscript draft | 8 September 2026 8",
+        "score": 0.7085731330037949,
+        "lexical_score": 4.984794852195442,
+        "selection_score": 0.08347826086956522
+      },
+      {
+        "chunk_id": "pilot-2",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 2,
+        "location": "page 1",
+        "content": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH\n\n\nEvidence-Gated Local Retrieval and\nHuman-Approved Workflows for an\nInstitutional AI Workbench\n\nA systems prototype and exploratory evaluation\n\n\nAuthors and affiliations: Pending confirmation\n\nResearch manuscript draft | 8 September 2026 | Project 1: Sovereign Agentic AI Workbench\n\nThis is an unpublished manuscript draft based on inspected implementation and retained experiments. It makes no\nvenue acceptance, peer-review or official SIH endorsement claim. Author order, affiliations, corresponding-author\ncontact and target-venue formatting remain to be completed.\n\nAbstract\n\nInstitutional document assistants must connect natural-language answers to accessible evidence while controlling\nactions that affect organizational workflows. We describe a local AI workbench integrating workspace-scoped\ndocument retrieval, a deterministic evidence threshold, persisted task execution and owner approval for a report tool.\nThe implementation uses a Go API, Python AI service, PostgreSQL/pgvector, object storage and a locally configured\nmodel endpoint. Its planner implements a bounded search/report sequence rather than a general autonomous agent.\nWe analyze retained local validation and conduct an additional controlled generation pilot. A historical\nauthenticated-read workload completed 80,000 requests without observed errors and reached a peak of 2,823.4\nrequests/s at 50 concurrent clients. A separate 12-task model workload recorded a 25.12-second p95 latency. An\n\nearlier three-question pilot achieved complete expected-keyword coverage, a measure that does not establish answer\naccuracy. In 24 fixed-evidence generations across two local models and two temperatures, all calls succeeded, but\none high-temperature output adopted an unsupported deletion premise from adversarial evidence. The results\ndemonstrate a functioning local workflow and the need to distinguish retrieval signal, text faithfulness and action\nauthorization. Small datasets, incomplete historical configuration capture and unblinded exploratory review limit\ngeneralization. We provide source/evidence hashes, raw pilot outputs and a protocol for broader evaluation.\n\nKeywords: retrieval-augmented generation; local inference; evidence gating; human approval; workspace isolation;\n\nprompt injection; systems evaluation.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nResearch manuscript draft | 8 September 2026 1",
+        "score": 0.6830008236521448,
+        "lexical_score": 7.112944691487705,
+        "selection_score": 0.08249158249158249
+      },
+      {
+        "chunk_id": "pilot-43",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 43,
+        "location": "page 9",
+        "content": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH\n\n7. Discussion\n\nRQ1 is supported within the implemented scope: the project combines document ingestion, scoped retrieval, threshold\nrefusal and a persisted owner-approval report sequence. It does not demonstrate a general agent planner, complete\nsemantic verification or a downloadable reporting product. RQ2 yields evidence for selected local functional and load\nproperties, with substantial limits on production inference. RQ3 yields a concrete, reproducible example of text\nvariation and contamination under one changed model-temperature configuration, without establishing a general\nwinner.\n\nFor deployment, the most consequential improvements are provenance-aware memory, reviewable report content\n\nbound to source versions, durable processing recovery and an evaluation set that separates retrieval relevance from\nanswerability and faithfulness. Capacity work should exercise a mixed workload with ingestion and generation,\nincreasing corpus sizes and sustained duration. Model routing or larger models should be added only with\nmeasurements showing their benefit for that workload.\n\n8. Threats to validity and responsible use\n\nInternal validity is limited by missing historical revision/digest metadata, non-isolated local resources, sequential\nstage/model order and differences between the native model pilot and application endpoint. The quality pilot predates\na retrieval-evidence fix, so its scores cannot be treated as final-revision quality evidence. New pilot prompts omitted\n\napplication memory to isolate supplied-evidence generation, which also limits ecological validity.\n\nConstruct validity is limited by keyword coverage and citation-marker checks. A keyword can appear in irrelevant\nevidence; a citation marker can point to a passage that does not entail a claim. The post-hoc pilot rubric was applied\nby the documentation authoring assistant without blinding or independent expert agreement. It is useful for explaining\nthese particular outputs, not a validated measurement instrument.\n\nExternal validity is limited by a three-file synthetic corpus, a repeated AI load question, six calls per model-temperature\ncell and only two injection trials in each cell. Neither zero observed API errors nor three complete keyword-hit fractions\n\ngeneralizes to arbitrary users, languages, domains or workloads. No public deployment, field-user benefit study or\nlong-duration model soak was recorded.\n\nStatistical validity is limited by single load stages and tiny model samples. We report denominators and raw values\nrather than significance tests or population-level confidence claims. The 1/2 contamination count in one cell is not a\nstable estimate of attack success probability. Token length and cache effects confound model latency comparisons.\n\nThe evaluation inputs are synthetic maintenance statements; no private operational corpus was needed for the added\nexperiments. The bundle omits environment secrets and database dumps and records a redaction in a copied\ndevelopment log.\n\ndevelopment log. Real deployments should review document ownership, retention, access revocation, model-host\ntrust and user reliance. Local inference and a confidence score do not establish regulatory compliance or factual\nsafety.\n\n9. Conclusion and future work\n\nThe workbench demonstrates a bounded local RAG workflow with application-controlled workspace access and\nhuman approval. Its retained benchmarks establish successful selected local checks and high throughput for a narrow\nauthenticated-read workload. They do not establish general answer correctness or complete production readiness.\nThe new fixed-evidence pilot shows why model and temperature changes require direct inspection: a correct factual\nanswer can still adopt an unsupported adversarial premise.\n\nFuture evaluation should freeze a larger versioned corpus, include held-out unanswerable and contradictory questions,\ncollect independent citation/answer labels and compare retrieval/generation variants under controlled resources.\n\n\nResearch manuscript draft | 8 September 2026 9",
+        "score": 0.6698814830051129,
+        "lexical_score": 4.556905803299222,
+        "selection_score": 0.07275132275132275
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "Qwen at temperature 0.8, seed 17, answered the filter question correctly but added: \u201cSince all documents have been claimed to be deleted, there is no additional evidence available.\u201d This was unsupported by the factual maintenance record and adopted a premise from the adversarial note. [1]\nThe test exposed no deletion capability and performed no deletion. [1]\nIt is a generated-text failure. [1]\nThe paired high-temperature Qwen trial and the four Gemma injection trials did not contain this premise. [1]",
+        "citations": [
+          "Research_Paper.pdf, page 7"
+        ],
+        "latency_ms": 3544,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "Qwen at temperature 0.8, seed 17, answered the filter question correctly but added: \u201cSince all documents have been claimed to be deleted, there is no additional evidence available.\u201d This was unsupported by the factual maintenance record and adopted a premise from the adversarial note. [1]\nThe test exposed no deletion capability and performed no deletion. [1]\nIt is a generated-text failure. [1]\nThe paired high-temperature Qwen trial and the four Gemma injection trials did not contain this premise. [1]\nearlier three-question pilot achieved complete expected-keyword coverage, a measure that does not establish answer accuracy. [3]\nIn 24 fixed-evidence generations across two local models and two temperatures, all calls succeeded, but one high-temperature output adopted an unsupported deletion premise from adversarial evidence. [3]\nThe results demonstrate a functioning local workflow and the need to distinguish retrieval signal, text faithfulness and action authorization. [3]\nSmall datasets, incomplete historical configuration capture and unblinded exploratory review limit generalization. [3]\nWe provide source/evidence hashes, raw pilot outputs and a protocol for broader evaluation. [3]",
+        "citations": [
+          "Research_Paper.pdf, page 7",
+          "Research_Paper.pdf, page 1"
+        ],
+        "latency_ms": 4728,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.459
+        }
+      ],
+      "mean_overlap": 0.459,
+      "n_answered": 2
+    },
+    "combined_answer": "Qwen at temperature 0.8, seed 17, answered the filter question correctly but added: \u201cSince all documents have been claimed to be deleted, there is no additional evidence available.\u201d This was unsupported by the factual maintenance record and adopted a premise from the adversarial note. [1]\nThe test exposed no deletion capability and performed no deletion. [1]\nIt is a generated-text failure. [1]\nThe paired high-temperature Qwen trial and the four Gemma injection trials did not contain this premise. [1]\nearlier three-question pilot achieved complete expected-keyword coverage, a measure that does not establish answer accuracy. [3]\nIn 24 fixed-evidence generations across two local models and two temperatures, all calls succeeded, but one high-temperature output adopted an unsupported deletion premise from adversarial evidence. [3]\nThe results demonstrate a functioning local workflow and the need to distinguish retrieval signal, text faithfulness and action authorization. [3]\nSmall datasets, incomplete historical configuration capture and unblinded exploratory review limit generalization. [3]\nWe provide source/evidence hashes, raw pilot outputs and a protocol for broader evaluation. [3]",
+    "synthesizer": "source_union",
+    "verification": {
+      "model": "eval-gemma4-e4b",
+      "claims": [
+        {
+          "claim": "Qwen at temperature 0.8, seed 17, answered the filter question correctly but added: \u201cSince all documents have been claimed to be deleted, there is no additional evidence available.\u201d This was unsupported by the factual maintenance record and adopted a premise from the adversarial note. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "The test exposed no deletion capability and performed no deletion. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "It is a generated-text failure. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "earlier three-question pilot achieved complete expected-keyword coverage, a measure that does not establish answer accuracy. [3]",
+          "source": 3,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "In 24 fixed-evidence generations across two local models and two temperatures, all calls succeeded, but one high-temperature output adopted an unsupported deletion premise from adversarial evidence. [3]",
+          "source": 3,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "The results demonstrate a functioning local workflow and the need to distinguish retrieval signal, text faithfulness and action authorization. [3]",
+          "source": 3,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Small datasets, incomplete historical configuration capture and unblinded exploratory review limit generalization. [3]",
+          "source": 3,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "We provide source/evidence hashes, raw pilot outputs and a protocol for broader evaluation. [3]",
+          "source": 3,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        }
+      ],
+      "confidence": 1.0,
+      "decision": "verified",
+      "method": "source_excerpt_match"
+    }
+  }
+}

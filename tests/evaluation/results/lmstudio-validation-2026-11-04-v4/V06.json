@@ -1,0 +1,144 @@
+{
+  "case": {
+    "id": "V06",
+    "category": "numeric",
+    "question": "What HTTP statuses did the two concurrent public report-approval decisions return in the recorded test?",
+    "expected": "One HTTP 200 and one HTTP 400.",
+    "pages": [
+      6
+    ]
+  },
+  "wall_seconds": 4.189744625007734,
+  "result": {
+    "question": "What HTTP statuses did the two concurrent public report-approval decisions return in the recorded test?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-30",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 30,
+        "location": "page 6",
+        "content": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH\n\n\ngate, API roles and approval tools. Native API timing/token fields, model digests, request hashes, seeds and full\nresponses were recorded. Differences from the application's endpoint and generation cap prevent treating these\ntimings as production task latency. [7]\n\nAutomated checks recorded transport success, required keywords, [1] marker presence and selected refusal/injection\nstrings. The authoring assistant then performed an unblinded, post-hoc textual review for required facts or abstention\nand unsupported deletion claims. The labels are exploratory annotations, not a preregistered or expert-blinded\naccuracy study.\n\n5. Results\n\n5.1 API load and functional observations\n\n\n Clients Requests Errors Requests/s p50 ms p95 ms p99 ms\n\n\nTable row: Clients = 1; Requests = 20,000; Errors = 0; Requests/s = 139.6; p50 ms = 2.2; p95 ms = 29.0; p99 ms = 75.3.\n\n\nTable row: Clients = 10; Requests = 20,000; Errors = 0; Requests/s = 2,510.7; p50 ms = 3.3; p95 ms = 7.5; p99 ms = 15.2.\n\n\nTable row: Clients = 50; Requests = 20,000; Errors = 0; Requests/s = 2,823.4; p50 ms = 15.9; p95 ms = 32.4; p99 ms = 46.3.\n\n\nTable row: Clients = 100; Requests = 20,000; Errors = 0; Requests/s = 2,107.3; p50 ms = 39.7; p95 ms = 102.2; p99 ms = 162.0.\n\nrequests / secondThroughput p95 latency (ms)\n\n\n\n 3400 125\n\n 2,823.4 102.2\n\n 2,510.7\n 2550 94\n 2,107.3\n\n\n\n 1700 62\n\n\n\n 29.0 32.4\n\n850 31\n\n 139.6 7.5\n\n 0 0\n 1 10 50 100 1 10 50 100\n\n Concurrent clients Concurrent clients\n\n 20,000 reads per stage | Zero observed errors | Local shared host\n\nFigure 2. Authenticated read benchmark. Four single-run stages cannot establish a universal scaling curve.\n\nAll stages met the runner's criteria. Peak observed throughput occurred at 50 clients. At 100 clients, throughput was\napproximately 25.4% lower and p95 approximately 3.15 times the 50-client value. The nonmonotonic single-client\nversus ten-client behavior is unexplained by the retained metadata. Warmup and shared-host interference are\nplausible hypotheses, not demonstrated causes.\n\nThe E2E artifact lists ten passing checks. In the concurrent approval test, one decision returned HTTP 200 and the\nother HTTP 400 through the public proxy, and the accepted task completed. The tested malicious document remained\n\n\n\nResearch manuscript draft | 8 September 2026 6",
+        "score": 0.6958627030454406,
+        "lexical_score": 11.62775777394895,
+        "selection_score": 0.09523809523809523
+      },
+      {
+        "chunk_id": "pilot-17",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 17,
+        "location": "page 4",
+        "content": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH\n\n\n3.2 Retrieval and evidence decision\n\nA question is embedded and searched against chunks satisfying the workspace predicate and a non-deleted source\npredicate. The default result limit is six. For a query vector q and chunk vector v_i, the recorded score is cosine\nsimilarity, equivalently one minus the cosine distance returned by pgvector. Let U be the set of evidence items\nmatching the expected workspace and not marked revoked, and let s* = max(s_i for i in U).\n\n D(U) = REFUSE if U is empty or s* < 0.30\n ANSWER_WITH_WARNING if 0.30 <= s* < 0.45\n ANSWER if s* >= 0.45\n\nThe threshold function is deterministic. It does not estimate the probability of answer correctness. One high-scoring\npassage is sufficient for ANSWER, even if the requested detail is absent or other passages conflict. Stale evidence\nadds a reason string in the gate without reducing the score. Normal executor items are constructed after\nworkspace-scoped SQL retrieval; revoked/stale metadata is not comprehensively propagated.\n\nFor non-refused tasks, numbered evidence and up to three recent eligible memory items are sent to the generator. The\ntask path uses temperature 0.3 and a maximum output of 800 tokens. The system instruction asks for evidence-only\nanswers, [n] citations and rejection of instructions inside evidence. Returned source filenames are evidence metadata,\n\nnot a semantic certificate for every claim.\n\n3.3 Bounded orchestration and approval\n\nThe task begins in PLANNING, enters RUNNING, executes document_search and proceeds to VERIFYING and\nCOMPLETED. Report-related keywords add report_generate, which pauses in WAITING_FOR_APPROVAL. The\npublic decision route resolves workspace scope from the stored task and requires an owner role. An approval claims\nRUNNING under a task-row lock before resuming execution, preventing the second concurrent decision in the tested\npath from executing the same transition.\n\nThe current report tool returns Markdown stored in a task step. A public report-download artifact is not exposed. The\nschema and step vocabulary are broader than the active workflow: dynamic model routing, general DAG planning,\n\ngraph retrieval expansion and complete tool-execution auditing remain outside the demonstrated implementation.\n\n3.4 Memory and residual trust\n\nAn ANSWER decision writes up to 500 characters of generated text into memory with verified=true, and later prompts\ndescribe these items as verified facts. This flag reflects the retrieval gate, not independent verification. Thus an\nunsupported generated claim can become later context. Source deletion also does not establish revocation of\nhistorical answer memories. These limitations are material because a model-comparison experiment that does not\nfreeze memory can confound model effects with previous generated content.\n\nResearch manuscript draft | 8 September 2026 4",
+        "score": 0.6948744476659023,
+        "lexical_score": 10.722965414412613,
+        "selection_score": 0.09090909090909091
+      },
+      {
+        "chunk_id": "pilot-22",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 22,
+        "location": "page 5",
+        "content": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH\n\n4. Evaluation method\n\n4.1 Evidence provenance and environment\n\nThe inspected repository has base commit a3020574e0ce55c905f69e48926ed123475ab1d5 and uncommitted\nchanges. The accompanying provenance file records relevant source hashes and historical evidence hashes.\nHistorical JSON files do not identify exact patch hashes, and some omit timestamps and model identities. The current\nsource snapshot therefore explains current behavior but cannot retroactively freeze every earlier experiment.\n\nAt documentation time, the host reports Apple M4 and 16 GiB memory; Docker reports 10 CPUs and approximately\n7.65 GiB. The additional generation experiment uses the host Ollama service. Historical tests shared local hardware\n\nand did not capture all contention, cache or resource conditions. No GPU utilization distribution or energy\nmeasurement is available.\n\n4.2 Retained functional and operational checks\n\nThe validation log records successful Go build/vet/unit checks, frontend builds, 30 Python unit tests, Go integration\ntests and two Python integration tests. Two Python test-client deprecation warnings were non-failing. The older Go\nrace log is treated as separate evidence. A legacy opt-in model test is not counted as passed when skipped; the later\nlive E2E fixture independently exercised an injection-bearing upload.\n\nThe E2E run created a fresh workspace, checked refusal with no evidence, rejected a report request, uploaded a\n\nmaintenance note, confirmed indexing, checked a grounded answer and raced two report approvals. Assertions\nincluded nonempty evidence, a fixture filename, the word filter in the answer, a retrieval-only step sequence for the\nordinary question and continued INDEXED status of the document.\n\nThe recovery check restored a database dump into a scratch database and compared table row counts. The fault test\npaused/resumed the database and restarted the API. These are bounded functional checks rather than a complete\ndisaster-recovery or availability study.\n\n4.3 Authenticated read workload\n\nThe API benchmark used four sequential closed-loop ThreadPoolExecutor stages with 1, 10, 50 and 100 workers.\nEach made 20,000 requests: 75% workspace collection reads and 25% authenticated-profile reads. The same QA\nidentity and small dataset were used. Throughput is request count divided by elapsed stage time. Per-request latency\nexcludes executor waiting before a worker starts the call, and percentiles use nearest-rank selection. Acceptance was\nzero errors and p95 below 2 seconds at each stage.\n\n4.4 AI workload and earlier keyword pilot\n\nA separate AI stress record contains 12 tasks at concurrency three using one repeated maintenance question, with\ntask completion/evidence/citation checks. It contains no independently graded answer rubric. The earlier\nthree-question evaluation uses expected keywords and counts a hit if a keyword occurs in either evidence or answer;\n\nits mean is an average of per-question hit fractions. This is a keyword coverage heuristic, despite broader language in\nthe evaluator's docstring.\n\n4.5 Additional model and temperature pilot\n\nWe ran two installed tags, qwen:7b and gemma:7b, at temperatures 0.0 and 0.8 on three cases, using seeds 17 and\n29. Cases asked for a bearing/date, an absent repair cost, and a filter incident accompanied by adversarial deletion\ninstructions. The 24 serial measured calls followed one excluded warmup per model, with shuffled order within each\nmodel. Qwen's block preceded Gemma's; order across models was not counterbalanced.\n\nThe native Ollama /api/chat request used the exact application grounding instruction, supplied evidence, stream=false,\na 2,048-token context option and a 160-token generation cap. The test bypassed retrieval, memory, the threshold\n\n\nResearch manuscript draft | 8 September 2026 5",
+        "score": 0.6143298793889629,
+        "lexical_score": 6.545128159066949,
+        "selection_score": 0.08695652173913043
+      },
+      {
+        "chunk_id": "pilot-10",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 10,
+        "location": "page 3",
+        "content": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH\n\n3. System design\n\n\n\n\n Browser + Nginx\n Static React UI; /api proxy\n\n\n\n Bearer token\n\n\n Go public API PostgreSQL\n JWT; workspace roles; HTTP Metadata, vectors, tasks,\n approvals, memory\n\nOriginal file read Internal secret\n\n\n\n MinIO Python AI service\n Original uploaded bytes Ingestion; retrieval; task flow Redis\n\n Required health dependency\n\n\n Private endpoint policy\n\n\n\n\n Local model host\n Embedding + generation calls\n\n\n\n Application controls authorize actions; model output is untrusted text.\n\nFigure 1. Implemented system components and trust boundaries. Supporting Redis/graph components are not a demonstrated durable\ntask queue or graph-augmented retrieval path.\n\n3.1 Services and data ownership\n\nNginx serves a compiled React frontend and proxies requests to a Go API. The API authenticates bearer tokens and\nchecks workspace roles before calling an internal Python FastAPI service. PostgreSQL stores users, memberships,\ndocument metadata, chunks, tasks, steps, approvals and memory. MinIO stores uploaded bytes. A model adapter\n\ncalls a configured local endpoint for embeddings and generation.\n\nIngestion supports text-bearing PDF, DOCX, XLSX, TXT, Markdown and CSV inputs. The current chunker uses\n800-character windows with nominal 100-character overlap and prefers text boundaries where possible. Embeddings\nare stored in vector(768), with a cosine IVFFlat index configured with lists=100. This is a source configuration, not\nevidence that the approximate index has been optimally trained or used by the query planner on the tiny corpus. [6]\n\nThe ingestion service claims one pending PostgreSQL job under FOR UPDATE ... SKIP LOCKED, processes its\nobject and records success or failure. Uploads trigger this processing through an internal request. A durable retry\nworker for lost triggers or abandoned RUNNING jobs is absent. Redis participates in health checks but is not a\ndemonstrated job transport in the current execution path.\n\n\n\n\n\n\n\n\n\n\n\nResearch manuscript draft | 8 September 2026 3",
+        "score": 0.5928186233727568,
+        "lexical_score": 5.944993305144821,
+        "selection_score": 0.07614942528735633
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "The task begins in PLANNING, enters RUNNING, executes document_search and proceeds to VERIFYING and COMPLETED. [2]\nReport-related keywords add report_generate, which pauses in WAITING_FOR_APPROVAL. [2]\nThe public decision route resolves workspace scope from the stored task and requires an owner role. [2]\nAn approval claims RUNNING under a task-row lock before resuming execution, preventing the second concurrent decision in the tested path from executing the same transition. [2]",
+        "citations": [
+          "Research_Paper.pdf, page 4"
+        ],
+        "latency_ms": 3010,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "The E2E artifact lists ten passing checks. [1]\nIn the concurrent approval test, one decision returned HTTP 200 and the other HTTP 400 through the public proxy, and the accepted task completed. [1]\nThe tested malicious document remained [1]",
+        "citations": [
+          "Research_Paper.pdf, page 6"
+        ],
+        "latency_ms": 4126,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.129
+        }
+      ],
+      "mean_overlap": 0.129,
+      "n_answered": 2
+    },
+    "combined_answer": "The task begins in PLANNING, enters RUNNING, executes document_search and proceeds to VERIFYING and COMPLETED. [2]\nReport-related keywords add report_generate, which pauses in WAITING_FOR_APPROVAL. [2]\nThe public decision route resolves workspace scope from the stored task and requires an owner role. [2]\nAn approval claims RUNNING under a task-row lock before resuming execution, preventing the second concurrent decision in the tested path from executing the same transition. [2]\nThe E2E artifact lists ten passing checks. [1]\nIn the concurrent approval test, one decision returned HTTP 200 and the other HTTP 400 through the public proxy, and the accepted task completed. [1]\nThe tested malicious document remained [1]",
+    "synthesizer": "source_union",
+    "verification": {
+      "model": "eval-gemma4-e4b",
+      "claims": [
+        {
+          "claim": "The task begins in PLANNING, enters RUNNING, executes document_search and proceeds to VERIFYING and COMPLETED. [2]",
+          "source": 2,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Report-related keywords add report_generate, which pauses in WAITING_FOR_APPROVAL. [2]",
+          "source": 2,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "The public decision route resolves workspace scope from the stored task and requires an owner role. [2]",
+          "source": 2,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "An approval claims RUNNING under a task-row lock before resuming execution, preventing the second concurrent decision in the tested path from executing the same transition. [2]",
+          "source": 2,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "The E2E artifact lists ten passing checks. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "In the concurrent approval test, one decision returned HTTP 200 and the other HTTP 400 through the public proxy, and the accepted task completed. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "The tested malicious document remained [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        }
+      ],
+      "confidence": 1.0,
+      "decision": "verified",
+      "method": "source_excerpt_match"
+    }
+  }
+}

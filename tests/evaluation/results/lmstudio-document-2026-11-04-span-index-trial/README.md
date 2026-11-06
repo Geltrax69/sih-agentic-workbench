@@ -1,0 +1,1 @@
+Completed intermediate repair trial, retained without mixing into the final comparison. Models selected integer span IDs and Gemma selected the combined spans. Source fidelity improved but relevance and unnecessary refusals remained poor. The final repair uses explicit string E IDs and a validated source union.

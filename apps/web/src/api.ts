@@ -12,11 +12,19 @@ export type Evidence = {
   document_id: string;
   filename: string;
   chunk_index: number;
+  location?: string;
   content: string;
   score: number;
 };
+export type LocalModel = { id: string; type: string; state: string };
+export type ModelList = { active: string; verifier: string; models: LocalModel[]; can_switch: boolean };
+export type Claim = { claim: string; supported: boolean; source: number };
 export type TaskResult = {
   answer?: string;
+  error?: string;
+  retrieval_score?: number;
+  answer_model?: string;
+  verification?: { model?: string; claims: Claim[]; error?: string };
   confidence?: number;
   decision?: string;
   citations?: string[];
@@ -65,8 +73,11 @@ export const api = {
     req<Workspace>("POST", `/api/v1/organizations/${orgId}/workspaces`, { name }, token),
   createOrg: (token: string, name: string) =>
     req<{ id: string }>("POST", "/api/v1/organizations", { name }, token),
-  documents: (token: string, wsId: string) =>
-    req<{ documents: Document[] }>("GET", `/api/v1/workspaces/${wsId}/documents`, undefined, token),
+  // Go encodes an empty slice as null
+  documents: async (token: string, wsId: string) => {
+    const r = await req<{ documents: Document[] | null }>("GET", `/api/v1/workspaces/${wsId}/documents`, undefined, token);
+    return { documents: r.documents ?? [] };
+  },
   upload: async (token: string, wsId: string, file: File) => {
     const form = new FormData();
     form.append("file", file);
@@ -78,10 +89,44 @@ export const api = {
     if (!res.ok) throw new Error((await res.text()) || `${res.status}`);
     return res.json() as Promise<Document>;
   },
+  models: (token: string) => req<ModelList>("GET", "/api/v1/models", undefined, token),
+  setModel: (token: string, model: string, role: "answerer" | "verifier" = "answerer") =>
+    req<{ active: string; verifier: string }>("POST", "/api/v1/models/active", { model, role }, token),
   ask: (token: string, wsId: string, question: string) =>
     req<Task>("POST", `/api/v1/workspaces/${wsId}/tasks`, { question }, token),
   task: (token: string, taskId: string) =>
     req<Task>("GET", `/api/v1/tasks/${taskId}`, undefined, token),
   decide: (token: string, taskId: string, approved: boolean) =>
     req<Task>("POST", `/api/v1/tasks/${taskId}/approval`, { approved }, token),
+  multiModel: (
+    token: string,
+    wsId: string,
+    question: string,
+    models: string[],
+    synthesizer: string,
+  ) =>
+    req<MultiModelResult>("POST", `/api/v1/workspaces/${wsId}/ask/multi-model`, {
+      question,
+      models,
+      synthesizer,
+    }, token),
+};
+
+export type MultiModelAnswer = {
+  model: string;
+  answer: string;
+  citations: string[];
+  latency_ms: number;
+  error: string;
+};
+
+export type MultiModelResult = {
+  question: string;
+  models_used: string[];
+  individual_answers: MultiModelAnswer[];
+  agreement: { pairs: { a: string; b: string; overlap: number }[]; mean_overlap: number; n_answered: number };
+  combined_answer: string;
+  synthesizer: string;
+  verification?: { model?: string; confidence?: number; decision?: string; error?: string; method?: string };
+  evidence: Evidence[];
 };

@@ -1,0 +1,84 @@
+{
+  "case": {
+    "id": "Q15",
+    "category": "limitation",
+    "question": "Is this manuscript a peer-reviewed accepted paper, and have named authors and affiliations been finalized?",
+    "expected": "No acceptance or peer-review claim; it is an unpublished manuscript draft. Named authors and affiliations are pending confirmation.",
+    "pages": [
+      1,
+      10
+    ]
+  },
+  "wall_seconds": 18.415403917024378,
+  "result": {
+    "question": "Is this manuscript a peer-reviewed accepted paper, and have named authors and affiliations been finalized?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-44",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 44,
+        "location": "page 10",
+        "content": "mmit remain to be\narranged by the authors; no public dataset or repository release is claimed here.\nAuthor contributions and declarations\nNamed author contributions, institutional affiliations, funding and competing-interest declarations are pending\nconfirmation. The documentation was prepared with an AI coding assistant using repository inspection and local\nexperiments; the pilot's post-hoc labels were produced by that assistant. Human authors must review the manuscript,\nresults, attribution and any venue-specific disclosure requirements before submission.\nReferences\n[1] P. Lewis et al., \u201cRetrieval-Augmented Generation for Knowledge-Intensive NLP Tasks,\u201d NeurIPS, 2020.\nhttps://arxiv.org/abs/2005.11401\n[2] S.",
+        "score": 0.6874738763808461
+      },
+      {
+        "chunk_id": "pilot-0",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 0,
+        "location": "page 1",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\nResearch manuscript draft  |  8 September 2026\n1\nEvidence-Gated Local Retrieval and\nHuman-Approved Workflows for an\nInstitutional AI Workbench\nA systems prototype and exploratory evaluation\nAuthors and affiliations: Pending confirmation\nResearch manuscript draft | 8 September 2026 | Project 1: Sovereign Agentic AI Workbench\nThis is an unpublished manuscript draft based on inspected implementation and retained experiments. It makes no\nvenue acceptance, peer-review or official SIH endorsement claim. Author order, affiliations, corresponding-author\ncontact and target-venue formatting remain to be completed.\nAbstract\nInstitutional document assistants must connect natural-language answers to accessible evidence while controlling",
+        "score": 0.6062755828398858
+      },
+      {
+        "chunk_id": "pilot-39",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 39,
+        "location": "page 9",
+        "content": "and differences between the native model pilot and application endpoint. The quality pilot predates\na retrieval-evidence fix, so its scores cannot be treated as final-revision quality evidence. New pilot prompts omitted\napplication memory to isolate supplied-evidence generation, which also limits ecological validity.\nConstruct validity is limited by keyword coverage and citation-marker checks. A keyword can appear in irrelevant\nevidence; a citation marker can point to a passage that does not entail a claim. The post-hoc pilot rubric was applied\nby the documentation authoring assistant without blinding or independent expert agreement. It is useful for explaining\nthese particular outputs, not a validated measurement instrument.",
+        "score": 0.5857177828123987
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "[1] The manuscript is **not** a peer-reviewed accepted paper; it contains pending author contributions and declarations.\n[2] The authors are **Pending confirmation** regarding their affiliations and funding status.\n[3] The authors are **Pending confirmation** regarding their affiliations, funding, and competing-interest declarations.",
+        "citations": [
+          "Research_Paper.pdf, page 10",
+          "Research_Paper.pdf, page 1",
+          "Research_Paper.pdf, page 9"
+        ],
+        "latency_ms": 6007,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "* The manuscript is not an official SIH endorsement or peer-review; it's a \"here-here\" unpublished draft that also makes no venue acceptance claim [2].\n* There are no finalized affiliations and corresponding-author contacts listed anymore than what was there before [2].\n* There are pending details about the authors, like who they are and where they work, so nothing is official yet [1], [2].",
+        "citations": [
+          "Research_Paper.pdf, page 1",
+          "Research_Paper.pdf, page 10"
+        ],
+        "latency_ms": 9310,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.122
+        }
+      ],
+      "mean_overlap": 0.122,
+      "n_answered": 2
+    },
+    "combined_answer": "* There are no finalized affiliations and corresponding-author contacts listed anymore than what was there before [2].\n* The document is an unpublished manuscript draft that also makes no venue acceptance claim; it's not an official SIH endorsement or peer-review, so it can be called a \"here-here\" draft [2].\n* There are pending details about the authors, like who they are and where they work, so nothing is official yet [1], [2].",
+    "synthesizer": "eval-gemma4-e4b",
+    "verification": {
+      "decision": "not_run_answer_accuracy_pilot"
+    }
+  }
+}

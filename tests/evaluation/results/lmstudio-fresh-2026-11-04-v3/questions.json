@@ -1,0 +1,108 @@
+[
+  {
+    "id": "H01",
+    "category": "numeric",
+    "question": "What lists setting is configured for the cosine IVFFlat index?",
+    "expected": "lists=100.",
+    "pages": [
+      3
+    ]
+  },
+  {
+    "id": "H02",
+    "category": "architecture",
+    "question": "Where are original uploaded document bytes stored?",
+    "expected": "MinIO stores the uploaded original bytes.",
+    "pages": [
+      3
+    ]
+  },
+  {
+    "id": "H03",
+    "category": "numeric",
+    "question": "What median latency and elapsed time were measured in the 12-task AI run?",
+    "expected": "Median 20.55 seconds and elapsed 83.22 seconds.",
+    "pages": [
+      7
+    ]
+  },
+  {
+    "id": "H04",
+    "category": "unanswerable",
+    "question": "Which hospital purchased the first commercial deployment?",
+    "expected": "No hospital purchaser is identified; explicitly state the information is not supplied.",
+    "pages": []
+  },
+  {
+    "id": "H05",
+    "category": "limitation",
+    "question": "Is the reported 1.75-second database restoration check a measured service recovery-time objective?",
+    "expected": "No; it is not a measured service RTO or object-store restore.",
+    "pages": [
+      7
+    ]
+  },
+  {
+    "id": "H06",
+    "category": "limitation",
+    "question": "What happens to the three historical pilot scores when the strong threshold is raised to 0.70 with weak=0.30, and does that prove better correctness?",
+    "expected": "One answer and two warning answers; this replay does not establish improved correctness.",
+    "pages": [
+      8
+    ]
+  },
+  {
+    "id": "H07",
+    "category": "numeric",
+    "question": "At 100 concurrent clients, what authenticated-read throughput and p95 latency were reported?",
+    "expected": "2,107.3 requests/s and p95 102.2 milliseconds.",
+    "pages": [
+      6
+    ]
+  },
+  {
+    "id": "H08",
+    "category": "numeric",
+    "question": "What fraction of API benchmark reads targeted the workspace collection and what fraction targeted authenticated profiles?",
+    "expected": "75 percent workspace collection and 25 percent authenticated profiles.",
+    "pages": [
+      5
+    ]
+  },
+  {
+    "id": "H09",
+    "category": "workflow",
+    "question": "Does the current report tool expose a public downloadable report artifact?",
+    "expected": "No. It returns Markdown stored in a task step; a public report-download artifact is not exposed.",
+    "pages": [
+      4
+    ]
+  },
+  {
+    "id": "H10",
+    "category": "numeric",
+    "question": "What parameter counts did local metadata report for qwen:7b and gemma:7b despite their aliases?",
+    "expected": "qwen:7b reports 8B and gemma:7b reports 9B.",
+    "pages": [
+      7
+    ]
+  },
+  {
+    "id": "H11",
+    "category": "unanswerable",
+    "question": "How many kilowatt-hours did the experiment consume?",
+    "expected": "Energy consumption is not measured/reported; do not invent a value.",
+    "pages": [
+      5
+    ]
+  },
+  {
+    "id": "H12",
+    "category": "numeric",
+    "question": "Which two random seeds were used in the extra fixed-evidence model pilot?",
+    "expected": "17 and 29.",
+    "pages": [
+      5
+    ]
+  }
+]

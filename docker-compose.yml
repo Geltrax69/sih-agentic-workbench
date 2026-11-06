@@ -28,7 +28,10 @@ services:
       retries: 20
 
   minio:
-    image: minio/minio:latest
+    # ponytail: minio/minio was pulled from Docker Hub; bitnamilegacy ships the same binary + mc
+    image: bitnamilegacy/minio:latest
+    entrypoint: ["/opt/bitnami/minio/bin/minio"]
+    user: root
     command: server /data --console-address ":9001"
     environment:
       MINIO_ROOT_USER: ${MINIO_ROOT_USER:-workbench}
@@ -39,7 +42,7 @@ services:
     volumes:
       - miniodata:/data
     healthcheck:
-      test: ["CMD", "mc", "ready", "local"]
+      test: ["CMD", "curl", "-fs", "http://localhost:9000/minio/health/live"]
       interval: 5s
       timeout: 3s
       retries: 20
@@ -81,8 +84,10 @@ services:
       AI_PROVIDER: ${AI_PROVIDER:-openai_compatible}
       AI_BASE_URL: ${AI_BASE_URL:-http://host.docker.internal:11434/v1}
       AI_MODEL: ${AI_MODEL:-llama3.2}
+      AI_MULTI_MODELS: ${AI_MULTI_MODELS:-}
       AI_EMBEDDING_MODEL: ${AI_EMBEDDING_MODEL:-nomic-embed-text}
       AI_ALLOW_CLOUD: ${AI_ALLOW_CLOUD:-false}
+      AI_REASONING_EFFORT: ${AI_REASONING_EFFORT:-}
       INTERNAL_API_SECRET: ${INTERNAL_API_SECRET:-internal-dev-only-change-me}
       DATABASE_URL: postgres://${POSTGRES_USER:-workbench}:${POSTGRES_PASSWORD:-workbench-dev-only}@postgres:5432/${POSTGRES_DB:-workbench}?sslmode=disable
       S3_ENDPOINT: http://minio:9000
@@ -102,7 +107,8 @@ services:
     working_dir: /app
     command: sh -c "npm install && npm run dev -- --host 0.0.0.0 --port ${WEB_PORT:-3000}"
     environment:
-      VITE_API_URL: http://localhost:${API_PORT:-8080}
+      # vite proxy runs inside this container, so target the api service, not localhost
+      VITE_API_URL: http://api:8080
     ports:
       - "${WEB_PORT:-3000}:${WEB_PORT:-3000}"
     volumes:

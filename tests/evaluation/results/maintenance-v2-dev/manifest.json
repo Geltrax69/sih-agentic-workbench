@@ -1,0 +1,279 @@
+{
+  "started_at": "2026-11-04T01:39:08.834655+05:30",
+  "document": "scripts/demo/maintenance_manual.md",
+  "document_sha256": "21cd91183448e089095c01795f01c0302dcac67e8094e46ecb0f8ce48d96bd3c",
+  "questions_sha256": "9b81071b76ef00feafccc40dfa3c4732b8b8139e38a094cfde8955f3f0772f8b",
+  "question_count": 8,
+  "dataset_created_before_generation": true,
+  "model_inventory": [
+    {
+      "type": "llm",
+      "modelKey": "l3-8b-stheno-v3.2-iq-imatrix",
+      "format": "gguf",
+      "displayName": "L3 8B Stheno v3.2 Imat",
+      "publisher": "Lewdiculous",
+      "path": "Lewdiculous/L3-8B-Stheno-v3.2-GGUF-IQ-Imatrix/L3-8B-Stheno-v3.2-Q4_K_S-imat.gguf",
+      "sizeBytes": 4692669024,
+      "indexedModelIdentifier": "Lewdiculous/L3-8B-Stheno-v3.2-GGUF-IQ-Imatrix/L3-8B-Stheno-v3.2-Q4_K_S-imat.gguf",
+      "deviceIdentifier": null,
+      "paramsString": "8B",
+      "architecture": "llama",
+      "quantization": {
+        "name": "Q4_K_S",
+        "bits": 4
+      },
+      "vision": false,
+      "trainedForToolUse": false,
+      "maxContextLength": 8192
+    },
+    {
+      "type": "llm",
+      "modelKey": "gemma-4-12b-obliterated",
+      "format": "gguf",
+      "displayName": "Gemma 4 12B OBLITERATED",
+      "publisher": "OBLITERATUS",
+      "path": "OBLITERATUS/Gemma-4-12B-OBLITERATED/Gemma-4-12B-OBLITERATED-Q4_K_M.gguf",
+      "sizeBytes": 7381386551,
+      "indexedModelIdentifier": "OBLITERATUS/Gemma-4-12B-OBLITERATED/Gemma-4-12B-OBLITERATED-Q4_K_M.gguf",
+      "deviceIdentifier": null,
+      "paramsString": "12B",
+      "architecture": "gemma4",
+      "quantization": {
+        "name": "Q4_K_M",
+        "bits": 4
+      },
+      "vision": false,
+      "trainedForToolUse": true,
+      "maxContextLength": 131072
+    },
+    {
+      "type": "llm",
+      "modelKey": "ornith-1.5-9b-obliterated",
+      "format": "gguf",
+      "displayName": "Ornith 1.5 9B OBLITERATED",
+      "publisher": "OBLITERATUS",
+      "path": "OBLITERATUS/Ornith-1.5-9B-OBLITERATED/Ornith-1.5-9B-OBLITERATED-Q4_K_M.gguf",
+      "sizeBytes": 6701797438,
+      "indexedModelIdentifier": "OBLITERATUS/Ornith-1.5-9B-OBLITERATED/Ornith-1.5-9B-OBLITERATED-Q4_K_M.gguf",
+      "deviceIdentifier": null,
+      "paramsString": "9.2B",
+      "architecture": "qwen35",
+      "quantization": {
+        "name": "Q4_K_M",
+        "bits": 4
+      },
+      "vision": true,
+      "trainedForToolUse": true,
+      "maxContextLength": 262144
+    },
+    {
+      "type": "llm",
+      "modelKey": "gemma-4-e4b-it-obliterated",
+      "format": "gguf",
+      "displayName": "Gemma 4 E4B Instruct OBLITERATED",
+      "publisher": "OBLITERATUS",
+      "path": "OBLITERATUS/gemma-4-E4B-it-OBLITERATED/gemma-4-E4B-it-OBLITERATED-Q4_K_M.gguf",
+      "sizeBytes": 6325667251,
+      "indexedModelIdentifier": "OBLITERATUS/gemma-4-E4B-it-OBLITERATED/gemma-4-E4B-it-OBLITERATED-Q4_K_M.gguf",
+      "deviceIdentifier": null,
+      "paramsString": "7.5B",
+      "architecture": "gemma4",
+      "quantization": {
+        "name": "Q4_K_M",
+        "bits": 4
+      },
+      "vision": true,
+      "trainedForToolUse": true,
+      "maxContextLength": 131072
+    },
+    {
+      "type": "llm",
+      "modelKey": "google/gemma-4-12b-qat",
+      "format": "gguf",
+      "displayName": "Gemma 4 12B QAT",
+      "publisher": "google",
+      "path": "google/gemma-4-12b-qat",
+      "sizeBytes": 7151067268,
+      "indexedModelIdentifier": "google/gemma-4-12b-qat",
+      "deviceIdentifier": null,
+      "paramsString": "12B",
+      "architecture": "gemma4",
+      "quantization": {
+        "name": "Q4_0",
+        "bits": 4
+      },
+      "variants": [
+        "google/gemma-4-12b-qat@q4_0"
+      ],
+      "selectedVariant": "google/gemma-4-12b-qat@q4_0",
+      "vision": true,
+      "trainedForToolUse": true,
+      "maxContextLength": 262144
+    },
+    {
+      "type": "llm",
+      "modelKey": "minicpm5-1b",
+      "format": "gguf",
+      "displayName": "MiniCPM5 1B",
+      "publisher": "openbmb",
+      "path": "openbmb/MiniCPM5-1B-GGUF/MiniCPM5-1B-Q8_0.gguf",
+      "sizeBytes": 1153529216,
+      "indexedModelIdentifier": "openbmb/MiniCPM5-1B-GGUF/MiniCPM5-1B-Q8_0.gguf",
+      "deviceIdentifier": null,
+      "paramsString": "1B",
+      "architecture": "llama",
+      "quantization": {
+        "name": "Q8_0",
+        "bits": 8
+      },
+      "vision": false,
+      "trainedForToolUse": false,
+      "maxContextLength": 131072
+    },
+    {
+      "type": "embedding",
+      "modelKey": "text-embedding-nomic-embed-text-v1.5",
+      "format": "gguf",
+      "displayName": "Nomic Embed Text v1.5",
+      "publisher": "nomic-ai",
+      "path": "nomic-ai/nomic-embed-text-v1.5-GGUF/nomic-embed-text-v1.5.Q4_K_M.gguf",
+      "sizeBytes": 84106624,
+      "indexedModelIdentifier": "nomic-ai/nomic-embed-text-v1.5-GGUF/nomic-embed-text-v1.5.Q4_K_M.gguf",
+      "deviceIdentifier": null,
+      "architecture": "nomic-bert",
+      "quantization": {
+        "name": "Q4_K_M",
+        "bits": 4
+      },
+      "maxContextLength": 2048
+    }
+  ],
+  "loaded_models": [
+    {
+      "type": "llm",
+      "modelKey": "minicpm5-1b",
+      "format": "gguf",
+      "displayName": "MiniCPM5 1B",
+      "publisher": "openbmb",
+      "path": "openbmb/MiniCPM5-1B-GGUF/MiniCPM5-1B-Q8_0.gguf",
+      "sizeBytes": 1153529216,
+      "indexedModelIdentifier": "openbmb/MiniCPM5-1B-GGUF/MiniCPM5-1B-Q8_0.gguf",
+      "deviceIdentifier": null,
+      "paramsString": "1B",
+      "architecture": "llama",
+      "quantization": {
+        "name": "Q8_0",
+        "bits": 8
+      },
+      "identifier": "eval-minicpm5-1b",
+      "ttlMs": null,
+      "lastUsedTime": 1793735858566,
+      "vision": false,
+      "trainedForToolUse": false,
+      "maxContextLength": 131072,
+      "contextLength": 8192,
+      "status": "idle",
+      "queued": 0,
+      "parallel": 4,
+      "engineConfigFileEnabled": false
+    },
+    {
+      "type": "llm",
+      "modelKey": "gemma-4-e4b-it-obliterated",
+      "format": "gguf",
+      "displayName": "Gemma 4 E4B Instruct OBLITERATED",
+      "publisher": "OBLITERATUS",
+      "path": "OBLITERATUS/gemma-4-E4B-it-OBLITERATED/gemma-4-E4B-it-OBLITERATED-Q4_K_M.gguf",
+      "sizeBytes": 6325667251,
+      "indexedModelIdentifier": "OBLITERATUS/gemma-4-E4B-it-OBLITERATED/gemma-4-E4B-it-OBLITERATED-Q4_K_M.gguf",
+      "deviceIdentifier": null,
+      "paramsString": "7.5B",
+      "architecture": "gemma4",
+      "quantization": {
+        "name": "Q4_K_M",
+        "bits": 4
+      },
+      "identifier": "eval-gemma4-e4b",
+      "ttlMs": null,
+      "lastUsedTime": 1793735861865,
+      "vision": true,
+      "trainedForToolUse": true,
+      "maxContextLength": 131072,
+      "contextLength": 8192,
+      "status": "idle",
+      "queued": 0,
+      "parallel": 4,
+      "engineConfigFileEnabled": false
+    },
+    {
+      "type": "embedding",
+      "modelKey": "text-embedding-nomic-embed-text-v1.5",
+      "format": "gguf",
+      "displayName": "Nomic Embed Text v1.5",
+      "publisher": "nomic-ai",
+      "path": "nomic-ai/nomic-embed-text-v1.5-GGUF/nomic-embed-text-v1.5.Q4_K_M.gguf",
+      "sizeBytes": 84106624,
+      "indexedModelIdentifier": "nomic-ai/nomic-embed-text-v1.5-GGUF/nomic-embed-text-v1.5.Q4_K_M.gguf",
+      "deviceIdentifier": null,
+      "architecture": "nomic-bert",
+      "quantization": {
+        "name": "Q4_K_M",
+        "bits": 4
+      },
+      "identifier": "eval-nomic",
+      "ttlMs": null,
+      "lastUsedTime": 1793735853318,
+      "maxContextLength": 2048,
+      "contextLength": 2048,
+      "status": "idle",
+      "queued": 0,
+      "parallel": null,
+      "engineConfigFileEnabled": false
+    }
+  ],
+  "hardware": {
+    "platform": "macOS-27.0-arm64-arm-64bit-Mach-O",
+    "machine": "arm64",
+    "memory_bytes": 17179869184
+  },
+  "lms_version": "CLI commit: dcefd5a",
+  "settings": {
+    "output_policy": "ranked paragraph context; two fixed paragraph IDs; source union; answerability gate",
+    "generator_models": [
+      "eval-minicpm5-1b",
+      "eval-gemma4-e4b"
+    ],
+    "synthesizer": "source_union",
+    "verifier": "eval-gemma4-e4b",
+    "embedding_model": "eval-nomic",
+    "temperature": 0.0,
+    "reasoning_effort": "none",
+    "verifier_reasoning_effort": "none",
+    "generator_max_tokens": 80,
+    "synthesis_max_tokens": 80,
+    "verifier_max_tokens": 64,
+    "context_length": 8192,
+    "chunk_size_chars": 800,
+    "chunk_overlap_chars": 100,
+    "retrieval_limit_per_channel": 16,
+    "selected_evidence": 4,
+    "context_expansion": "adjacent chunk on either side within same document/page",
+    "ranking": "cosine + lexical BM25 reciprocal ranks"
+  },
+  "source_hashes": {
+    "services/ai/app/multi_model.py": "acb4adb1b8a22be60c280e98f4d40f0ac6dc6dee763432185357bc9fc23c3ba2",
+    "services/ai/app/models_client.py": "22ca263a0cb097fd9b5dba72b498037bfb3d2f53b27fb5991efff05754ae9d18",
+    "services/ai/app/grounding/verifier.py": "7211a023e70d869cadf28534f2a451936acea808fba76916e6df2bf28e5853cc",
+    "services/ai/app/extraction.py": "ef3f2c2ed8328d0bf2360efdb1ed90c352189bd663fd98df80fd68b0af6c6a27",
+    "services/ai/app/orchestration/executor.py": "a46294c85cc0b7deae0df0dee061dec53ae61f86c5a52c79eb1d98cc9b1bbc77",
+    "services/ai/app/grounding/excerpts.py": "7d99d65e12ff308ef21f10e98f0387eb1c572ff8e650935c0c0f933861517c63",
+    "services/ai/app/retrieval.py": "3a33374a2e33b0f1114cd56d5abc44b0eae38aec9fe80009b91bef18e97b9fca",
+    "services/ai/app/ingestion.py": "9506243b22af35fe811d9fbe0f845f9067cbb5fb489d17c383ac7f44c5690709",
+    "tests/evaluation/run_document_pilot.py": "5f154f7499b564357614b2cb95b84b1f60c91a4f080846e184b42d20675030ab"
+  },
+  "verification": "Full corrected pipeline enabled; exact source excerpts are checked against their cited passages without a model judge. Other claims use bounded verification.",
+  "scope": "Application PDF extraction/chunking, live local embeddings, in-memory exact cosine retrieval, production evidence focusing, independent local generations, Jaccard agreement, source-excerpt selection, source-checked synthesis and verification. This is an extractive output policy rather than the baseline free-text policy. Bypasses PostgreSQL/MinIO/Go authentication, task approval and persistence. No memory is supplied. One trial per question; order fixed; response wall times share fan-out contention.",
+  "finished_at": "2026-11-04T01:39:30.498068+05:30",
+  "chunks": 1,
+  "embedding_dimensions": 768
+}

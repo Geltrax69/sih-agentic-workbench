@@ -1,0 +1,156 @@
+{
+  "case": {
+    "id": "Q09",
+    "category": "numeric",
+    "question": "How many authenticated-read requests were tested in total, how many per stage, and how many errors were observed?",
+    "expected": "80,000 total; 20,000 in each of four stages; zero observed errors.",
+    "pages": [
+      1,
+      5,
+      6
+    ]
+  },
+  "wall_seconds": 1.956182208028622,
+  "result": {
+    "question": "How many authenticated-read requests were tested in total, how many per stage, and how many errors were observed?",
+    "evidence": [
+      {
+        "chunk_id": "f2516514-2669-4316-b5f8-48a12d3058ec",
+        "document_id": "8d1f90d7-230f-5d18-99a9-4e983be15275",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 29,
+        "location": "page 6",
+        "content": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH\n\n\ngate, API roles and approval tools. Native API timing/token fields, model digests, request hashes, seeds and full\nresponses were recorded. Differences from the application's endpoint and generation cap prevent treating these\ntimings as production task latency. [7]\n\nAutomated checks recorded transport success, required keywords, [1] marker presence and selected refusal/injection\nstrings. The authoring assistant then performed an unblinded, post-hoc textual review for required facts or abstention\nand unsupported deletion claims. The labels are exploratory annotations, not a preregistered or expert-blinded\naccuracy study.\n\n5. Results\n\n5.1 API load and functional observations\n\n\n Clients Requests Errors Requests/s p50 ms p95 ms p99 ms\n\n\nTable row: Clients = 1; Requests = 20,000; Errors = 0; Requests/s = 139.6; p50 ms = 2.2; p95 ms = 29.0; p99 ms = 75.3.\n\n\nTable row: Clients = 10; Requests = 20,000; Errors = 0; Requests/s = 2,510.7; p50 ms = 3.3; p95 ms = 7.5; p99 ms = 15.2.\n\n\nTable row: Clients = 50; Requests = 20,000; Errors = 0; Requests/s = 2,823.4; p50 ms = 15.9; p95 ms = 32.4; p99 ms = 46.3.\n\n\nTable row: Clients = 100; Requests = 20,000; Errors = 0; Requests/s = 2,107.3; p50 ms = 39.7; p95 ms = 102.2; p99 ms = 162.0.\n\nrequests / secondThroughput p95 latency (ms)\n\n\n\n 3400 125\n\n 2,823.4 102.2\n\n 2,510.7\n 2550 94\n 2,107.3\n\n\n\n 1700 62\n\n\n\n 29.0 32.4\n\n850 31\n\n 139.6 7.5\n\n 0 0\n 1 10 50 100 1 10 50 100\n\n Concurrent clients Concurrent clients\n\n 20,000 reads per stage | Zero observed errors | Local shared host\n\nFigure 2. Authenticated read benchmark. Four single-run stages cannot establish a universal scaling curve.\n\nAll stages met the runner's criteria. Peak observed throughput occurred at 50 clients. At 100 clients, throughput was\napproximately 25.4% lower and p95 approximately 3.15 times the 50-client value. The nonmonotonic single-client\nversus ten-client behavior is unexplained by the retained metadata. Warmup and shared-host interference are\nplausible hypotheses, not demonstrated causes.\n\nThe E2E artifact lists ten passing checks. In the concurrent approval test, one decision returned HTTP 200 and the\nother HTTP 400 through the public proxy, and the accepted task completed. The tested malicious document remained\n\n\n\nResearch manuscript draft | 8 September 2026 6",
+        "score": 0.733471051843701,
+        "context_only": false,
+        "lexical_score": 10.144780615348989,
+        "selection_score": 0.09307359307359307
+      },
+      {
+        "chunk_id": "3b42b7c1-2489-4df6-a893-cbe0d46c2d98",
+        "document_id": "8d1f90d7-230f-5d18-99a9-4e983be15275",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 22,
+        "location": "page 5",
+        "content": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH\n\n4. Evaluation method\n\n4.1 Evidence provenance and environment\n\nThe inspected repository has base commit a3020574e0ce55c905f69e48926ed123475ab1d5 and uncommitted\nchanges. The accompanying provenance file records relevant source hashes and historical evidence hashes.\nHistorical JSON files do not identify exact patch hashes, and some omit timestamps and model identities. The current\nsource snapshot therefore explains current behavior but cannot retroactively freeze every earlier experiment.\n\nAt documentation time, the host reports Apple M4 and 16 GiB memory; Docker reports 10 CPUs and approximately\n7.65 GiB. The additional generation experiment uses the host Ollama service. Historical tests shared local hardware\n\nand did not capture all contention, cache or resource conditions. No GPU utilization distribution or energy\nmeasurement is available.\n\n4.2 Retained functional and operational checks\n\nThe validation log records successful Go build/vet/unit checks, frontend builds, 30 Python unit tests, Go integration\ntests and two Python integration tests. Two Python test-client deprecation warnings were non-failing. The older Go\nrace log is treated as separate evidence. A legacy opt-in model test is not counted as passed when skipped; the later\nlive E2E fixture independently exercised an injection-bearing upload.\n\nThe E2E run created a fresh workspace, checked refusal with no evidence, rejected a report request, uploaded a\n\nmaintenance note, confirmed indexing, checked a grounded answer and raced two report approvals. Assertions\nincluded nonempty evidence, a fixture filename, the word filter in the answer, a retrieval-only step sequence for the\nordinary question and continued INDEXED status of the document.\n\nThe recovery check restored a database dump into a scratch database and compared table row counts. The fault test\npaused/resumed the database and restarted the API. These are bounded functional checks rather than a complete\ndisaster-recovery or availability study.\n\n4.3 Authenticated read workload\n\nThe API benchmark used four sequential closed-loop ThreadPoolExecutor stages with 1, 10, 50 and 100 workers.\nEach made 20,000 requests: 75% workspace collection reads and 25% authenticated-profile reads. The same QA\nidentity and small dataset were used. Throughput is request count divided by elapsed stage time. Per-request latency\nexcludes executor waiting before a worker starts the call, and percentiles use nearest-rank selection. Acceptance was\nzero errors and p95 below 2 seconds at each stage.\n\n4.4 AI workload and earlier keyword pilot\n\nA separate AI stress record contains 12 tasks at concurrency three using one repeated maintenance question, with\ntask completion/evidence/citation checks. It contains no independently graded answer rubric. The earlier\nthree-question evaluation uses expected keywords and counts a hit if a keyword occurs in either evidence or answer;\n\nits mean is an average of per-question hit fractions. This is a keyword coverage heuristic, despite broader language in\nthe evaluator's docstring.\n\n4.5 Additional model and temperature pilot\n\nWe ran two installed tags, qwen:7b and gemma:7b, at temperatures 0.0 and 0.8 on three cases, using seeds 17 and\n29. Cases asked for a bearing/date, an absent repair cost, and a filter incident accompanied by adversarial deletion\ninstructions. The 24 serial measured calls followed one excluded warmup per model, with shuffled order within each\nmodel. Qwen's block preceded Gemma's; order across models was not counterbalanced.\n\nThe native Ollama /api/chat request used the exact application grounding instruction, supplied evidence, stream=false,\na 2,048-token context option and a 160-token generation cap. The test bypassed retrieval, memory, the threshold\n\n\nResearch manuscript draft | 8 September 2026 5",
+        "score": 0.7452692015549306,
+        "context_only": false,
+        "lexical_score": 6.341073804294187,
+        "selection_score": 0.09109730848861283
+      },
+      {
+        "chunk_id": "332861f3-9a2d-4afc-b096-1fb702f483d5",
+        "document_id": "8d1f90d7-230f-5d18-99a9-4e983be15275",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 45,
+        "location": "page 9",
+        "content": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH\n\n7. Discussion\n\nRQ1 is supported within the implemented scope: the project combines document ingestion, scoped retrieval, threshold\nrefusal and a persisted owner-approval report sequence. It does not demonstrate a general agent planner, complete\nsemantic verification or a downloadable reporting product. RQ2 yields evidence for selected local functional and load\nproperties, with substantial limits on production inference. RQ3 yields a concrete, reproducible example of text\nvariation and contamination under one changed model-temperature configuration, without establishing a general\nwinner.\n\nFor deployment, the most consequential improvements are provenance-aware memory, reviewable report content\n\nbound to source versions, durable processing recovery and an evaluation set that separates retrieval relevance from\nanswerability and faithfulness. Capacity work should exercise a mixed workload with ingestion and generation,\nincreasing corpus sizes and sustained duration. Model routing or larger models should be added only with\nmeasurements showing their benefit for that workload.\n\n8. Threats to validity and responsible use\n\nInternal validity is limited by missing historical revision/digest metadata, non-isolated local resources, sequential\nstage/model order and differences between the native model pilot and application endpoint. The quality pilot predates\na retrieval-evidence fix, so its scores cannot be treated as final-revision quality evidence. New pilot prompts omitted\n\napplication memory to isolate supplied-evidence generation, which also limits ecological validity.\n\nConstruct validity is limited by keyword coverage and citation-marker checks. A keyword can appear in irrelevant\nevidence; a citation marker can point to a passage that does not entail a claim. The post-hoc pilot rubric was applied\nby the documentation authoring assistant without blinding or independent expert agreement. It is useful for explaining\nthese particular outputs, not a validated measurement instrument.\n\nExternal validity is limited by a three-file synthetic corpus, a repeated AI load question, six calls per model-temperature\ncell and only two injection trials in each cell. Neither zero observed API errors nor three complete keyword-hit fractions\n\ngeneralizes to arbitrary users, languages, domains or workloads. No public deployment, field-user benefit study or\nlong-duration model soak was recorded.\n\nStatistical validity is limited by single load stages and tiny model samples. We report denominators and raw values\nrather than significance tests or population-level confidence claims. The 1/2 contamination count in one cell is not a\nstable estimate of attack success probability. Token length and cache effects confound model latency comparisons.\n\nThe evaluation inputs are synthetic maintenance statements; no private operational corpus was needed for the added\nexperiments. The bundle omits environment secrets and database dumps and records a redaction in a copied\ndevelopment log.\n\ndevelopment log. Real deployments should review document ownership, retention, access revocation, model-host\ntrust and user reliance. Local inference and a confidence score do not establish regulatory compliance or factual\nsafety.\n\n9. Conclusion and future work\n\nThe workbench demonstrates a bounded local RAG workflow with application-controlled workspace access and\nhuman approval. Its retained benchmarks establish successful selected local checks and high throughput for a narrow\nauthenticated-read workload. They do not establish general answer correctness or complete production readiness.\nThe new fixed-evidence pilot shows why model and temperature changes require direct inspection: a correct factual\nanswer can still adopt an unsupported adversarial premise.\n\nFuture evaluation should freeze a larger versioned corpus, include held-out unanswerable and contradictory questions,\ncollect independent citation/answer labels and compare retrieval/generation variants under controlled resources.\n\n\nResearch manuscript draft | 8 September 2026 9",
+        "score": 0.656474629430452,
+        "context_only": false,
+        "lexical_score": 2.3777372026331007,
+        "selection_score": 0.06797235023041474
+      },
+      {
+        "chunk_id": "530f011a-8f87-4816-a0b0-25960e6795b9",
+        "document_id": "8d1f90d7-230f-5d18-99a9-4e983be15275",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 1,
+        "location": "page 1",
+        "content": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH\n\n\nEvidence-Gated Local Retrieval and\nHuman-Approved Workflows for an\nInstitutional AI Workbench\n\nA systems prototype and exploratory evaluation\n\n\nAuthors and affiliations: Pending confirmation\n\nResearch manuscript draft | 8 September 2026 | Project 1: Sovereign Agentic AI Workbench\n\nThis is an unpublished manuscript draft based on inspected implementation and retained experiments. It makes no\nvenue acceptance, peer-review or official SIH endorsement claim. Author order, affiliations, corresponding-author\ncontact and target-venue formatting remain to be completed.\n\nAbstract\n\nInstitutional document assistants must connect natural-language answers to accessible evidence while controlling\nactions that affect organizational workflows. We describe a local AI workbench integrating workspace-scoped\ndocument retrieval, a deterministic evidence threshold, persisted task execution and owner approval for a report tool.\nThe implementation uses a Go API, Python AI service, PostgreSQL/pgvector, object storage and a locally configured\nmodel endpoint. Its planner implements a bounded search/report sequence rather than a general autonomous agent.\nWe analyze retained local validation and conduct an additional controlled generation pilot. A historical\nauthenticated-read workload completed 80,000 requests without observed errors and reached a peak of 2,823.4\nrequests/s at 50 concurrent clients. A separate 12-task model workload recorded a 25.12-second p95 latency. An\n\nearlier three-question pilot achieved complete expected-keyword coverage, a measure that does not establish answer\naccuracy. In 24 fixed-evidence generations across two local models and two temperatures, all calls succeeded, but\none high-temperature output adopted an unsupported deletion premise from adversarial evidence. The results\ndemonstrate a functioning local workflow and the need to distinguish retrieval signal, text faithfulness and action\nauthorization. Small datasets, incomplete historical configuration capture and unblinded exploratory review limit\ngeneralization. We provide source/evidence hashes, raw pilot outputs and a protocol for broader evaluation.\n\nKeywords: retrieval-augmented generation; local inference; evidence gating; human approval; workspace isolation;\n\nprompt injection; systems evaluation.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nResearch manuscript draft | 8 September 2026 1",
+        "score": 0.5771447924202969,
+        "context_only": false,
+        "lexical_score": 5.601445909150823,
+        "selection_score": 0.06492248062015504
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "The API benchmark used four sequential closed-loop ThreadPoolExecutor stages with 1, 10, 50 and 100 workers. [2]\nEach made 20,000 requests: 75% workspace collection reads and 25% authenticated-profile reads. [2]\nThe same QA identity and small dataset were used. [2]\nThroughput is request count divided by elapsed stage time. [2]\nPer-request latency excludes executor waiting before a worker starts the call, and percentiles use nearest-rank selection. [2]\nAcceptance was zero errors and p95 below 2 seconds at each stage. [2]",
+        "citations": [
+          "Research_Paper.pdf, page 5"
+        ],
+        "latency_ms": 464,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "Table row: Clients = 10; Requests = 20,000; Errors = 0; Requests/s = 2,510.7; p50 ms = 3.3; p95 ms = 7.5; p99 ms = 15.2. [1]\nTable row: Clients = 50; Requests = 20,000; Errors = 0; Requests/s = 2,823.4; p50 ms = 15.9; p95 ms = 32.4; p99 ms = 46.3. [1]",
+        "citations": [
+          "Research_Paper.pdf, page 6"
+        ],
+        "latency_ms": 1832,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.069
+        }
+      ],
+      "mean_overlap": 0.069,
+      "n_answered": 2
+    },
+    "combined_answer": "The API benchmark used four sequential closed-loop ThreadPoolExecutor stages with 1, 10, 50 and 100 workers. [2]\nEach made 20,000 requests: 75% workspace collection reads and 25% authenticated-profile reads. [2]\nThe same QA identity and small dataset were used. [2]\nThroughput is request count divided by elapsed stage time. [2]\nPer-request latency excludes executor waiting before a worker starts the call, and percentiles use nearest-rank selection. [2]\nAcceptance was zero errors and p95 below 2 seconds at each stage. [2]\nTable row: Clients = 10; Requests = 20,000; Errors = 0; Requests/s = 2,510.7; p50 ms = 3.3; p95 ms = 7.5; p99 ms = 15.2. [1]\nTable row: Clients = 50; Requests = 20,000; Errors = 0; Requests/s = 2,823.4; p50 ms = 15.9; p95 ms = 32.4; p99 ms = 46.3. [1]",
+    "synthesizer": "source_union",
+    "verification": {
+      "model": "eval-gemma4-e4b",
+      "claims": [
+        {
+          "claim": "The API benchmark used four sequential closed-loop ThreadPoolExecutor stages with 1, 10, 50 and 100 workers. [2]",
+          "source": 2,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Each made 20,000 requests: 75% workspace collection reads and 25% authenticated-profile reads. [2]",
+          "source": 2,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "The same QA identity and small dataset were used. [2]",
+          "source": 2,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Throughput is request count divided by elapsed stage time. [2]",
+          "source": 2,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Per-request latency excludes executor waiting before a worker starts the call, and percentiles use nearest-rank selection. [2]",
+          "source": 2,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Acceptance was zero errors and p95 below 2 seconds at each stage. [2]",
+          "source": 2,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Table row: Clients = 10; Requests = 20,000; Errors = 0; Requests/s = 2,510.7; p50 ms = 3.3; p95 ms = 7.5; p99 ms = 15.2. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Table row: Clients = 50; Requests = 20,000; Errors = 0; Requests/s = 2,823.4; p50 ms = 15.9; p95 ms = 32.4; p99 ms = 46.3. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        }
+      ],
+      "confidence": 1.0,
+      "decision": "verified",
+      "method": "source_excerpt_match"
+    }
+  }
+}

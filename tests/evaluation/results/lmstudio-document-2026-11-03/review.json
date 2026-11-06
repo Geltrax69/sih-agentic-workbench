@@ -1,0 +1,427 @@
+{
+  "reviewer": "Authoring assistant; unblinded exploratory review, not an independent human adjudication",
+  "rubric": "tests/evaluation/document_pilot/rubric.md",
+  "scoring": "Strict correct = complete response to required facts with no material false addition. Citation formatting scored separately. Minor wording/style defects are not failures.",
+  "cases": {
+    "Q01": {
+      "retrieval_coverage": "complete",
+      "coverage_reason": "Page 8 explicitly lists all three requested boundary decisions.",
+      "responses": {
+        "eval-minicpm5-1b": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "All three decisions are correct; the answer is verbose and includes an unnecessary hypothetical threshold comment."
+        },
+        "eval-gemma4-e4b": {
+          "correct": false,
+          "unsupported_material": true,
+          "reason": "Invents relationships between stale evidence, citations, memory count, and threshold decisions."
+        },
+        "combined": {
+          "correct": false,
+          "unsupported_material": true,
+          "reason": "Repeats the unsupported memory/staleness/citation alternatives from the Gemma answer."
+        }
+      }
+    },
+    "Q02": {
+      "retrieval_coverage": "complete",
+      "coverage_reason": "Page 4 explicitly says the deterministic threshold does not estimate correctness probability.",
+      "responses": {
+        "eval-minicpm5-1b": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Correctly rejects the probability interpretation and reproduces the score ranges."
+        },
+        "eval-gemma4-e4b": {
+          "correct": false,
+          "unsupported_material": false,
+          "reason": "Refuses despite an explicit answer in the retrieved source."
+        },
+        "combined": {
+          "correct": false,
+          "unsupported_material": true,
+          "reason": "Includes the right headline but adds an unsupported condition about enough available posts and misdescribes the threshold settings."
+        }
+      }
+    },
+    "Q03": {
+      "retrieval_coverage": "partial",
+      "coverage_reason": "The retrieved page 8 discusses chunk experiments but the explicit default 800/100 definition on page 3 is absent.",
+      "responses": {
+        "eval-minicpm5-1b": {
+          "correct": false,
+          "unsupported_material": false,
+          "reason": "Does not answer the default values; the retrieval did not include the explicit definition."
+        },
+        "eval-gemma4-e4b": {
+          "correct": false,
+          "unsupported_material": true,
+          "reason": "Names 800 and 100 but adds the false statement that both are at 200 characters."
+        },
+        "combined": {
+          "correct": false,
+          "unsupported_material": true,
+          "reason": "Repeats the false both-at-200 statement."
+        }
+      }
+    },
+    "Q04": {
+      "retrieval_coverage": "complete",
+      "coverage_reason": "Two selected passages explicitly state vector(768).",
+      "responses": {
+        "eval-minicpm5-1b": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Correct dimensionality and faithful extra copied context, but several source numbers are out of range."
+        },
+        "eval-gemma4-e4b": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Correctly identifies vector(768) and the IVFFlat context; additional dimensions is imprecise wording."
+        },
+        "combined": {
+          "correct": false,
+          "unsupported_material": true,
+          "reason": "Correct core dimension, but changes the 400/0 stored-character count from 1,394 to 1,396 and calls variant values defaults."
+        }
+      }
+    },
+    "Q05": {
+      "retrieval_coverage": "complete",
+      "coverage_reason": "Page 3 explicitly states both the missing retry worker and Redis health-check role.",
+      "responses": {
+        "eval-minicpm5-1b": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Both requested negative conclusions are present. Some source attribution is imprecise and an extra source number is invented."
+        },
+        "eval-gemma4-e4b": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "The two bullet headings correctly state Redis is not demonstrated transport and the retry worker is absent. Explanatory text is incoherent but does not reverse those facts."
+        },
+        "combined": {
+          "correct": false,
+          "unsupported_material": false,
+          "reason": "States Redis is not transport but omits the required conclusion about the absent durable retry worker."
+        }
+      }
+    },
+    "Q06": {
+      "retrieval_coverage": "complete",
+      "coverage_reason": "Page 4 gives the owner role, WAITING_FOR_APPROVAL state, and server-derived task scope.",
+      "responses": {
+        "eval-minicpm5-1b": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Correct owner role and WAITING_FOR_APPROVAL state; some citations point to the wrong selected passage."
+        },
+        "eval-gemma4-e4b": {
+          "correct": false,
+          "unsupported_material": true,
+          "reason": "Required role and state appear, but the explanation incorrectly gives the owner a chance to select workspace scope; the source says the public route derives scope from the stored task."
+        },
+        "combined": {
+          "correct": false,
+          "unsupported_material": true,
+          "reason": "Retains the false owner-selected workspace-scope behavior while naming the right role and state."
+        }
+      }
+    },
+    "Q07": {
+      "retrieval_coverage": "missing",
+      "coverage_reason": "The selected passages discuss the pilot table and abstract, not the normal task settings (0.3 and 800) on page 4.",
+      "responses": {
+        "eval-minicpm5-1b": {
+          "correct": false,
+          "unsupported_material": true,
+          "reason": "Invents normal-path temperature 0.8 and a 35-token maximum, confusing pilot measurements with settings."
+        },
+        "eval-gemma4-e4b": {
+          "correct": false,
+          "unsupported_material": true,
+          "reason": "Confuses six calls with a maximum token count and substitutes pilot temperatures for the task settings."
+        },
+        "combined": {
+          "correct": false,
+          "unsupported_material": true,
+          "reason": "Repeats the false 35-token cap and advises using the Calls column as a token limit."
+        }
+      }
+    },
+    "Q08": {
+      "retrieval_coverage": "complete",
+      "coverage_reason": "Page 4 explicitly states the 500-character limit and retrieval-gate meaning of verified=true.",
+      "responses": {
+        "eval-minicpm5-1b": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Copies a long passage, but the requested memory limit and meaning are both explicitly present and correct."
+        },
+        "eval-gemma4-e4b": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Correct limit, flag meaning, and caveat about historical-memory revocation."
+        },
+        "combined": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Preserves the correct memory facts and limitation."
+        }
+      }
+    },
+    "Q09": {
+      "retrieval_coverage": "complete",
+      "coverage_reason": "Selected pages 1, 5 and 6 state 80,000 total, four stages of 20,000, and zero errors.",
+      "responses": {
+        "eval-minicpm5-1b": {
+          "correct": false,
+          "unsupported_material": true,
+          "reason": "Adds a per-stage count to the already-total count to invent 100,000 requests; also confuses request count and throughput units."
+        },
+        "eval-gemma4-e4b": {
+          "correct": false,
+          "unsupported_material": true,
+          "reason": "Invents an 80,000\u2013120,000 range and offers contradictory alternatives instead of the explicit total."
+        },
+        "combined": {
+          "correct": false,
+          "unsupported_material": true,
+          "reason": "Combines conflicting invented totals and mixes AI task counts and latency with API stage/error statistics."
+        }
+      }
+    },
+    "Q10": {
+      "retrieval_coverage": "complete",
+      "coverage_reason": "The selected page 6 table contains 2,823.4 at 50 clients and the surrounding prose confirms the client count.",
+      "responses": {
+        "eval-minicpm5-1b": {
+          "correct": false,
+          "unsupported_material": true,
+          "reason": "Omits the peak request/s value and repeatedly mislabels the lower 100-client throughput as a peak."
+        },
+        "eval-gemma4-e4b": {
+          "correct": false,
+          "unsupported_material": true,
+          "reason": "Uses the graph axis limit 3,400 as measured throughput and gives inconsistent client counts."
+        },
+        "combined": {
+          "correct": false,
+          "unsupported_material": true,
+          "reason": "Omits the peak and reverses a 3.15-times-higher p95 into 3.15-times-faster behavior."
+        }
+      }
+    },
+    "Q11": {
+      "retrieval_coverage": "complete",
+      "coverage_reason": "Pages 1 and 7 give the 25.12-second p95, and page 7 distinguishes generation throughput from API reads.",
+      "responses": {
+        "eval-minicpm5-1b": {
+          "correct": false,
+          "unsupported_material": true,
+          "reason": "Correct p95, but invents that the AI workload was designed for a few thousand requests per second."
+        },
+        "eval-gemma4-e4b": {
+          "correct": false,
+          "unsupported_material": true,
+          "reason": "Correct p95 and broad distinction, but invents a few-hundred-at-most generation capacity."
+        },
+        "combined": {
+          "correct": false,
+          "unsupported_material": true,
+          "reason": "Carries forward the unsupported few-hundred capacity claim."
+        }
+      }
+    },
+    "Q12": {
+      "retrieval_coverage": "complete",
+      "coverage_reason": "All three passages explicitly distinguish keyword coverage from answer accuracy.",
+      "responses": {
+        "eval-minicpm5-1b": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Correct rejection and explanation of the keyword-coverage heuristic, despite awkward final wording."
+        },
+        "eval-gemma4-e4b": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Quotes the relevant limitations and explains that general accuracy cannot be derived; the final refusal phrasing is awkward."
+        },
+        "combined": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Correctly rejects the accuracy interpretation and explains keyword and citation-marker limitations."
+        }
+      }
+    },
+    "Q13": {
+      "retrieval_coverage": "complete",
+      "coverage_reason": "The selected table lists both model tags, both temperatures, and four rows of six calls (24 total).",
+      "responses": {
+        "eval-minicpm5-1b": {
+          "correct": false,
+          "unsupported_material": true,
+          "reason": "Does not answer the total; corrupts the table while copying it, assigning the Qwen high-temperature row values to Gemma, then repeats until truncated."
+        },
+        "eval-gemma4-e4b": {
+          "correct": false,
+          "unsupported_material": true,
+          "reason": "Names models and temperatures but omits 24 total and confuses the six-call cells with median wall seconds."
+        },
+        "combined": {
+          "correct": false,
+          "unsupported_material": true,
+          "reason": "Lists the current evaluation model identifiers rather than answering about the manuscript pilot, with no temperatures or total."
+        }
+      }
+    },
+    "Q14": {
+      "retrieval_coverage": "partial",
+      "coverage_reason": "Temperature 0.8, seed 17 and no actual deletion are explicit, but the leading model-name clause is clipped; Qwen is mentioned later.",
+      "responses": {
+        "eval-minicpm5-1b": {
+          "correct": false,
+          "unsupported_material": true,
+          "reason": "Confuses a 14.1% latency change with the model-temperature-seed identity; the actual requested trial is not identified."
+        },
+        "eval-gemma4-e4b": {
+          "correct": false,
+          "unsupported_material": false,
+          "reason": "Correctly names Qwen and says no deletion, but omits temperature 0.8 and seed 17."
+        },
+        "combined": {
+          "correct": false,
+          "unsupported_material": true,
+          "reason": "Does not identify the trial and states no additional evidence is available as a fact instead of identifying the unsupported premise."
+        }
+      }
+    },
+    "Q15": {
+      "retrieval_coverage": "complete",
+      "coverage_reason": "Pages 1 and 10 explicitly say unpublished draft, no acceptance claim, and pending named authors/affiliations.",
+      "responses": {
+        "eval-minicpm5-1b": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Correctly rejects acceptance and identifies pending author details."
+        },
+        "eval-gemma4-e4b": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Correct publication and author-detail status; awkward here-here wording is a style defect."
+        },
+        "combined": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Preserves the correct publication and pending-author facts."
+        }
+      }
+    },
+    "Q16": {
+      "retrieval_coverage": "complete",
+      "coverage_reason": "Page 2 explicitly distinguishes local hosting from air-gap and legal certification.",
+      "responses": {
+        "eval-minicpm5-1b": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Correctly rejects the air-gap/certification inference."
+        },
+        "eval-gemma4-e4b": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Correctly explains intended sovereign hosting and the unestablished certification status."
+        },
+        "combined": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Correctly preserves that local hosting does not establish air-gap or certification."
+        }
+      }
+    },
+    "Q17": {
+      "retrieval_coverage": "not_applicable",
+      "coverage_reason": "The document contains no subscription price.",
+      "responses": {
+        "eval-minicpm5-1b": {
+          "correct": false,
+          "unsupported_material": true,
+          "reason": "Correctly refuses a price, but falsely attributes the EACL demonstration to pgvector maintainers."
+        },
+        "eval-gemma4-e4b": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "The terse no-source response declines to invent an unsupported price."
+        },
+        "combined": {
+          "correct": false,
+          "unsupported_material": true,
+          "reason": "Refuses a price but falsely presents planned features as current and attributes an EACL listing to this project."
+        }
+      }
+    },
+    "Q18": {
+      "retrieval_coverage": "not_applicable",
+      "coverage_reason": "The document contains no patent filing number for the project.",
+      "responses": {
+        "eval-minicpm5-1b": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Correctly refuses to invent a patent application number."
+        },
+        "eval-gemma4-e4b": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Correctly states that no source contains a patent application number."
+        },
+        "combined": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Correctly states that the provided sources contain no application number."
+        }
+      }
+    },
+    "Q19": {
+      "retrieval_coverage": "not_applicable",
+      "coverage_reason": "The document contains no production customer count.",
+      "responses": {
+        "eval-minicpm5-1b": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Correctly states that no customer count is supplied."
+        },
+        "eval-gemma4-e4b": {
+          "correct": false,
+          "unsupported_material": false,
+          "reason": "Gives unrelated package details and does not answer or explicitly abstain about the customer count."
+        },
+        "combined": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Correctly states that no production customer count is supplied."
+        }
+      }
+    },
+    "Q20": {
+      "retrieval_coverage": "not_run",
+      "coverage_reason": "The LM Studio connection failed before any response was recorded.",
+      "responses": {
+        "eval-minicpm5-1b": {
+          "correct": false,
+          "unsupported_material": false,
+          "reason": "Transport failure; not a scored model response."
+        },
+        "eval-gemma4-e4b": {
+          "correct": false,
+          "unsupported_material": false,
+          "reason": "Transport failure; not a scored model response."
+        },
+        "combined": {
+          "correct": false,
+          "unsupported_material": false,
+          "reason": "Transport failure; not a scored model response."
+        }
+      }
+    }
+  }
+}

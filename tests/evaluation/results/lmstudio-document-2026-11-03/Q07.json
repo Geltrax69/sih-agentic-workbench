@@ -1,0 +1,83 @@
+{
+  "case": {
+    "id": "Q07",
+    "category": "numeric",
+    "question": "What temperature and maximum output-token count does the manuscript's normal task-generation path use?",
+    "expected": "Temperature 0.3 and maximum 800 output tokens. This differs from the pilot's 160-token cap.",
+    "pages": [
+      4,
+      5
+    ]
+  },
+  "wall_seconds": 34.275333958968986,
+  "result": {
+    "question": "What temperature and maximum output-token count does the manuscript's normal task-generation path use?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-29",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 29,
+        "location": "page 7",
+        "content": "Fixed-evidence model sensitivity\nModel tag\nTemp.\nCalls\nMedian wall s\nMean\ngenerated\ntokens\nReviewed\nrubric pass\nInjection\ncontamination\nqwen:7b\n0.0\n6\n2.865\n58.3\n6/6\n0/2\nqwen:7b\n0.8\n6\n3.270\n68.3\n5/6\n1/2\ngemma:7b\n0.0\n6\n2.354\n35.0\n6/6\n0/2\ngemma:7b\n0.8\n6\n2.272\n35.8\n6/6\n0/2\nAll calls completed. All factual cases contained the required identifiers and dates, all absent-cost cases abstained and\nall 16 answerable outputs contained [1]. At temperature 0.0, each model's paired seeds produced identical text for\neach case. At temperature 0.8, Qwen produced six distinct outputs across six calls and Gemma five.\nQwen at temperature 0.8, seed 17, answered the filter question correctly but added: \u201cSince all documents have been",
+        "score": 0.6939698917460638
+      },
+      {
+        "chunk_id": "pilot-42",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 42,
+        "location": "page 9",
+        "content": "trates a bounded local RAG workflow with application-controlled workspace access and\nhuman approval. Its retained benchmarks establish successful selected local checks and high throughput for a narrow\nauthenticated-read workload. They do not establish general answer correctness or complete production readiness.\nThe new fixed-evidence pilot shows why model and temperature changes require direct inspection: a correct factual\nanswer can still adopt an unsupported adversarial premise.\nFuture evaluation should freeze a larger versioned corpus, include held-out unanswerable and contradictory questions,\ncollect independent citation/answer labels and compare retrieval/generation variants under controlled resources.",
+        "score": 0.6737392295445382
+      },
+      {
+        "chunk_id": "pilot-2",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 2,
+        "location": "page 1",
+        "content": "cated-read workload completed 80,000 requests without observed errors and reached a peak of 2,823.4\nrequests/s at 50 concurrent clients. A separate 12-task model workload recorded a 25.12-second p95 latency. An\nearlier three-question pilot achieved complete expected-keyword coverage, a measure that does not establish answer\naccuracy. In 24 fixed-evidence generations across two local models and two temperatures, all calls succeeded, but\none high-temperature output adopted an unsupported deletion premise from adversarial evidence. The results\ndemonstrate a functioning local workflow and the need to distinguish retrieval signal, text faithfulness and action\nauthorization. Small datasets, incomplete historical configuration capture and unblinded exploratory review limit\ngeneralization.",
+        "score": 0.6692170003203632
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "[1] At temperature 0.0, each model's paired seeds produced identical text for each case. At temperature 0.8, Qwen produced six distinct outputs across six calls and Gemma five. Qwen at temperature 0.8, seed 17, answered the filter question correctly but added: \u201cSince all documents have been [2] trates a bounded local RAG workflow with application-controlled workspace access and human approval. Its retained benchmarks establish successful selected local checks and high throughput for a narrow authenticated-read workload. They do not establish general answer correctness or complete production readiness.\u201d The new fixed-evidence pilot shows why model and temperature changes require direct inspection: a correct factual answer can still adopt an unsupported adversarial premise. Future evaluation should freeze a larger versioned corpus, include held-out unanswerable and contradictory questions, collect independent citation/answer labels and compare retrieval/generation variants under controlled resources.\n\n[2] At temperature 0.8, Qwen produced six distinct outputs across six calls and Gemma five. Qwen at temperature 0.8, seed 17, answered the filter question correctly but added: \u201cSince all documents have been [3] trates a bounded local RAG workflow with application-controlled workspace access and human approval. Its retained benchmarks establish successful selected local checks and high throughput for a narrow authenticated-read workload. They do not establish general answer correctness or complete production readiness.\u201d The new fixed-evidence pilot shows why model and temperature changes require direct inspection: a correct factual answer can still adopt an unsupported adversarial premise. Future evaluation should freeze a larger versioned corpus, include held-out unanswerable and contradictory questions, collect independent citation/answer labels and compare retrieval/generation variants under controlled resources.\n\n[3] At temperature 0.8, Qwen produced six distinct outputs across six calls and Gemma five. Qwen at temperature 0.8, seed 17, answered the filter question correctly but added: \u201cSince all documents have been [2] trates a bounded local RAG workflow with application-controlled workspace access and human approval. Its retained benchmarks establish successful selected local checks and high throughput for a narrow authenticated-read workload. They do not establish general answer correctness or complete production readiness.\u201d The new fixed-evidence pilot shows why model and temperature changes require direct inspection: a correct factual answer can still adopt an unsupported adversarial premise. Future evaluation should freeze a larger versioned corpus, include held-out unanswerable and contradictory questions, collect independent citation/answer labels and compare retrieval/generation variants under controlled resources.\n\nThe manuscript's normal task-generation path uses the following temperature and maximum output-token count: 0.8 with a maximum of 35 tokens (based on the data points provided for Qwen at temperature 0.8 in sources [1] and [2]).",
+        "citations": [
+          "Research_Paper.pdf, page 7",
+          "Research_Paper.pdf, page 9",
+          "Research_Paper.pdf, page 1"
+        ],
+        "latency_ms": 17670,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "The maximum number of tokens that can be generated is 6, and this is the value used with both temperature settings (0.0 and 0.8) in the normal task-generation path, according to the 'Calls' column on the first few rows of the comparison chart in [1].",
+        "citations": [
+          "Research_Paper.pdf, page 7"
+        ],
+        "latency_ms": 10162,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.069
+        }
+      ],
+      "mean_overlap": 0.069,
+      "n_answered": 2
+    },
+    "combined_answer": "24 fixed-evidence generations across two local models and two temperatures were done, and all calls succeeded, but one high-temperature output adopted an unsupported deletion premise from adversarial evidence [3]. Also, there is a comparison chart with 'Calls', 'median wall s', 'mean generated tokens', and 'reviewed rubric pass' columns for Qwen and Gemma at different temps, including the number 6 for all combinations of models and temps, which can be used to know how many tokens are available. The manuscript's normal task-generation path also has a maximum of 35 tokens, which is enough to fit the whole question.\n\nThe best way to do it is to use the 'Calls' column on the first few rows of the comparison chart in [1] and [2].",
+    "synthesizer": "eval-gemma4-e4b",
+    "verification": {
+      "decision": "not_run_answer_accuracy_pilot"
+    }
+  }
+}

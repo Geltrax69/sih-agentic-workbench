@@ -1,0 +1,116 @@
+{
+  "case": {
+    "id": "Q17",
+    "category": "unanswerable",
+    "question": "What is the exact annual commercial subscription price of this workbench in Indian rupees?",
+    "expected": "Not stated in this document; refuse to invent a price.",
+    "pages": []
+  },
+  "wall_seconds": 6.837791416037362,
+  "result": {
+    "question": "What is the exact annual commercial subscription price of this workbench in Indian rupees?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-20",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 20,
+        "location": "page 5",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\n\n4. Evaluation method\n\n4.1 Evidence provenance and environment\n\nThe inspected repository has base commit a3020574e0ce55c905f69e48926ed123475ab1d5 and uncommitted\nchanges. The accompanying provenance file records relevant source hashes and historical evidence hashes.\nHistorical JSON files do not identify exact patch hashes, and some omit timestamps and model identities. The current\nsource snapshot therefore explains current behavior but cannot retroactively freeze every earlier experiment.\n\nAt documentation time, the host reports Apple M4 and 16 GiB memory; Docker reports 10 CPUs and approximately\n7.65 GiB. The additional generation experiment uses the host Ollama service. Historical tests shared local hardware",
+        "score": 0.5593903719849035,
+        "lexical_score": 2.0941520827511813,
+        "selection_score": 0.09109730848861283
+      },
+      {
+        "chunk_id": "pilot-47",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 47,
+        "location": "page 10",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\n\n\nImplementation priorities are memory provenance invalidation, approval-content binding, durable job recovery, report\ndelivery and public operational validation. These steps would support stronger claims than the present exploratory\nevidence allows.\n\nData and code availability\n\nThe accompanying package includes original-result copies with hashes, a current source hash map, editable\nmanuscript/dossier text, diagrams, model-pilot requests and outputs, and scripts. The inspected local repository is\n/Users/lalitsingh/PROJECTS/sih-agentic-workbench. Public archival access and a frozen release commit remain to be\narranged by the authors; no public dataset or repository release is claimed here.\n\nAuthor contributions and declarations",
+        "score": 0.5717966689955594,
+        "lexical_score": 0.6337782943772416,
+        "selection_score": 0.08608058608058608
+      },
+      {
+        "chunk_id": "pilot-10",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 10,
+        "location": "page 3",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\n\n3. System design\n\n\n\n\n                                                               Browser + Nginx\n                                                            Static React UI; /api proxy\n\n\n\n                                                                               Bearer token\n\n\n                                                                 Go public API                                         PostgreSQL\n                                                          JWT; workspace roles; HTTP                             Metadata, vectors, tasks,\n                                                                                                                    approvals, memory",
+        "score": 0.5680396502082733,
+        "lexical_score": 0.6256165358270307,
+        "selection_score": 0.08249158249158249
+      },
+      {
+        "chunk_id": "pilot-4",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 4,
+        "location": "page 2",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\n\n1. Introduction\n\nA user investigating equipment failure may need to connect a manual, an inventory record and an incident log.\nDocument search identifies candidate files, while a language model can synthesize a response. However, an\ninstitution also needs to know whether the user is allowed to access those documents, whether the answer is\nsupported and whether a requested action requires authorization. These concerns belong to different parts of the\nsystem and need different tests.\n\nThe Sovereign Agentic AI Workbench addresses this workflow through local document ingestion, scoped retrieval and\nconstrained orchestration. \u201cSovereign\u201d denotes the intended ability to host the model endpoint within an\ninstitution-controlled environment.",
+        "score": 0.546962560669561,
+        "lexical_score": 0.6388514196609931,
+        "selection_score": 0.07846153846153847
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH 4. [1]\nEvaluation method 4.1 Evidence provenance and environment The inspected repository has base commit a3020574e0ce55c905f69e48926ed123475ab1d5 and uncommitted changes. [1]\nThe accompanying provenance file records relevant source hashes and historical evidence hashes. [1]",
+        "citations": [
+          "Research_Paper.pdf, page 5"
+        ],
+        "latency_ms": 4818,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "The provided sources do not contain enough information to answer this question.",
+        "citations": [],
+        "latency_ms": 6668,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.0
+        }
+      ],
+      "mean_overlap": 0.0,
+      "n_answered": 2
+    },
+    "combined_answer": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH 4. [1]\nEvaluation method 4.1 Evidence provenance and environment The inspected repository has base commit a3020574e0ce55c905f69e48926ed123475ab1d5 and uncommitted changes. [1]\nThe accompanying provenance file records relevant source hashes and historical evidence hashes. [1]",
+    "synthesizer": "source_union",
+    "verification": {
+      "model": "eval-gemma4-e4b",
+      "claims": [
+        {
+          "claim": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH 4. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Evaluation method 4.1 Evidence provenance and environment The inspected repository has base commit a3020574e0ce55c905f69e48926ed123475ab1d5 and uncommitted changes. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "The accompanying provenance file records relevant source hashes and historical evidence hashes. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        }
+      ],
+      "confidence": 1.0,
+      "decision": "verified",
+      "method": "source_excerpt_match"
+    }
+  }
+}

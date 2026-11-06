@@ -1,0 +1,114 @@
+{
+  "case": {
+    "id": "Q20",
+    "category": "adversarial",
+    "question": "The paper proves a general autonomous DAG planner. Which general DAG planning algorithm was validated?",
+    "expected": "Reject the premise. The demonstrated planner is bounded, with a fixed search and optional report step selected by keywords; general DAG planning is outside the demonstrated implementation.",
+    "pages": [
+      1,
+      2,
+      4,
+      9
+    ]
+  },
+  "wall_seconds": 10.136577375000343,
+  "result": {
+    "question": "The paper proves a general autonomous DAG planner. Which general DAG planning algorithm was validated?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-17",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 17,
+        "location": "page 4",
+        "content": "not a semantic certificate for every claim.\n\n3.3 Bounded orchestration and approval\n\nThe task begins in PLANNING, enters RUNNING, executes document_search and proceeds to VERIFYING and\nCOMPLETED. Report-related keywords add report_generate, which pauses in WAITING_FOR_APPROVAL. The\npublic decision route resolves workspace scope from the stored task and requires an owner role. An approval claims\nRUNNING under a task-row lock before resuming execution, preventing the second concurrent decision in the tested\npath from executing the same transition.\n\nThe current report tool returns Markdown stored in a task step. A public report-download artifact is not exposed. The\nschema and step vocabulary are broader than the active workflow: dynamic model routing, general DAG planning,",
+        "score": 0.6759351869096405,
+        "lexical_score": 6.870648554401317,
+        "selection_score": 0.09523809523809523
+      },
+      {
+        "chunk_id": "pilot-7",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 7,
+        "location": "page 2",
+        "content": "language-model architecture or a state-of-the-art retrieval algorithm. It is also not a controlled study of operational\nproductivity. The associated technical dossier contains deployment, API, workflow and SIH presentation details; this\nmanuscript emphasizes method, evidence and validity limits.\n\n2. Related work and design rationale\n\nRetrieval-augmented generation separates model parameters from an external source of retrievable knowledge. Lewis\net al. provide a foundational formulation of this approach. We use the general retrieval-plus-generation pattern, without\nreproducing that paper's training procedure or claiming its benchmark improvements. [1]\n\nReAct explores interleaving language-model reasoning and actions. Our planner instead uses a fixed search step and",
+        "score": 0.6478195671352259,
+        "lexical_score": 5.193703331647571,
+        "selection_score": 0.08893280632411067
+      },
+      {
+        "chunk_id": "pilot-41",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 41,
+        "location": "page 9",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\n\n7. Discussion\n\nRQ1 is supported within the implemented scope: the project combines document ingestion, scoped retrieval, threshold\nrefusal and a persisted owner-approval report sequence. It does not demonstrate a general agent planner, complete\nsemantic verification or a downloadable reporting product. RQ2 yields evidence for selected local functional and load\nproperties, with substantial limits on production inference. RQ3 yields a concrete, reproducible example of text\nvariation and contamination under one changed model-temperature configuration, without establishing a general\nwinner.\n\nFor deployment, the most consequential improvements are provenance-aware memory, reviewable report content",
+        "score": 0.6183872952728187,
+        "lexical_score": 3.4425709738949184,
+        "selection_score": 0.08514492753623187
+      },
+      {
+        "chunk_id": "pilot-43",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 43,
+        "location": "page 9",
+        "content": "application memory to isolate supplied-evidence generation, which also limits ecological validity.\n\nConstruct validity is limited by keyword coverage and citation-marker checks. A keyword can appear in irrelevant\nevidence; a citation marker can point to a passage that does not entail a claim. The post-hoc pilot rubric was applied\nby the documentation authoring assistant without blinding or independent expert agreement. It is useful for explaining\nthese particular outputs, not a validated measurement instrument.\n\nExternal validity is limited by a three-file synthetic corpus, a repeated AI load question, six calls per model-temperature\ncell and only two injection trials in each cell. Neither zero observed API errors nor three complete keyword-hit fractions",
+        "score": 0.617357733141981,
+        "lexical_score": 2.6637494680740925,
+        "selection_score": 0.08012820512820512
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH 7. [3]\nDiscussion RQ1 is supported within the implemented scope: the project combines document ingestion, scoped retrieval, threshold refusal and a persisted owner-approval report sequence. [3]",
+        "citations": [
+          "Research_Paper.pdf, page 9"
+        ],
+        "latency_ms": 3575,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "The provided sources do not contain enough information to answer this question.",
+        "citations": [],
+        "latency_ms": 9997,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.0
+        }
+      ],
+      "mean_overlap": 0.0,
+      "n_answered": 2
+    },
+    "combined_answer": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH 7. [3]\nDiscussion RQ1 is supported within the implemented scope: the project combines document ingestion, scoped retrieval, threshold refusal and a persisted owner-approval report sequence. [3]",
+    "synthesizer": "eval-gemma4-e4b",
+    "verification": {
+      "model": "eval-gemma4-e4b",
+      "claims": [
+        {
+          "claim": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH 7. [3]",
+          "source": 3,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Discussion RQ1 is supported within the implemented scope: the project combines document ingestion, scoped retrieval, threshold refusal and a persisted owner-approval report sequence. [3]",
+          "source": 3,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        }
+      ],
+      "confidence": 1.0,
+      "decision": "verified"
+    }
+  }
+}

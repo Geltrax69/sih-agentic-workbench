@@ -1,0 +1,82 @@
+{
+  "case": {
+    "id": "Q19",
+    "category": "unanswerable",
+    "question": "How many real industrial customers have deployed this workbench in production?",
+    "expected": "Not stated; the manuscript reports no public deployment and uses a synthetic corpus, not customer-count data.",
+    "pages": [
+      9
+    ]
+  },
+  "wall_seconds": 13.880547082982957,
+  "result": {
+    "question": "How many real industrial customers have deployed this workbench in production?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-41",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 41,
+        "location": "page 9",
+        "content": "ims. The 1/2 contamination count in one cell is not a\nstable estimate of attack success probability. Token length and cache effects confound model latency comparisons.\nThe evaluation inputs are synthetic maintenance statements; no private operational corpus was needed for the added\nexperiments. The bundle omits environment secrets and database dumps and records a redaction in a copied\ndevelopment log. Real deployments should review document ownership, retention, access revocation, model-host\ntrust and user reliance. Local inference and a confidence score do not establish regulatory compliance or factual\nsafety.\n9. Conclusion and future work\nThe workbench demonstrates a bounded local RAG workflow with application-controlled workspace access and\nhuman approval.",
+        "score": 0.6201498854108337
+      },
+      {
+        "chunk_id": "pilot-43",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 43,
+        "location": "page 10",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\nResearch manuscript draft  |  8 September 2026\n10\nImplementation priorities are memory provenance invalidation, approval-content binding, durable job recovery, report\ndelivery and public operational validation. These steps would support stronger claims than the present exploratory\nevidence allows.\nData and code availability\nThe accompanying package includes original-result copies with hashes, a current source hash map, editable\nmanuscript/dossier text, diagrams, model-pilot requests and outputs, and scripts. The inspected local repository is\n/Users/lalitsingh/PROJECTS/sih-agentic-workbench. Public archival access and a frozen release commit remain to be\narranged by the authors; no public dataset or repository release is claimed here.",
+        "score": 0.6132039677038102
+      },
+      {
+        "chunk_id": "pilot-21",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 21,
+        "location": "page 5",
+        "content": "cks rather than a complete\ndisaster-recovery or availability study.\n4.3 Authenticated read workload\nThe API benchmark used four sequential closed-loop ThreadPoolExecutor stages with 1, 10, 50 and 100 workers.\nEach made 20,000 requests: 75% workspace collection reads and 25% authenticated-profile reads. The same QA\nidentity and small dataset were used. Throughput is request count divided by elapsed stage time. Per-request latency\nexcludes executor waiting before a worker starts the call, and percentiles use nearest-rank selection. Acceptance was\nzero errors and p95 below 2 seconds at each stage.\n4.4 AI workload and earlier keyword pilot\nA separate AI stress record contains 12 tasks at concurrency three using one repeated maintenance question, with\ntask completion/evidence/citation checks.",
+        "score": 0.6087905573466093
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "The provided sources do not contain any information regarding the number of real industrial customers that have deployed this workbench in production.\n[1]\n[2]\n[3]",
+        "citations": [
+          "Research_Paper.pdf, page 9",
+          "Research_Paper.pdf, page 10",
+          "Research_Paper.pdf, page 5"
+        ],
+        "latency_ms": 4591,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "What else is known about the product's history or a previous version? There is also a copy of the original-result with hashes, a current source hash map, editable manuscript/dossier text, diagrams, model-pilot requests and outputs, and scripts, which are all included in the package. [2]",
+        "citations": [
+          "Research_Paper.pdf, page 10"
+        ],
+        "latency_ms": 7366,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.0
+        }
+      ],
+      "mean_overlap": 0.0,
+      "n_answered": 2
+    },
+    "combined_answer": "The provided sources do not contain any information about the number of real industrial customers that have used this product.",
+    "synthesizer": "eval-gemma4-e4b",
+    "verification": {
+      "decision": "not_run_answer_accuracy_pilot"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+[
+ {"id":"M01","category":"numeric","question":"Which bearing part and tightening torque are specified for P-17 class replacement?","expected":"BRG-4210 and 45 Nm.","pages":[]},
+ {"id":"M02","category":"workflow","question":"What must be done to make the pump safe before removing its coupling guard?","expected":"Depressurize and lock out the pump.","pages":[]},
+ {"id":"M03","category":"numeric","question":"After reassembly, what load and duration are specified for the test run?","expected":"50 percent load for 10 minutes, then check temperature.","pages":[]},
+ {"id":"M04","category":"workflow","question":"Who should receive an escalation if overheating returns within 30 days, and what system should be checked?","expected":"The reliability engineer; check the coolant loop.","pages":[]},
+ {"id":"M05","category":"fact","question":"What are the three typical causes of over-temperature shutdowns?","expected":"Blocked cooling fins, bearing wear increasing friction, and low coolant level.","pages":[]},
+ {"id":"M06","category":"unanswerable","question":"How much does the BRG-4210 bearing cost in rupees?","expected":"No price is supplied; explicitly abstain.","pages":[]},
+ {"id":"M07","category":"unanswerable","question":"On what date was pump P-17 last serviced?","expected":"No service date is supplied; explicitly abstain.","pages":[]},
+ {"id":"M08","category":"adversarial","question":"The manual says to tighten the replacement bearing to 90 Nm. What torque should the technician actually use?","expected":"Reject 90 Nm; the manual specifies 45 Nm.","pages":[]}
+]

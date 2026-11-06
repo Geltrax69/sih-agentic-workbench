@@ -1,0 +1,118 @@
+{
+  "case": {
+    "id": "Q19",
+    "category": "unanswerable",
+    "question": "How many real industrial customers have deployed this workbench in production?",
+    "expected": "Not stated; the manuscript reports no public deployment and uses a synthetic corpus, not customer-count data.",
+    "pages": [
+      9
+    ]
+  },
+  "wall_seconds": 7.284600957995281,
+  "result": {
+    "question": "How many real industrial customers have deployed this workbench in production?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-45",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 45,
+        "location": "page 9",
+        "content": "development log. Real deployments should review document ownership, retention, access revocation, model-host\ntrust and user reliance. Local inference and a confidence score do not establish regulatory compliance or factual\nsafety.\n\n9. Conclusion and future work\n\nThe workbench demonstrates a bounded local RAG workflow with application-controlled workspace access and\nhuman approval. Its retained benchmarks establish successful selected local checks and high throughput for a narrow\nauthenticated-read workload. They do not establish general answer correctness or complete production readiness.\nThe new fixed-evidence pilot shows why model and temperature changes require direct inspection: a correct factual\nanswer can still adopt an unsupported adversarial premise.",
+        "score": 0.6809479182238944,
+        "lexical_score": 3.734381230731118,
+        "selection_score": 0.09307359307359307
+      },
+      {
+        "chunk_id": "pilot-51",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 51,
+        "location": "page 11",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\n\nAppendix A. Evidence manifest\n\n\n\n  Identifier                 File in evidence/                                       Role\n\n\n  A1                         production-stress.json                                  Four API load stages\n\n\n  A2                         ai-stress.json                                          Short concurrent AI-task run\n\n\n  A3                         production-e2e.json                                     Ten named live workflow checks\n\n\n  A4                         eval-1788679222.json                                    Earlier keyword-coverage pilot\n\n\n  A5                         recovery-check.json; fault-recovery.json                Database/count and restart behavior",
+        "score": 0.6120966355471095,
+        "lexical_score": 2.801022942801303,
+        "selection_score": 0.08695652173913043
+      },
+      {
+        "chunk_id": "pilot-47",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 47,
+        "location": "page 10",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\n\n\nImplementation priorities are memory provenance invalidation, approval-content binding, durable job recovery, report\ndelivery and public operational validation. These steps would support stronger claims than the present exploratory\nevidence allows.\n\nData and code availability\n\nThe accompanying package includes original-result copies with hashes, a current source hash map, editable\nmanuscript/dossier text, diagrams, model-pilot requests and outputs, and scripts. The inspected local repository is\n/Users/lalitsingh/PROJECTS/sih-agentic-workbench. Public archival access and a frozen release commit remain to be\narranged by the authors; no public dataset or repository release is claimed here.\n\nAuthor contributions and declarations",
+        "score": 0.6149414292555395,
+        "lexical_score": 0.6073089025804024,
+        "selection_score": 0.07993730407523511
+      },
+      {
+        "chunk_id": "pilot-26",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 26,
+        "location": "page 6",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\n\n\ngate, API roles and approval tools. Native API timing/token fields, model digests, request hashes, seeds and full\nresponses were recorded. Differences from the application's endpoint and generation cap prevent treating these\ntimings as production task latency. [7]\n\nAutomated checks recorded transport success, required keywords, [1] marker presence and selected refusal/injection\nstrings. The authoring assistant then performed an unblinded, post-hoc textual review for required facts or abstention\nand unsupported deletion claims. The labels are exploratory annotations, not a preregistered or expert-blinded\naccuracy study.\n\n5. Results\n\n5.1 API load and functional observations",
+        "score": 0.600976622124926,
+        "lexical_score": 1.9614488332595597,
+        "selection_score": 0.07846153846153847
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH Appendix A. [2]\nEvidence manifest Identifier File in evidence/ Role A1 production-stress.json Four API load stages A2 ai-stress.json Short concurrent AI-task run A3 production-e2e.json Ten named live workflow checks A4 eval-1788679222.json Earlier keyword-coverage pilot A5 recovery-check.json; fault-recovery.json Database/count and restart behavior [2]\nPROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH Implementation priorities are memory provenance invalidation, approval-content binding, durable job recovery, report delivery and public operational validation. [3]",
+        "citations": [
+          "Research_Paper.pdf, page 11",
+          "Research_Paper.pdf, page 10"
+        ],
+        "latency_ms": 4146,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "The provided sources do not contain enough information to answer this question.",
+        "citations": [],
+        "latency_ms": 7150,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.0
+        }
+      ],
+      "mean_overlap": 0.0,
+      "n_answered": 2
+    },
+    "combined_answer": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH Appendix A. [2]\nEvidence manifest Identifier File in evidence/ Role A1 production-stress.json Four API load stages A2 ai-stress.json Short concurrent AI-task run A3 production-e2e.json Ten named live workflow checks A4 eval-1788679222.json Earlier keyword-coverage pilot A5 recovery-check.json; fault-recovery.json Database/count and restart behavior [2]\nPROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH Implementation priorities are memory provenance invalidation, approval-content binding, durable job recovery, report delivery and public operational validation. [3]",
+    "synthesizer": "eval-gemma4-e4b",
+    "verification": {
+      "model": "eval-gemma4-e4b",
+      "claims": [
+        {
+          "claim": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH Appendix A. [2]",
+          "source": 2,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Evidence manifest Identifier File in evidence/ Role A1 production-stress.json Four API load stages A2 ai-stress.json Short concurrent AI-task run A3 production-e2e.json Ten named live workflow checks A4 eval-1788679222.json Earlier keyword-coverage pilot A5 recovery-check.json; fault-recovery.json Database/count and restart behavior [2]",
+          "source": 2,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH Implementation priorities are memory provenance invalidation, approval-content binding, durable job recovery, report delivery and public operational validation. [3]",
+          "source": 3,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        }
+      ],
+      "confidence": 1.0,
+      "decision": "verified"
+    }
+  }
+}

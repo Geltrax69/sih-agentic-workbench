@@ -1,0 +1,80 @@
+{
+  "case": {
+    "id": "Q02",
+    "category": "limitation",
+    "question": "Does the manuscript's deterministic evidence threshold estimate the probability that an answer is correct?",
+    "expected": "No. It is a deterministic threshold on retrieval similarity, not a correctness probability.",
+    "pages": [
+      4
+    ]
+  },
+  "wall_seconds": 21.1186402500025,
+  "result": {
+    "question": "Does the manuscript's deterministic evidence threshold estimate the probability that an answer is correct?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-14",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 14,
+        "location": "page 4",
+        "content": "<= s* < 0.45\n       ANSWER                    if s* >= 0.45\nThe threshold function is deterministic. It does not estimate the probability of answer correctness. One high-scoring\npassage is sufficient for ANSWER, even if the requested detail is absent or other passages conflict. Stale evidence\nadds a reason string in the gate without reducing the score. Normal executor items are constructed after\nworkspace-scoped SQL retrieval; revoked/stale metadata is not comprehensively propagated.\nFor non-refused tasks, numbered evidence and up to three recent eligible memory items are sent to the generator. The\ntask path uses temperature 0.3 and a maximum output of 800 tokens. The system instruction asks for evidence-only\nanswers, [n] citations and rejection of instructions inside evidence.",
+        "score": 0.7533537700412878
+      },
+      {
+        "chunk_id": "pilot-13",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 13,
+        "location": "page 4",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\nResearch manuscript draft  |  8 September 2026\n4\n3.2 Retrieval and evidence decision\nA question is embedded and searched against chunks satisfying the workspace predicate and a non-deleted source\npredicate. The default result limit is six. For a query vector q and chunk vector v_i, the recorded score is cosine\nsimilarity, equivalently one minus the cosine distance returned by pgvector. Let U be the set of evidence items\nmatching the expected workspace and not marked revoked, and let s* = max(s_i for i in U).\n D(U) = REFUSE                    if U is empty or s* < 0.30\n       ANSWER_WITH_WARNING       if 0.30 <= s* < 0.45\n       ANSWER                    if s* >= 0.45\nThe threshold function is deterministic.",
+        "score": 0.7279861324812811
+      },
+      {
+        "chunk_id": "pilot-32",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 32,
+        "location": "page 8",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\nResearch manuscript draft  |  8 September 2026\n8\n6. Configuration sensitivity and failure analysis\n6.1 Discrete decision changes\nThe evidence threshold creates discontinuities. A best usable score of 0.29 refuses, 0.30 permits a warning answer\nand 0.45 permits an answer under current settings. Raising the strong threshold to 0.70 while retaining weak=0.30\nwould map the three historical pilot scores to one answer and two warning answers. This is a deterministic replay of\nrecorded scores, not evidence of improved correctness.\nA new generator changes conditional text behavior while fixed evidence scores leave the gate unchanged. An\nembedding-model replacement changes retrieval geometry and requires compatible corpus/query embeddings,",
+        "score": 0.7216505944596951
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "[1] The threshold function in the first source is deterministic and does not estimate the probability of correctness; a score of 0.45 or higher is sufficient for an \"ANSWER\" output.\n[2] In the second source, the evidence threshold (s*) is calculated as the maximum similarity score among matching evidence items U. If s* < 0.30, the result is \"D(U) = REFUSE\"; if 0.30 \u2264 s* < 0.45, it is \"ANSWER_WITH_WARNING\"; and if s* \u2265 0.45, it is \"ANSWER\". The threshold function itself is deterministic.\n[3] In the third source, the text discusses that the evidence threshold creates discontinuities (e.g., 0.29 refuses, 0.30 permits a warning answer, 0.45 allows an answer). It explicitly states that raising the strong threshold to 0.70 would map multiple historical pilot scores to one answer and two warning answers, which is a deterministic replay of recorded scores, not evidence of improved correctness.\n\nBased on the analysis above:\nThe manuscript's deterministic evidence threshold does **not** estimate the probability that an answer is correct; it only provides a fixed cutoff score (0.45) for classification, regardless of how accurate the underlying evidence or reasoning is.",
+        "citations": [
+          "Research_Paper.pdf, page 4",
+          "Research_Paper.pdf, page 4",
+          "Research_Paper.pdf, page 8"
+        ],
+        "latency_ms": 7894,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "* none of the available posts are sure enough about the question's answer.",
+        "citations": [],
+        "latency_ms": 4606,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.014
+        }
+      ],
+      "mean_overlap": 0.014,
+      "n_answered": 2
+    },
+    "combined_answer": "The manuscript's evidence threshold is a determinant process that does not estimate the probability of correctness; it only works if there are enough available posts or if the score is greater than or equal to 0.45, which allows for an \"ANSWER\" output [1], otherwise, it can be a warning or no answer at all [2].\n\n- A high-scoring passage is sufficient for any answer, even if other passages conflict or the detail is missing [1].\n- There are different ranges of scores that result in different outcomes: below 0.30 means no match; 0.30 to 0.45 means warning; and 0.45 or more means a regular answer [2].\n- The thresholds can be set differently, like 0.29 for refuse, 0.30 for warning, and 0.45 for an answer, which is not necessarily better than the old way of doing things [3].",
+    "synthesizer": "eval-gemma4-e4b",
+    "verification": {
+      "decision": "not_run_answer_accuracy_pilot"
+    }
+  }
+}

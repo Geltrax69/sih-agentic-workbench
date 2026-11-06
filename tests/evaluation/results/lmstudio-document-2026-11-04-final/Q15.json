@@ -1,0 +1,134 @@
+{
+  "case": {
+    "id": "Q15",
+    "category": "limitation",
+    "question": "Is this manuscript a peer-reviewed accepted paper, and have named authors and affiliations been finalized?",
+    "expected": "No acceptance or peer-review claim; it is an unpublished manuscript draft. Named authors and affiliations are pending confirmation.",
+    "pages": [
+      1,
+      10
+    ]
+  },
+  "wall_seconds": 8.124580625037197,
+  "result": {
+    "question": "Is this manuscript a peer-reviewed accepted paper, and have named authors and affiliations been finalized?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-48",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 48,
+        "location": "page 10",
+        "content": "Author contributions and declarations\n\nNamed author contributions, institutional affiliations, funding and competing-interest declarations are pending\nconfirmation. The documentation was prepared with an AI coding assistant using repository inspection and local\nexperiments; the pilot's post-hoc labels were produced by that assistant. Human authors must review the manuscript,\nresults, attribution and any venue-specific disclosure requirements before submission.\n\nReferences\n\n[1] P. Lewis et al., \u201cRetrieval-Augmented Generation for Knowledge-Intensive NLP Tasks,\u201d NeurIPS, 2020.\nhttps://arxiv.org/abs/2005.11401\n\n[2] S. Yao et al., \u201cReAct: Synergizing Reasoning and Acting in Language Models,\u201d arXiv:2210.03629, 2022.\nhttps://arxiv.org/abs/2210.03629\n\n[3] K.",
+        "score": 0.7167281514071088,
+        "lexical_score": 7.119807430614751,
+        "selection_score": 0.09307359307359307
+      },
+      {
+        "chunk_id": "pilot-0",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 0,
+        "location": "page 1",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\n\n\nEvidence-Gated Local Retrieval and\nHuman-Approved Workflows for an\nInstitutional AI Workbench\n\nA systems prototype and exploratory evaluation\n\n\nAuthors and affiliations: Pending confirmation\n\nResearch manuscript draft | 8 September 2026 | Project 1: Sovereign Agentic AI Workbench\n\nThis is an unpublished manuscript draft based on inspected implementation and retained experiments. It makes no\nvenue acceptance, peer-review or official SIH endorsement claim. Author order, affiliations, corresponding-author\ncontact and target-venue formatting remain to be completed.\n\nAbstract\n\nInstitutional document assistants must connect natural-language answers to accessible evidence while controlling\nactions that affect organizational workflows.",
+        "score": 0.5917046556897255,
+        "lexical_score": 8.787242289136767,
+        "selection_score": 0.09109730848861283
+      },
+      {
+        "chunk_id": "pilot-47",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 47,
+        "location": "page 10",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\n\n\nImplementation priorities are memory provenance invalidation, approval-content binding, durable job recovery, report\ndelivery and public operational validation. These steps would support stronger claims than the present exploratory\nevidence allows.\n\nData and code availability\n\nThe accompanying package includes original-result copies with hashes, a current source hash map, editable\nmanuscript/dossier text, diagrams, model-pilot requests and outputs, and scripts. The inspected local repository is\n/Users/lalitsingh/PROJECTS/sih-agentic-workbench. Public archival access and a frozen release commit remain to be\narranged by the authors; no public dataset or repository release is claimed here.\n\nAuthor contributions and declarations",
+        "score": 0.5517020901375784,
+        "lexical_score": 2.620675128194546,
+        "selection_score": 0.0757142857142857
+      },
+      {
+        "chunk_id": "pilot-30",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 30,
+        "location": "page 6",
+        "content": "All stages met the runner's criteria. Peak observed throughput occurred at 50 clients. At 100 clients, throughput was\napproximately 25.4% lower and p95 approximately 3.15 times the 50-client value. The nonmonotonic single-client\nversus ten-client behavior is unexplained by the retained metadata. Warmup and shared-host interference are\nplausible hypotheses, not demonstrated causes.\n\nThe E2E artifact lists ten passing checks. In the concurrent approval test, one decision returned HTTP 200 and the\nother HTTP 400 through the public proxy, and the accepted task completed. The tested malicious document remained\n\n\n\nResearch manuscript draft  |  8 September 2026                                                                                                    6",
+        "score": 0.5435028723313685,
+        "lexical_score": 2.6624067020153577,
+        "selection_score": 0.075
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "Author contributions and declarations Named author contributions, institutional affiliations, funding and competing-interest declarations are pending confirmation. [1]\nThe documentation was prepared with an AI coding assistant using repository inspection and local experiments; the pilot's post-hoc labels were produced by that assistant. [1]\nHuman authors must review the manuscript, results, attribution and any venue-specific disclosure requirements before submission. [1]",
+        "citations": [
+          "Research_Paper.pdf, page 10"
+        ],
+        "latency_ms": 6234,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "Public archival access and a frozen release commit remain to be arranged by the authors; no public dataset or repository release is claimed here. [3]\nAuthor order, affiliations, corresponding-author contact and target-venue formatting remain to be completed. [2]",
+        "citations": [
+          "Research_Paper.pdf, page 10",
+          "Research_Paper.pdf, page 1"
+        ],
+        "latency_ms": 8033,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.089
+        }
+      ],
+      "mean_overlap": 0.089,
+      "n_answered": 2
+    },
+    "combined_answer": "Author contributions and declarations Named author contributions, institutional affiliations, funding and competing-interest declarations are pending confirmation. [1]\nThe documentation was prepared with an AI coding assistant using repository inspection and local experiments; the pilot's post-hoc labels were produced by that assistant. [1]\nHuman authors must review the manuscript, results, attribution and any venue-specific disclosure requirements before submission. [1]\nPublic archival access and a frozen release commit remain to be arranged by the authors; no public dataset or repository release is claimed here. [3]\nAuthor order, affiliations, corresponding-author contact and target-venue formatting remain to be completed. [2]",
+    "synthesizer": "source_union",
+    "verification": {
+      "model": "eval-gemma4-e4b",
+      "claims": [
+        {
+          "claim": "Author contributions and declarations Named author contributions, institutional affiliations, funding and competing-interest declarations are pending confirmation. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "The documentation was prepared with an AI coding assistant using repository inspection and local experiments; the pilot's post-hoc labels were produced by that assistant. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Human authors must review the manuscript, results, attribution and any venue-specific disclosure requirements before submission. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Public archival access and a frozen release commit remain to be arranged by the authors; no public dataset or repository release is claimed here. [3]",
+          "source": 3,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Author order, affiliations, corresponding-author contact and target-venue formatting remain to be completed. [2]",
+          "source": 2,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        }
+      ],
+      "confidence": 1.0,
+      "decision": "verified",
+      "method": "source_excerpt_match"
+    }
+  }
+}

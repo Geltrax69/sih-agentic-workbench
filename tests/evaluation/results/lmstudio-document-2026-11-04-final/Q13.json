@@ -1,0 +1,124 @@
+{
+  "case": {
+    "id": "Q13",
+    "category": "numeric",
+    "question": "Which two model tags and two temperatures were used in the manuscript's fixed-evidence pilot, and how many measured generations were run?",
+    "expected": "qwen:7b and gemma:7b; temperatures 0.0 and 0.8; 24 measured generations.",
+    "pages": [
+      5,
+      7
+    ]
+  },
+  "wall_seconds": 6.636398125032429,
+  "result": {
+    "question": "Which two model tags and two temperatures were used in the manuscript's fixed-evidence pilot, and how many measured generations were run?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-24",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 24,
+        "location": "page 5",
+        "content": "its mean is an average of per-question hit fractions. This is a keyword coverage heuristic, despite broader language in\nthe evaluator's docstring.\n\n4.5 Additional model and temperature pilot\n\nWe ran two installed tags, qwen:7b and gemma:7b, at temperatures 0.0 and 0.8 on three cases, using seeds 17 and\n29. Cases asked for a bearing/date, an absent repair cost, and a filter incident accompanied by adversarial deletion\ninstructions. The 24 serial measured calls followed one excluded warmup per model, with shuffled order within each\nmodel. Qwen's block preceded Gemma's; order across models was not counterbalanced.\n\nThe native Ollama /api/chat request used the exact application grounding instruction, supplied evidence, stream=false,\na 2,048-token context option and a 160-token generation cap.",
+        "score": 0.7287183484604397,
+        "lexical_score": 10.273977235545296,
+        "selection_score": 0.09523809523809523
+      },
+      {
+        "chunk_id": "pilot-53",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 53,
+        "location": "page 11",
+        "content": "Use the existing local models and execute source/run_model_pilot.py. Its requests use two temperatures, two seeds,\nthree fixed cases and a per-model warmup, saving all outputs as JSON. A rerun requires fresh review of responses; do\nnot reuse manual labels automatically. Record model digests rather than aliases alone, preserve the runtime version\nand distinguish wall time from server-reported generation duration.\n\nFor an end-to-end comparison, create an isolated workspace per variant, ingest an identical versioned corpus with one\nfixed embedder, prevent prior generated memories from contaminating later trials and run the same questions through\nthe authenticated task API. A model-only generation pilot is insufficient to measure retrieval or authorization effects.",
+        "score": 0.7220678544475095,
+        "lexical_score": 9.075914288843764,
+        "selection_score": 0.08893280632411067
+      },
+      {
+        "chunk_id": "pilot-43",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 43,
+        "location": "page 9",
+        "content": "application memory to isolate supplied-evidence generation, which also limits ecological validity.\n\nConstruct validity is limited by keyword coverage and citation-marker checks. A keyword can appear in irrelevant\nevidence; a citation marker can point to a passage that does not entail a claim. The post-hoc pilot rubric was applied\nby the documentation authoring assistant without blinding or independent expert agreement. It is useful for explaining\nthese particular outputs, not a validated measurement instrument.\n\nExternal validity is limited by a three-file synthetic corpus, a repeated AI load question, six calls per model-temperature\ncell and only two injection trials in each cell. Neither zero observed API errors nor three complete keyword-hit fractions",
+        "score": 0.723596041599545,
+        "lexical_score": 4.329520708794507,
+        "selection_score": 0.08545454545454545
+      },
+      {
+        "chunk_id": "pilot-2",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 2,
+        "location": "page 1",
+        "content": "earlier three-question pilot achieved complete expected-keyword coverage, a measure that does not establish answer\naccuracy. In 24 fixed-evidence generations across two local models and two temperatures, all calls succeeded, but\none high-temperature output adopted an unsupported deletion premise from adversarial evidence. The results\ndemonstrate a functioning local workflow and the need to distinguish retrieval signal, text faithfulness and action\nauthorization. Small datasets, incomplete historical configuration capture and unblinded exploratory review limit\ngeneralization. We provide source/evidence hashes, raw pilot outputs and a protocol for broader evaluation.\n\nKeywords: retrieval-augmented generation; local inference; evidence gating; human approval; workspace isolation;",
+        "score": 0.7161853315609041,
+        "lexical_score": 7.036678099622477,
+        "selection_score": 0.08514492753623187
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "4.5 Additional model and temperature pilot We ran two installed tags, qwen:7b and gemma:7b, at temperatures 0.0 and 0.8 on three cases, using seeds 17 and 29. [1]\nIts requests use two temperatures, two seeds, three fixed cases and a per-model warmup, saving all outputs as JSON. [2]",
+        "citations": [
+          "Research_Paper.pdf, page 5",
+          "Research_Paper.pdf, page 11"
+        ],
+        "latency_ms": 4539,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "4.5 Additional model and temperature pilot We ran two installed tags, qwen:7b and gemma:7b, at temperatures 0.0 and 0.8 on three cases, using seeds 17 and 29. [1]\nIts requests use two temperatures, two seeds, three fixed cases and a per-model warmup, saving all outputs as JSON. [2]\nIn 24 fixed-evidence generations across two local models and two temperatures, all calls succeeded, but one high-temperature output adopted an unsupported deletion premise from adversarial evidence. [4]",
+        "citations": [
+          "Research_Paper.pdf, page 5",
+          "Research_Paper.pdf, page 11",
+          "Research_Paper.pdf, page 1"
+        ],
+        "latency_ms": 6556,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.61
+        }
+      ],
+      "mean_overlap": 0.61,
+      "n_answered": 2
+    },
+    "combined_answer": "4.5 Additional model and temperature pilot We ran two installed tags, qwen:7b and gemma:7b, at temperatures 0.0 and 0.8 on three cases, using seeds 17 and 29. [1]\nIts requests use two temperatures, two seeds, three fixed cases and a per-model warmup, saving all outputs as JSON. [2]\nIn 24 fixed-evidence generations across two local models and two temperatures, all calls succeeded, but one high-temperature output adopted an unsupported deletion premise from adversarial evidence. [4]",
+    "synthesizer": "source_union",
+    "verification": {
+      "model": "eval-gemma4-e4b",
+      "claims": [
+        {
+          "claim": "4.5 Additional model and temperature pilot We ran two installed tags, qwen:7b and gemma:7b, at temperatures 0.0 and 0.8 on three cases, using seeds 17 and 29. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Its requests use two temperatures, two seeds, three fixed cases and a per-model warmup, saving all outputs as JSON. [2]",
+          "source": 2,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "In 24 fixed-evidence generations across two local models and two temperatures, all calls succeeded, but one high-temperature output adopted an unsupported deletion premise from adversarial evidence. [4]",
+          "source": 4,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        }
+      ],
+      "confidence": 1.0,
+      "decision": "verified",
+      "method": "source_excerpt_match"
+    }
+  }
+}

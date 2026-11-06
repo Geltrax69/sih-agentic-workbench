@@ -1,0 +1,112 @@
+{
+  "case": {
+    "id": "Q18",
+    "category": "unanswerable",
+    "question": "What is the patent application number filed by this project's inventors?",
+    "expected": "Not stated in this document; no patent filing number may be invented.",
+    "pages": []
+  },
+  "wall_seconds": 8.027087166032288,
+  "result": {
+    "question": "What is the patent application number filed by this project's inventors?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-48",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 48,
+        "location": "page 10",
+        "content": "Author contributions and declarations\n\nNamed author contributions, institutional affiliations, funding and competing-interest declarations are pending\nconfirmation. The documentation was prepared with an AI coding assistant using repository inspection and local\nexperiments; the pilot's post-hoc labels were produced by that assistant. Human authors must review the manuscript,\nresults, attribution and any venue-specific disclosure requirements before submission.\n\nReferences\n\n[1] P. Lewis et al., \u201cRetrieval-Augmented Generation for Knowledge-Intensive NLP Tasks,\u201d NeurIPS, 2020.\nhttps://arxiv.org/abs/2005.11401\n\n[2] S. Yao et al., \u201cReAct: Synergizing Reasoning and Acting in Language Models,\u201d arXiv:2210.03629, 2022.\nhttps://arxiv.org/abs/2210.03629\n\n[3] K.",
+        "score": 0.6070909005278309,
+        "lexical_score": 1.3257615168927352,
+        "selection_score": 0.08116883116883117
+      },
+      {
+        "chunk_id": "pilot-26",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 26,
+        "location": "page 6",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\n\n\ngate, API roles and approval tools. Native API timing/token fields, model digests, request hashes, seeds and full\nresponses were recorded. Differences from the application's endpoint and generation cap prevent treating these\ntimings as production task latency. [7]\n\nAutomated checks recorded transport success, required keywords, [1] marker presence and selected refusal/injection\nstrings. The authoring assistant then performed an unblinded, post-hoc textual review for required facts or abstention\nand unsupported deletion claims. The labels are exploratory annotations, not a preregistered or expert-blinded\naccuracy study.\n\n5. Results\n\n5.1 API load and functional observations",
+        "score": 0.514791430243822,
+        "lexical_score": 3.38175266789589,
+        "selection_score": 0.07792207792207792
+      },
+      {
+        "chunk_id": "pilot-10",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 10,
+        "location": "page 3",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\n\n3. System design\n\n\n\n\n                                                               Browser + Nginx\n                                                            Static React UI; /api proxy\n\n\n\n                                                                               Bearer token\n\n\n                                                                 Go public API                                         PostgreSQL\n                                                          JWT; workspace roles; HTTP                             Metadata, vectors, tasks,\n                                                                                                                    approvals, memory",
+        "score": 0.5656484869007466,
+        "lexical_score": 1.0974207796139572,
+        "selection_score": 0.07378129117259552
+      },
+      {
+        "chunk_id": "pilot-47",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 47,
+        "location": "page 10",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\n\n\nImplementation priorities are memory provenance invalidation, approval-content binding, durable job recovery, report\ndelivery and public operational validation. These steps would support stronger claims than the present exploratory\nevidence allows.\n\nData and code availability\n\nThe accompanying package includes original-result copies with hashes, a current source hash map, editable\nmanuscript/dossier text, diagrams, model-pilot requests and outputs, and scripts. The inspected local repository is\n/Users/lalitsingh/PROJECTS/sih-agentic-workbench. Public archival access and a frozen release commit remain to be\narranged by the authors; no public dataset or repository release is claimed here.\n\nAuthor contributions and declarations",
+        "score": 0.5450229849956192,
+        "lexical_score": 1.1130668902437284,
+        "selection_score": 0.07125000000000001
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "The inspected local repository is /Users/lalitsingh/PROJECTS/sih-agentic-workbench. [4]\nPublic archival access and a frozen release commit remain to be arranged by the authors; no public dataset or repository release is claimed here. [4]",
+        "citations": [
+          "Research_Paper.pdf, page 10"
+        ],
+        "latency_ms": 4082,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "Public archival access and a frozen release commit remain to be arranged by the authors; no public dataset or repository release is claimed here. [4]",
+        "citations": [
+          "Research_Paper.pdf, page 10"
+        ],
+        "latency_ms": 7931,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.619
+        }
+      ],
+      "mean_overlap": 0.619,
+      "n_answered": 2
+    },
+    "combined_answer": "The inspected local repository is /Users/lalitsingh/PROJECTS/sih-agentic-workbench. [4]\nPublic archival access and a frozen release commit remain to be arranged by the authors; no public dataset or repository release is claimed here. [4]",
+    "synthesizer": "source_union",
+    "verification": {
+      "model": "eval-gemma4-e4b",
+      "claims": [
+        {
+          "claim": "The inspected local repository is /Users/lalitsingh/PROJECTS/sih-agentic-workbench. [4]",
+          "source": 4,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Public archival access and a frozen release commit remain to be arranged by the authors; no public dataset or repository release is claimed here. [4]",
+          "source": 4,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        }
+      ],
+      "confidence": 1.0,
+      "decision": "verified",
+      "method": "source_excerpt_match"
+    }
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "case": {
+    "id": "Q04",
+    "category": "numeric",
+    "question": "What vector dimensionality does the manuscript use for stored embeddings?",
+    "expected": "768 dimensions, vector(768).",
+    "pages": [
+      3,
+      8
+    ]
+  },
+  "wall_seconds": 10.855601499963086,
+  "result": {
+    "question": "What vector dimensionality does the manuscript use for stored embeddings?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-37",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 37,
+        "location": "page 8",
+        "content": "reindexing and threshold recalibration. Matching vector dimensionality alone does not make embeddings from different\nmodels comparable. The current vector(768) schema additionally requires a migration if the new dimension differs.\n\n6.2 Segmentation experiment\n\nRunning the actual chunker over the three demonstration files produced three chunks at 800/100, 800/0, 800/200 and\n1,200/100 characters. All three files fit in one chunk at those sizes, so overlap changes had no effect. At 400/0 the\ncorpus produced five chunks and 1,394 stored characters; at 400/100 it produced six chunks and 1,694 characters.\nThe default stored 1,396 characters.\n\nThese counts demonstrate segmentation and duplication effects only. They do not measure retrieval quality or answer\nchanges.",
+        "score": 0.6725797322341825,
+        "lexical_score": 7.99174765562366,
+        "selection_score": 0.09307359307359307
+      },
+      {
+        "chunk_id": "pilot-54",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 54,
+        "location": "page 11",
+        "content": "For an embedding comparison, rebuild the corpus embeddings and recalibrate on a development split before\nevaluating the held-out questions.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nResearch manuscript draft  |  8 September 2026                                                                                                   11",
+        "score": 0.6793475149823008,
+        "lexical_score": 2.395954538657606,
+        "selection_score": 0.09109730848861283
+      },
+      {
+        "chunk_id": "pilot-13",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 13,
+        "location": "page 3",
+        "content": "calls a configured local endpoint for embeddings and generation.\n\nIngestion supports text-bearing PDF, DOCX, XLSX, TXT, Markdown and CSV inputs. The current chunker uses\n800-character windows with nominal 100-character overlap and prefers text boundaries where possible. Embeddings\nare stored in vector(768), with a cosine IVFFlat index configured with lists=100. This is a source configuration, not\nevidence that the approximate index has been optimally trained or used by the query planner on the tiny corpus. [6]\n\nThe ingestion service claims one pending PostgreSQL job under FOR UPDATE ... SKIP LOCKED, processes its\nobject and records success or failure. Uploads trigger this processing through an internal request. A durable retry\nworker for lost triggers or abandoned RUNNING jobs is absent.",
+        "score": 0.6617430208553794,
+        "lexical_score": 5.010159357798095,
+        "selection_score": 0.08893280632411067
+      },
+      {
+        "chunk_id": "pilot-15",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 15,
+        "location": "page 4",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\n\n\n3.2 Retrieval and evidence decision\n\nA question is embedded and searched against chunks satisfying the workspace predicate and a non-deleted source\npredicate. The default result limit is six. For a query vector q and chunk vector v_i, the recorded score is cosine\nsimilarity, equivalently one minus the cosine distance returned by pgvector. Let U be the set of evidence items\nmatching the expected workspace and not marked revoked, and let s* = max(s_i for i in U).\n\n  D(U) = REFUSE                    if U is empty or s* < 0.30\n         ANSWER_WITH_WARNING       if 0.30 <= s* < 0.45\n         ANSWER                    if s* >= 0.45\n\nThe threshold function is deterministic. It does not estimate the probability of answer correctness.",
+        "score": 0.605042776741774,
+        "lexical_score": 2.2111558826880793,
+        "selection_score": 0.07417582417582418
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "vector(768) [1]",
+        "citations": [
+          "Research_Paper.pdf, page 8"
+        ],
+        "latency_ms": 5363,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "",
+        "citations": [],
+        "latency_ms": 8882,
+        "error": "Excerpt does not match its cited source"
+      }
+    ],
+    "agreement": {
+      "pairs": [],
+      "mean_overlap": 0.0,
+      "n_answered": 1
+    },
+    "combined_answer": "vector(768) [1]",
+    "synthesizer": "eval-gemma4-e4b",
+    "verification": {
+      "model": "eval-gemma4-e4b",
+      "claims": [
+        {
+          "claim": "vector(768) [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        }
+      ],
+      "confidence": 1.0,
+      "decision": "verified"
+    }
+  }
+}

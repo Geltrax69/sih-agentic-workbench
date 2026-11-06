@@ -1,0 +1,115 @@
+{
+  "case": {
+    "id": "Q01",
+    "category": "numeric",
+    "question": "What decisions does the manuscript's evidence gate make at scores 0.29, 0.30, and 0.45?",
+    "expected": "0.29 refuses; 0.30 answers with a warning; 0.45 answers. These are retrieval gate decisions, not accuracy probabilities.",
+    "pages": [
+      4,
+      8
+    ]
+  },
+  "wall_seconds": 20.490692541992757,
+  "result": {
+    "question": "What decisions does the manuscript's evidence gate make at scores 0.29, 0.30, and 0.45?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-36",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 36,
+        "location": "page 8",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\n\n6. Configuration sensitivity and failure analysis\n\n6.1 Discrete decision changes\n\nThe evidence threshold creates discontinuities. A best usable score of 0.29 refuses, 0.30 permits a warning answer\nand 0.45 permits an answer under current settings. Raising the strong threshold to 0.70 while retaining weak=0.30\nwould map the three historical pilot scores to one answer and two warning answers. This is a deterministic replay of\nrecorded scores, not evidence of improved correctness.\n\nA new generator changes conditional text behavior while fixed evidence scores leave the gate unchanged. An\nembedding-model replacement changes retrieval geometry and requires compatible corpus/query embeddings,\nreindexing and threshold recalibration.",
+        "score": 0.7435461997596505,
+        "lexical_score": 14.49382725620654,
+        "selection_score": 0.09523809523809523
+      },
+      {
+        "chunk_id": "pilot-15",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 15,
+        "location": "page 4",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\n\n\n3.2 Retrieval and evidence decision\n\nA question is embedded and searched against chunks satisfying the workspace predicate and a non-deleted source\npredicate. The default result limit is six. For a query vector q and chunk vector v_i, the recorded score is cosine\nsimilarity, equivalently one minus the cosine distance returned by pgvector. Let U be the set of evidence items\nmatching the expected workspace and not marked revoked, and let s* = max(s_i for i in U).\n\n  D(U) = REFUSE                    if U is empty or s* < 0.30\n         ANSWER_WITH_WARNING       if 0.30 <= s* < 0.45\n         ANSWER                    if s* >= 0.45\n\nThe threshold function is deterministic. It does not estimate the probability of answer correctness.",
+        "score": 0.6871559188799734,
+        "lexical_score": 12.40152041553687,
+        "selection_score": 0.08893280632411067
+      },
+      {
+        "chunk_id": "pilot-16",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 16,
+        "location": "page 4",
+        "content": "The threshold function is deterministic. It does not estimate the probability of answer correctness. One high-scoring\npassage is sufficient for ANSWER, even if the requested detail is absent or other passages conflict. Stale evidence\nadds a reason string in the gate without reducing the score. Normal executor items are constructed after\nworkspace-scoped SQL retrieval; revoked/stale metadata is not comprehensively propagated.\n\nFor non-refused tasks, numbered evidence and up to three recent eligible memory items are sent to the generator. The\ntask path uses temperature 0.3 and a maximum output of 800 tokens. The system instruction asks for evidence-only\nanswers, [n] citations and rejection of instructions inside evidence. Returned source filenames are evidence metadata,",
+        "score": 0.6927997096386461,
+        "lexical_score": 4.787816162703099,
+        "selection_score": 0.08545454545454545
+      },
+      {
+        "chunk_id": "pilot-24",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 24,
+        "location": "page 5",
+        "content": "its mean is an average of per-question hit fractions. This is a keyword coverage heuristic, despite broader language in\nthe evaluator's docstring.\n\n4.5 Additional model and temperature pilot\n\nWe ran two installed tags, qwen:7b and gemma:7b, at temperatures 0.0 and 0.8 on three cases, using seeds 17 and\n29. Cases asked for a bearing/date, an absent repair cost, and a filter incident accompanied by adversarial deletion\ninstructions. The 24 serial measured calls followed one excluded warmup per model, with shuffled order within each\nmodel. Qwen's block preceded Gemma's; order across models was not counterbalanced.\n\nThe native Ollama /api/chat request used the exact application grounding instruction, supplied evidence, stream=false,\na 2,048-token context option and a 160-token generation cap.",
+        "score": 0.6486086674543454,
+        "lexical_score": 4.820941879136333,
+        "selection_score": 0.07738095238095238
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH 3.2 Retrieval and evidence decision A question is embedded and searched against chunks satisfying the workspace predicate and a non-deleted source predicate. [2]\nThe default result limit is six. [2]",
+        "citations": [
+          "Research_Paper.pdf, page 4"
+        ],
+        "latency_ms": 1413,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "For a query vector q and chunk vector v_i, the recorded score is cosine similarity, equivalently one minus the cosine distance returned by pgvector. [2]\nConfiguration sensitivity and failure analysis 6.1 Discrete decision changes The evidence threshold creates discontinuities. [1]",
+        "citations": [
+          "Research_Paper.pdf, page 4",
+          "Research_Paper.pdf, page 8"
+        ],
+        "latency_ms": 17321,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.045
+        }
+      ],
+      "mean_overlap": 0.045,
+      "n_answered": 2
+    },
+    "combined_answer": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH 6. [1]\nA best usable score of 0.29 refuses, 0.30 permits a warning answer and 0.45 permits an answer under current settings. [1]",
+    "synthesizer": "eval-gemma4-e4b",
+    "verification": {
+      "model": "eval-gemma4-e4b",
+      "claims": [
+        {
+          "claim": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH 6. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "A best usable score of 0.29 refuses, 0.30 permits a warning answer and 0.45 permits an answer under current settings. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        }
+      ],
+      "confidence": 1.0,
+      "decision": "verified"
+    }
+  }
+}

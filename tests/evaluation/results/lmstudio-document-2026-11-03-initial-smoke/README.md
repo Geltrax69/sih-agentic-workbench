@@ -1,0 +1,1 @@
+Initial full-pipeline attempt, interrupted during Q01 verification after a repetitive verifier response exhausted 2,000 tokens. Raw requests/responses are retained. This incomplete attempt is excluded from the 20-question answer-accuracy batch. Generators and synthesizer had completed; no completed Q01 record was written before cancellation.

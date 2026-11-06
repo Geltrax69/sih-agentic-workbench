@@ -1,0 +1,103 @@
+{
+  "case": {
+    "id": "Q07",
+    "category": "numeric",
+    "question": "What temperature and maximum output-token count does the manuscript's normal task-generation path use?",
+    "expected": "Temperature 0.3 and maximum 800 output tokens. This differs from the pilot's 160-token cap.",
+    "pages": [
+      4,
+      5
+    ]
+  },
+  "wall_seconds": 33.846229500020854,
+  "result": {
+    "question": "What temperature and maximum output-token count does the manuscript's normal task-generation path use?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-16",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 16,
+        "location": "page 4",
+        "content": "The threshold function is deterministic. It does not estimate the probability of answer correctness. One high-scoring\npassage is sufficient for ANSWER, even if the requested detail is absent or other passages conflict. Stale evidence\nadds a reason string in the gate without reducing the score. Normal executor items are constructed after\nworkspace-scoped SQL retrieval; revoked/stale metadata is not comprehensively propagated.\n\nFor non-refused tasks, numbered evidence and up to three recent eligible memory items are sent to the generator. The\ntask path uses temperature 0.3 and a maximum output of 800 tokens. The system instruction asks for evidence-only\nanswers, [n] citations and rejection of instructions inside evidence. Returned source filenames are evidence metadata,",
+        "score": 0.6584108551019829,
+        "lexical_score": 11.460916734336266,
+        "selection_score": 0.08761904761904762
+      },
+      {
+        "chunk_id": "pilot-24",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 24,
+        "location": "page 5",
+        "content": "its mean is an average of per-question hit fractions. This is a keyword coverage heuristic, despite broader language in\nthe evaluator's docstring.\n\n4.5 Additional model and temperature pilot\n\nWe ran two installed tags, qwen:7b and gemma:7b, at temperatures 0.0 and 0.8 on three cases, using seeds 17 and\n29. Cases asked for a bearing/date, an absent repair cost, and a filter incident accompanied by adversarial deletion\ninstructions. The 24 serial measured calls followed one excluded warmup per model, with shuffled order within each\nmodel. Qwen's block preceded Gemma's; order across models was not counterbalanced.\n\nThe native Ollama /api/chat request used the exact application grounding instruction, supplied evidence, stream=false,\na 2,048-token context option and a 160-token generation cap.",
+        "score": 0.6922015771530388,
+        "lexical_score": 4.880887750927718,
+        "selection_score": 0.08712121212121213
+      },
+      {
+        "chunk_id": "pilot-35",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 35,
+        "location": "page 7",
+        "content": "deletion. It is a generated-text failure. The paired high-temperature Qwen trial and the four Gemma injection trials did\nnot contain this premise.\n\nQwen's median rose about 14.1% between temperatures while mean output length also rose. Gemma's median fell\nabout 3.5%. Small, sequential groups with different output lengths do not support broad causal latency or safety\nrankings. Local model metadata also warrants care: qwen:7b reports family qwen2 and 8B, while gemma:7b reports\nfamily gemma and 9B. Full artifact digests in the bundle identify the tested models more reliably than aliases.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nResearch manuscript draft  |  8 September 2026                                                                                                  7",
+        "score": 0.6812090895581323,
+        "lexical_score": 4.06391324737187,
+        "selection_score": 0.08347826086956522
+      },
+      {
+        "chunk_id": "pilot-53",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 53,
+        "location": "page 11",
+        "content": "Use the existing local models and execute source/run_model_pilot.py. Its requests use two temperatures, two seeds,\nthree fixed cases and a per-model warmup, saving all outputs as JSON. A rerun requires fresh review of responses; do\nnot reuse manual labels automatically. Record model digests rather than aliases alone, preserve the runtime version\nand distinguish wall time from server-reported generation duration.\n\nFor an end-to-end comparison, create an isolated workspace per variant, ingest an identical versioned corpus with one\nfixed embedder, prevent prior generated memories from contaminating later trials and run the same questions through\nthe authenticated task API. A model-only generation pilot is insufficient to measure retrieval or authorization effects.",
+        "score": 0.6586703762135555,
+        "lexical_score": 3.9897605611326026,
+        "selection_score": 0.08012820512820512
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "The task path uses temperature 0.3 and a maximum output of 800 tokens. [1]\nThe system instruction asks for evidence-only answers, [n] citations and rejection of instructions inside evidence. [1]",
+        "citations": [
+          "Research_Paper.pdf, page 4"
+        ],
+        "latency_ms": 5495,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "Small, sequential groups with different output lengths do not support broad causal latency or safety rankings. [3]\nOne high-scoring passage is sufficient for ANSWER, even if the requested detail is absent or other passages conflict. [1]\nThe threshold function is deterministic. [1]",
+        "citations": [
+          "Research_Paper.pdf, page 7",
+          "Research_Paper.pdf, page 4"
+        ],
+        "latency_ms": 12244,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.022
+        }
+      ],
+      "mean_overlap": 0.022,
+      "n_answered": 2
+    },
+    "combined_answer": "The provided sources do not contain enough information to answer this question.",
+    "synthesizer": "eval-gemma4-e4b",
+    "verification": {
+      "model": "eval-gemma4-e4b",
+      "claims": [],
+      "confidence": 0.0,
+      "decision": "unverified",
+      "error": "generation exceeded its output-token budget"
+    }
+  }
+}

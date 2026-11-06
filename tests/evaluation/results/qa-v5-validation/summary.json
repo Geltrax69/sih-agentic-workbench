@@ -1,0 +1,64 @@
+{
+  "date": "2026-11-04",
+  "scope": "Post-repair v5 combined-output evaluation; unblinded assistant review",
+  "sha256": {
+    "services/ai/app/extraction.py": "efa4d1db9a61e11412a2fd4e8e5bd3b050efa6ef8418c66d0b06d7979abc54e2",
+    "services/ai/app/retrieval.py": "1b8da11e6e9f2620c3c218fd1a0d5e5b56f146b15a60530304da3d0ccf49094d",
+    "services/ai/app/ingestion.py": "6aae03178b95eaa98d1b7d3e02a675f3d653bc1fb4beea7f9ea4170b8f521988",
+    "services/ai/app/grounding/excerpts.py": "dcf2b6af6d852869a9c57dda5c657472db37146dcfb2ddc8d763388a5124e0c8",
+    "services/ai/app/grounding/verifier.py": "c4c61eb1035c87e309260a36ec466ed32edb7c84c51d2384f0564efc5e344589",
+    "services/ai/app/multi_model.py": "acb4adb1b8a22be60c280e98f4d40f0ac6dc6dee763432185357bc9fc23c3ba2",
+    "services/ai/app/models_client.py": "22ca263a0cb097fd9b5dba72b498037bfb3d2f53b27fb5991efff05754ae9d18",
+    "services/ai/requirements.txt": "ab4399bfa1a38d4bbd8c5f59287bb45fa2c8f76d754a409f72eef2a4e8786314",
+    "docker-compose.yml": "624f984b7a838d83860f72fe246efc854e2ac2e5842352149afd7a2131c45578",
+    "tests/evaluation/document_pilot/questions.json": "0be7989aa36881d273c4e4efc26b38cef9d22d1201350769602a243deb67cf19",
+    "tests/evaluation/document_pilot/validation_questions.json": "2721958b0a9b58ef24417c1042eaa90d420113839dc03cf78ae686b8917cc7e2",
+    "tests/evaluation/document_pilot/review_v5.py": "e9f0033cbf44061fb0dcdc68670a7407b341cd8c8690a68b86dbbde34e1433f4"
+  },
+  "results": {
+    "lmstudio-postgres-2026-11-04-v5": {
+      "role": "Original 20-question development regression; real production PostgreSQL/pgvector retrieval",
+      "reviewer": "Authoring assistant, unblinded; strict factual completeness and no material false additions.",
+      "scored_output": "combined_answer only; individual outputs retained but not separately graded in this revision",
+      "correct": 17,
+      "total": 20,
+      "median_seconds": 1.8366329584969208,
+      "p95_nearest_rank_seconds": 4.348148292046972,
+      "answerable_median_seconds": 1.8581500829895958,
+      "passes_above_80_percent": true
+    },
+    "lmstudio-validation-2026-11-04-v5": {
+      "role": "Ten additional questions authored before the paragraph/ranking fixes, not used to tune them; real PostgreSQL retrieval, unblinded review",
+      "reviewer": "Authoring assistant, unblinded; strict factual completeness and no material false additions.",
+      "scored_output": "combined_answer only; individual outputs retained but not separately graded in this revision",
+      "correct": 9,
+      "total": 10,
+      "median_seconds": 3.4878841875179205,
+      "p95_nearest_rank_seconds": 4.445864167006221,
+      "answerable_median_seconds": 3.380669250007486,
+      "passes_above_80_percent": true
+    },
+    "maintenance-2026-11-04-v5": {
+      "role": "Second-document Markdown regression; used for development",
+      "reviewer": "Authoring assistant, unblinded; strict factual completeness and no material false additions.",
+      "scored_output": "combined_answer only; individual outputs retained but not separately graded in this revision",
+      "correct": 8,
+      "total": 8,
+      "median_seconds": 2.1541163335205056,
+      "p95_nearest_rank_seconds": 2.7827798750367947,
+      "answerable_median_seconds": 2.2365386460151058,
+      "passes_above_80_percent": true
+    },
+    "lmstudio-tables-2026-11-04-v5": {
+      "role": "Targeted table-row regression cases; not independent accuracy evidence",
+      "reviewer": "Authoring assistant, unblinded; strict factual completeness and no material false additions.",
+      "scored_output": "combined_answer only; individual outputs retained but not separately graded in this revision",
+      "correct": 3,
+      "total": 3,
+      "median_seconds": 4.434202332980931,
+      "p95_nearest_rank_seconds": 4.449573915975634,
+      "answerable_median_seconds": 4.434202332980931,
+      "passes_above_80_percent": true
+    }
+  }
+}

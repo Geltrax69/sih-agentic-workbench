@@ -1,0 +1,82 @@
+{
+  "case": {
+    "id": "Q11",
+    "category": "numeric",
+    "question": "What p95 latency did the 12-task AI workload record, and does the API-read throughput establish thousands of generated answers per second?",
+    "expected": "25.12 seconds p95. No: API reads and AI generation are different workloads.",
+    "pages": [
+      1,
+      7
+    ]
+  },
+  "wall_seconds": 31.517498583009,
+  "result": {
+    "question": "What p95 latency did the 12-task AI workload record, and does the API-read throughput establish thousands of generated answers per second?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-27",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 27,
+        "location": "page 7",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\nResearch manuscript draft  |  8 September 2026\n7\nindexed and did not change the normal question's action sequence. These assertions support the bounded workflow\nproperty, not universal prompt-injection resistance.\n5.2 AI, keyword and recovery measurements\nThe 12-task AI run recorded zero errors, elapsed time 83.22 seconds, median 20.55 seconds and p95 25.12 seconds.\nDividing count by elapsed time yields approximately 8.65 tasks/minute for that run. This is a different workload from the\nAPI reads and cannot support thousands of generated answers per second.\nThe earlier keyword pilot had hit fractions 3/3, 1/1 and 1/1 for the failure-cause, bearing and date questions,\nrespectively.",
+        "score": 0.7897121982591917
+      },
+      {
+        "chunk_id": "pilot-21",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 21,
+        "location": "page 5",
+        "content": "cks rather than a complete\ndisaster-recovery or availability study.\n4.3 Authenticated read workload\nThe API benchmark used four sequential closed-loop ThreadPoolExecutor stages with 1, 10, 50 and 100 workers.\nEach made 20,000 requests: 75% workspace collection reads and 25% authenticated-profile reads. The same QA\nidentity and small dataset were used. Throughput is request count divided by elapsed stage time. Per-request latency\nexcludes executor waiting before a worker starts the call, and percentiles use nearest-rank selection. Acceptance was\nzero errors and p95 below 2 seconds at each stage.\n4.4 AI workload and earlier keyword pilot\nA separate AI stress record contains 12 tasks at concurrency three using one repeated maintenance question, with\ntask completion/evidence/citation checks.",
+        "score": 0.7751108861504752
+      },
+      {
+        "chunk_id": "pilot-2",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 2,
+        "location": "page 1",
+        "content": "cated-read workload completed 80,000 requests without observed errors and reached a peak of 2,823.4\nrequests/s at 50 concurrent clients. A separate 12-task model workload recorded a 25.12-second p95 latency. An\nearlier three-question pilot achieved complete expected-keyword coverage, a measure that does not establish answer\naccuracy. In 24 fixed-evidence generations across two local models and two temperatures, all calls succeeded, but\none high-temperature output adopted an unsupported deletion premise from adversarial evidence. The results\ndemonstrate a functioning local workflow and the need to distinguish retrieval signal, text faithfulness and action\nauthorization. Small datasets, incomplete historical configuration capture and unblinded exploratory review limit\ngeneralization.",
+        "score": 0.7657264701976336
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "[3] The 12-task AI workload recorded a p95 latency of 25.12 seconds.\nThe API-read throughput does **not** establish thousands of generated answers per second; it indicates that this specific workload (the 12-task model) is designed to handle only a few thousand requests per second, as evidenced by the low throughput metrics in the benchmark and the small dataset used for testing.",
+        "citations": [
+          "Research_Paper.pdf, page 1"
+        ],
+        "latency_ms": 9511,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "*   **p95 latency of 12-task AI workload:** 25.12 seconds [3], which can also be seen as 25.12 seconds [1].\n*   **API-read throughput vs. speed:** The comparison is not possible, because the 8.65 tasks/minute rate from the 12-task AI run is different from the API reads and cannot support thousands of generated answers per second; it's only a few hundred at most [1].",
+        "citations": [
+          "Research_Paper.pdf, page 1",
+          "Research_Paper.pdf, page 7"
+        ],
+        "latency_ms": 18680,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.306
+        }
+      ],
+      "mean_overlap": 0.306,
+      "n_answered": 2
+    },
+    "combined_answer": "*   **p95 latency of 12-task AI workload:** 25.12 seconds [1], [3].\n*   **API-read throughput vs. speed:** The 12-task AI run hit about 8.65 tasks/minute, which is different from the API reads and cannot support thousands of generated answers per second; it's only a few hundred at most [1].\n\nThus, no comparison can be made between the two speeds.",
+    "synthesizer": "eval-gemma4-e4b",
+    "verification": {
+      "decision": "not_run_answer_accuracy_pilot"
+    }
+  }
+}

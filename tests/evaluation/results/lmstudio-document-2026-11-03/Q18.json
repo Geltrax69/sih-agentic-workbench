@@ -1,0 +1,76 @@
+{
+  "case": {
+    "id": "Q18",
+    "category": "unanswerable",
+    "question": "What is the patent application number filed by this project's inventors?",
+    "expected": "Not stated in this document; no patent filing number may be invented.",
+    "pages": []
+  },
+  "wall_seconds": 11.141143999993801,
+  "result": {
+    "question": "What is the patent application number filed by this project's inventors?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-44",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 44,
+        "location": "page 10",
+        "content": "mmit remain to be\narranged by the authors; no public dataset or repository release is claimed here.\nAuthor contributions and declarations\nNamed author contributions, institutional affiliations, funding and competing-interest declarations are pending\nconfirmation. The documentation was prepared with an AI coding assistant using repository inspection and local\nexperiments; the pilot's post-hoc labels were produced by that assistant. Human authors must review the manuscript,\nresults, attribution and any venue-specific disclosure requirements before submission.\nReferences\n[1] P. Lewis et al., \u201cRetrieval-Augmented Generation for Knowledge-Intensive NLP Tasks,\u201d NeurIPS, 2020.\nhttps://arxiv.org/abs/2005.11401\n[2] S.",
+        "score": 0.6046003235429198
+      },
+      {
+        "chunk_id": "pilot-18",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 18,
+        "location": "page 5",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\nResearch manuscript draft  |  8 September 2026\n5\n4. Evaluation method\n4.1 Evidence provenance and environment\nThe inspected repository has base commit a3020574e0ce55c905f69e48926ed123475ab1d5 and uncommitted\nchanges. The accompanying provenance file records relevant source hashes and historical evidence hashes.\nHistorical JSON files do not identify exact patch hashes, and some omit timestamps and model identities. The current\nsource snapshot therefore explains current behavior but cannot retroactively freeze every earlier experiment.\nAt documentation time, the host reports Apple M4 and 16 GiB memory; Docker reports 10 CPUs and approximately\n7.65 GiB. The additional generation experiment uses the host Ollama service.",
+        "score": 0.5688020121078814
+      },
+      {
+        "chunk_id": "pilot-43",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 43,
+        "location": "page 10",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\nResearch manuscript draft  |  8 September 2026\n10\nImplementation priorities are memory provenance invalidation, approval-content binding, durable job recovery, report\ndelivery and public operational validation. These steps would support stronger claims than the present exploratory\nevidence allows.\nData and code availability\nThe accompanying package includes original-result copies with hashes, a current source hash map, editable\nmanuscript/dossier text, diagrams, model-pilot requests and outputs, and scripts. The inspected local repository is\n/Users/lalitsingh/PROJECTS/sih-agentic-workbench. Public archival access and a frozen release commit remain to be\narranged by the authors; no public dataset or repository release is claimed here.",
+        "score": 0.5568251949335916
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "The provided sources do not include a patent application number for this project.\n\nSource 1: (Research_Paper.pdf, page 10)\nSource 2: [2] (Research_Paper.pdf, page 5)\nSource 3: (Research_Paper.pdf, page 10)\n\nNo information regarding the patent application number is present in these sources.",
+        "citations": [
+          "Research_Paper.pdf, page 5"
+        ],
+        "latency_ms": 5403,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "Which source does this belong to? None of the sources contains a patent application number for the project's inventors.",
+        "citations": [],
+        "latency_ms": 5277,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.3
+        }
+      ],
+      "mean_overlap": 0.3,
+      "n_answered": 2
+    },
+    "combined_answer": "There is no information about a patent application number for the project's inventors in the provided sources.",
+    "synthesizer": "eval-gemma4-e4b",
+    "verification": {
+      "decision": "not_run_answer_accuracy_pilot"
+    }
+  }
+}

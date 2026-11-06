@@ -1,0 +1,127 @@
+{
+  "case": {
+    "id": "H02",
+    "category": "architecture",
+    "question": "Where are original uploaded document bytes stored?",
+    "expected": "MinIO stores the uploaded original bytes.",
+    "pages": [
+      3
+    ]
+  },
+  "wall_seconds": 4.345413082977757,
+  "result": {
+    "question": "Where are original uploaded document bytes stored?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-11",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 11,
+        "location": "page 3",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\n\n3. System design\n\n\n\n\n                                                               Browser + Nginx\n                                                            Static React UI; /api proxy\n\n\n\n                                                                               Bearer token\n\n\n                                                                 Go public API                                         PostgreSQL\n                                                          JWT; workspace roles; HTTP                             Metadata, vectors, tasks,\n                                                                                                                    approvals, memory\n\nOriginal file read                                                  Internal secret\n\n\n\n                 MinIO                                        Python AI service\n         Original uploaded bytes                           Ingestion; retrieval; task flow                                 Redis\n\n                                                                                                               Required health dependency\n\n\n                                                                                       Private endpoint policy\n\n\n\n\n                                                              Local model host\n                                                          Embedding + generation calls\n\n\n\n                                     Application controls authorize actions; model output is untrusted text.\n\nFigure 1. Implemented system components and trust boundaries. Supporting Redis/graph components are not a demonstrated durable\ntask queue or graph-augmented retrieval path.\n\n3.1 Services and data ownership\n\nNginx serves a compiled React frontend and proxies requests to a Go API. The API authenticates bearer tokens and\nchecks workspace roles before calling an internal Python FastAPI service. PostgreSQL stores users, memberships,\ndocument metadata, chunks, tasks, steps, approvals and memory. MinIO stores uploaded bytes. A model adapter",
+        "score": 0.6223544596075556,
+        "lexical_score": 8.896270663938974,
+        "selection_score": 0.09523809523809523
+      },
+      {
+        "chunk_id": "pilot-17",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 17,
+        "location": "page 4",
+        "content": "The threshold function is deterministic. It does not estimate the probability of answer correctness. One high-scoring\npassage is sufficient for ANSWER, even if the requested detail is absent or other passages conflict. Stale evidence\nadds a reason string in the gate without reducing the score. Normal executor items are constructed after\nworkspace-scoped SQL retrieval; revoked/stale metadata is not comprehensively propagated.\n\nFor non-refused tasks, numbered evidence and up to three recent eligible memory items are sent to the generator. The\ntask path uses temperature 0.3 and a maximum output of 800 tokens. The system instruction asks for evidence-only\nanswers, [n] citations and rejection of instructions inside evidence. Returned source filenames are evidence metadata,\n\nnot a semantic certificate for every claim.\n\n3.3 Bounded orchestration and approval\n\nThe task begins in PLANNING, enters RUNNING, executes document_search and proceeds to VERIFYING and\nCOMPLETED. Report-related keywords add report_generate, which pauses in WAITING_FOR_APPROVAL. The\npublic decision route resolves workspace scope from the stored task and requires an owner role. An approval claims\nRUNNING under a task-row lock before resuming execution, preventing the second concurrent decision in the tested\npath from executing the same transition.\n\nThe current report tool returns Markdown stored in a task step. A public report-download artifact is not exposed. The\nschema and step vocabulary are broader than the active workflow: dynamic model routing, general DAG planning,\n\ngraph retrieval expansion and complete tool-execution auditing remain outside the demonstrated implementation.\n\n3.4 Memory and residual trust\n\nAn ANSWER decision writes up to 500 characters of generated text into memory with verified=true, and later prompts\ndescribe these items as verified facts. This flag reflects the retrieval gate, not independent verification. Thus an\nunsupported generated claim can become later context. Source deletion also does not establish revocation of\nhistorical answer memories. These limitations are material because a model-comparison experiment that does not\nfreeze memory can confound model effects with previous generated content.",
+        "score": 0.5203606187593248,
+        "lexical_score": 2.3100737385044043,
+        "selection_score": 0.07291666666666666
+      },
+      {
+        "chunk_id": "pilot-47",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 47,
+        "location": "page 10",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\n\n\nImplementation priorities are memory provenance invalidation, approval-content binding, durable job recovery, report\ndelivery and public operational validation. These steps would support stronger claims than the present exploratory\nevidence allows.\n\nData and code availability\n\nThe accompanying package includes original-result copies with hashes, a current source hash map, editable\nmanuscript/dossier text, diagrams, model-pilot requests and outputs, and scripts. The inspected local repository is\n/Users/lalitsingh/PROJECTS/sih-agentic-workbench. Public archival access and a frozen release commit remain to be\narranged by the authors; no public dataset or repository release is claimed here.\n\nAuthor contributions and declarations\n\nNamed author contributions, institutional affiliations, funding and competing-interest declarations are pending\nconfirmation. The documentation was prepared with an AI coding assistant using repository inspection and local\nexperiments; the pilot's post-hoc labels were produced by that assistant. Human authors must review the manuscript,\nresults, attribution and any venue-specific disclosure requirements before submission.\n\nReferences\n\n[1] P. Lewis et al., \u201cRetrieval-Augmented Generation for Knowledge-Intensive NLP Tasks,\u201d NeurIPS, 2020.\nhttps://arxiv.org/abs/2005.11401\n\n[2] S. Yao et al., \u201cReAct: Synergizing Reasoning and Acting in Language Models,\u201d arXiv:2210.03629, 2022.\nhttps://arxiv.org/abs/2210.03629\n\n[3] K.",
+        "score": 0.5146669126874709,
+        "lexical_score": 2.271330041497223,
+        "selection_score": 0.06703296703296703
+      },
+      {
+        "chunk_id": "pilot-21",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 21,
+        "location": "page 5",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\n\n4. Evaluation method\n\n4.1 Evidence provenance and environment\n\nThe inspected repository has base commit a3020574e0ce55c905f69e48926ed123475ab1d5 and uncommitted\nchanges. The accompanying provenance file records relevant source hashes and historical evidence hashes.\nHistorical JSON files do not identify exact patch hashes, and some omit timestamps and model identities. The current\nsource snapshot therefore explains current behavior but cannot retroactively freeze every earlier experiment.\n\nAt documentation time, the host reports Apple M4 and 16 GiB memory; Docker reports 10 CPUs and approximately\n7.65 GiB. The additional generation experiment uses the host Ollama service. Historical tests shared local hardware\n\nand did not capture all contention, cache or resource conditions. No GPU utilization distribution or energy\nmeasurement is available.\n\n4.2 Retained functional and operational checks\n\nThe validation log records successful Go build/vet/unit checks, frontend builds, 30 Python unit tests, Go integration\ntests and two Python integration tests. Two Python test-client deprecation warnings were non-failing. The older Go\nrace log is treated as separate evidence. A legacy opt-in model test is not counted as passed when skipped; the later\nlive E2E fixture independently exercised an injection-bearing upload.\n\nThe E2E run created a fresh workspace, checked refusal with no evidence, rejected a report request, uploaded a\n\nmaintenance note, confirmed indexing, checked a grounded answer and raced two report approvals. Assertions\nincluded nonempty evidence, a fixture filename, the word filter in the answer, a retrieval-only step sequence for the\nordinary question and continued INDEXED status of the document.\n\nThe recovery check restored a database dump into a scratch database and compared table row counts. The fault test\npaused/resumed the database and restarted the API. These are bounded functional checks rather than a complete\ndisaster-recovery or availability study.\n\n4.3 Authenticated read workload\n\nThe API benchmark used four sequential closed-loop ThreadPoolExecutor stages with 1, 10, 50 and 100 workers.\nEach made 20,000 requests: 75% workspace collection reads and 25% authenticated-profile reads.",
+        "score": 0.5088756025164328,
+        "lexical_score": 2.2934563626339664,
+        "selection_score": 0.06702702702702704
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "MinIO Python AI service Original uploaded bytes Ingestion; retrieval; task flow Redis [1]",
+        "citations": [
+          "Research_Paper.pdf, page 3"
+        ],
+        "latency_ms": 2812,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "The accompanying package includes original-result copies with hashes, a current source hash map, editable manuscript/dossier text, diagrams, model-pilot requests and outputs, and scripts. [3]\nThe inspected local repository is /Users/lalitsingh/PROJECTS/sih-agentic-workbench. [3]\nPublic archival access and a frozen release commit remain to be arranged by the authors; no public dataset or repository release is claimed here. [3]\nMinIO Python AI service Original uploaded bytes Ingestion; retrieval; task flow Redis [1]",
+        "citations": [
+          "Research_Paper.pdf, page 10",
+          "Research_Paper.pdf, page 3"
+        ],
+        "latency_ms": 4278,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.212
+        }
+      ],
+      "mean_overlap": 0.212,
+      "n_answered": 2
+    },
+    "combined_answer": "MinIO Python AI service Original uploaded bytes Ingestion; retrieval; task flow Redis [1]\nThe accompanying package includes original-result copies with hashes, a current source hash map, editable manuscript/dossier text, diagrams, model-pilot requests and outputs, and scripts. [3]\nThe inspected local repository is /Users/lalitsingh/PROJECTS/sih-agentic-workbench. [3]\nPublic archival access and a frozen release commit remain to be arranged by the authors; no public dataset or repository release is claimed here. [3]",
+    "synthesizer": "source_union",
+    "verification": {
+      "model": "eval-gemma4-e4b",
+      "claims": [
+        {
+          "claim": "MinIO Python AI service Original uploaded bytes Ingestion; retrieval; task flow Redis [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "The accompanying package includes original-result copies with hashes, a current source hash map, editable manuscript/dossier text, diagrams, model-pilot requests and outputs, and scripts. [3]",
+          "source": 3,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "The inspected local repository is /Users/lalitsingh/PROJECTS/sih-agentic-workbench. [3]",
+          "source": 3,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Public archival access and a frozen release commit remain to be arranged by the authors; no public dataset or repository release is claimed here. [3]",
+          "source": 3,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        }
+      ],
+      "confidence": 1.0,
+      "decision": "verified",
+      "method": "source_excerpt_match"
+    }
+  }
+}

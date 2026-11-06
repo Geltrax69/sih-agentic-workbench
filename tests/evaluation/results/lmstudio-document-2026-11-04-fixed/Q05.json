@@ -1,0 +1,113 @@
+{
+  "case": {
+    "id": "Q05",
+    "category": "limitation",
+    "question": "According to the manuscript, is Redis a demonstrated durable job transport, and is a durable retry worker implemented?",
+    "expected": "No to both. Redis participates in health checks; a durable retry worker for lost triggers or abandoned RUNNING jobs is absent.",
+    "pages": [
+      3
+    ]
+  },
+  "wall_seconds": 8.149390999984462,
+  "result": {
+    "question": "According to the manuscript, is Redis a demonstrated durable job transport, and is a durable retry worker implemented?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-14",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 14,
+        "location": "page 3",
+        "content": "worker for lost triggers or abandoned RUNNING jobs is absent. Redis participates in health checks but is not a\ndemonstrated job transport in the current execution path.\n\n\n\n\n\n\n\n\n\n\n\nResearch manuscript draft  |  8 September 2026                                                                                                    3",
+        "score": 0.793053139706286,
+        "lexical_score": 13.107693278182511,
+        "selection_score": 0.09523809523809523
+      },
+      {
+        "chunk_id": "pilot-41",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 41,
+        "location": "page 9",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\n\n7. Discussion\n\nRQ1 is supported within the implemented scope: the project combines document ingestion, scoped retrieval, threshold\nrefusal and a persisted owner-approval report sequence. It does not demonstrate a general agent planner, complete\nsemantic verification or a downloadable reporting product. RQ2 yields evidence for selected local functional and load\nproperties, with substantial limits on production inference. RQ3 yields a concrete, reproducible example of text\nvariation and contamination under one changed model-temperature configuration, without establishing a general\nwinner.\n\nFor deployment, the most consequential improvements are provenance-aware memory, reviewable report content",
+        "score": 0.6074512496812897,
+        "lexical_score": 1.9474455411302758,
+        "selection_score": 0.07870370370370369
+      },
+      {
+        "chunk_id": "pilot-47",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 47,
+        "location": "page 10",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\n\n\nImplementation priorities are memory provenance invalidation, approval-content binding, durable job recovery, report\ndelivery and public operational validation. These steps would support stronger claims than the present exploratory\nevidence allows.\n\nData and code availability\n\nThe accompanying package includes original-result copies with hashes, a current source hash map, editable\nmanuscript/dossier text, diagrams, model-pilot requests and outputs, and scripts. The inspected local repository is\n/Users/lalitsingh/PROJECTS/sih-agentic-workbench. Public archival access and a frozen release commit remain to be\narranged by the authors; no public dataset or repository release is claimed here.\n\nAuthor contributions and declarations",
+        "score": 0.587808799184123,
+        "lexical_score": 3.5468129129269728,
+        "selection_score": 0.07738095238095238
+      },
+      {
+        "chunk_id": "pilot-6",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 6,
+        "location": "page 2",
+        "content": "RQ1: Can a bounded local document workflow combine workspace-scoped retrieval with a deterministic\nanswer/refusal gate and persisted human approval? RQ2: What do the retained functional, load and recovery\nmeasurements establish about the prototype, and what do they leave unmeasured? RQ3: With supplied evidence held\nfixed, how do local model choice and sampling temperature affect response content and latency in a small exploratory\ncomparison?\n\n1.2 Contributions and scope\n\nWe present an inspectable systems integration, a distinction between implemented and planned capabilities, an\nanalysis of retained test artifacts and a reproducible fixed-evidence sensitivity pilot. The contribution is not a new\nlanguage-model architecture or a state-of-the-art retrieval algorithm.",
+        "score": 0.5929921704275092,
+        "lexical_score": 1.9371913955037916,
+        "selection_score": 0.07417582417582418
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "worker for lost triggers or abandoned RUNNING jobs is absent. [1]\nRedis participates in health checks but is not a demonstrated job transport in the current execution path. [1]",
+        "citations": [
+          "Research_Paper.pdf, page 3"
+        ],
+        "latency_ms": 4178,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "worker for lost triggers or abandoned RUNNING jobs is absent. [1]\nRedis participates in health checks but is not a demonstrated job transport in the current execution path. [1]",
+        "citations": [
+          "Research_Paper.pdf, page 3"
+        ],
+        "latency_ms": 7811,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 1.0
+        }
+      ],
+      "mean_overlap": 1.0,
+      "n_answered": 2
+    },
+    "combined_answer": "worker for lost triggers or abandoned RUNNING jobs is absent. [1]\nRedis participates in health checks but is not a demonstrated job transport in the current execution path. [1]",
+    "synthesizer": "eval-gemma4-e4b",
+    "verification": {
+      "model": "eval-gemma4-e4b",
+      "claims": [
+        {
+          "claim": "worker for lost triggers or abandoned RUNNING jobs is absent. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Redis participates in health checks but is not a demonstrated job transport in the current execution path. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        }
+      ],
+      "confidence": 1.0,
+      "decision": "verified"
+    }
+  }
+}

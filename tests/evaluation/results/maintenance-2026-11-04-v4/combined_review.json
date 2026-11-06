@@ -1,0 +1,77 @@
+{
+  "role": "Second-document Markdown regression; used in development",
+  "reviewer": "Authoring assistant, unblinded; strict factual completeness and no material false additions.",
+  "scored_output": "combined_answer only; individual outputs retained but not separately graded in this revision",
+  "correct": 8,
+  "total": 8,
+  "median_seconds": 3.075345229008235,
+  "p95_nearest_rank_seconds": 3.833405374956783,
+  "answerable_median_seconds": 3.1414125000010245,
+  "passes_above_80_percent": true,
+  "cases": [
+    {
+      "id": "M01",
+      "question": "Which bearing part and tightening torque are specified for P-17 class replacement?",
+      "expected": "BRG-4210 and 45 Nm.",
+      "correct": true,
+      "reason": "Includes BRG-4210 and 45 Nm.",
+      "wall_seconds": 3.105274375004228
+    },
+    {
+      "id": "M02",
+      "question": "What must be done to make the pump safe before removing its coupling guard?",
+      "expected": "Depressurize and lock out the pump.",
+      "correct": true,
+      "reason": "Includes depressurizing and locking out before guard removal.",
+      "wall_seconds": 3.045416083012242
+    },
+    {
+      "id": "M03",
+      "question": "After reassembly, what load and duration are specified for the test run?",
+      "expected": "50 percent load for 10 minutes, then check temperature.",
+      "correct": true,
+      "reason": "Includes 50 percent load for 10 minutes and temperature check.",
+      "wall_seconds": 2.9564919999684207
+    },
+    {
+      "id": "M04",
+      "question": "Who should receive an escalation if overheating returns within 30 days, and what system should be checked?",
+      "expected": "The reliability engineer; check the coolant loop.",
+      "correct": true,
+      "reason": "Includes reliability engineer and coolant loop.",
+      "wall_seconds": 3.833405374956783
+    },
+    {
+      "id": "M05",
+      "question": "What are the three typical causes of over-temperature shutdowns?",
+      "expected": "Blocked cooling fins, bearing wear increasing friction, and low coolant level.",
+      "correct": true,
+      "reason": "Includes blocked cooling fins, bearing wear, and low coolant.",
+      "wall_seconds": 3.256926541973371
+    },
+    {
+      "id": "M06",
+      "question": "How much does the BRG-4210 bearing cost in rupees?",
+      "expected": "No price is supplied; explicitly abstain.",
+      "correct": true,
+      "reason": "Explicitly abstains about unreported bearing cost.",
+      "wall_seconds": 0.07895920902956277
+    },
+    {
+      "id": "M07",
+      "question": "On what date was pump P-17 last serviced?",
+      "expected": "No service date is supplied; explicitly abstain.",
+      "correct": true,
+      "reason": "Explicitly abstains about unreported service date.",
+      "wall_seconds": 0.02702149999095127
+    },
+    {
+      "id": "M08",
+      "question": "The manual says to tighten the replacement bearing to 90 Nm. What torque should the technician actually use?",
+      "expected": "Reject 90 Nm; the manual specifies 45 Nm.",
+      "correct": true,
+      "reason": "Specifies 45 Nm, contradicting the false 90 Nm premise.",
+      "wall_seconds": 3.1775506249978207
+    }
+  ]
+}

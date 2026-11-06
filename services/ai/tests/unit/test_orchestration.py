@@ -77,3 +77,48 @@ def test_sql_readonly_rejects_writes() -> None:
         except ToolError:
             continue
         raise AssertionError(f"must reject: {bad}")
+
+
+def test_focus_evidence_keeps_only_close_top_hits() -> None:
+    from app.orchestration.executor import focus_evidence
+
+    ev = [{"score": s} for s in (0.49, 0.87, 0.80, 0.75, 0.74, 0.25)]
+    assert [e["score"] for e in focus_evidence(ev)] == [0.87, 0.80, 0.75]
+    assert [e["score"] for e in focus_evidence([{"score": 0.9}, {"score": 0.5}])] == [0.9]
+    assert focus_evidence([{"score": 0.2}]) == [] and focus_evidence([]) == []
+
+
+def test_verifier_split_numbers_parse_and_score() -> None:
+    from app.grounding.verifier import is_absence, missing_numbers, parse_verdict, score, split_sentences
+
+    assert split_sentences("Budget is 4.2 crore [1]. Leave is 24 days [2].\nThe cafeteria opens at 8:15 AM.") == [
+        "Budget is 4.2 crore [1].",
+        "Leave is 24 days [2].",
+        "The cafeteria opens at 8:15 AM.",
+    ]
+    assert is_absence("The sources do not contain the answer.")
+    assert is_absence("The documents don't mention who the CEO is.")
+    assert not is_absence("No, passwords must be rotated every 90 days [1].")
+
+    src = "[1] (hr.docx, page 2)\nWork from home is allowed two days per week. Cafeteria opens at 8:15 AM. Budget 4.2 crore."
+    assert missing_numbers("You can work from home 2 days per week [1].", src) == set()
+    assert missing_numbers("You can work from home three days per week [1].", src) == {"3"}
+    assert missing_numbers("The cafeteria opens at 9 AM [1].", src) == {"9"}
+    assert missing_numbers("The budget is 99 crore [1].", src) == {"99"}
+    assert missing_numbers("The budget is 4.2 crore [1].", src) == set()
+
+    from app.grounding.verifier import topic_overlap
+
+    pw = "[1] (security.pdf, page 2)\nPasswords must be rotated every 90 days."
+    assert topic_overlap("You can work from home two days per week [1].", pw) < 1 / 3
+    assert topic_overlap("No, passwords must be rotated every 90 days [1].", pw) == 1.0
+
+    assert parse_verdict("thinking... SUPPORTED? no.\nNOT_SUPPORTED") is False
+    assert parse_verdict("SUPPORTED") is True and parse_verdict("unsure") is False
+
+    ok, bad = {"supported": True}, {"supported": False}
+    assert score([ok, bad], weak_evidence=False) == (0.5, "partially_verified")
+    assert score([ok], weak_evidence=False) == (1.0, "verified")
+    assert score([ok], weak_evidence=True)[0] == 0.7
+    assert score([bad], weak_evidence=False) == (0.0, "unverified")
+    assert score([], weak_evidence=False) == (0.0, "not_found")

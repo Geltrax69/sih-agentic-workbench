@@ -1,0 +1,122 @@
+{
+  "case": {
+    "id": "Q11",
+    "category": "numeric",
+    "question": "What p95 latency did the 12-task AI workload record, and does the API-read throughput establish thousands of generated answers per second?",
+    "expected": "25.12 seconds p95. No: API reads and AI generation are different workloads.",
+    "pages": [
+      1,
+      7
+    ]
+  },
+  "wall_seconds": 6.4066807919880375,
+  "result": {
+    "question": "What p95 latency did the 12-task AI workload record, and does the API-read throughput establish thousands of generated answers per second?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-23",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 23,
+        "location": "page 5",
+        "content": "Each made 20,000 requests: 75% workspace collection reads and 25% authenticated-profile reads. The same QA\nidentity and small dataset were used. Throughput is request count divided by elapsed stage time. Per-request latency\nexcludes executor waiting before a worker starts the call, and percentiles use nearest-rank selection. Acceptance was\nzero errors and p95 below 2 seconds at each stage.\n\n4.4 AI workload and earlier keyword pilot\n\nA separate AI stress record contains 12 tasks at concurrency three using one repeated maintenance question, with\ntask completion/evidence/citation checks. It contains no independently graded answer rubric. The earlier\nthree-question evaluation uses expected keywords and counts a hit if a keyword occurs in either evidence or answer;",
+        "score": 0.8186121646452706,
+        "lexical_score": 17.238264583815322,
+        "selection_score": 0.09307359307359307
+      },
+      {
+        "chunk_id": "pilot-31",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 31,
+        "location": "page 7",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\n\n\nindexed and did not change the normal question's action sequence. These assertions support the bounded workflow\nproperty, not universal prompt-injection resistance.\n\n5.2 AI, keyword and recovery measurements\n\nThe 12-task AI run recorded zero errors, elapsed time 83.22 seconds, median 20.55 seconds and p95 25.12 seconds.\nDividing count by elapsed time yields approximately 8.65 tasks/minute for that run. This is a different workload from the\nAPI reads and cannot support thousands of generated answers per second.\n\nThe earlier keyword pilot had hit fractions 3/3, 1/1 and 1/1 for the failure-cause, bearing and date questions,\nrespectively. Its stored similarity scores were 0.841924, 0.683897 and 0.692557, and all decisions were answer. Mean",
+        "score": 0.7734636114768971,
+        "lexical_score": 18.46465902102988,
+        "selection_score": 0.09307359307359307
+      },
+      {
+        "chunk_id": "pilot-1",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 1,
+        "location": "page 1",
+        "content": "actions that affect organizational workflows. We describe a local AI workbench integrating workspace-scoped\ndocument retrieval, a deterministic evidence threshold, persisted task execution and owner approval for a report tool.\nThe implementation uses a Go API, Python AI service, PostgreSQL/pgvector, object storage and a locally configured\nmodel endpoint. Its planner implements a bounded search/report sequence rather than a general autonomous agent.\nWe analyze retained local validation and conduct an additional controlled generation pilot. A historical\nauthenticated-read workload completed 80,000 requests without observed errors and reached a peak of 2,823.4\nrequests/s at 50 concurrent clients. A separate 12-task model workload recorded a 25.12-second p95 latency. An",
+        "score": 0.7018045752787532,
+        "lexical_score": 13.039438391125111,
+        "selection_score": 0.08193979933110368
+      },
+      {
+        "chunk_id": "pilot-26",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 26,
+        "location": "page 6",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\n\n\ngate, API roles and approval tools. Native API timing/token fields, model digests, request hashes, seeds and full\nresponses were recorded. Differences from the application's endpoint and generation cap prevent treating these\ntimings as production task latency. [7]\n\nAutomated checks recorded transport success, required keywords, [1] marker presence and selected refusal/injection\nstrings. The authoring assistant then performed an unblinded, post-hoc textual review for required facts or abstention\nand unsupported deletion claims. The labels are exploratory annotations, not a preregistered or expert-blinded\naccuracy study.\n\n5. Results\n\n5.1 API load and functional observations",
+        "score": 0.7282575116446495,
+        "lexical_score": 4.361351746257166,
+        "selection_score": 0.07681159420289854
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "A separate 12-task model workload recorded a 25.12-second p95 latency. [3]\n5.2 AI, keyword and recovery measurements The 12-task AI run recorded zero errors, elapsed time 83.22 seconds, median 20.55 seconds and p95 25.12 seconds. [2]",
+        "citations": [
+          "Research_Paper.pdf, page 1",
+          "Research_Paper.pdf, page 7"
+        ],
+        "latency_ms": 4100,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "5.2 AI, keyword and recovery measurements The 12-task AI run recorded zero errors, elapsed time 83.22 seconds, median 20.55 seconds and p95 25.12 seconds. [2]\nThis is a different workload from the API reads and cannot support thousands of generated answers per second. [2]",
+        "citations": [
+          "Research_Paper.pdf, page 7"
+        ],
+        "latency_ms": 6315,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.556
+        }
+      ],
+      "mean_overlap": 0.556,
+      "n_answered": 2
+    },
+    "combined_answer": "A separate 12-task model workload recorded a 25.12-second p95 latency. [3]\n5.2 AI, keyword and recovery measurements The 12-task AI run recorded zero errors, elapsed time 83.22 seconds, median 20.55 seconds and p95 25.12 seconds. [2]\nThis is a different workload from the API reads and cannot support thousands of generated answers per second. [2]",
+    "synthesizer": "source_union",
+    "verification": {
+      "model": "eval-gemma4-e4b",
+      "claims": [
+        {
+          "claim": "A separate 12-task model workload recorded a 25.12-second p95 latency. [3]",
+          "source": 3,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "5.2 AI, keyword and recovery measurements The 12-task AI run recorded zero errors, elapsed time 83.22 seconds, median 20.55 seconds and p95 25.12 seconds. [2]",
+          "source": 2,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "This is a different workload from the API reads and cannot support thousands of generated answers per second. [2]",
+          "source": 2,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        }
+      ],
+      "confidence": 1.0,
+      "decision": "verified",
+      "method": "source_excerpt_match"
+    }
+  }
+}

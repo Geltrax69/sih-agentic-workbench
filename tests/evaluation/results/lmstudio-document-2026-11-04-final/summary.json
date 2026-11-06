@@ -1,0 +1,87 @@
+{
+  "method": "Unblinded 20-question development-set comparison; strict completeness with no material false additions. One trial per request. Raw source excerpts replace free-text answers in the after run.",
+  "before": {
+    "completed_requests": 19,
+    "transport_or_pipeline_failures": 1,
+    "models": {
+      "eval-minicpm5-1b": {
+        "generator_errors": 0,
+        "correct": 11,
+        "requests": 20,
+        "correct_request_fraction": 0.55,
+        "completed_response_fraction": 0.5789473684210527,
+        "unsupported_material_responses": 7
+      },
+      "eval-gemma4-e4b": {
+        "generator_errors": 0,
+        "correct": 8,
+        "requests": 20,
+        "correct_request_fraction": 0.4,
+        "completed_response_fraction": 0.42105263157894735,
+        "unsupported_material_responses": 8
+      },
+      "combined": {
+        "generator_errors": 0,
+        "correct": 6,
+        "requests": 20,
+        "correct_request_fraction": 0.3,
+        "completed_response_fraction": 0.3157894736842105,
+        "unsupported_material_responses": 12
+      }
+    },
+    "retrieval_coverage": {
+      "complete": 13,
+      "partial": 2,
+      "missing": 1,
+      "not_applicable": 3,
+      "not_run": 1
+    },
+    "pipeline_wall_seconds": {
+      "median": 20.846281750011258,
+      "p95_nearest_rank": 38.121010291040875
+    },
+    "http_generations": 58,
+    "length_capped_responses": 1
+  },
+  "after": {
+    "completed_requests": 20,
+    "transport_or_pipeline_failures": 0,
+    "models": {
+      "eval-minicpm5-1b": {
+        "generator_errors": 0,
+        "correct": 9,
+        "requests": 20,
+        "correct_request_fraction": 0.45,
+        "completed_response_fraction": 0.45,
+        "unsupported_material_responses": 0
+      },
+      "eval-gemma4-e4b": {
+        "generator_errors": 2,
+        "correct": 10,
+        "requests": 20,
+        "correct_request_fraction": 0.5,
+        "completed_response_fraction": 0.5,
+        "unsupported_material_responses": 0
+      },
+      "combined": {
+        "generator_errors": 0,
+        "correct": 13,
+        "requests": 20,
+        "correct_request_fraction": 0.65,
+        "completed_response_fraction": 0.65,
+        "unsupported_material_responses": 0
+      }
+    },
+    "retrieval_coverage": {
+      "complete": 16,
+      "partial": 1,
+      "not_applicable": 3
+    },
+    "pipeline_wall_seconds": {
+      "median": 6.154388708499027,
+      "p95_nearest_rank": 8.793064875004347
+    },
+    "http_generations": 40,
+    "length_capped_responses": 2
+  }
+}

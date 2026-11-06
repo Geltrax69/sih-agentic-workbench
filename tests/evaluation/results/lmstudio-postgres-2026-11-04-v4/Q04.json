@@ -1,0 +1,155 @@
+{
+  "case": {
+    "id": "Q04",
+    "category": "numeric",
+    "question": "What vector dimensionality does the manuscript use for stored embeddings?",
+    "expected": "768 dimensions, vector(768).",
+    "pages": [
+      3,
+      8
+    ]
+  },
+  "wall_seconds": 5.06075291603338,
+  "result": {
+    "question": "What vector dimensionality does the manuscript use for stored embeddings?",
+    "evidence": [
+      {
+        "chunk_id": "c796a00e-cf35-4216-a7f0-36147ed14cd8",
+        "document_id": "8d1f90d7-230f-5d18-99a9-4e983be15275",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 37,
+        "location": "page 8",
+        "content": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH\n\n6. Configuration sensitivity and failure analysis\n\n6.1 Discrete decision changes\n\nThe evidence threshold creates discontinuities. A best usable score of 0.29 refuses, 0.30 permits a warning answer\nand 0.45 permits an answer under current settings. Raising the strong threshold to 0.70 while retaining weak=0.30\nwould map the three historical pilot scores to one answer and two warning answers. This is a deterministic replay of\nrecorded scores, not evidence of improved correctness.\n\nA new generator changes conditional text behavior while fixed evidence scores leave the gate unchanged. An\nembedding-model replacement changes retrieval geometry and requires compatible corpus/query embeddings,\nreindexing and threshold recalibration. Matching vector dimensionality alone does not make embeddings from different\nmodels comparable. The current vector(768) schema additionally requires a migration if the new dimension differs.\n\n6.2 Segmentation experiment\n\nRunning the actual chunker over the three demonstration files produced three chunks at 800/100, 800/0, 800/200 and\n1,200/100 characters. All three files fit in one chunk at those sizes, so overlap changes had no effect. At 400/0 the\ncorpus produced five chunks and 1,394 stored characters; at 400/100 it produced six chunks and 1,694 characters.\nThe default stored 1,396 characters.\n\nThese counts demonstrate segmentation and duplication effects only. They do not measure retrieval quality or answer\nchanges.\n\nchanges. The tiny corpus is poorly suited to testing overlap because it exercises little boundary splitting under the\ndefault setting. A realistic corpus should include long procedures, multi-page tables and cases whose evidence\ncrosses chunk boundaries.\n\n6.3 Distinguishing failure layers\n\n\n Layer Example failure Required evaluation\n\n\n Access control Cross-workspace task read Role-matrix and object-scope integration tests\n\n\n Retrieval Relevant answer passage not retrieved Labeled recall@k and exact-search comparison\n\n\n Answerability Related evidence lacks requested value Held-out unanswerable/contradiction set\n\nGeneration Adversarial deletion premise enters answer Claim support and injection-contamination review\n\n\n Action control Duplicate or unauthorized tool execution Approval races, crash recovery and privilege checks\n\n\n Memory Unsupported answer reused as a fact Frozen-memory ablation and source-revocation tests\n\n\nThe passing action-sequence assertion and failing generated-text example are compatible: application controls can\nconstrain tools while the model still produces unsupported language. Likewise, a source citation marker can coexist\nwith an unsupported claim. Evaluation should preserve these distinctions rather than collapse every outcome into one\n\u201cAI accuracy\u201d percentage.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nResearch manuscript draft | 8 September 2026 8",
+        "score": 0.6725796081363572,
+        "context_only": false,
+        "lexical_score": 8.139679828984276,
+        "selection_score": 0.09307359307359307
+      },
+      {
+        "chunk_id": "eeebcf91-fd25-4d69-a9b0-4ed732bdab74",
+        "document_id": "8d1f90d7-230f-5d18-99a9-4e983be15275",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 13,
+        "location": "page 3",
+        "content": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH\n\n3. System design\n\n\n\n\n Browser + Nginx\n Static React UI; /api proxy\n\n\n\n Bearer token\n\n\n Go public API PostgreSQL\n JWT; workspace roles; HTTP Metadata, vectors, tasks,\n approvals, memory\n\nOriginal file read Internal secret\n\n\n\n MinIO Python AI service\n Original uploaded bytes Ingestion; retrieval; task flow Redis\n\n Required health dependency\n\n\n Private endpoint policy\n\n\n\n\n Local model host\n Embedding + generation calls\n\n\n\n Application controls authorize actions; model output is untrusted text.\n\nFigure 1. Implemented system components and trust boundaries. Supporting Redis/graph components are not a demonstrated durable\ntask queue or graph-augmented retrieval path.\n\n3.1 Services and data ownership\n\nNginx serves a compiled React frontend and proxies requests to a Go API. The API authenticates bearer tokens and\nchecks workspace roles before calling an internal Python FastAPI service. PostgreSQL stores users, memberships,\ndocument metadata, chunks, tasks, steps, approvals and memory. MinIO stores uploaded bytes. A model adapter\n\ncalls a configured local endpoint for embeddings and generation.\n\nIngestion supports text-bearing PDF, DOCX, XLSX, TXT, Markdown and CSV inputs. The current chunker uses\n800-character windows with nominal 100-character overlap and prefers text boundaries where possible. Embeddings\nare stored in vector(768), with a cosine IVFFlat index configured with lists=100. This is a source configuration, not\nevidence that the approximate index has been optimally trained or used by the query planner on the tiny corpus. [6]\n\nThe ingestion service claims one pending PostgreSQL job under FOR UPDATE ... SKIP LOCKED, processes its\nobject and records success or failure. Uploads trigger this processing through an internal request. A durable retry\nworker for lost triggers or abandoned RUNNING jobs is absent. Redis participates in health checks but is not a\ndemonstrated job transport in the current execution path.\n\n\n\n\n\n\n\n\n\n\n\nResearch manuscript draft | 8 September 2026 3",
+        "score": 0.6617430430924277,
+        "context_only": false,
+        "lexical_score": 5.012114762052509,
+        "selection_score": 0.08893280632411067
+      },
+      {
+        "chunk_id": "7ff05f24-27f9-4b99-a64e-01a3b9aa1ac1",
+        "document_id": "8d1f90d7-230f-5d18-99a9-4e983be15275",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 54,
+        "location": "page 11",
+        "content": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH\n\nAppendix A. Evidence manifest\n\n\n\n Identifier File in evidence/ Role\n\n\n A1 production-stress.json Four API load stages\n\n\n A2 ai-stress.json Short concurrent AI-task run\n\n\n A3 production-e2e.json Ten named live workflow checks\n\n\n A4 eval-1788679222.json Earlier keyword-coverage pilot\n\n\n A5 recovery-check.json; fault-recovery.json Database/count and restart behavior\n\nA6 validation-tests.log; race-tests.log Separate build/unit/integration/race records\n\n\n A7 model-pilot.json Full new requests, outputs, timing and identity\n\n\n A8 model-pilot-review.json Transparent post-hoc labels and summaries\n\n\n A9 chunk-sensitivity.json Actual chunker count experiments\n\n\n A10 provenance.json Source/evidence hashes and source-state caveats\n\n\nAppendix B. Minimal replication protocol\n\nUse the existing local models and execute source/run_model_pilot.py. Its requests use two temperatures, two seeds,\nthree fixed cases and a per-model warmup, saving all outputs as JSON. A rerun requires fresh review of responses; do\nnot reuse manual labels automatically. Record model digests rather than aliases alone, preserve the runtime version\nand distinguish wall time from server-reported generation duration.\n\nFor an end-to-end comparison, create an isolated workspace per variant, ingest an identical versioned corpus with one\nfixed embedder, prevent prior generated memories from contaminating later trials and run the same questions through\nthe authenticated task API. A model-only generation pilot is insufficient to measure retrieval or authorization effects.\n\nFor an embedding comparison, rebuild the corpus embeddings and recalibrate on a development split before\nevaluating the held-out questions.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nResearch manuscript draft | 8 September 2026 11",
+        "score": 0.6793472407303569,
+        "context_only": false,
+        "lexical_score": 2.2210155625396277,
+        "selection_score": 0.08465608465608465
+      },
+      {
+        "chunk_id": "a426ae50-2195-4ecf-8f78-f3f1d677fe00",
+        "document_id": "8d1f90d7-230f-5d18-99a9-4e983be15275",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 15,
+        "location": "page 4",
+        "content": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH\n\n\n3.2 Retrieval and evidence decision\n\nA question is embedded and searched against chunks satisfying the workspace predicate and a non-deleted source\npredicate. The default result limit is six. For a query vector q and chunk vector v_i, the recorded score is cosine\nsimilarity, equivalently one minus the cosine distance returned by pgvector. Let U be the set of evidence items\nmatching the expected workspace and not marked revoked, and let s* = max(s_i for i in U).\n\n D(U) = REFUSE if U is empty or s* < 0.30\n ANSWER_WITH_WARNING if 0.30 <= s* < 0.45\n ANSWER if s* >= 0.45\n\nThe threshold function is deterministic. It does not estimate the probability of answer correctness. One high-scoring\npassage is sufficient for ANSWER, even if the requested detail is absent or other passages conflict. Stale evidence\nadds a reason string in the gate without reducing the score. Normal executor items are constructed after\nworkspace-scoped SQL retrieval; revoked/stale metadata is not comprehensively propagated.\n\nFor non-refused tasks, numbered evidence and up to three recent eligible memory items are sent to the generator. The\ntask path uses temperature 0.3 and a maximum output of 800 tokens. The system instruction asks for evidence-only\nanswers, [n] citations and rejection of instructions inside evidence. Returned source filenames are evidence metadata,\n\nnot a semantic certificate for every claim.\n\n3.3 Bounded orchestration and approval\n\nThe task begins in PLANNING, enters RUNNING, executes document_search and proceeds to VERIFYING and\nCOMPLETED. Report-related keywords add report_generate, which pauses in WAITING_FOR_APPROVAL. The\npublic decision route resolves workspace scope from the stored task and requires an owner role. An approval claims\nRUNNING under a task-row lock before resuming execution, preventing the second concurrent decision in the tested\npath from executing the same transition.\n\nThe current report tool returns Markdown stored in a task step. A public report-download artifact is not exposed. The\nschema and step vocabulary are broader than the active workflow: dynamic model routing, general DAG planning,\n\ngraph retrieval expansion and complete tool-execution auditing remain outside the demonstrated implementation.\n\n3.4 Memory and residual trust\n\nAn ANSWER decision writes up to 500 characters of generated text into memory with verified=true, and later prompts\ndescribe these items as verified facts. This flag reflects the retrieval gate, not independent verification. Thus an\nunsupported generated claim can become later context. Source deletion also does not establish revocation of\nhistorical answer memories. These limitations are material because a model-comparison experiment that does not\nfreeze memory can confound model effects with previous generated content.\n\nResearch manuscript draft | 8 September 2026 4",
+        "score": 0.6050427931700593,
+        "context_only": false,
+        "lexical_score": 3.463214597836423,
+        "selection_score": 0.07738095238095238
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "Ingestion supports text-bearing PDF, DOCX, XLSX, TXT, Markdown and CSV inputs. [2]\nThe current chunker uses 800-character windows with nominal 100-character overlap and prefers text boundaries where possible. [2]\nEmbeddings are stored in vector(768), with a cosine IVFFlat index configured with lists=100. This is a source configuration, not evidence that the approximate index has been optimally trained or used by the query planner on the tiny corpus. [2]\n(document reference 6) [2]",
+        "citations": [
+          "Research_Paper.pdf, page 3"
+        ],
+        "latency_ms": 3519,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "A new generator changes conditional text behavior while fixed evidence scores leave the gate unchanged. [1]\nAn embedding-model replacement changes retrieval geometry and requires compatible corpus/query embeddings, reindexing and threshold recalibration. [1]\nMatching vector dimensionality alone does not make embeddings from different models comparable. [1]\nThe current vector(768) schema additionally requires a migration if the new dimension differs. [1]",
+        "citations": [
+          "Research_Paper.pdf, page 8"
+        ],
+        "latency_ms": 4916,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.099
+        }
+      ],
+      "mean_overlap": 0.099,
+      "n_answered": 2
+    },
+    "combined_answer": "Ingestion supports text-bearing PDF, DOCX, XLSX, TXT, Markdown and CSV inputs. [2]\nThe current chunker uses 800-character windows with nominal 100-character overlap and prefers text boundaries where possible. [2]\nEmbeddings are stored in vector(768), with a cosine IVFFlat index configured with lists=100. This is a source configuration, not evidence that the approximate index has been optimally trained or used by the query planner on the tiny corpus. [2]\n(document reference 6) [2]\nA new generator changes conditional text behavior while fixed evidence scores leave the gate unchanged. [1]\nAn embedding-model replacement changes retrieval geometry and requires compatible corpus/query embeddings, reindexing and threshold recalibration. [1]\nMatching vector dimensionality alone does not make embeddings from different models comparable. [1]\nThe current vector(768) schema additionally requires a migration if the new dimension differs. [1]",
+    "synthesizer": "source_union",
+    "verification": {
+      "model": "eval-gemma4-e4b",
+      "claims": [
+        {
+          "claim": "Ingestion supports text-bearing PDF, DOCX, XLSX, TXT, Markdown and CSV inputs. [2]",
+          "source": 2,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "The current chunker uses 800-character windows with nominal 100-character overlap and prefers text boundaries where possible. [2]",
+          "source": 2,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Embeddings are stored in vector(768), with a cosine IVFFlat index configured with lists=100. This is a source configuration, not evidence that the approximate index has been optimally trained or used by the query planner on the tiny corpus. [2]",
+          "source": 2,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "(document reference 6) [2]",
+          "source": 2,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "A new generator changes conditional text behavior while fixed evidence scores leave the gate unchanged. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "An embedding-model replacement changes retrieval geometry and requires compatible corpus/query embeddings, reindexing and threshold recalibration. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Matching vector dimensionality alone does not make embeddings from different models comparable. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "The current vector(768) schema additionally requires a migration if the new dimension differs. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        }
+      ],
+      "confidence": 1.0,
+      "decision": "verified",
+      "method": "source_excerpt_match"
+    }
+  }
+}

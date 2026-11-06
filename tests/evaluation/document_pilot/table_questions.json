@@ -1,0 +1,5 @@
+[
+ {"id":"T01","category":"numeric","question":"At 100 concurrent clients, what authenticated-read throughput and p95 latency were reported?","expected":"2,107.3 requests/s and p95 102.2 ms, specifically the 100-client row.","pages":[6]},
+ {"id":"T02","category":"numeric","question":"At 10 concurrent clients, what p50 latency was reported?","expected":"3.3 ms, specifically the 10-client row.","pages":[6]},
+ {"id":"T03","category":"numeric","question":"At 1 concurrent client, what throughput and p99 latency were reported?","expected":"139.6 requests/s and p99 75.3 ms, specifically the 1-client row.","pages":[6]}
+]

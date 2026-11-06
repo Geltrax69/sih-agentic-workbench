@@ -1,0 +1,95 @@
+{
+  "case": {
+    "id": "M03",
+    "category": "numeric",
+    "question": "After reassembly, what load and duration are specified for the test run?",
+    "expected": "50 percent load for 10 minutes, then check temperature.",
+    "pages": []
+  },
+  "wall_seconds": 2.380347915983293,
+  "result": {
+    "question": "After reassembly, what load and duration are specified for the test run?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-0",
+        "document_id": "21cd91183448e089095c01795f01c0302dcac67e8094e46ecb0f8ce48d96bd3c",
+        "filename": "maintenance_manual.md",
+        "chunk_index": 0,
+        "location": "",
+        "content": "# P-Series Pump Maintenance Manual (excerpt)\n\n## Over-temperature shutdowns\nOver-temperature shutdowns on P-series pumps are typically caused by:\n1. Blocked cooling fins (dust accumulation in dusty environments)\n2. Bearing wear increasing friction load\n3. Low coolant level in closed-loop systems\n\n## Procedure: Bearing replacement (P-17 class)\n1. Depressurize and lock out the pump.\n2. Remove coupling guard and coupling.\n3. Extract bearing housing; inspect shaft for scoring.\n4. Fit new bearing (part BRG-4210), torque to 45 Nm.\n5. Reassemble, run at 50% load for 10 minutes, check temperature.\n\n## Escalation\nIf over-temperature shutdowns recur within 30 days of bearing replacement,\nescalate to the reliability engineer and check the coolant loop.",
+        "score": 0.5486782472658822,
+        "lexical_score": 0.6832449220729795,
+        "selection_score": 0.09523809523809523
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "The provided sources do not contain enough information to answer this question.",
+        "citations": [],
+        "latency_ms": 1512,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "## Procedure: Bearing replacement (P-17 class) 1. Depressurize and lock out the pump. [1]\n2. Remove coupling guard and coupling. [1]\n3. Extract bearing housing; inspect shaft for scoring. [1]\n4. Fit new bearing (part BRG-4210), torque to 45 Nm. [1]\n5. Reassemble, run at 50% load for 10 minutes, check temperature. [1]",
+        "citations": [
+          "maintenance_manual.md"
+        ],
+        "latency_ms": 2336,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.0
+        }
+      ],
+      "mean_overlap": 0.0,
+      "n_answered": 2
+    },
+    "combined_answer": "## Procedure: Bearing replacement (P-17 class) 1. Depressurize and lock out the pump. [1]\n2. Remove coupling guard and coupling. [1]\n3. Extract bearing housing; inspect shaft for scoring. [1]\n4. Fit new bearing (part BRG-4210), torque to 45 Nm. [1]\n5. Reassemble, run at 50% load for 10 minutes, check temperature. [1]",
+    "synthesizer": "source_union",
+    "verification": {
+      "model": "eval-gemma4-e4b",
+      "claims": [
+        {
+          "claim": "## Procedure: Bearing replacement (P-17 class) 1. Depressurize and lock out the pump. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "2. Remove coupling guard and coupling. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "3. Extract bearing housing; inspect shaft for scoring. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "4. Fit new bearing (part BRG-4210), torque to 45 Nm. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "5. Reassemble, run at 50% load for 10 minutes, check temperature. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        }
+      ],
+      "confidence": 1.0,
+      "decision": "verified",
+      "method": "source_excerpt_match"
+    }
+  }
+}

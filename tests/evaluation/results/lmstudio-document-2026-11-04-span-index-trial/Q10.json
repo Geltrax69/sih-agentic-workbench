@@ -1,0 +1,101 @@
+{
+  "case": {
+    "id": "Q10",
+    "category": "numeric",
+    "question": "What was the peak authenticated-read throughput, and at how many concurrent clients did it occur?",
+    "expected": "2,823.4 requests per second at 50 concurrent clients.",
+    "pages": [
+      1,
+      6
+    ]
+  },
+  "wall_seconds": 10.057128540996928,
+  "result": {
+    "question": "What was the peak authenticated-read throughput, and at how many concurrent clients did it occur?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-29",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 29,
+        "location": "page 6",
+        "content": "850                                                                         31\n\n               139.6                                                                                      7.5\n\n        0                                                                          0\n                 1             10             50            100                              1             10            50            100\n\n                              Concurrent clients                                                          Concurrent clients\n\n                                       20,000 reads per stage | Zero observed errors | Local shared host\n\nFigure 2. Authenticated read benchmark. Four single-run stages cannot establish a universal scaling curve.\n\nAll stages met the runner's criteria.",
+        "score": 0.8063960354273808,
+        "lexical_score": 7.758707201707612,
+        "selection_score": 0.09307359307359307
+      },
+      {
+        "chunk_id": "pilot-30",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 30,
+        "location": "page 6",
+        "content": "All stages met the runner's criteria. Peak observed throughput occurred at 50 clients. At 100 clients, throughput was\napproximately 25.4% lower and p95 approximately 3.15 times the 50-client value. The nonmonotonic single-client\nversus ten-client behavior is unexplained by the retained metadata. Warmup and shared-host interference are\nplausible hypotheses, not demonstrated causes.\n\nThe E2E artifact lists ten passing checks. In the concurrent approval test, one decision returned HTTP 200 and the\nother HTTP 400 through the public proxy, and the accepted task completed. The tested malicious document remained\n\n\n\nResearch manuscript draft  |  8 September 2026                                                                                                    6",
+        "score": 0.7462300118275571,
+        "lexical_score": 9.104012621837215,
+        "selection_score": 0.09307359307359307
+      },
+      {
+        "chunk_id": "pilot-23",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 23,
+        "location": "page 5",
+        "content": "Each made 20,000 requests: 75% workspace collection reads and 25% authenticated-profile reads. The same QA\nidentity and small dataset were used. Throughput is request count divided by elapsed stage time. Per-request latency\nexcludes executor waiting before a worker starts the call, and percentiles use nearest-rank selection. Acceptance was\nzero errors and p95 below 2 seconds at each stage.\n\n4.4 AI workload and earlier keyword pilot\n\nA separate AI stress record contains 12 tasks at concurrency three using one repeated maintenance question, with\ntask completion/evidence/citation checks. It contains no independently graded answer rubric. The earlier\nthree-question evaluation uses expected keywords and counts a hit if a keyword occurs in either evidence or answer;",
+        "score": 0.7040257134716728,
+        "lexical_score": 6.908912858876908,
+        "selection_score": 0.08333333333333333
+      },
+      {
+        "chunk_id": "pilot-22",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 22,
+        "location": "page 5",
+        "content": "maintenance note, confirmed indexing, checked a grounded answer and raced two report approvals. Assertions\nincluded nonempty evidence, a fixture filename, the word filter in the answer, a retrieval-only step sequence for the\nordinary question and continued INDEXED status of the document.\n\nThe recovery check restored a database dump into a scratch database and compared table row counts. The fault test\npaused/resumed the database and restarted the API. These are bounded functional checks rather than a complete\ndisaster-recovery or availability study.\n\n4.3 Authenticated read workload\n\nThe API benchmark used four sequential closed-loop ThreadPoolExecutor stages with 1, 10, 50 and 100 workers.\nEach made 20,000 requests: 75% workspace collection reads and 25% authenticated-profile reads.",
+        "score": 0.7137205738699632,
+        "lexical_score": 3.391496929857996,
+        "selection_score": 0.08193979933110368
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "4.3 Authenticated read workload The API benchmark used four sequential closed-loop ThreadPoolExecutor stages with 1, 10, 50 and 100 workers. [4]",
+        "citations": [
+          "Research_Paper.pdf, page 5"
+        ],
+        "latency_ms": 3634,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "Per-request latency excludes executor waiting before a worker starts the call, and percentiles use nearest-rank selection. [3]",
+        "citations": [
+          "Research_Paper.pdf, page 5"
+        ],
+        "latency_ms": 8187,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.0
+        }
+      ],
+      "mean_overlap": 0.0,
+      "n_answered": 2
+    },
+    "combined_answer": "The provided sources do not contain enough information to answer this question.",
+    "synthesizer": "eval-gemma4-e4b",
+    "verification": {
+      "model": "eval-gemma4-e4b",
+      "claims": [],
+      "confidence": 0.0,
+      "decision": "not_found"
+    }
+  }
+}

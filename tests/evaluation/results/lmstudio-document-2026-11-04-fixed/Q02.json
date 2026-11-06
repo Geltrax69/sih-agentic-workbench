@@ -1,0 +1,107 @@
+{
+  "case": {
+    "id": "Q02",
+    "category": "limitation",
+    "question": "Does the manuscript's deterministic evidence threshold estimate the probability that an answer is correct?",
+    "expected": "No. It is a deterministic threshold on retrieval similarity, not a correctness probability.",
+    "pages": [
+      4
+    ]
+  },
+  "wall_seconds": 8.809996708005201,
+  "result": {
+    "question": "Does the manuscript's deterministic evidence threshold estimate the probability that an answer is correct?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-16",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 16,
+        "location": "page 4",
+        "content": "The threshold function is deterministic. It does not estimate the probability of answer correctness. One high-scoring\npassage is sufficient for ANSWER, even if the requested detail is absent or other passages conflict. Stale evidence\nadds a reason string in the gate without reducing the score. Normal executor items are constructed after\nworkspace-scoped SQL retrieval; revoked/stale metadata is not comprehensively propagated.\n\nFor non-refused tasks, numbered evidence and up to three recent eligible memory items are sent to the generator. The\ntask path uses temperature 0.3 and a maximum output of 800 tokens. The system instruction asks for evidence-only\nanswers, [n] citations and rejection of instructions inside evidence. Returned source filenames are evidence metadata,",
+        "score": 0.7706598312599202,
+        "lexical_score": 8.700625242151249,
+        "selection_score": 0.09307359307359307
+      },
+      {
+        "chunk_id": "pilot-15",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 15,
+        "location": "page 4",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\n\n\n3.2 Retrieval and evidence decision\n\nA question is embedded and searched against chunks satisfying the workspace predicate and a non-deleted source\npredicate. The default result limit is six. For a query vector q and chunk vector v_i, the recorded score is cosine\nsimilarity, equivalently one minus the cosine distance returned by pgvector. Let U be the set of evidence items\nmatching the expected workspace and not marked revoked, and let s* = max(s_i for i in U).\n\n  D(U) = REFUSE                    if U is empty or s* < 0.30\n         ANSWER_WITH_WARNING       if 0.30 <= s* < 0.45\n         ANSWER                    if s* >= 0.45\n\nThe threshold function is deterministic. It does not estimate the probability of answer correctness.",
+        "score": 0.7598615118117729,
+        "lexical_score": 10.21152662497557,
+        "selection_score": 0.09307359307359307
+      },
+      {
+        "chunk_id": "pilot-36",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 36,
+        "location": "page 8",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\n\n6. Configuration sensitivity and failure analysis\n\n6.1 Discrete decision changes\n\nThe evidence threshold creates discontinuities. A best usable score of 0.29 refuses, 0.30 permits a warning answer\nand 0.45 permits an answer under current settings. Raising the strong threshold to 0.70 while retaining weak=0.30\nwould map the three historical pilot scores to one answer and two warning answers. This is a deterministic replay of\nrecorded scores, not evidence of improved correctness.\n\nA new generator changes conditional text behavior while fixed evidence scores leave the gate unchanged. An\nembedding-model replacement changes retrieval geometry and requires compatible corpus/query embeddings,\nreindexing and threshold recalibration.",
+        "score": 0.7106249943183126,
+        "lexical_score": 4.970814834379975,
+        "selection_score": 0.08695652173913043
+      },
+      {
+        "chunk_id": "pilot-25",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 25,
+        "location": "page 5",
+        "content": "a 2,048-token context option and a 160-token generation cap. The test bypassed retrieval, memory, the threshold\n\n\nResearch manuscript draft  |  8 September 2026                                                                                              5",
+        "score": 0.6574752547221977,
+        "lexical_score": 2.227911799034468,
+        "selection_score": 0.07275132275132275
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "The threshold function is deterministic. [1]\nIt does not estimate the probability of answer correctness. [1]",
+        "citations": [
+          "Research_Paper.pdf, page 4"
+        ],
+        "latency_ms": 3950,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "It does not estimate the probability of answer correctness. [1]",
+        "citations": [
+          "Research_Paper.pdf, page 4"
+        ],
+        "latency_ms": 5805,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.571
+        }
+      ],
+      "mean_overlap": 0.571,
+      "n_answered": 2
+    },
+    "combined_answer": "It does not estimate the probability of answer correctness. [1]",
+    "synthesizer": "eval-gemma4-e4b",
+    "verification": {
+      "model": "eval-gemma4-e4b",
+      "claims": [
+        {
+          "claim": "It does not estimate the probability of answer correctness. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        }
+      ],
+      "confidence": 1.0,
+      "decision": "verified"
+    }
+  }
+}

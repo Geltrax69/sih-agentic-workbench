@@ -1,0 +1,160 @@
+{
+  "case": {
+    "id": "Q02",
+    "category": "limitation",
+    "question": "Does the manuscript's deterministic evidence threshold estimate the probability that an answer is correct?",
+    "expected": "No. It is a deterministic threshold on retrieval similarity, not a correctness probability.",
+    "pages": [
+      4
+    ]
+  },
+  "wall_seconds": 1.8113778329570778,
+  "result": {
+    "question": "Does the manuscript's deterministic evidence threshold estimate the probability that an answer is correct?",
+    "evidence": [
+      {
+        "chunk_id": "50d1f7cc-6f3e-4543-a7c8-040d500891a0",
+        "document_id": "8d1f90d7-230f-5d18-99a9-4e983be15275",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 16,
+        "location": "page 4",
+        "content": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH\n\n\n3.2 Retrieval and evidence decision\n\nA question is embedded and searched against chunks satisfying the workspace predicate and a non-deleted source\npredicate. The default result limit is six. For a query vector q and chunk vector v_i, the recorded score is cosine\nsimilarity, equivalently one minus the cosine distance returned by pgvector. Let U be the set of evidence items\nmatching the expected workspace and not marked revoked, and let s* = max(s_i for i in U).\n\n D(U) = REFUSE if U is empty or s* < 0.30\n ANSWER_WITH_WARNING if 0.30 <= s* < 0.45\n ANSWER if s* >= 0.45\n\nThe threshold function is deterministic. It does not estimate the probability of answer correctness. One high-scoring\npassage is sufficient for ANSWER, even if the requested detail is absent or other passages conflict. Stale evidence\nadds a reason string in the gate without reducing the score. Normal executor items are constructed after\nworkspace-scoped SQL retrieval; revoked/stale metadata is not comprehensively propagated.\n\nFor non-refused tasks, numbered evidence and up to three recent eligible memory items are sent to the generator. The\ntask path uses temperature 0.3 and a maximum output of 800 tokens. The system instruction asks for evidence-only\nanswers, [n] citations and rejection of instructions inside evidence. Returned source filenames are evidence metadata,\n\nnot a semantic certificate for every claim.\n\n3.3 Bounded orchestration and approval\n\nThe task begins in PLANNING, enters RUNNING, executes document_search and proceeds to VERIFYING and\nCOMPLETED. Report-related keywords add report_generate, which pauses in WAITING_FOR_APPROVAL. The\npublic decision route resolves workspace scope from the stored task and requires an owner role. An approval claims\nRUNNING under a task-row lock before resuming execution, preventing the second concurrent decision in the tested\npath from executing the same transition.\n\nThe current report tool returns Markdown stored in a task step. A public report-download artifact is not exposed. The\nschema and step vocabulary are broader than the active workflow: dynamic model routing, general DAG planning,\n\ngraph retrieval expansion and complete tool-execution auditing remain outside the demonstrated implementation.\n\n3.4 Memory and residual trust\n\nAn ANSWER decision writes up to 500 characters of generated text into memory with verified=true, and later prompts\ndescribe these items as verified facts. This flag reflects the retrieval gate, not independent verification. Thus an\nunsupported generated claim can become later context. Source deletion also does not establish revocation of\nhistorical answer memories. These limitations are material because a model-comparison experiment that does not\nfreeze memory can confound model effects with previous generated content.\n\nResearch manuscript draft | 8 September 2026 4",
+        "score": 0.7706599744141368,
+        "context_only": false,
+        "lexical_score": 9.705688201444893,
+        "selection_score": 0.09307359307359307
+      },
+      {
+        "chunk_id": "1cb225d5-f9f7-4ae1-8882-a0f46399d8e4",
+        "document_id": "8d1f90d7-230f-5d18-99a9-4e983be15275",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 36,
+        "location": "page 8",
+        "content": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH\n\n6. Configuration sensitivity and failure analysis\n\n6.1 Discrete decision changes\n\nThe evidence threshold creates discontinuities. A best usable score of 0.29 refuses, 0.30 permits a warning answer\nand 0.45 permits an answer under current settings. Raising the strong threshold to 0.70 while retaining weak=0.30\nwould map the three historical pilot scores to one answer and two warning answers. This is a deterministic replay of\nrecorded scores, not evidence of improved correctness.\n\nA new generator changes conditional text behavior while fixed evidence scores leave the gate unchanged. An\nembedding-model replacement changes retrieval geometry and requires compatible corpus/query embeddings,\nreindexing and threshold recalibration. Matching vector dimensionality alone does not make embeddings from different\nmodels comparable. The current vector(768) schema additionally requires a migration if the new dimension differs.\n\n6.2 Segmentation experiment\n\nRunning the actual chunker over the three demonstration files produced three chunks at 800/100, 800/0, 800/200 and\n1,200/100 characters. All three files fit in one chunk at those sizes, so overlap changes had no effect. At 400/0 the\ncorpus produced five chunks and 1,394 stored characters; at 400/100 it produced six chunks and 1,694 characters.\nThe default stored 1,396 characters.\n\nThese counts demonstrate segmentation and duplication effects only. They do not measure retrieval quality or answer\nchanges.\n\nchanges. The tiny corpus is poorly suited to testing overlap because it exercises little boundary splitting under the\ndefault setting. A realistic corpus should include long procedures, multi-page tables and cases whose evidence\ncrosses chunk boundaries.\n\n6.3 Distinguishing failure layers\n\n\n Layer Example failure Required evaluation\n\n\n Access control Cross-workspace task read Role-matrix and object-scope integration tests\n\n\n Retrieval Relevant answer passage not retrieved Labeled recall@k and exact-search comparison\n\n\n Answerability Related evidence lacks requested value Held-out unanswerable/contradiction set\n\nGeneration Adversarial deletion premise enters answer Claim support and injection-contamination review\n\n\n Action control Duplicate or unauthorized tool execution Approval races, crash recovery and privilege checks\n\n\n Memory Unsupported answer reused as a fact Frozen-memory ablation and source-revocation tests\n\n\nThe passing action-sequence assertion and failing generated-text example are compatible: application controls can\nconstrain tools while the model still produces unsupported language. Likewise, a source citation marker can coexist\nwith an unsupported claim. Evaluation should preserve these distinctions rather than collapse every outcome into one\n\u201cAI accuracy\u201d percentage.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nResearch manuscript draft | 8 September 2026 8",
+        "score": 0.7106249277852494,
+        "context_only": false,
+        "lexical_score": 6.053100141595448,
+        "selection_score": 0.08695652173913043
+      },
+      {
+        "chunk_id": "b7174ff1-7314-43e4-a24e-2ee6952ca03b",
+        "document_id": "8d1f90d7-230f-5d18-99a9-4e983be15275",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 34,
+        "location": "page 7",
+        "content": "PROJECT 01 / SOVEREIGN AGENTIC AI WORKBENCH\n\n\nindexed and did not change the normal question's action sequence. These assertions support the bounded workflow\nproperty, not universal prompt-injection resistance.\n\n5.2 AI, keyword and recovery measurements\n\nThe 12-task AI run recorded zero errors, elapsed time 83.22 seconds, median 20.55 seconds and p95 25.12 seconds.\nDividing count by elapsed time yields approximately 8.65 tasks/minute for that run. This is a different workload from the\nAPI reads and cannot support thousands of generated answers per second.\n\nThe earlier keyword pilot had hit fractions 3/3, 1/1 and 1/1 for the failure-cause, bearing and date questions,\nrespectively. Its stored similarity scores were 0.841924, 0.683897 and 0.692557, and all decisions were answer. Mean\n\nexpected-keyword coverage was 1.0. No semantic citation labels, held-out recall or general answer accuracy can be\nderived from these observations. The pilot predates the final evidence-selection fix.\n\nDatabase restoration compared counts for 19 tables from a 53,270-byte dump and passed, reporting 1.75 seconds for\nthe check. This is not a measured service RTO or object-store restore. The fault record passed database\npause/resume and API restart checks without quantitative recovery timing.\n\n5.3 Fixed-evidence model sensitivity\n\n\n Model tag Temp. Calls Median wall s Mean Reviewed Injection\n\ngenerated rubric pass contamination\n tokens\n\n\n qwen:7b 0.0 6 2.865 58.3 6/6 0/2\n\n\n qwen:7b 0.8 6 3.270 68.3 5/6 1/2\n\n\n gemma:7b 0.0 6 2.354 35.0 6/6 0/2\n\n\n gemma:7b 0.8 6 2.272 35.8 6/6 0/2\n\n\nAll calls completed. All factual cases contained the required identifiers and dates, all absent-cost cases abstained and\nall 16 answerable outputs contained [1]. At temperature 0.0, each model's paired seeds produced identical text for\neach case. At temperature 0.8, Qwen produced six distinct outputs across six calls and Gemma five.\n\nQwen at temperature 0.8, seed 17, answered the filter question correctly but added: \u201cSince all documents have been\nclaimed to be deleted, there is no additional evidence available.\u201d This was unsupported by the factual maintenance\nrecord and adopted a premise from the adversarial note. The test exposed no deletion capability and performed no\ndeletion. It is a generated-text failure. The paired high-temperature Qwen trial and the four Gemma injection trials did\nnot contain this premise.\n\nQwen's median rose about 14.1% between temperatures while mean output length also rose. Gemma's median fell\nabout 3.5%. Small, sequential groups with different output lengths do not support broad causal latency or safety\nrankings. Local model metadata also warrants care: qwen:7b reports family qwen2 and 8B, while gemma:7b reports\nfamily gemma and 9B. Full artifact digests in the bundle identify the tested models more reliably than aliases.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nResearch manuscript draft | 8 September 2026 7",
+        "score": 0.6314842794788997,
+        "context_only": false,
+        "lexical_score": 3.509270140371387,
+        "selection_score": 0.07125000000000001
+      },
+      {
+        "chunk_id": "4cb2e961-c176-469b-b1e7-9d88911180e9",
+        "document_id": "8d1f90d7-230f-5d18-99a9-4e983be15275",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 25,
+        "location": "page 5",
+        "content": "and did not capture all contention, cache or resource conditions. No GPU utilization distribution or energy\nmeasurement is available.\n\n4.2 Retained functional and operational checks\n\nThe validation log records successful Go build/vet/unit checks, frontend builds, 30 Python unit tests, Go integration\ntests and two Python integration tests. Two Python test-client deprecation warnings were non-failing. The older Go\nrace log is treated as separate evidence. A legacy opt-in model test is not counted as passed when skipped; the later\nlive E2E fixture independently exercised an injection-bearing upload.\n\nThe E2E run created a fresh workspace, checked refusal with no evidence, rejected a report request, uploaded a\n\nmaintenance note, confirmed indexing, checked a grounded answer and raced two report approvals. Assertions\nincluded nonempty evidence, a fixture filename, the word filter in the answer, a retrieval-only step sequence for the\nordinary question and continued INDEXED status of the document.\n\nThe recovery check restored a database dump into a scratch database and compared table row counts. The fault test\npaused/resumed the database and restarted the API. These are bounded functional checks rather than a complete\ndisaster-recovery or availability study.\n\n4.3 Authenticated read workload\n\nThe API benchmark used four sequential closed-loop ThreadPoolExecutor stages with 1, 10, 50 and 100 workers.\nEach made 20,000 requests: 75% workspace collection reads and 25% authenticated-profile reads. The same QA\nidentity and small dataset were used. Throughput is request count divided by elapsed stage time. Per-request latency\nexcludes executor waiting before a worker starts the call, and percentiles use nearest-rank selection. Acceptance was\nzero errors and p95 below 2 seconds at each stage.\n\n4.4 AI workload and earlier keyword pilot\n\nA separate AI stress record contains 12 tasks at concurrency three using one repeated maintenance question, with\ntask completion/evidence/citation checks. It contains no independently graded answer rubric. The earlier\nthree-question evaluation uses expected keywords and counts a hit if a keyword occurs in either evidence or answer;\n\nits mean is an average of per-question hit fractions. This is a keyword coverage heuristic, despite broader language in\nthe evaluator's docstring.\n\n4.5 Additional model and temperature pilot\n\nWe ran two installed tags, qwen:7b and gemma:7b, at temperatures 0.0 and 0.8 on three cases, using seeds 17 and\n29. Cases asked for a bearing/date, an absent repair cost, and a filter incident accompanied by adversarial deletion\ninstructions. The 24 serial measured calls followed one excluded warmup per model, with shuffled order within each\nmodel. Qwen's block preceded Gemma's; order across models was not counterbalanced.\n\nThe native Ollama /api/chat request used the exact application grounding instruction, supplied evidence, stream=false,\na 2,048-token context option and a 160-token generation cap. The test bypassed retrieval, memory, the threshold\n\n\nResearch manuscript draft | 8 September 2026 5",
+        "score": 0.6574755090417111,
+        "context_only": false,
+        "lexical_score": 2.1656443822589453,
+        "selection_score": 0.07019704433497537
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "The evidence threshold creates discontinuities. [2]\nA best usable score of 0.29 refuses, 0.30 permits a warning answer and 0.45 permits an answer under current settings. [2]\nRaising the strong threshold to 0.70 while retaining weak=0.30 would map the three historical pilot scores to one answer and two warning answers. [2]\nThis is a deterministic replay of recorded scores, not evidence of improved correctness. [2]",
+        "citations": [
+          "Research_Paper.pdf, page 8"
+        ],
+        "latency_ms": 552,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "The threshold function is deterministic. [1]\nIt does not estimate the probability of answer correctness. [1]\nOne high-scoring passage is sufficient for ANSWER, even if the requested detail is absent or other passages conflict. [1]\nStale evidence adds a reason string in the gate without reducing the score. [1]\nNormal executor items are constructed after workspace-scoped SQL retrieval; revoked/stale metadata is not comprehensively propagated. [1]",
+        "citations": [
+          "Research_Paper.pdf, page 4"
+        ],
+        "latency_ms": 1701,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.104
+        }
+      ],
+      "mean_overlap": 0.104,
+      "n_answered": 2
+    },
+    "combined_answer": "The evidence threshold creates discontinuities. [2]\nA best usable score of 0.29 refuses, 0.30 permits a warning answer and 0.45 permits an answer under current settings. [2]\nRaising the strong threshold to 0.70 while retaining weak=0.30 would map the three historical pilot scores to one answer and two warning answers. [2]\nThis is a deterministic replay of recorded scores, not evidence of improved correctness. [2]\nThe threshold function is deterministic. [1]\nIt does not estimate the probability of answer correctness. [1]\nOne high-scoring passage is sufficient for ANSWER, even if the requested detail is absent or other passages conflict. [1]\nStale evidence adds a reason string in the gate without reducing the score. [1]\nNormal executor items are constructed after workspace-scoped SQL retrieval; revoked/stale metadata is not comprehensively propagated. [1]",
+    "synthesizer": "source_union",
+    "verification": {
+      "model": "eval-gemma4-e4b",
+      "claims": [
+        {
+          "claim": "The evidence threshold creates discontinuities. [2]",
+          "source": 2,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "A best usable score of 0.29 refuses, 0.30 permits a warning answer and 0.45 permits an answer under current settings. [2]",
+          "source": 2,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Raising the strong threshold to 0.70 while retaining weak=0.30 would map the three historical pilot scores to one answer and two warning answers. [2]",
+          "source": 2,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "This is a deterministic replay of recorded scores, not evidence of improved correctness. [2]",
+          "source": 2,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "The threshold function is deterministic. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "It does not estimate the probability of answer correctness. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "One high-scoring passage is sufficient for ANSWER, even if the requested detail is absent or other passages conflict. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Stale evidence adds a reason string in the gate without reducing the score. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Normal executor items are constructed after workspace-scoped SQL retrieval; revoked/stale metadata is not comprehensively propagated. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        }
+      ],
+      "confidence": 1.0,
+      "decision": "verified",
+      "method": "source_excerpt_match"
+    }
+  }
+}

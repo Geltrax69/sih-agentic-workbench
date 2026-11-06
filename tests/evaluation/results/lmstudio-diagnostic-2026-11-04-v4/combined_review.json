@@ -1,0 +1,109 @@
+{
+  "role": "Additional diagnostic set used to guide repairs; not held out",
+  "reviewer": "Authoring assistant, unblinded; strict factual completeness and no material false additions.",
+  "scored_output": "combined_answer only; individual outputs retained but not separately graded in this revision",
+  "correct": 11,
+  "total": 12,
+  "median_seconds": 6.5614935620105825,
+  "p95_nearest_rank_seconds": 9.147535957978107,
+  "answerable_median_seconds": 6.624552291497821,
+  "passes_above_80_percent": true,
+  "cases": [
+    {
+      "id": "H01",
+      "question": "What lists setting is configured for the cosine IVFFlat index?",
+      "expected": "lists=100.",
+      "correct": true,
+      "reason": "Explicit lists=100 index setting.",
+      "wall_seconds": 9.147535957978107
+    },
+    {
+      "id": "H02",
+      "question": "Where are original uploaded document bytes stored?",
+      "expected": "MinIO stores the uploaded original bytes.",
+      "correct": true,
+      "reason": "Includes the unambiguous narrative sentence MinIO stores uploaded bytes.",
+      "wall_seconds": 5.899681082984898
+    },
+    {
+      "id": "H03",
+      "question": "What median latency and elapsed time were measured in the 12-task AI run?",
+      "expected": "Median 20.55 seconds and elapsed 83.22 seconds.",
+      "correct": true,
+      "reason": "Includes 20.55-second median and 83.22-second elapsed time.",
+      "wall_seconds": 5.715749374998268
+    },
+    {
+      "id": "H04",
+      "question": "Which hospital purchased the first commercial deployment?",
+      "expected": "No hospital purchaser is identified; explicitly state the information is not supplied.",
+      "correct": true,
+      "reason": "Explicitly abstains about an unreported hospital purchaser.",
+      "wall_seconds": 0.07794500002637506
+    },
+    {
+      "id": "H05",
+      "question": "Is the reported 1.75-second database restoration check a measured service recovery-time objective?",
+      "expected": "No; it is not a measured service RTO or object-store restore.",
+      "correct": true,
+      "reason": "Explicitly rejects interpreting the 1.75-second check as measured service RTO.",
+      "wall_seconds": 7.642730958992615
+    },
+    {
+      "id": "H06",
+      "question": "What happens to the three historical pilot scores when the strong threshold is raised to 0.70 with weak=0.30, and does that prove better correctness?",
+      "expected": "One answer and two warning answers; this replay does not establish improved correctness.",
+      "correct": true,
+      "reason": "Includes one answer, two warnings, and no improved-correctness conclusion.",
+      "wall_seconds": 6.660258124989923
+    },
+    {
+      "id": "H07",
+      "question": "At 100 concurrent clients, what authenticated-read throughput and p95 latency were reported?",
+      "expected": "2,107.3 requests/s and p95 102.2 milliseconds.",
+      "correct": false,
+      "reason": "Returns rows for 50, 10 and 1 clients, not the requested 100-client values; this failure prompted the subsequent row-condition guard.",
+      "wall_seconds": 7.14062408299651
+    },
+    {
+      "id": "H08",
+      "question": "What fraction of API benchmark reads targeted the workspace collection and what fraction targeted authenticated profiles?",
+      "expected": "75 percent workspace collection and 25 percent authenticated profiles.",
+      "correct": true,
+      "reason": "Includes 75 percent collection reads and 25 percent profile reads.",
+      "wall_seconds": 6.588846458005719
+    },
+    {
+      "id": "H09",
+      "question": "Does the current report tool expose a public downloadable report artifact?",
+      "expected": "No. It returns Markdown stored in a task step; a public report-download artifact is not exposed.",
+      "correct": true,
+      "reason": "Includes Markdown in a task step and no public download artifact.",
+      "wall_seconds": 6.534140666015446
+    },
+    {
+      "id": "H10",
+      "question": "What parameter counts did local metadata report for qwen:7b and gemma:7b despite their aliases?",
+      "expected": "qwen:7b reports 8B and gemma:7b reports 9B.",
+      "correct": true,
+      "reason": "Includes actual metadata counts 8B and 9B.",
+      "wall_seconds": 6.52126741601387
+    },
+    {
+      "id": "H11",
+      "question": "How many kilowatt-hours did the experiment consume?",
+      "expected": "Energy consumption is not measured/reported; do not invent a value.",
+      "correct": true,
+      "reason": "Explicitly abstains from an unmeasured energy value.",
+      "wall_seconds": 0.058947207988239825
+    },
+    {
+      "id": "H12",
+      "question": "Which two random seeds were used in the extra fixed-evidence model pilot?",
+      "expected": "17 and 29.",
+      "correct": true,
+      "reason": "Includes the actual seeds 17 and 29, not merely a protocol saying two seeds.",
+      "wall_seconds": 8.942366625007708
+    }
+  ]
+}

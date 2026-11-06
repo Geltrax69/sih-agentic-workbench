@@ -22,6 +22,19 @@ into an enterprise workbench. See `docs/forge-migration.md`.
 
 ## Quick start (development)
 
+For the configured two-model LM Studio setup on this machine, open LM Studio and run:
+
+```bash
+./run.sh
+```
+
+The script starts Docker Desktop if needed, loads the existing MiniCPM/Gemma models
+and Nomic embedder, starts LM Studio on port 1234, builds the stack, waits for the
+API/AI/UI, and opens the browser. It preserves `.env` and stored data. Set
+`NO_BROWSER=1 ./run.sh` to skip opening the browser. Stop with `docker compose down`.
+
+For manual setup:
+
 ```bash
 cp .env.example .env
 make dev        # docker compose up: postgres, redis, minio, api, ai, web

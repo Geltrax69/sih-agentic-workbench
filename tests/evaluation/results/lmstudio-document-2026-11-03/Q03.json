@@ -1,0 +1,82 @@
+{
+  "case": {
+    "id": "Q03",
+    "category": "numeric",
+    "question": "What are the manuscript's default chunk-window size and nominal chunk overlap, in characters?",
+    "expected": "800-character windows and nominal 100-character overlap.",
+    "pages": [
+      3
+    ]
+  },
+  "wall_seconds": 11.593615541991312,
+  "result": {
+    "question": "What are the manuscript's default chunk-window size and nominal chunk overlap, in characters?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-33",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 33,
+        "location": "page 8",
+        "content": "dding-model replacement changes retrieval geometry and requires compatible corpus/query embeddings,\nreindexing and threshold recalibration. Matching vector dimensionality alone does not make embeddings from different\nmodels comparable. The current vector(768) schema additionally requires a migration if the new dimension differs.\n6.2 Segmentation experiment\nRunning the actual chunker over the three demonstration files produced three chunks at 800/100, 800/0, 800/200 and\n1,200/100 characters. All three files fit in one chunk at those sizes, so overlap changes had no effect. At 400/0 the\ncorpus produced five chunks and 1,394 stored characters; at 400/100 it produced six chunks and 1,694 characters.\nThe default stored 1,396 characters.",
+        "score": 0.6960876416882535
+      },
+      {
+        "chunk_id": "pilot-34",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 34,
+        "location": "page 8",
+        "content": "cters; at 400/100 it produced six chunks and 1,694 characters.\nThe default stored 1,396 characters.\nThese counts demonstrate segmentation and duplication effects only. They do not measure retrieval quality or answer\nchanges. The tiny corpus is poorly suited to testing overlap because it exercises little boundary splitting under the\ndefault setting. A realistic corpus should include long procedures, multi-page tables and cases whose evidence\ncrosses chunk boundaries.\n6.3 Distinguishing failure layers\nLayer\nExample failure\nRequired evaluation\nAccess control\nCross-workspace task read\nRole-matrix and object-scope integration tests\nRetrieval\nRelevant answer passage not retrieved\nLabeled recall@k and exact-search comparison\nAnswerability\nRelated evidence lacks requested value",
+        "score": 0.6804646180249678
+      },
+      {
+        "chunk_id": "pilot-48",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 48,
+        "location": "page 11",
+        "content": "ctual chunker count experiments\nA10\nprovenance.json\nSource/evidence hashes and source-state caveats\nAppendix B. Minimal replication protocol\nUse the existing local models and execute source/run_model_pilot.py. Its requests use two temperatures, two seeds,\nthree fixed cases and a per-model warmup, saving all outputs as JSON. A rerun requires fresh review of responses; do\nnot reuse manual labels automatically. Record model digests rather than aliases alone, preserve the runtime version\nand distinguish wall time from server-reported generation duration.\nFor an end-to-end comparison, create an isolated workspace per variant, ingest an identical versioned corpus with one\nfixed embedder, prevent prior generated memories from contaminating later trials and run the same questions through",
+        "score": 0.6580109594668728
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "[1] The manuscript does not provide a default chunk-window size or nominal chunk overlap.\n[2] The manuscript does not provide a default chunk-window size or nominal chunk overlap.\n[3] The manuscript does not provide a default chunk-window size or nominal chunk overlap.",
+        "citations": [
+          "Research_Paper.pdf, page 8",
+          "Research_Paper.pdf, page 8",
+          "Research_Paper.pdf, page 11"
+        ],
+        "latency_ms": 4877,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "The default window size is 800 characters and the nominal overlap is 100 characters, which are both at 200 characters. You can see this here: [1]",
+        "citations": [
+          "Research_Paper.pdf, page 8"
+        ],
+        "latency_ms": 5646,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.294
+        }
+      ],
+      "mean_overlap": 0.294,
+      "n_answered": 2
+    },
+    "combined_answer": "The default window size is 800 characters and the nominal overlap is 100 characters, which are both at 200 characters [1]. You can see this here: [1] and [2].",
+    "synthesizer": "eval-gemma4-e4b",
+    "verification": {
+      "decision": "not_run_answer_accuracy_pilot"
+    }
+  }
+}

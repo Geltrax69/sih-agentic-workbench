@@ -1,0 +1,40 @@
+[
+  {
+    "name": "login",
+    "width": 1440,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "name": "workbench",
+    "width": 1440,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "width": 1440,
+    "questionFlow": "passed",
+    "multiModelFlow": "passed",
+    "apiRequests": [],
+    "overflow": false
+  },
+  {
+    "name": "login",
+    "width": 390,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "name": "workbench",
+    "width": 390,
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "width": 390,
+    "questionFlow": "passed",
+    "multiModelFlow": "passed",
+    "apiRequests": [],
+    "overflow": false
+  }
+]

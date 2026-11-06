@@ -1,0 +1,37 @@
+{
+  "role": "Targeted table-row regression cases; not independent accuracy evidence",
+  "reviewer": "Authoring assistant, unblinded; strict factual completeness and no material false additions.",
+  "scored_output": "combined_answer only; individual outputs retained but not separately graded in this revision",
+  "correct": 3,
+  "total": 3,
+  "median_seconds": 4.434202332980931,
+  "p95_nearest_rank_seconds": 4.449573915975634,
+  "answerable_median_seconds": 4.434202332980931,
+  "passes_above_80_percent": true,
+  "cases": [
+    {
+      "id": "T01",
+      "question": "At 100 concurrent clients, what authenticated-read throughput and p95 latency were reported?",
+      "expected": "2,107.3 requests/s and p95 102.2 ms, specifically the 100-client row.",
+      "correct": true,
+      "reason": "Explicit 100-client row: 2,107.3 requests/s and p95 102.2 ms.",
+      "wall_seconds": 4.449573915975634
+    },
+    {
+      "id": "T02",
+      "question": "At 10 concurrent clients, what p50 latency was reported?",
+      "expected": "3.3 ms, specifically the 10-client row.",
+      "correct": true,
+      "reason": "Explicit 10-client row: p50 3.3 ms.",
+      "wall_seconds": 4.008716583950445
+    },
+    {
+      "id": "T03",
+      "question": "At 1 concurrent client, what throughput and p99 latency were reported?",
+      "expected": "139.6 requests/s and p99 75.3 ms, specifically the 1-client row.",
+      "correct": true,
+      "reason": "Explicit 1-client row: 139.6 requests/s and p99 75.3 ms.",
+      "wall_seconds": 4.434202332980931
+    }
+  ]
+}

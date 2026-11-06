@@ -1,0 +1,62 @@
+{
+  "case": {
+    "id": "M07",
+    "category": "unanswerable",
+    "question": "On what date was pump P-17 last serviced?",
+    "expected": "No service date is supplied; explicitly abstain.",
+    "pages": []
+  },
+  "wall_seconds": 0.017127041006460786,
+  "result": {
+    "question": "On what date was pump P-17 last serviced?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-0",
+        "document_id": "21cd91183448e089095c01795f01c0302dcac67e8094e46ecb0f8ce48d96bd3c",
+        "filename": "maintenance_manual.md",
+        "chunk_index": 0,
+        "location": "",
+        "content": "# P-Series Pump Maintenance Manual (excerpt)\n\n## Over-temperature shutdowns\nOver-temperature shutdowns on P-series pumps are typically caused by:\n1. Blocked cooling fins (dust accumulation in dusty environments)\n2. Bearing wear increasing friction load\n3. Low coolant level in closed-loop systems\n\n## Procedure: Bearing replacement (P-17 class)\n1. Depressurize and lock out the pump.\n2. Remove coupling guard and coupling.\n3. Extract bearing housing; inspect shaft for scoring.\n4. Fit new bearing (part BRG-4210), torque to 45 Nm.\n5. Reassemble, run at 50% load for 10 minutes, check temperature.\n\n## Escalation\nIf over-temperature shutdowns recur within 30 days of bearing replacement,\nescalate to the reliability engineer and check the coolant loop.",
+        "score": 0.6769105133903184,
+        "lexical_score": 1.1918257287288065,
+        "selection_score": 0.09523809523809523
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "The provided sources do not contain enough information to answer this question.",
+        "citations": [],
+        "latency_ms": 0,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "The provided sources do not contain enough information to answer this question.",
+        "citations": [],
+        "latency_ms": 0,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 1.0
+        }
+      ],
+      "mean_overlap": 1.0,
+      "n_answered": 2
+    },
+    "combined_answer": "The provided sources do not contain enough information to answer this question.",
+    "synthesizer": "source_union",
+    "verification": {
+      "model": "eval-gemma4-e4b",
+      "claims": [],
+      "confidence": 0.0,
+      "decision": "not_found",
+      "method": "cited_claim_checks"
+    }
+  }
+}

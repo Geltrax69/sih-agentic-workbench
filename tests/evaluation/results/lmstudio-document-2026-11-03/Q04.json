@@ -1,0 +1,84 @@
+{
+  "case": {
+    "id": "Q04",
+    "category": "numeric",
+    "question": "What vector dimensionality does the manuscript use for stored embeddings?",
+    "expected": "768 dimensions, vector(768).",
+    "pages": [
+      3,
+      8
+    ]
+  },
+  "wall_seconds": 19.168116624990944,
+  "result": {
+    "question": "What vector dimensionality does the manuscript use for stored embeddings?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-33",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 33,
+        "location": "page 8",
+        "content": "dding-model replacement changes retrieval geometry and requires compatible corpus/query embeddings,\nreindexing and threshold recalibration. Matching vector dimensionality alone does not make embeddings from different\nmodels comparable. The current vector(768) schema additionally requires a migration if the new dimension differs.\n6.2 Segmentation experiment\nRunning the actual chunker over the three demonstration files produced three chunks at 800/100, 800/0, 800/200 and\n1,200/100 characters. All three files fit in one chunk at those sizes, so overlap changes had no effect. At 400/0 the\ncorpus produced five chunks and 1,394 stored characters; at 400/100 it produced six chunks and 1,694 characters.\nThe default stored 1,396 characters.",
+        "score": 0.6799372448017617
+      },
+      {
+        "chunk_id": "pilot-12",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 12,
+        "location": "page 3",
+        "content": "ssible. Embeddings\nare stored in vector(768), with a cosine IVFFlat index configured with lists=100. This is a source configuration, not\nevidence that the approximate index has been optimally trained or used by the query planner on the tiny corpus. [6]\nThe ingestion service claims one pending PostgreSQL job under FOR UPDATE ... SKIP LOCKED, processes its\nobject and records success or failure. Uploads trigger this processing through an internal request. A durable retry\nworker for lost triggers or abandoned RUNNING jobs is absent. Redis participates in health checks but is not a\ndemonstrated job transport in the current execution path.",
+        "score": 0.6523370183921573
+      },
+      {
+        "chunk_id": "pilot-49",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 49,
+        "location": "page 11",
+        "content": "prevent prior generated memories from contaminating later trials and run the same questions through\nthe authenticated task API. A model-only generation pilot is insufficient to measure retrieval or authorization effects.\nFor an embedding comparison, rebuild the corpus embeddings and recalibrate on a development split before\nevaluating the held-out questions.",
+        "score": 0.6413039160374273
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "The manuscript uses a vector(768) schema.\n[1]\nRunning the actual chunker over the three demonstration files produced three chunks at 800/100, 800/0, 800/200 and 1,200/100 characters. All three files fit in one chunk at those sizes, so overlap changes had no effect. At 400/0 the corpus produced five chunks and 1,394 stored characters; at 400/100 it produced six chunks and 1,694 characters.\n[2]\nssible. Embeddings\nare stored in vector(768), with a cosine IVFFlat index configured with lists=100. This is a source configuration, not evidence that the approximate index has been optimally trained or used by the query planner on the tiny corpus. [6]\nThe ingestion service claims one pending PostgreSQL job under FOR UPDATE ... SKIP LOCKED, processes its object and records success or failure. Uploads trigger this processing through an internal request. A durable retry worker for lost triggers or abandoned RUNNING jobs is absent. Redis participates in health checks but is not a demonstrated job transport in the current execution path.\n[3]\nprevent prior generated memories from contaminating later trials and run the same questions through the authenticated task API. A model-only generation pilot is insufficient to measure retrieval or authorization effects. For an embedding comparison, rebuild the corpus embeddings and recalibrate on a development split before evaluating the held-out questions.\nUsing only the sources, the answer is: The manuscript uses a vector(768) schema.\n[4]\nThe default stored 1,396 characters.\n[5]\nAt 400/0 the corpus produced five chunks and 1,394 stored characters; at 400/100 it produced six chunks and 1,694 characters.",
+        "citations": [
+          "Research_Paper.pdf, page 8",
+          "Research_Paper.pdf, page 3",
+          "Research_Paper.pdf, page 11"
+        ],
+        "latency_ms": 9171,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "The manuscript uses a vector(768) schema for additional dimensions and also has an \"embeddings\" that are stored in a vector(768) with a cosine IVFFlat index [2], [1].",
+        "citations": [
+          "Research_Paper.pdf, page 3",
+          "Research_Paper.pdf, page 8"
+        ],
+        "latency_ms": 5143,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.082
+        }
+      ],
+      "mean_overlap": 0.082,
+      "n_answered": 2
+    },
+    "combined_answer": "- 768 dimension can be used for a vector schema [1].\n- There are also \"embeddings\" that are stored in a vector(768) with a cosine IVFFlat index, which is a source configuration [2].\n- The default number of characters stored is 1,396 (at 400/0) and 1,694 (at 400/100), depending on the size. Also, five or six chunks can be produced from the corpus at these sizes.",
+    "synthesizer": "eval-gemma4-e4b",
+    "verification": {
+      "decision": "not_run_answer_accuracy_pilot"
+    }
+  }
+}

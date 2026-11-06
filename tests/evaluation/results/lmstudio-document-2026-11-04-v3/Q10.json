@@ -1,0 +1,218 @@
+{
+  "case": {
+    "id": "Q10",
+    "category": "numeric",
+    "question": "What was the peak authenticated-read throughput, and at how many concurrent clients did it occur?",
+    "expected": "2,823.4 requests per second at 50 concurrent clients.",
+    "pages": [
+      1,
+      6
+    ]
+  },
+  "wall_seconds": 2.3239989589783363,
+  "result": {
+    "question": "What was the peak authenticated-read throughput, and at how many concurrent clients did it occur?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-29",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 29,
+        "location": "page 6",
+        "content": "requests / secondThroughput                                               p95 latency (ms)\n\n\n\n    3400                                                                         125\n\n                                           2,823.4                                                                                    102.2\n\n                             2,510.7\n    2550                                                                          94\n                                                          2,107.3\n\n\n\n    1700                                                                          62\n\n\n\n                                                                                           29.0                         32.4\n\n850                                                                         31\n\n               139.6                                                                                      7.5\n\n        0                                                                          0\n                 1             10             50            100                              1             10            50            100\n\n                              Concurrent clients                                                          Concurrent clients\n\n                                       20,000 reads per stage | Zero observed errors | Local shared host\n\nFigure 2. Authenticated read benchmark. Four single-run stages cannot establish a universal scaling curve.\n\nAll stages met the runner's criteria. Peak observed throughput occurred at 50 clients. At 100 clients, throughput was\napproximately 25.4% lower and p95 approximately 3.15 times the 50-client value. The nonmonotonic single-client\nversus ten-client behavior is unexplained by the retained metadata. Warmup and shared-host interference are\nplausible hypotheses, not demonstrated causes.\n\nThe E2E artifact lists ten passing checks. In the concurrent approval test, one decision returned HTTP 200 and the\nother HTTP 400 through the public proxy, and the accepted task completed. The tested malicious document remained\n\n\n\nResearch manuscript draft  |  8 September 2026                                                                                                    6",
+        "score": 0.8063960354273808,
+        "lexical_score": 7.797952355516389,
+        "selection_score": 0.09307359307359307
+      },
+      {
+        "chunk_id": "pilot-23",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 23,
+        "location": "page 5",
+        "content": "maintenance note, confirmed indexing, checked a grounded answer and raced two report approvals. Assertions\nincluded nonempty evidence, a fixture filename, the word filter in the answer, a retrieval-only step sequence for the\nordinary question and continued INDEXED status of the document.\n\nThe recovery check restored a database dump into a scratch database and compared table row counts. The fault test\npaused/resumed the database and restarted the API. These are bounded functional checks rather than a complete\ndisaster-recovery or availability study.\n\n4.3 Authenticated read workload\n\nThe API benchmark used four sequential closed-loop ThreadPoolExecutor stages with 1, 10, 50 and 100 workers.\nEach made 20,000 requests: 75% workspace collection reads and 25% authenticated-profile reads. The same QA\nidentity and small dataset were used. Throughput is request count divided by elapsed stage time. Per-request latency\nexcludes executor waiting before a worker starts the call, and percentiles use nearest-rank selection. Acceptance was\nzero errors and p95 below 2 seconds at each stage.\n\n4.4 AI workload and earlier keyword pilot\n\nA separate AI stress record contains 12 tasks at concurrency three using one repeated maintenance question, with\ntask completion/evidence/citation checks. It contains no independently graded answer rubric. The earlier\nthree-question evaluation uses expected keywords and counts a hit if a keyword occurs in either evidence or answer;\n\nits mean is an average of per-question hit fractions. This is a keyword coverage heuristic, despite broader language in\nthe evaluator's docstring.\n\n4.5 Additional model and temperature pilot\n\nWe ran two installed tags, qwen:7b and gemma:7b, at temperatures 0.0 and 0.8 on three cases, using seeds 17 and\n29. Cases asked for a bearing/date, an absent repair cost, and a filter incident accompanied by adversarial deletion\ninstructions. The 24 serial measured calls followed one excluded warmup per model, with shuffled order within each\nmodel. Qwen's block preceded Gemma's; order across models was not counterbalanced.\n\nThe native Ollama /api/chat request used the exact application grounding instruction, supplied evidence, stream=false,\na 2,048-token context option and a 160-token generation cap.",
+        "score": 0.7040257134716728,
+        "lexical_score": 6.975485595245138,
+        "selection_score": 0.08333333333333333
+      },
+      {
+        "chunk_id": "pilot-45",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 45,
+        "location": "page 9",
+        "content": "generalizes to arbitrary users, languages, domains or workloads. No public deployment, field-user benefit study or\nlong-duration model soak was recorded.\n\nStatistical validity is limited by single load stages and tiny model samples. We report denominators and raw values\nrather than significance tests or population-level confidence claims. The 1/2 contamination count in one cell is not a\nstable estimate of attack success probability. Token length and cache effects confound model latency comparisons.\n\nThe evaluation inputs are synthetic maintenance statements; no private operational corpus was needed for the added\nexperiments. The bundle omits environment secrets and database dumps and records a redaction in a copied\ndevelopment log.\n\ndevelopment log. Real deployments should review document ownership, retention, access revocation, model-host\ntrust and user reliance. Local inference and a confidence score do not establish regulatory compliance or factual\nsafety.\n\n9. Conclusion and future work\n\nThe workbench demonstrates a bounded local RAG workflow with application-controlled workspace access and\nhuman approval. Its retained benchmarks establish successful selected local checks and high throughput for a narrow\nauthenticated-read workload. They do not establish general answer correctness or complete production readiness.\nThe new fixed-evidence pilot shows why model and temperature changes require direct inspection: a correct factual\nanswer can still adopt an unsupported adversarial premise.\n\nFuture evaluation should freeze a larger versioned corpus, include held-out unanswerable and contradictory questions,\ncollect independent citation/answer labels and compare retrieval/generation variants under controlled resources.\n\n\nResearch manuscript draft  |  8 September 2026                                                                                                9",
+        "score": 0.6359401242219866,
+        "lexical_score": 4.251387698687739,
+        "selection_score": 0.07703703703703704
+      },
+      {
+        "chunk_id": "pilot-1",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 1,
+        "location": "page 1",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\n\n\nEvidence-Gated Local Retrieval and\nHuman-Approved Workflows for an\nInstitutional AI Workbench\n\nA systems prototype and exploratory evaluation\n\n\nAuthors and affiliations: Pending confirmation\n\nResearch manuscript draft | 8 September 2026 | Project 1: Sovereign Agentic AI Workbench\n\nThis is an unpublished manuscript draft based on inspected implementation and retained experiments. It makes no\nvenue acceptance, peer-review or official SIH endorsement claim. Author order, affiliations, corresponding-author\ncontact and target-venue formatting remain to be completed.\n\nAbstract\n\nInstitutional document assistants must connect natural-language answers to accessible evidence while controlling\nactions that affect organizational workflows. We describe a local AI workbench integrating workspace-scoped\ndocument retrieval, a deterministic evidence threshold, persisted task execution and owner approval for a report tool.\nThe implementation uses a Go API, Python AI service, PostgreSQL/pgvector, object storage and a locally configured\nmodel endpoint. Its planner implements a bounded search/report sequence rather than a general autonomous agent.\nWe analyze retained local validation and conduct an additional controlled generation pilot. A historical\nauthenticated-read workload completed 80,000 requests without observed errors and reached a peak of 2,823.4\nrequests/s at 50 concurrent clients. A separate 12-task model workload recorded a 25.12-second p95 latency. An\n\nearlier three-question pilot achieved complete expected-keyword coverage, a measure that does not establish answer\naccuracy. In 24 fixed-evidence generations across two local models and two temperatures, all calls succeeded, but\none high-temperature output adopted an unsupported deletion premise from adversarial evidence. The results\ndemonstrate a functioning local workflow and the need to distinguish retrieval signal, text faithfulness and action\nauthorization. Small datasets, incomplete historical configuration capture and unblinded exploratory review limit\ngeneralization. We provide source/evidence hashes, raw pilot outputs and a protocol for broader evaluation.\n\nKeywords: retrieval-augmented generation; local inference; evidence gating; human approval; workspace isolation;",
+        "score": 0.6059282899340072,
+        "lexical_score": 7.246805823530283,
+        "selection_score": 0.07050528789659224
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "All stages met the runner's criteria. [1]\nPeak observed throughput occurred at 50 clients. [1]\nAt 100 clients, throughput was approximately 25.4% lower and p95 approximately 3.15 times the 50-client value. [1]\nThe nonmonotonic single-client versus ten-client behavior is unexplained by the retained metadata. [1]\nWarmup and shared-host interference are plausible hypotheses, not demonstrated causes. [1]",
+        "citations": [
+          "Research_Paper.pdf, page 6"
+        ],
+        "latency_ms": 501,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "Institutional document assistants must connect natural-language answers to accessible evidence while controlling actions that affect organizational workflows. [4]\nWe describe a local AI workbench integrating workspace-scoped document retrieval, a deterministic evidence threshold, persisted task execution and owner approval for a report tool. [4]\nThe implementation uses a Go API, Python AI service, PostgreSQL/pgvector, object storage and a locally configured model endpoint. [4]\nIts planner implements a bounded search/report sequence rather than a general autonomous agent. [4]\nWe analyze retained local validation and conduct an additional controlled generation pilot. [4]\nA historical authenticated-read workload completed 80,000 requests without observed errors and reached a peak of 2,823.4 requests/s at 50 concurrent clients. [4]\nA separate 12-task model workload recorded a 25.12-second p95 latency. [4]\nAn [4]\nThe API benchmark used four sequential closed-loop ThreadPoolExecutor stages with 1, 10, 50 and 100 workers. [2]\nEach made 20,000 requests: 75% workspace collection reads and 25% authenticated-profile reads. [2]\nThe same QA identity and small dataset were used. [2]\nThroughput is request count divided by elapsed stage time. [2]\nPer-request latency excludes executor waiting before a worker starts the call, and percentiles use nearest-rank selection. [2]\nAcceptance was zero errors and p95 below 2 seconds at each stage. [2]",
+        "citations": [
+          "Research_Paper.pdf, page 1",
+          "Research_Paper.pdf, page 5"
+        ],
+        "latency_ms": 2231,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.053
+        }
+      ],
+      "mean_overlap": 0.053,
+      "n_answered": 2
+    },
+    "combined_answer": "All stages met the runner's criteria. [1]\nPeak observed throughput occurred at 50 clients. [1]\nAt 100 clients, throughput was approximately 25.4% lower and p95 approximately 3.15 times the 50-client value. [1]\nThe nonmonotonic single-client versus ten-client behavior is unexplained by the retained metadata. [1]\nWarmup and shared-host interference are plausible hypotheses, not demonstrated causes. [1]\nInstitutional document assistants must connect natural-language answers to accessible evidence while controlling actions that affect organizational workflows. [4]\nWe describe a local AI workbench integrating workspace-scoped document retrieval, a deterministic evidence threshold, persisted task execution and owner approval for a report tool. [4]\nThe implementation uses a Go API, Python AI service, PostgreSQL/pgvector, object storage and a locally configured model endpoint. [4]\nIts planner implements a bounded search/report sequence rather than a general autonomous agent. [4]\nWe analyze retained local validation and conduct an additional controlled generation pilot. [4]\nA historical authenticated-read workload completed 80,000 requests without observed errors and reached a peak of 2,823.4 requests/s at 50 concurrent clients. [4]\nA separate 12-task model workload recorded a 25.12-second p95 latency. [4]\nAn [4]\nThe API benchmark used four sequential closed-loop ThreadPoolExecutor stages with 1, 10, 50 and 100 workers. [2]\nEach made 20,000 requests: 75% workspace collection reads and 25% authenticated-profile reads. [2]\nThe same QA identity and small dataset were used. [2]\nThroughput is request count divided by elapsed stage time. [2]\nPer-request latency excludes executor waiting before a worker starts the call, and percentiles use nearest-rank selection. [2]\nAcceptance was zero errors and p95 below 2 seconds at each stage. [2]",
+    "synthesizer": "source_union",
+    "verification": {
+      "model": "eval-gemma4-e4b",
+      "claims": [
+        {
+          "claim": "All stages met the runner's criteria. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Peak observed throughput occurred at 50 clients. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "At 100 clients, throughput was approximately 25.4% lower and p95 approximately 3.15 times the 50-client value. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "The nonmonotonic single-client versus ten-client behavior is unexplained by the retained metadata. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Warmup and shared-host interference are plausible hypotheses, not demonstrated causes. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Institutional document assistants must connect natural-language answers to accessible evidence while controlling actions that affect organizational workflows. [4]",
+          "source": 4,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "We describe a local AI workbench integrating workspace-scoped document retrieval, a deterministic evidence threshold, persisted task execution and owner approval for a report tool. [4]",
+          "source": 4,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "The implementation uses a Go API, Python AI service, PostgreSQL/pgvector, object storage and a locally configured model endpoint. [4]",
+          "source": 4,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Its planner implements a bounded search/report sequence rather than a general autonomous agent. [4]",
+          "source": 4,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "We analyze retained local validation and conduct an additional controlled generation pilot. [4]",
+          "source": 4,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "A historical authenticated-read workload completed 80,000 requests without observed errors and reached a peak of 2,823.4 requests/s at 50 concurrent clients. [4]",
+          "source": 4,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "A separate 12-task model workload recorded a 25.12-second p95 latency. [4]",
+          "source": 4,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "An [4]",
+          "source": 4,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "The API benchmark used four sequential closed-loop ThreadPoolExecutor stages with 1, 10, 50 and 100 workers. [2]",
+          "source": 2,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Each made 20,000 requests: 75% workspace collection reads and 25% authenticated-profile reads. [2]",
+          "source": 2,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "The same QA identity and small dataset were used. [2]",
+          "source": 2,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Throughput is request count divided by elapsed stage time. [2]",
+          "source": 2,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Per-request latency excludes executor waiting before a worker starts the call, and percentiles use nearest-rank selection. [2]",
+          "source": 2,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Acceptance was zero errors and p95 below 2 seconds at each stage. [2]",
+          "source": 2,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        }
+      ],
+      "confidence": 1.0,
+      "decision": "verified",
+      "method": "source_excerpt_match"
+    }
+  }
+}

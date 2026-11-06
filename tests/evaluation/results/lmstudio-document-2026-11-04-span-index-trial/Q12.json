@@ -1,0 +1,122 @@
+{
+  "case": {
+    "id": "Q12",
+    "category": "limitation",
+    "question": "Does the earlier three-question pilot's mean keyword coverage of 1.0 establish general answer accuracy?",
+    "expected": "No. Keywords could occur in evidence or answers; this is coverage, not independently graded correctness or semantic citation accuracy.",
+    "pages": [
+      5,
+      7,
+      9
+    ]
+  },
+  "wall_seconds": 11.598961708019488,
+  "result": {
+    "question": "Does the earlier three-question pilot's mean keyword coverage of 1.0 establish general answer accuracy?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-32",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 32,
+        "location": "page 7",
+        "content": "expected-keyword coverage was 1.0. No semantic citation labels, held-out recall or general answer accuracy can be\nderived from these observations. The pilot predates the final evidence-selection fix.\n\nDatabase restoration compared counts for 19 tables from a 53,270-byte dump and passed, reporting 1.75 seconds for\nthe check. This is not a measured service RTO or object-store restore. The fault record passed database\npause/resume and API restart checks without quantitative recovery timing.\n\n5.3 Fixed-evidence model sensitivity\n\n\n  Model tag           Temp.                Calls                Median wall s        Mean                Reviewed             Injection",
+        "score": 0.7221063963758163,
+        "lexical_score": 13.016845858054173,
+        "selection_score": 0.09523809523809523
+      },
+      {
+        "chunk_id": "pilot-2",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 2,
+        "location": "page 1",
+        "content": "earlier three-question pilot achieved complete expected-keyword coverage, a measure that does not establish answer\naccuracy. In 24 fixed-evidence generations across two local models and two temperatures, all calls succeeded, but\none high-temperature output adopted an unsupported deletion premise from adversarial evidence. The results\ndemonstrate a functioning local workflow and the need to distinguish retrieval signal, text faithfulness and action\nauthorization. Small datasets, incomplete historical configuration capture and unblinded exploratory review limit\ngeneralization. We provide source/evidence hashes, raw pilot outputs and a protocol for broader evaluation.\n\nKeywords: retrieval-augmented generation; local inference; evidence gating; human approval; workspace isolation;",
+        "score": 0.7004450478557808,
+        "lexical_score": 11.461332599698904,
+        "selection_score": 0.08893280632411067
+      },
+      {
+        "chunk_id": "pilot-24",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 24,
+        "location": "page 5",
+        "content": "its mean is an average of per-question hit fractions. This is a keyword coverage heuristic, despite broader language in\nthe evaluator's docstring.\n\n4.5 Additional model and temperature pilot\n\nWe ran two installed tags, qwen:7b and gemma:7b, at temperatures 0.0 and 0.8 on three cases, using seeds 17 and\n29. Cases asked for a bearing/date, an absent repair cost, and a filter incident accompanied by adversarial deletion\ninstructions. The 24 serial measured calls followed one excluded warmup per model, with shuffled order within each\nmodel. Qwen's block preceded Gemma's; order across models was not counterbalanced.\n\nThe native Ollama /api/chat request used the exact application grounding instruction, supplied evidence, stream=false,\na 2,048-token context option and a 160-token generation cap.",
+        "score": 0.7049357510456593,
+        "lexical_score": 9.130374956963376,
+        "selection_score": 0.08712121212121213
+      },
+      {
+        "chunk_id": "pilot-43",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 43,
+        "location": "page 9",
+        "content": "application memory to isolate supplied-evidence generation, which also limits ecological validity.\n\nConstruct validity is limited by keyword coverage and citation-marker checks. A keyword can appear in irrelevant\nevidence; a citation marker can point to a passage that does not entail a claim. The post-hoc pilot rubric was applied\nby the documentation authoring assistant without blinding or independent expert agreement. It is useful for explaining\nthese particular outputs, not a validated measurement instrument.\n\nExternal validity is limited by a three-file synthetic corpus, a repeated AI load question, six calls per model-temperature\ncell and only two injection trials in each cell. Neither zero observed API errors nor three complete keyword-hit fractions",
+        "score": 0.6798840111753084,
+        "lexical_score": 6.187414749985192,
+        "selection_score": 0.07870370370370369
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "5.3 Fixed-evidence model sensitivity Model tag Temp. [1]\nCalls Median wall s Mean Reviewed Injection [1]\nearlier three-question pilot achieved complete expected-keyword coverage, a measure that does not establish answer accuracy. [2]",
+        "citations": [
+          "Research_Paper.pdf, page 7",
+          "Research_Paper.pdf, page 1"
+        ],
+        "latency_ms": 4853,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "This is a keyword coverage heuristic, despite broader language in the evaluator's docstring. [3]",
+        "citations": [
+          "Research_Paper.pdf, page 5"
+        ],
+        "latency_ms": 8598,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.065
+        }
+      ],
+      "mean_overlap": 0.065,
+      "n_answered": 2
+    },
+    "combined_answer": "The pilot predates the final evidence-selection fix. [1]\nexpected-keyword coverage was 1.0. [1]\nNo semantic citation labels, held-out recall or general answer accuracy can be derived from these observations. [1]",
+    "synthesizer": "eval-gemma4-e4b",
+    "verification": {
+      "model": "eval-gemma4-e4b",
+      "claims": [
+        {
+          "claim": "The pilot predates the final evidence-selection fix. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "expected-keyword coverage was 1.0. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "No semantic citation labels, held-out recall or general answer accuracy can be derived from these observations. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        }
+      ],
+      "confidence": 1.0,
+      "decision": "verified"
+    }
+  }
+}

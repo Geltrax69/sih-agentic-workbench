@@ -1,0 +1,82 @@
+{
+  "case": {
+    "id": "Q08",
+    "category": "limitation",
+    "question": "What does verified=true mean for answer memory in the manuscript, and how much generated text can be stored?",
+    "expected": "It reflects an ANSWER retrieval-gate decision rather than independent verification; up to 500 characters of generated text.",
+    "pages": [
+      4
+    ]
+  },
+  "wall_seconds": 30.148272250022274,
+  "result": {
+    "question": "What does verified=true mean for answer memory in the manuscript, and how much generated text can be stored?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-16",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 16,
+        "location": "page 4",
+        "content": "from executing the same transition.\nThe current report tool returns Markdown stored in a task step. A public report-download artifact is not exposed. The\nschema and step vocabulary are broader than the active workflow: dynamic model routing, general DAG planning,\ngraph retrieval expansion and complete tool-execution auditing remain outside the demonstrated implementation.\n3.4 Memory and residual trust\nAn ANSWER decision writes up to 500 characters of generated text into memory with verified=true, and later prompts\ndescribe these items as verified facts. This flag reflects the retrieval gate, not independent verification. Thus an\nunsupported generated claim can become later context. Source deletion also does not establish revocation of\nhistorical answer memories.",
+        "score": 0.7374658530501268
+      },
+      {
+        "chunk_id": "pilot-14",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 14,
+        "location": "page 4",
+        "content": "<= s* < 0.45\n       ANSWER                    if s* >= 0.45\nThe threshold function is deterministic. It does not estimate the probability of answer correctness. One high-scoring\npassage is sufficient for ANSWER, even if the requested detail is absent or other passages conflict. Stale evidence\nadds a reason string in the gate without reducing the score. Normal executor items are constructed after\nworkspace-scoped SQL retrieval; revoked/stale metadata is not comprehensively propagated.\nFor non-refused tasks, numbered evidence and up to three recent eligible memory items are sent to the generator. The\ntask path uses temperature 0.3 and a maximum output of 800 tokens. The system instruction asks for evidence-only\nanswers, [n] citations and rejection of instructions inside evidence.",
+        "score": 0.7046277696487848
+      },
+      {
+        "chunk_id": "pilot-42",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 42,
+        "location": "page 9",
+        "content": "trates a bounded local RAG workflow with application-controlled workspace access and\nhuman approval. Its retained benchmarks establish successful selected local checks and high throughput for a narrow\nauthenticated-read workload. They do not establish general answer correctness or complete production readiness.\nThe new fixed-evidence pilot shows why model and temperature changes require direct inspection: a correct factual\nanswer can still adopt an unsupported adversarial premise.\nFuture evaluation should freeze a larger versioned corpus, include held-out unanswerable and contradictory questions,\ncollect independent citation/answer labels and compare retrieval/generation variants under controlled resources.",
+        "score": 0.6915008148570103
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "[1] from executing the same transition.\nThe current report tool returns Markdown stored in a task step. A public report-download artifact is not exposed. The schema and step vocabulary are broader than the active workflow: dynamic model routing, general DAG planning, graph retrieval expansion and complete tool-execution auditing remain outside the demonstrated implementation.\n3.4 Memory and residual trust\nAn ANSWER decision writes up to 500 characters of generated text into memory with verified=true, and later prompts describe these items as verified facts. This flag reflects the retrieval gate, not independent verification. Thus an unsupported generated claim can become later context. Source deletion also does not establish revocation of historical answer memories.\n[2] (Research_Paper.pdf, page 4)\n<= s* < 0.45\nANSWER                    if s* >= 0.45\nThe threshold function is deterministic. It does not estimate the probability of answer correctness. One high-scoring passage is sufficient for ANSWER, even if the requested detail is absent or other passages conflict.\nStale evidence adds a reason string in the gate without reducing the score. Normal executor items are constructed after workspace-scoped SQL retrieval; revoked/stale metadata is not comprehensively propagated.\nFor non-refused tasks, numbered evidence and up to three recent eligible memory items are sent to the generator. The task path uses temperature 0.3 and a maximum output of 800 tokens. The system instruction asks for evidence-only answers, [n] citations and rejection of instructions inside evidence.\n[3] (Research_Paper.pdf, page 9)\ntrates a bounded local RAG workflow with application-controlled workspace access and human approval. Its retained benchmarks establish successful selected local checks and high throughput for a narrow authenticated-read workload. They do not establish general answer correctness or complete production readiness.\nThe new fixed-evidence pilot shows why model and temperature changes require direct inspection: a correct factual answer can still adopt an unsupported adversarial premise.\nFuture evaluation should freeze a larger versioned corpus, include held-out unanswerable and contradictory questions, collect independent citation/answer labels and compare retrieval/generation variants under controlled resources.",
+        "citations": [
+          "Research_Paper.pdf, page 4",
+          "Research_Paper.pdf, page 4",
+          "Research_Paper.pdf, page 9"
+        ],
+        "latency_ms": 15355,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "*   An ANSWER decision can write up to 500 characters of generated text into memory with a verified=true flag, which can be referenced later as a verified fact. This also means that an unsupportable claim can become context, and the source does not show how to revoke historical answer memories if they are deleted. [1]\n*   The meaning of this flag is that it reflects the retrieval gate, not independent verification. [1]",
+        "citations": [
+          "Research_Paper.pdf, page 4"
+        ],
+        "latency_ms": 10462,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.124
+        }
+      ],
+      "mean_overlap": 0.124,
+      "n_answered": 2
+    },
+    "combined_answer": "*   An ANSWER decision can write up to 500 characters of generated text into memory with a verified=true flag, which can be referenced later as a verified fact [1].\n*    This also means that an unsupportable claim can become context, and the source does not show how to revoke historical answer memories if they are deleted. [1]\n*    The meaning of this flag is that it reflects the retrieval gate, not independent verification. [1]",
+    "synthesizer": "eval-gemma4-e4b",
+    "verification": {
+      "decision": "not_run_answer_accuracy_pilot"
+    }
+  }
+}

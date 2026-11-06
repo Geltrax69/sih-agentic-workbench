@@ -1,0 +1,157 @@
+{
+  "case": {
+    "id": "Q05",
+    "category": "limitation",
+    "question": "According to the manuscript, is Redis a demonstrated durable job transport, and is a durable retry worker implemented?",
+    "expected": "No to both. Redis participates in health checks; a durable retry worker for lost triggers or abandoned RUNNING jobs is absent.",
+    "pages": [
+      3
+    ]
+  },
+  "wall_seconds": 3.049161584000103,
+  "result": {
+    "question": "According to the manuscript, is Redis a demonstrated durable job transport, and is a durable retry worker implemented?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-14",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 14,
+        "location": "page 3",
+        "content": "calls a configured local endpoint for embeddings and generation.\n\nIngestion supports text-bearing PDF, DOCX, XLSX, TXT, Markdown and CSV inputs. The current chunker uses\n800-character windows with nominal 100-character overlap and prefers text boundaries where possible. Embeddings\nare stored in vector(768), with a cosine IVFFlat index configured with lists=100. This is a source configuration, not\nevidence that the approximate index has been optimally trained or used by the query planner on the tiny corpus. [6]\n\nThe ingestion service claims one pending PostgreSQL job under FOR UPDATE ... SKIP LOCKED, processes its\nobject and records success or failure. Uploads trigger this processing through an internal request. A durable retry\nworker for lost triggers or abandoned RUNNING jobs is absent. Redis participates in health checks but is not a\ndemonstrated job transport in the current execution path.\n\n\n\n\n\n\n\n\n\n\n\nResearch manuscript draft  |  8 September 2026                                                                                                    3",
+        "score": 0.793053139706286,
+        "lexical_score": 13.09708289701219,
+        "selection_score": 0.09523809523809523
+      },
+      {
+        "chunk_id": "pilot-41",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 41,
+        "location": "page 9",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\n\n7. Discussion\n\nRQ1 is supported within the implemented scope: the project combines document ingestion, scoped retrieval, threshold\nrefusal and a persisted owner-approval report sequence. It does not demonstrate a general agent planner, complete\nsemantic verification or a downloadable reporting product. RQ2 yields evidence for selected local functional and load\nproperties, with substantial limits on production inference. RQ3 yields a concrete, reproducible example of text\nvariation and contamination under one changed model-temperature configuration, without establishing a general\nwinner.\n\nFor deployment, the most consequential improvements are provenance-aware memory, reviewable report content\n\nbound to source versions, durable processing recovery and an evaluation set that separates retrieval relevance from\nanswerability and faithfulness. Capacity work should exercise a mixed workload with ingestion and generation,\nincreasing corpus sizes and sustained duration. Model routing or larger models should be added only with\nmeasurements showing their benefit for that workload.\n\n8. Threats to validity and responsible use\n\nInternal validity is limited by missing historical revision/digest metadata, non-isolated local resources, sequential\nstage/model order and differences between the native model pilot and application endpoint. The quality pilot predates\na retrieval-evidence fix, so its scores cannot be treated as final-revision quality evidence. New pilot prompts omitted",
+        "score": 0.6074512496812897,
+        "lexical_score": 1.9648065237834171,
+        "selection_score": 0.07870370370370369
+      },
+      {
+        "chunk_id": "pilot-47",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 47,
+        "location": "page 10",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\n\n\nImplementation priorities are memory provenance invalidation, approval-content binding, durable job recovery, report\ndelivery and public operational validation. These steps would support stronger claims than the present exploratory\nevidence allows.\n\nData and code availability\n\nThe accompanying package includes original-result copies with hashes, a current source hash map, editable\nmanuscript/dossier text, diagrams, model-pilot requests and outputs, and scripts. The inspected local repository is\n/Users/lalitsingh/PROJECTS/sih-agentic-workbench. Public archival access and a frozen release commit remain to be\narranged by the authors; no public dataset or repository release is claimed here.\n\nAuthor contributions and declarations\n\nNamed author contributions, institutional affiliations, funding and competing-interest declarations are pending\nconfirmation. The documentation was prepared with an AI coding assistant using repository inspection and local\nexperiments; the pilot's post-hoc labels were produced by that assistant. Human authors must review the manuscript,\nresults, attribution and any venue-specific disclosure requirements before submission.\n\nReferences\n\n[1] P. Lewis et al., \u201cRetrieval-Augmented Generation for Knowledge-Intensive NLP Tasks,\u201d NeurIPS, 2020.\nhttps://arxiv.org/abs/2005.11401\n\n[2] S. Yao et al., \u201cReAct: Synergizing Reasoning and Acting in Language Models,\u201d arXiv:2210.03629, 2022.\nhttps://arxiv.org/abs/2210.03629\n\n[3] K.",
+        "score": 0.587808799184123,
+        "lexical_score": 3.558602713879159,
+        "selection_score": 0.07738095238095238
+      },
+      {
+        "chunk_id": "pilot-6",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 6,
+        "location": "page 2",
+        "content": "institution-controlled environment. The present implementation checks configured endpoint locality and runs in a local\ncontainer deployment; it does not establish an air-gapped or legally certified environment.\n\nThe motivating domain in the evaluated prototype is synthetic pump maintenance. Part identifiers, event dates and\nfailure causes provide inspectable facts. We do not claim that this corpus represents the complexity of a real industrial\nknowledge base. Its role is to support functional and exploratory tests, including missing evidence and adversarial\ninstructions embedded in a source.\n\n1.1 Research questions\n\nRQ1: Can a bounded local document workflow combine workspace-scoped retrieval with a deterministic\nanswer/refusal gate and persisted human approval? RQ2: What do the retained functional, load and recovery\nmeasurements establish about the prototype, and what do they leave unmeasured? RQ3: With supplied evidence held\nfixed, how do local model choice and sampling temperature affect response content and latency in a small exploratory\ncomparison?\n\n1.2 Contributions and scope\n\nWe present an inspectable systems integration, a distinction between implemented and planned capabilities, an\nanalysis of retained test artifacts and a reproducible fixed-evidence sensitivity pilot. The contribution is not a new\nlanguage-model architecture or a state-of-the-art retrieval algorithm. It is also not a controlled study of operational\nproductivity. The associated technical dossier contains deployment, API, workflow and SIH presentation details; this\nmanuscript emphasizes method, evidence and validity limits.\n\n2. Related work and design rationale\n\nRetrieval-augmented generation separates model parameters from an external source of retrievable knowledge. Lewis\net al. provide a foundational formulation of this approach. We use the general retrieval-plus-generation pattern, without\nreproducing that paper's training procedure or claiming its benchmark improvements. [1]\n\nReAct explores interleaving language-model reasoning and actions. Our planner instead uses a fixed search step and",
+        "score": 0.5929921704275092,
+        "lexical_score": 1.933687524286631,
+        "selection_score": 0.07417582417582418
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "The ingestion service claims one pending PostgreSQL job under FOR UPDATE ... [1]\nSKIP LOCKED, processes its object and records success or failure. [1]\nUploads trigger this processing through an internal request. [1]\nA durable retry worker for lost triggers or abandoned RUNNING jobs is absent. [1]\nRedis participates in health checks but is not a demonstrated job transport in the current execution path. [1]",
+        "citations": [
+          "Research_Paper.pdf, page 3"
+        ],
+        "latency_ms": 2094,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "The ingestion service claims one pending PostgreSQL job under FOR UPDATE ... [1]\nSKIP LOCKED, processes its object and records success or failure. [1]\nUploads trigger this processing through an internal request. [1]\nA durable retry worker for lost triggers or abandoned RUNNING jobs is absent. [1]\nRedis participates in health checks but is not a demonstrated job transport in the current execution path. [1]\nWe present an inspectable systems integration, a distinction between implemented and planned capabilities, an analysis of retained test artifacts and a reproducible fixed-evidence sensitivity pilot. [4]\nThe contribution is not a new language-model architecture or a state-of-the-art retrieval algorithm. [4]\nIt is also not a controlled study of operational productivity. [4]\nThe associated technical dossier contains deployment, API, workflow and SIH presentation details; this manuscript emphasizes method, evidence and validity limits. [4]",
+        "citations": [
+          "Research_Paper.pdf, page 3",
+          "Research_Paper.pdf, page 2"
+        ],
+        "latency_ms": 2969,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.472
+        }
+      ],
+      "mean_overlap": 0.472,
+      "n_answered": 2
+    },
+    "combined_answer": "The ingestion service claims one pending PostgreSQL job under FOR UPDATE ... [1]\nSKIP LOCKED, processes its object and records success or failure. [1]\nUploads trigger this processing through an internal request. [1]\nA durable retry worker for lost triggers or abandoned RUNNING jobs is absent. [1]\nRedis participates in health checks but is not a demonstrated job transport in the current execution path. [1]\nWe present an inspectable systems integration, a distinction between implemented and planned capabilities, an analysis of retained test artifacts and a reproducible fixed-evidence sensitivity pilot. [4]\nThe contribution is not a new language-model architecture or a state-of-the-art retrieval algorithm. [4]\nIt is also not a controlled study of operational productivity. [4]\nThe associated technical dossier contains deployment, API, workflow and SIH presentation details; this manuscript emphasizes method, evidence and validity limits. [4]",
+    "synthesizer": "source_union",
+    "verification": {
+      "model": "eval-gemma4-e4b",
+      "claims": [
+        {
+          "claim": "The ingestion service claims one pending PostgreSQL job under FOR UPDATE ... [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "SKIP LOCKED, processes its object and records success or failure. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Uploads trigger this processing through an internal request. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "A durable retry worker for lost triggers or abandoned RUNNING jobs is absent. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Redis participates in health checks but is not a demonstrated job transport in the current execution path. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "We present an inspectable systems integration, a distinction between implemented and planned capabilities, an analysis of retained test artifacts and a reproducible fixed-evidence sensitivity pilot. [4]",
+          "source": 4,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "The contribution is not a new language-model architecture or a state-of-the-art retrieval algorithm. [4]",
+          "source": 4,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "It is also not a controlled study of operational productivity. [4]",
+          "source": 4,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "The associated technical dossier contains deployment, API, workflow and SIH presentation details; this manuscript emphasizes method, evidence and validity limits. [4]",
+          "source": 4,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        }
+      ],
+      "confidence": 1.0,
+      "decision": "verified",
+      "method": "source_excerpt_match"
+    }
+  }
+}

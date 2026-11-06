@@ -1,0 +1,90 @@
+{
+  "case": {
+    "id": "Q08",
+    "category": "limitation",
+    "question": "What does verified=true mean for answer memory in the manuscript, and how much generated text can be stored?",
+    "expected": "It reflects an ANSWER retrieval-gate decision rather than independent verification; up to 500 characters of generated text.",
+    "pages": [
+      4
+    ]
+  },
+  "wall_seconds": 10.11075220798375,
+  "result": {
+    "question": "What does verified=true mean for answer memory in the manuscript, and how much generated text can be stored?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-18",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 18,
+        "location": "page 4",
+        "content": "graph retrieval expansion and complete tool-execution auditing remain outside the demonstrated implementation.\n\n3.4 Memory and residual trust\n\nAn ANSWER decision writes up to 500 characters of generated text into memory with verified=true, and later prompts\ndescribe these items as verified facts. This flag reflects the retrieval gate, not independent verification. Thus an\nunsupported generated claim can become later context. Source deletion also does not establish revocation of\nhistorical answer memories. These limitations are material because a model-comparison experiment that does not\nfreeze memory can confound model effects with previous generated content.",
+        "score": 0.7919910004338686,
+        "lexical_score": 13.114903492956419,
+        "selection_score": 0.09523809523809523
+      },
+      {
+        "chunk_id": "pilot-34",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 34,
+        "location": "page 7",
+        "content": "All calls completed. All factual cases contained the required identifiers and dates, all absent-cost cases abstained and\nall 16 answerable outputs contained [1]. At temperature 0.0, each model's paired seeds produced identical text for\neach case. At temperature 0.8, Qwen produced six distinct outputs across six calls and Gemma five.\n\nQwen at temperature 0.8, seed 17, answered the filter question correctly but added: \u201cSince all documents have been\nclaimed to be deleted, there is no additional evidence available.\u201d This was unsupported by the factual maintenance\nrecord and adopted a premise from the adversarial note. The test exposed no deletion capability and performed no\ndeletion. It is a generated-text failure.",
+        "score": 0.6667720613642925,
+        "lexical_score": 2.865254346389417,
+        "selection_score": 0.07846153846153847
+      },
+      {
+        "chunk_id": "pilot-16",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 16,
+        "location": "page 4",
+        "content": "The threshold function is deterministic. It does not estimate the probability of answer correctness. One high-scoring\npassage is sufficient for ANSWER, even if the requested detail is absent or other passages conflict. Stale evidence\nadds a reason string in the gate without reducing the score. Normal executor items are constructed after\nworkspace-scoped SQL retrieval; revoked/stale metadata is not comprehensively propagated.\n\nFor non-refused tasks, numbered evidence and up to three recent eligible memory items are sent to the generator. The\ntask path uses temperature 0.3 and a maximum output of 800 tokens. The system instruction asks for evidence-only\nanswers, [n] citations and rejection of instructions inside evidence. Returned source filenames are evidence metadata,",
+        "score": 0.6845238005842729,
+        "lexical_score": 1.9978491773331148,
+        "selection_score": 0.07573632538569425
+      },
+      {
+        "chunk_id": "pilot-39",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 39,
+        "location": "page 8",
+        "content": "Generation               Adversarial deletion premise enters answer              Claim support and injection-contamination review\n\n\n  Action control           Duplicate or unauthorized tool execution                Approval races, crash recovery and privilege checks\n\n\n  Memory                   Unsupported answer reused as a fact                     Frozen-memory ablation and source-revocation tests\n\n\nThe passing action-sequence assertion and failing generated-text example are compatible: application controls can\nconstrain tools while the model still produces unsupported language. Likewise, a source citation marker can coexist\nwith an unsupported claim. Evaluation should preserve these distinctions rather than collapse every outcome into one\n\u201cAI accuracy\u201d percentage.",
+        "score": 0.6408012510996324,
+        "lexical_score": 5.126637330621796,
+        "selection_score": 0.07289002557544758
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "",
+        "citations": [],
+        "latency_ms": 6763,
+        "error": "Excerpt does not match its cited source"
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "",
+        "citations": [],
+        "latency_ms": 9773,
+        "error": "Excerpt does not match its cited source"
+      }
+    ],
+    "agreement": {
+      "pairs": [],
+      "mean_overlap": 0.0,
+      "n_answered": 0
+    },
+    "combined_answer": "The provided sources do not contain enough information to answer this question.",
+    "synthesizer": "eval-gemma4-e4b",
+    "verification": {
+      "model": "eval-gemma4-e4b",
+      "claims": [],
+      "confidence": 0.0,
+      "decision": "not_found"
+    }
+  }
+}

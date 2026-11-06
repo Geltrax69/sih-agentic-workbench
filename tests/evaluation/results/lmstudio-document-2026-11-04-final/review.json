@@ -1,0 +1,426 @@
+{
+  "reviewer": "Authoring assistant; unblinded development-set regression review, not independent validation",
+  "rubric": "tests/evaluation/document_pilot/rubric.md",
+  "cases": {
+    "Q01": {
+      "retrieval_coverage": "complete",
+      "coverage_reason": "Selected pages 8 and 4 explicitly contain all three gate decisions.",
+      "responses": {
+        "eval-minicpm5-1b": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Correct boundary decisions plus faithful threshold context."
+        },
+        "eval-gemma4-e4b": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Returns the exact three-decision sentence."
+        },
+        "combined": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Retains the correct gate decisions without rewriting them."
+        }
+      }
+    },
+    "Q02": {
+      "retrieval_coverage": "complete",
+      "coverage_reason": "Page 4 explicitly distinguishes deterministic retrieval gating from correctness probability.",
+      "responses": {
+        "eval-minicpm5-1b": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Returns the explicit not-a-probability statement."
+        },
+        "eval-gemma4-e4b": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Returns the explicit not-a-probability statement."
+        },
+        "combined": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Preserves the correct limitation."
+        }
+      }
+    },
+    "Q03": {
+      "retrieval_coverage": "complete",
+      "coverage_reason": "The explicit default chunk definition on page 3 is now retrieved.",
+      "responses": {
+        "eval-minicpm5-1b": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Returns 800-character windows and nominal 100-character overlap."
+        },
+        "eval-gemma4-e4b": {
+          "correct": false,
+          "unsupported_material": false,
+          "reason": "The generator exhausted its output budget; no accepted answer was returned."
+        },
+        "combined": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Preserves the correct MiniCPM excerpt despite Gemma failing."
+        }
+      }
+    },
+    "Q04": {
+      "retrieval_coverage": "complete",
+      "coverage_reason": "Pages 3 and 8 specify vector(768).",
+      "responses": {
+        "eval-minicpm5-1b": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Correct vector dimensionality with faithful extra context."
+        },
+        "eval-gemma4-e4b": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Correct vector dimensionality."
+        },
+        "combined": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Retains the shared correct dimensionality without a synthesis refusal."
+        }
+      }
+    },
+    "Q05": {
+      "retrieval_coverage": "complete",
+      "coverage_reason": "Page 3 contains the worker absence and Redis transport limitation.",
+      "responses": {
+        "eval-minicpm5-1b": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Both negative conclusions appear."
+        },
+        "eval-gemma4-e4b": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Both negative conclusions appear."
+        },
+        "combined": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Both required conclusions are retained."
+        }
+      }
+    },
+    "Q06": {
+      "retrieval_coverage": "complete",
+      "coverage_reason": "Page 4 contains both the owner role and WAITING_FOR_APPROVAL.",
+      "responses": {
+        "eval-minicpm5-1b": {
+          "correct": false,
+          "unsupported_material": false,
+          "reason": "Names owner but omits the paused WAITING_FOR_APPROVAL state."
+        },
+        "eval-gemma4-e4b": {
+          "correct": false,
+          "unsupported_material": false,
+          "reason": "Names the paused state but omits the owner role."
+        },
+        "combined": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Combines the complementary owner-role and paused-state excerpts."
+        }
+      }
+    },
+    "Q07": {
+      "retrieval_coverage": "complete",
+      "coverage_reason": "Page 4 now supplies the normal task settings; pilot settings are separately described.",
+      "responses": {
+        "eval-minicpm5-1b": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Explicitly returns temperature 0.3 and maximum 800 output tokens."
+        },
+        "eval-gemma4-e4b": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Explicitly returns normal settings and distinguishes the separately labeled Ollama pilot."
+        },
+        "combined": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Retains the normal settings without rewriting pilot values as production values."
+        }
+      }
+    },
+    "Q08": {
+      "retrieval_coverage": "complete",
+      "coverage_reason": "Page 4 supplies the 500-character limit and retrieval-gate interpretation.",
+      "responses": {
+        "eval-minicpm5-1b": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Returns both limit and meaning, with the memory contamination caveat."
+        },
+        "eval-gemma4-e4b": {
+          "correct": false,
+          "unsupported_material": false,
+          "reason": "Returns the 500-character limit but omits the flag meaning."
+        },
+        "combined": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Retains both required facts from MiniCPM."
+        }
+      }
+    },
+    "Q09": {
+      "retrieval_coverage": "partial",
+      "coverage_reason": "Four 20,000-request stages and zero observed errors are present, but the explicit 80,000 total in the abstract is absent.",
+      "responses": {
+        "eval-minicpm5-1b": {
+          "correct": false,
+          "unsupported_material": false,
+          "reason": "States stage count/per-stage requests and zero errors but never gives the requested 80,000 total."
+        },
+        "eval-gemma4-e4b": {
+          "correct": false,
+          "unsupported_material": false,
+          "reason": "Gives per-stage count but omits the total; the zero-error wording is a criterion rather than an observed result."
+        },
+        "combined": {
+          "correct": false,
+          "unsupported_material": false,
+          "reason": "Retains the available facts but does not explicitly answer the requested total; the user would have to calculate it."
+        }
+      }
+    },
+    "Q10": {
+      "retrieval_coverage": "complete",
+      "coverage_reason": "The selected page 6 evidence includes the table and explicit peak-client statement, but row layout is difficult.",
+      "responses": {
+        "eval-minicpm5-1b": {
+          "correct": false,
+          "unsupported_material": false,
+          "reason": "Correctly states 50 clients but does not state the requested peak throughput 2,823.4 requests/s."
+        },
+        "eval-gemma4-e4b": {
+          "correct": false,
+          "unsupported_material": false,
+          "reason": "Only states 50 clients; omits peak throughput."
+        },
+        "combined": {
+          "correct": false,
+          "unsupported_material": false,
+          "reason": "Retains the client count but not the required throughput value."
+        }
+      }
+    },
+    "Q11": {
+      "retrieval_coverage": "complete",
+      "coverage_reason": "Pages 7 and 1 give p95 25.12 seconds and page 7 explicitly separates generation from API reads.",
+      "responses": {
+        "eval-minicpm5-1b": {
+          "correct": false,
+          "unsupported_material": false,
+          "reason": "Gives p95 but omits the requested warning about generated-answer throughput."
+        },
+        "eval-gemma4-e4b": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Returns both the measured p95 and the explicit cannot-support-thousands distinction."
+        },
+        "combined": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Preserves both required facts from the complementary excerpts."
+        }
+      }
+    },
+    "Q12": {
+      "retrieval_coverage": "complete",
+      "coverage_reason": "Several selected passages explicitly state keyword coverage does not establish accuracy.",
+      "responses": {
+        "eval-minicpm5-1b": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Returns the exact no-general-accuracy statement."
+        },
+        "eval-gemma4-e4b": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Returns the exact no-general-accuracy statement with heuristic context."
+        },
+        "combined": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Preserves the accurate limitation."
+        }
+      }
+    },
+    "Q13": {
+      "retrieval_coverage": "complete",
+      "coverage_reason": "Selected pages 5 and 1 specify both model tags, temperatures, and 24 total generations.",
+      "responses": {
+        "eval-minicpm5-1b": {
+          "correct": false,
+          "unsupported_material": false,
+          "reason": "Names models and temperatures but omits the required 24-generation total."
+        },
+        "eval-gemma4-e4b": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Includes model tags, both temperatures, and 24 generations."
+        },
+        "combined": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Retains all required facts."
+        }
+      }
+    },
+    "Q14": {
+      "retrieval_coverage": "complete",
+      "coverage_reason": "The selected pages 7 passages contain the trial identity and explicit no-deletion statement.",
+      "responses": {
+        "eval-minicpm5-1b": {
+          "correct": false,
+          "unsupported_material": false,
+          "reason": "Selects unrelated pilot statistics and omits the requested trial and actual-deletion outcome."
+        },
+        "eval-gemma4-e4b": {
+          "correct": false,
+          "unsupported_material": false,
+          "reason": "Identifies Qwen, 0.8 and seed 17, but selects only the fragment deletion instead of answering whether deletion occurred."
+        },
+        "combined": {
+          "correct": false,
+          "unsupported_material": false,
+          "reason": "Retains the trial identity but still does not explicitly answer the actual-deletion question."
+        }
+      }
+    },
+    "Q15": {
+      "retrieval_coverage": "complete",
+      "coverage_reason": "Pages 1 and 10 include unpublished status and pending authors/affiliations.",
+      "responses": {
+        "eval-minicpm5-1b": {
+          "correct": false,
+          "unsupported_material": false,
+          "reason": "Answers pending authors/affiliations but omits unpublished/no-peer-review status."
+        },
+        "eval-gemma4-e4b": {
+          "correct": false,
+          "unsupported_material": false,
+          "reason": "Answers pending affiliations and release metadata, not whether the manuscript is accepted or peer reviewed."
+        },
+        "combined": {
+          "correct": false,
+          "unsupported_material": false,
+          "reason": "Retains pending author details but does not explicitly answer publication/peer-review status."
+        }
+      }
+    },
+    "Q16": {
+      "retrieval_coverage": "complete",
+      "coverage_reason": "Page 2 explicitly says local deployment does not establish air-gap or legal certification.",
+      "responses": {
+        "eval-minicpm5-1b": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Returns the explicit no-air-gap/no-certification statement."
+        },
+        "eval-gemma4-e4b": {
+          "correct": false,
+          "unsupported_material": false,
+          "reason": "Output-token budget exhausted; no accepted response."
+        },
+        "combined": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Preserves the complete MiniCPM excerpt despite Gemma failure."
+        }
+      }
+    },
+    "Q17": {
+      "retrieval_coverage": "not_applicable",
+      "coverage_reason": "The document contains no subscription price.",
+      "responses": {
+        "eval-minicpm5-1b": {
+          "correct": false,
+          "unsupported_material": false,
+          "reason": "Selects repository provenance instead of explicitly abstaining about price."
+        },
+        "eval-gemma4-e4b": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Correctly declines to answer because the sources do not contain the price."
+        },
+        "combined": {
+          "correct": false,
+          "unsupported_material": false,
+          "reason": "Retains the irrelevant provenance excerpt and does not explicitly abstain; no price is invented."
+        }
+      }
+    },
+    "Q18": {
+      "retrieval_coverage": "not_applicable",
+      "coverage_reason": "The document contains no patent application number for the project.",
+      "responses": {
+        "eval-minicpm5-1b": {
+          "correct": false,
+          "unsupported_material": false,
+          "reason": "Selects repository/release metadata rather than explicitly abstaining about the filing number."
+        },
+        "eval-gemma4-e4b": {
+          "correct": false,
+          "unsupported_material": false,
+          "reason": "Selects release metadata rather than explicitly abstaining."
+        },
+        "combined": {
+          "correct": false,
+          "unsupported_material": false,
+          "reason": "Does not answer or explicitly abstain; it does not invent a patent number."
+        }
+      }
+    },
+    "Q19": {
+      "retrieval_coverage": "not_applicable",
+      "coverage_reason": "The document contains no production customer count.",
+      "responses": {
+        "eval-minicpm5-1b": {
+          "correct": false,
+          "unsupported_material": false,
+          "reason": "Selects an evidence manifest instead of answering or explicitly abstaining."
+        },
+        "eval-gemma4-e4b": {
+          "correct": false,
+          "unsupported_material": false,
+          "reason": "Selects benchmark commentary, not a customer count or explicit abstention."
+        },
+        "combined": {
+          "correct": false,
+          "unsupported_material": false,
+          "reason": "Retains irrelevant excerpts rather than explicitly abstaining about customers."
+        }
+      }
+    },
+    "Q20": {
+      "retrieval_coverage": "complete",
+      "coverage_reason": "Selected pages 4 and 9 describe the bounded workflow and reject a general agent planner.",
+      "responses": {
+        "eval-minicpm5-1b": {
+          "correct": false,
+          "unsupported_material": false,
+          "reason": "Lists bounded task states but does not explicitly reject the false general-DAG premise."
+        },
+        "eval-gemma4-e4b": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Explicitly says a general agent planner is not demonstrated; the false premise is rejected."
+        },
+        "combined": {
+          "correct": true,
+          "unsupported_material": false,
+          "reason": "Rejects the general-planner premise and supplies bounded task-sequence context."
+        }
+      }
+    }
+  }
+}

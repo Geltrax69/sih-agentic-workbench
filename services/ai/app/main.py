@@ -12,7 +12,7 @@ import httpx
 from fastapi import FastAPI
 
 from app.config import settings
-from app.internal_api import register_internal
+from app.internal_api import load_active_model, register_internal
 
 
 @asynccontextmanager
@@ -22,6 +22,10 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
         # Logged loudly, but service still boots: healthz reports it degraded.
         for p in problems:
             app.state.sovereign_violations = problems
+    try:
+        load_active_model()
+    except Exception:  # noqa: BLE001 — DB not migrated yet: keep the env model
+        pass
     yield
 
 

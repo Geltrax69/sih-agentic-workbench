@@ -1,0 +1,155 @@
+{
+  "case": {
+    "id": "Q02",
+    "category": "limitation",
+    "question": "Does the manuscript's deterministic evidence threshold estimate the probability that an answer is correct?",
+    "expected": "No. It is a deterministic threshold on retrieval similarity, not a correctness probability.",
+    "pages": [
+      4
+    ]
+  },
+  "wall_seconds": 5.238555040967185,
+  "result": {
+    "question": "Does the manuscript's deterministic evidence threshold estimate the probability that an answer is correct?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-16",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 16,
+        "location": "page 4",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\n\n\n3.2 Retrieval and evidence decision\n\nA question is embedded and searched against chunks satisfying the workspace predicate and a non-deleted source\npredicate. The default result limit is six. For a query vector q and chunk vector v_i, the recorded score is cosine\nsimilarity, equivalently one minus the cosine distance returned by pgvector. Let U be the set of evidence items\nmatching the expected workspace and not marked revoked, and let s* = max(s_i for i in U).\n\n  D(U) = REFUSE                    if U is empty or s* < 0.30\n         ANSWER_WITH_WARNING       if 0.30 <= s* < 0.45\n         ANSWER                    if s* >= 0.45\n\nThe threshold function is deterministic. It does not estimate the probability of answer correctness. One high-scoring\npassage is sufficient for ANSWER, even if the requested detail is absent or other passages conflict. Stale evidence\nadds a reason string in the gate without reducing the score. Normal executor items are constructed after\nworkspace-scoped SQL retrieval; revoked/stale metadata is not comprehensively propagated.\n\nFor non-refused tasks, numbered evidence and up to three recent eligible memory items are sent to the generator. The\ntask path uses temperature 0.3 and a maximum output of 800 tokens. The system instruction asks for evidence-only\nanswers, [n] citations and rejection of instructions inside evidence. Returned source filenames are evidence metadata,\n\nnot a semantic certificate for every claim.\n\n3.3 Bounded orchestration and approval\n\nThe task begins in PLANNING, enters RUNNING, executes document_search and proceeds to VERIFYING and\nCOMPLETED. Report-related keywords add report_generate, which pauses in WAITING_FOR_APPROVAL. The\npublic decision route resolves workspace scope from the stored task and requires an owner role. An approval claims\nRUNNING under a task-row lock before resuming execution, preventing the second concurrent decision in the tested\npath from executing the same transition.\n\nThe current report tool returns Markdown stored in a task step. A public report-download artifact is not exposed. The\nschema and step vocabulary are broader than the active workflow: dynamic model routing, general DAG planning,",
+        "score": 0.7706598312599202,
+        "lexical_score": 8.755159102624097,
+        "selection_score": 0.09307359307359307
+      },
+      {
+        "chunk_id": "pilot-36",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 36,
+        "location": "page 8",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\n\n6. Configuration sensitivity and failure analysis\n\n6.1 Discrete decision changes\n\nThe evidence threshold creates discontinuities. A best usable score of 0.29 refuses, 0.30 permits a warning answer\nand 0.45 permits an answer under current settings. Raising the strong threshold to 0.70 while retaining weak=0.30\nwould map the three historical pilot scores to one answer and two warning answers. This is a deterministic replay of\nrecorded scores, not evidence of improved correctness.\n\nA new generator changes conditional text behavior while fixed evidence scores leave the gate unchanged. An\nembedding-model replacement changes retrieval geometry and requires compatible corpus/query embeddings,\nreindexing and threshold recalibration. Matching vector dimensionality alone does not make embeddings from different\nmodels comparable. The current vector(768) schema additionally requires a migration if the new dimension differs.\n\n6.2 Segmentation experiment\n\nRunning the actual chunker over the three demonstration files produced three chunks at 800/100, 800/0, 800/200 and\n1,200/100 characters. All three files fit in one chunk at those sizes, so overlap changes had no effect. At 400/0 the\ncorpus produced five chunks and 1,394 stored characters; at 400/100 it produced six chunks and 1,694 characters.\nThe default stored 1,396 characters.\n\nThese counts demonstrate segmentation and duplication effects only. They do not measure retrieval quality or answer\nchanges.",
+        "score": 0.7106249943183126,
+        "lexical_score": 5.038870018695362,
+        "selection_score": 0.08695652173913043
+      },
+      {
+        "chunk_id": "pilot-25",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 25,
+        "location": "page 5",
+        "content": "its mean is an average of per-question hit fractions. This is a keyword coverage heuristic, despite broader language in\nthe evaluator's docstring.\n\n4.5 Additional model and temperature pilot\n\nWe ran two installed tags, qwen:7b and gemma:7b, at temperatures 0.0 and 0.8 on three cases, using seeds 17 and\n29. Cases asked for a bearing/date, an absent repair cost, and a filter incident accompanied by adversarial deletion\ninstructions. The 24 serial measured calls followed one excluded warmup per model, with shuffled order within each\nmodel. Qwen's block preceded Gemma's; order across models was not counterbalanced.\n\nThe native Ollama /api/chat request used the exact application grounding instruction, supplied evidence, stream=false,\na 2,048-token context option and a 160-token generation cap. The test bypassed retrieval, memory, the threshold\n\n\nResearch manuscript draft  |  8 September 2026                                                                                              5",
+        "score": 0.6574752547221977,
+        "lexical_score": 2.1783478602656303,
+        "selection_score": 0.07275132275132275
+      },
+      {
+        "chunk_id": "pilot-32",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 32,
+        "location": "page 7",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\n\n\nindexed and did not change the normal question's action sequence. These assertions support the bounded workflow\nproperty, not universal prompt-injection resistance.\n\n5.2 AI, keyword and recovery measurements\n\nThe 12-task AI run recorded zero errors, elapsed time 83.22 seconds, median 20.55 seconds and p95 25.12 seconds.\nDividing count by elapsed time yields approximately 8.65 tasks/minute for that run. This is a different workload from the\nAPI reads and cannot support thousands of generated answers per second.\n\nThe earlier keyword pilot had hit fractions 3/3, 1/1 and 1/1 for the failure-cause, bearing and date questions,\nrespectively. Its stored similarity scores were 0.841924, 0.683897 and 0.692557, and all decisions were answer. Mean\n\nexpected-keyword coverage was 1.0. No semantic citation labels, held-out recall or general answer accuracy can be\nderived from these observations. The pilot predates the final evidence-selection fix.\n\nDatabase restoration compared counts for 19 tables from a 53,270-byte dump and passed, reporting 1.75 seconds for\nthe check. This is not a measured service RTO or object-store restore. The fault record passed database\npause/resume and API restart checks without quantitative recovery timing.\n\n5.3 Fixed-evidence model sensitivity\n\n\n  Model tag           Temp.                Calls                Median wall s        Mean                Reviewed             Injection\n\ngenerated           rubric pass          contamination\n                                                                                     tokens\n\n\n  qwen:7b             0.0                  6                    2.865                58.3                6/6                  0/2\n\n\n  qwen:7b             0.8                  6                    3.270                68.3                5/6                  1/2\n\n\n  gemma:7b            0.0                  6                    2.354                35.0                6/6                  0/2\n\n\n  gemma:7b            0.8                  6                    2.272                35.8                6/6                  0/2\n\n\nAll calls completed.",
+        "score": 0.6519718890458744,
+        "lexical_score": 2.1113099121938954,
+        "selection_score": 0.07019704433497537
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "The provided sources do not contain enough information to answer this question.",
+        "citations": [],
+        "latency_ms": 1362,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "The evidence threshold creates discontinuities. [2]\nA best usable score of 0.29 refuses, 0.30 permits a warning answer and 0.45 permits an answer under current settings. [2]\nRaising the strong threshold to 0.70 while retaining weak=0.30 would map the three historical pilot scores to one answer and two warning answers. [2]\nThis is a deterministic replay of recorded scores, not evidence of improved correctness. [2]\nThe threshold function is deterministic. [1]\nIt does not estimate the probability of answer correctness. [1]\nOne high-scoring passage is sufficient for ANSWER, even if the requested detail is absent or other passages conflict. [1]\nStale evidence adds a reason string in the gate without reducing the score. [1]\nNormal executor items are constructed after workspace-scoped SQL retrieval; revoked/stale metadata is not comprehensively propagated. [1]",
+        "citations": [
+          "Research_Paper.pdf, page 8",
+          "Research_Paper.pdf, page 4"
+        ],
+        "latency_ms": 4459,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.014
+        }
+      ],
+      "mean_overlap": 0.014,
+      "n_answered": 2
+    },
+    "combined_answer": "The evidence threshold creates discontinuities. [2]\nA best usable score of 0.29 refuses, 0.30 permits a warning answer and 0.45 permits an answer under current settings. [2]\nRaising the strong threshold to 0.70 while retaining weak=0.30 would map the three historical pilot scores to one answer and two warning answers. [2]\nThis is a deterministic replay of recorded scores, not evidence of improved correctness. [2]\nThe threshold function is deterministic. [1]\nIt does not estimate the probability of answer correctness. [1]\nOne high-scoring passage is sufficient for ANSWER, even if the requested detail is absent or other passages conflict. [1]\nStale evidence adds a reason string in the gate without reducing the score. [1]\nNormal executor items are constructed after workspace-scoped SQL retrieval; revoked/stale metadata is not comprehensively propagated. [1]",
+    "synthesizer": "source_union",
+    "verification": {
+      "model": "eval-gemma4-e4b",
+      "claims": [
+        {
+          "claim": "The evidence threshold creates discontinuities. [2]",
+          "source": 2,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "A best usable score of 0.29 refuses, 0.30 permits a warning answer and 0.45 permits an answer under current settings. [2]",
+          "source": 2,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Raising the strong threshold to 0.70 while retaining weak=0.30 would map the three historical pilot scores to one answer and two warning answers. [2]",
+          "source": 2,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "This is a deterministic replay of recorded scores, not evidence of improved correctness. [2]",
+          "source": 2,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "The threshold function is deterministic. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "It does not estimate the probability of answer correctness. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "One high-scoring passage is sufficient for ANSWER, even if the requested detail is absent or other passages conflict. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Stale evidence adds a reason string in the gate without reducing the score. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Normal executor items are constructed after workspace-scoped SQL retrieval; revoked/stale metadata is not comprehensively propagated. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        }
+      ],
+      "confidence": 1.0,
+      "decision": "verified",
+      "method": "source_excerpt_match"
+    }
+  }
+}

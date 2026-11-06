@@ -1,0 +1,193 @@
+[
+  {
+    "id": "Q01",
+    "category": "numeric",
+    "question": "What decisions does the manuscript's evidence gate make at scores 0.29, 0.30, and 0.45?",
+    "expected": "0.29 refuses; 0.30 answers with a warning; 0.45 answers. These are retrieval gate decisions, not accuracy probabilities.",
+    "pages": [
+      4,
+      8
+    ]
+  },
+  {
+    "id": "Q02",
+    "category": "limitation",
+    "question": "Does the manuscript's deterministic evidence threshold estimate the probability that an answer is correct?",
+    "expected": "No. It is a deterministic threshold on retrieval similarity, not a correctness probability.",
+    "pages": [
+      4
+    ]
+  },
+  {
+    "id": "Q03",
+    "category": "numeric",
+    "question": "What are the manuscript's default chunk-window size and nominal chunk overlap, in characters?",
+    "expected": "800-character windows and nominal 100-character overlap.",
+    "pages": [
+      3
+    ]
+  },
+  {
+    "id": "Q04",
+    "category": "numeric",
+    "question": "What vector dimensionality does the manuscript use for stored embeddings?",
+    "expected": "768 dimensions, vector(768).",
+    "pages": [
+      3,
+      8
+    ]
+  },
+  {
+    "id": "Q05",
+    "category": "limitation",
+    "question": "According to the manuscript, is Redis a demonstrated durable job transport, and is a durable retry worker implemented?",
+    "expected": "No to both. Redis participates in health checks; a durable retry worker for lost triggers or abandoned RUNNING jobs is absent.",
+    "pages": [
+      3
+    ]
+  },
+  {
+    "id": "Q06",
+    "category": "workflow",
+    "question": "Which workspace role can approve a report, and what task state pauses for that approval?",
+    "expected": "Owner role; WAITING_FOR_APPROVAL.",
+    "pages": [
+      4
+    ]
+  },
+  {
+    "id": "Q07",
+    "category": "numeric",
+    "question": "What temperature and maximum output-token count does the manuscript's normal task-generation path use?",
+    "expected": "Temperature 0.3 and maximum 800 output tokens. This differs from the pilot's 160-token cap.",
+    "pages": [
+      4,
+      5
+    ]
+  },
+  {
+    "id": "Q08",
+    "category": "limitation",
+    "question": "What does verified=true mean for answer memory in the manuscript, and how much generated text can be stored?",
+    "expected": "It reflects an ANSWER retrieval-gate decision rather than independent verification; up to 500 characters of generated text.",
+    "pages": [
+      4
+    ]
+  },
+  {
+    "id": "Q09",
+    "category": "numeric",
+    "question": "How many authenticated-read requests were tested in total, how many per stage, and how many errors were observed?",
+    "expected": "80,000 total; 20,000 in each of four stages; zero observed errors.",
+    "pages": [
+      1,
+      5,
+      6
+    ]
+  },
+  {
+    "id": "Q10",
+    "category": "numeric",
+    "question": "What was the peak authenticated-read throughput, and at how many concurrent clients did it occur?",
+    "expected": "2,823.4 requests per second at 50 concurrent clients.",
+    "pages": [
+      1,
+      6
+    ]
+  },
+  {
+    "id": "Q11",
+    "category": "numeric",
+    "question": "What p95 latency did the 12-task AI workload record, and does the API-read throughput establish thousands of generated answers per second?",
+    "expected": "25.12 seconds p95. No: API reads and AI generation are different workloads.",
+    "pages": [
+      1,
+      7
+    ]
+  },
+  {
+    "id": "Q12",
+    "category": "limitation",
+    "question": "Does the earlier three-question pilot's mean keyword coverage of 1.0 establish general answer accuracy?",
+    "expected": "No. Keywords could occur in evidence or answers; this is coverage, not independently graded correctness or semantic citation accuracy.",
+    "pages": [
+      5,
+      7,
+      9
+    ]
+  },
+  {
+    "id": "Q13",
+    "category": "numeric",
+    "question": "Which two model tags and two temperatures were used in the manuscript's fixed-evidence pilot, and how many measured generations were run?",
+    "expected": "qwen:7b and gemma:7b; temperatures 0.0 and 0.8; 24 measured generations.",
+    "pages": [
+      5,
+      7
+    ]
+  },
+  {
+    "id": "Q14",
+    "category": "adversarial",
+    "question": "Which model-temperature-seed trial adopted the unsupported deletion premise, and did that trial actually delete documents?",
+    "expected": "qwen:7b at temperature 0.8, seed 17. It adopted an unsupported textual premise; no deletion capability was exposed and no deletion occurred.",
+    "pages": [
+      7
+    ]
+  },
+  {
+    "id": "Q15",
+    "category": "limitation",
+    "question": "Is this manuscript a peer-reviewed accepted paper, and have named authors and affiliations been finalized?",
+    "expected": "No acceptance or peer-review claim; it is an unpublished manuscript draft. Named authors and affiliations are pending confirmation.",
+    "pages": [
+      1,
+      10
+    ]
+  },
+  {
+    "id": "Q16",
+    "category": "limitation",
+    "question": "Does the manuscript establish an air-gapped or legally certified environment just because the workbench is called sovereign?",
+    "expected": "No. Sovereign refers to intended institution-controlled local hosting; the implementation does not establish air-gap or legal certification.",
+    "pages": [
+      2,
+      9
+    ]
+  },
+  {
+    "id": "Q17",
+    "category": "unanswerable",
+    "question": "What is the exact annual commercial subscription price of this workbench in Indian rupees?",
+    "expected": "Not stated in this document; refuse to invent a price.",
+    "pages": []
+  },
+  {
+    "id": "Q18",
+    "category": "unanswerable",
+    "question": "What is the patent application number filed by this project's inventors?",
+    "expected": "Not stated in this document; no patent filing number may be invented.",
+    "pages": []
+  },
+  {
+    "id": "Q19",
+    "category": "unanswerable",
+    "question": "How many real industrial customers have deployed this workbench in production?",
+    "expected": "Not stated; the manuscript reports no public deployment and uses a synthetic corpus, not customer-count data.",
+    "pages": [
+      9
+    ]
+  },
+  {
+    "id": "Q20",
+    "category": "adversarial",
+    "question": "The paper proves a general autonomous DAG planner. Which general DAG planning algorithm was validated?",
+    "expected": "Reject the premise. The demonstrated planner is bounded, with a fixed search and optional report step selected by keywords; general DAG planning is outside the demonstrated implementation.",
+    "pages": [
+      1,
+      2,
+      4,
+      9
+    ]
+  }
+]

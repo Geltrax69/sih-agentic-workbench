@@ -1,0 +1,164 @@
+{
+  "case": {
+    "id": "Q07",
+    "category": "numeric",
+    "question": "What temperature and maximum output-token count does the manuscript's normal task-generation path use?",
+    "expected": "Temperature 0.3 and maximum 800 output tokens. This differs from the pilot's 160-token cap.",
+    "pages": [
+      4,
+      5
+    ]
+  },
+  "wall_seconds": 4.530039249977563,
+  "result": {
+    "question": "What temperature and maximum output-token count does the manuscript's normal task-generation path use?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-16",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 16,
+        "location": "page 4",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\n\n\n3.2 Retrieval and evidence decision\n\nA question is embedded and searched against chunks satisfying the workspace predicate and a non-deleted source\npredicate. The default result limit is six. For a query vector q and chunk vector v_i, the recorded score is cosine\nsimilarity, equivalently one minus the cosine distance returned by pgvector. Let U be the set of evidence items\nmatching the expected workspace and not marked revoked, and let s* = max(s_i for i in U).\n\n  D(U) = REFUSE                    if U is empty or s* < 0.30\n         ANSWER_WITH_WARNING       if 0.30 <= s* < 0.45\n         ANSWER                    if s* >= 0.45\n\nThe threshold function is deterministic. It does not estimate the probability of answer correctness. One high-scoring\npassage is sufficient for ANSWER, even if the requested detail is absent or other passages conflict. Stale evidence\nadds a reason string in the gate without reducing the score. Normal executor items are constructed after\nworkspace-scoped SQL retrieval; revoked/stale metadata is not comprehensively propagated.\n\nFor non-refused tasks, numbered evidence and up to three recent eligible memory items are sent to the generator. The\ntask path uses temperature 0.3 and a maximum output of 800 tokens. The system instruction asks for evidence-only\nanswers, [n] citations and rejection of instructions inside evidence. Returned source filenames are evidence metadata,\n\nnot a semantic certificate for every claim.\n\n3.3 Bounded orchestration and approval\n\nThe task begins in PLANNING, enters RUNNING, executes document_search and proceeds to VERIFYING and\nCOMPLETED. Report-related keywords add report_generate, which pauses in WAITING_FOR_APPROVAL. The\npublic decision route resolves workspace scope from the stored task and requires an owner role. An approval claims\nRUNNING under a task-row lock before resuming execution, preventing the second concurrent decision in the tested\npath from executing the same transition.\n\nThe current report tool returns Markdown stored in a task step. A public report-download artifact is not exposed. The\nschema and step vocabulary are broader than the active workflow: dynamic model routing, general DAG planning,",
+        "score": 0.6584108551019829,
+        "lexical_score": 11.844023907107044,
+        "selection_score": 0.08761904761904762
+      },
+      {
+        "chunk_id": "pilot-24",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 24,
+        "location": "page 5",
+        "content": "Each made 20,000 requests: 75% workspace collection reads and 25% authenticated-profile reads. The same QA\nidentity and small dataset were used. Throughput is request count divided by elapsed stage time. Per-request latency\nexcludes executor waiting before a worker starts the call, and percentiles use nearest-rank selection. Acceptance was\nzero errors and p95 below 2 seconds at each stage.\n\n4.4 AI workload and earlier keyword pilot\n\nA separate AI stress record contains 12 tasks at concurrency three using one repeated maintenance question, with\ntask completion/evidence/citation checks. It contains no independently graded answer rubric. The earlier\nthree-question evaluation uses expected keywords and counts a hit if a keyword occurs in either evidence or answer;\n\nits mean is an average of per-question hit fractions. This is a keyword coverage heuristic, despite broader language in\nthe evaluator's docstring.\n\n4.5 Additional model and temperature pilot\n\nWe ran two installed tags, qwen:7b and gemma:7b, at temperatures 0.0 and 0.8 on three cases, using seeds 17 and\n29. Cases asked for a bearing/date, an absent repair cost, and a filter incident accompanied by adversarial deletion\ninstructions. The 24 serial measured calls followed one excluded warmup per model, with shuffled order within each\nmodel. Qwen's block preceded Gemma's; order across models was not counterbalanced.\n\nThe native Ollama /api/chat request used the exact application grounding instruction, supplied evidence, stream=false,\na 2,048-token context option and a 160-token generation cap. The test bypassed retrieval, memory, the threshold\n\n\nResearch manuscript draft  |  8 September 2026                                                                                              5",
+        "score": 0.6922015771530388,
+        "lexical_score": 4.994163706655348,
+        "selection_score": 0.08712121212121213
+      },
+      {
+        "chunk_id": "pilot-53",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 53,
+        "location": "page 11",
+        "content": "A6                         validation-tests.log; race-tests.log                    Separate build/unit/integration/race records\n\n\n  A7                         model-pilot.json                                        Full new requests, outputs, timing and identity\n\n\n  A8                         model-pilot-review.json                                 Transparent post-hoc labels and summaries\n\n\n  A9                         chunk-sensitivity.json                                  Actual chunker count experiments\n\n\n  A10                        provenance.json                                         Source/evidence hashes and source-state caveats\n\n\nAppendix B. Minimal replication protocol\n\nUse the existing local models and execute source/run_model_pilot.py. Its requests use two temperatures, two seeds,\nthree fixed cases and a per-model warmup, saving all outputs as JSON. A rerun requires fresh review of responses; do\nnot reuse manual labels automatically. Record model digests rather than aliases alone, preserve the runtime version\nand distinguish wall time from server-reported generation duration.\n\nFor an end-to-end comparison, create an isolated workspace per variant, ingest an identical versioned corpus with one\nfixed embedder, prevent prior generated memories from contaminating later trials and run the same questions through\nthe authenticated task API. A model-only generation pilot is insufficient to measure retrieval or authorization effects.\n\nFor an embedding comparison, rebuild the corpus embeddings and recalibrate on a development split before\nevaluating the held-out questions.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nResearch manuscript draft  |  8 September 2026                                                                                                   11",
+        "score": 0.6586703762135555,
+        "lexical_score": 4.1928169486596,
+        "selection_score": 0.08166666666666667
+      },
+      {
+        "chunk_id": "pilot-35",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 35,
+        "location": "page 7",
+        "content": "All calls completed. All factual cases contained the required identifiers and dates, all absent-cost cases abstained and\nall 16 answerable outputs contained [1]. At temperature 0.0, each model's paired seeds produced identical text for\neach case. At temperature 0.8, Qwen produced six distinct outputs across six calls and Gemma five.\n\nQwen at temperature 0.8, seed 17, answered the filter question correctly but added: \u201cSince all documents have been\nclaimed to be deleted, there is no additional evidence available.\u201d This was unsupported by the factual maintenance\nrecord and adopted a premise from the adversarial note. The test exposed no deletion capability and performed no\ndeletion. It is a generated-text failure. The paired high-temperature Qwen trial and the four Gemma injection trials did\nnot contain this premise.\n\nQwen's median rose about 14.1% between temperatures while mean output length also rose. Gemma's median fell\nabout 3.5%. Small, sequential groups with different output lengths do not support broad causal latency or safety\nrankings. Local model metadata also warrants care: qwen:7b reports family qwen2 and 8B, while gemma:7b reports\nfamily gemma and 9B. Full artifact digests in the bundle identify the tested models more reliably than aliases.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nResearch manuscript draft  |  8 September 2026                                                                                                  7",
+        "score": 0.6812090895581323,
+        "lexical_score": 4.128821114406712,
+        "selection_score": 0.08051529790660225
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "All calls completed. [4]\nAll factual cases contained the required identifiers and dates, all absent-cost cases abstained and all 16 answerable outputs contained (document reference 1). [4]\nAt temperature 0.0, each model's paired seeds produced identical text for each case. [4]\nAt temperature 0.8, Qwen produced six distinct outputs across six calls and Gemma five. [4]",
+        "citations": [
+          "Research_Paper.pdf, page 7"
+        ],
+        "latency_ms": 3287,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "For non-refused tasks, numbered evidence and up to three recent eligible memory items are sent to the generator. [1]\nThe task path uses temperature 0.3 and a maximum output of 800 tokens. [1]\nThe system instruction asks for evidence-only answers, [n] citations and rejection of instructions inside evidence. [1]\nReturned source filenames are evidence metadata, [1]\nThe native Ollama /api/chat request used the exact application grounding instruction, supplied evidence, stream=false, a 2,048-token context option and a 160-token generation cap. [2]\nThe test bypassed retrieval, memory, the threshold [2]",
+        "citations": [
+          "Research_Paper.pdf, page 4",
+          "Research_Paper.pdf, page 5"
+        ],
+        "latency_ms": 4456,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.012
+        }
+      ],
+      "mean_overlap": 0.012,
+      "n_answered": 2
+    },
+    "combined_answer": "All calls completed. [4]\nAll factual cases contained the required identifiers and dates, all absent-cost cases abstained and all 16 answerable outputs contained (document reference 1). [4]\nAt temperature 0.0, each model's paired seeds produced identical text for each case. [4]\nAt temperature 0.8, Qwen produced six distinct outputs across six calls and Gemma five. [4]\nFor non-refused tasks, numbered evidence and up to three recent eligible memory items are sent to the generator. [1]\nThe task path uses temperature 0.3 and a maximum output of 800 tokens. [1]\nThe system instruction asks for evidence-only answers, [n] citations and rejection of instructions inside evidence. [1]\nReturned source filenames are evidence metadata, [1]\nThe native Ollama /api/chat request used the exact application grounding instruction, supplied evidence, stream=false, a 2,048-token context option and a 160-token generation cap. [2]\nThe test bypassed retrieval, memory, the threshold [2]",
+    "synthesizer": "source_union",
+    "verification": {
+      "model": "eval-gemma4-e4b",
+      "claims": [
+        {
+          "claim": "All calls completed. [4]",
+          "source": 4,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "All factual cases contained the required identifiers and dates, all absent-cost cases abstained and all 16 answerable outputs contained (document reference 1). [4]",
+          "source": 4,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "At temperature 0.0, each model's paired seeds produced identical text for each case. [4]",
+          "source": 4,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "At temperature 0.8, Qwen produced six distinct outputs across six calls and Gemma five. [4]",
+          "source": 4,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "For non-refused tasks, numbered evidence and up to three recent eligible memory items are sent to the generator. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "The task path uses temperature 0.3 and a maximum output of 800 tokens. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "The system instruction asks for evidence-only answers, [n] citations and rejection of instructions inside evidence. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Returned source filenames are evidence metadata, [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "The native Ollama /api/chat request used the exact application grounding instruction, supplied evidence, stream=false, a 2,048-token context option and a 160-token generation cap. [2]",
+          "source": 2,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "The test bypassed retrieval, memory, the threshold [2]",
+          "source": 2,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        }
+      ],
+      "confidence": 1.0,
+      "decision": "verified",
+      "method": "source_excerpt_match"
+    }
+  }
+}

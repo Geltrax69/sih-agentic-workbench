@@ -1,0 +1,82 @@
+{
+  "case": {
+    "id": "Q05",
+    "category": "limitation",
+    "question": "According to the manuscript, is Redis a demonstrated durable job transport, and is a durable retry worker implemented?",
+    "expected": "No to both. Redis participates in health checks; a durable retry worker for lost triggers or abandoned RUNNING jobs is absent.",
+    "pages": [
+      3
+    ]
+  },
+  "wall_seconds": 20.846281750011258,
+  "result": {
+    "question": "According to the manuscript, is Redis a demonstrated durable job transport, and is a durable retry worker implemented?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-12",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 12,
+        "location": "page 3",
+        "content": "ssible. Embeddings\nare stored in vector(768), with a cosine IVFFlat index configured with lists=100. This is a source configuration, not\nevidence that the approximate index has been optimally trained or used by the query planner on the tiny corpus. [6]\nThe ingestion service claims one pending PostgreSQL job under FOR UPDATE ... SKIP LOCKED, processes its\nobject and records success or failure. Uploads trigger this processing through an internal request. A durable retry\nworker for lost triggers or abandoned RUNNING jobs is absent. Redis participates in health checks but is not a\ndemonstrated job transport in the current execution path.",
+        "score": 0.6643369957062385
+      },
+      {
+        "chunk_id": "pilot-21",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 21,
+        "location": "page 5",
+        "content": "cks rather than a complete\ndisaster-recovery or availability study.\n4.3 Authenticated read workload\nThe API benchmark used four sequential closed-loop ThreadPoolExecutor stages with 1, 10, 50 and 100 workers.\nEach made 20,000 requests: 75% workspace collection reads and 25% authenticated-profile reads. The same QA\nidentity and small dataset were used. Throughput is request count divided by elapsed stage time. Per-request latency\nexcludes executor waiting before a worker starts the call, and percentiles use nearest-rank selection. Acceptance was\nzero errors and p95 below 2 seconds at each stage.\n4.4 AI workload and earlier keyword pilot\nA separate AI stress record contains 12 tasks at concurrency three using one repeated maintenance question, with\ntask completion/evidence/citation checks.",
+        "score": 0.6354360045285834
+      },
+      {
+        "chunk_id": "pilot-37",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 37,
+        "location": "page 9",
+        "content": "PROJECT 01  /  SOVEREIGN AGENTIC AI WORKBENCH\nResearch manuscript draft  |  8 September 2026\n9\n7. Discussion\nRQ1 is supported within the implemented scope: the project combines document ingestion, scoped retrieval, threshold\nrefusal and a persisted owner-approval report sequence. It does not demonstrate a general agent planner, complete\nsemantic verification or a downloadable reporting product. RQ2 yields evidence for selected local functional and load\nproperties, with substantial limits on production inference. RQ3 yields a concrete, reproducible example of text\nvariation and contamination under one changed model-temperature configuration, without establishing a general\nwinner.\nFor deployment, the most consequential improvements are provenance-aware memory, reviewable report content",
+        "score": 0.6179779470553054
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "[1] The manuscript states that Redis participates in health checks but is not a demonstrated job transport in the current execution path.\n[2] The manuscript claims one pending PostgreSQL job under FOR UPDATE ... SKIP LOCKED processes its object and records success or failure, but it does not explicitly state whether Redis acts as a durable retry worker for lost jobs or abandoned running jobs; however, it mentions an internal request for a durable retry worker for lost triggers or abandoned RUNNING jobs is absent.\n[3] The manuscript states that the ingestion service claims one pending PostgreSQL job under FOR UPDATE ... SKIP LOCKED processes its object and records success or failure. It also states that Redis participates in health checks but is not a demonstrated job transport, implying it does not function as a durable retry worker for lost jobs.\n[4] The manuscript describes four sequential closed-loop ThreadPoolExecutor stages with 1, 10, 50, and 100 workers, processing 20,000 requests at each stage. It mentions that Redis is not a demonstrated job transport or a durable retry worker in the current execution path.\n\nBased on the provided sources:\n- Redis is NOT a demonstrated durable job transport.\n- Redis is NOT a durable retry worker implemented (as an internal request for lost triggers or abandoned RUNNING jobs is absent).\n- The manuscript does not provide definitive evidence that Redis functions as a durable retry worker; it only mentions health checks and absence of a specific retry worker mechanism.",
+        "citations": [
+          "Research_Paper.pdf, page 3",
+          "Research_Paper.pdf, page 5",
+          "Research_Paper.pdf, page 9"
+        ],
+        "latency_ms": 9908,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "*   **Redis is not a demonstrated job transport:** This can't be happened because there are no other sources.\n*   **A durable retry worker is absent:** This can happen on its own.** Source: [1]",
+        "citations": [
+          "Research_Paper.pdf, page 3"
+        ],
+        "latency_ms": 6551,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.12
+        }
+      ],
+      "mean_overlap": 0.12,
+      "n_answered": 2
+    },
+    "combined_answer": "- Redis participates in health checks but is not a demonstrated job transport in the current execution path; nor is it a downloadable reporting product. [1]\n- There is no handy way to know if Redis can be used for another purpose, or if it has been set up to work with other things. [2]\n- The project does not demonstrate a general agent planner, complete semantic verification, or a downloadable reporting product. [3]\n- There is a separate AI stress record that contains 12 tasks at concurrency three using one repeated maintenance question, with task completion/evidence/citation checks. [2]",
+    "synthesizer": "eval-gemma4-e4b",
+    "verification": {
+      "decision": "not_run_answer_accuracy_pilot"
+    }
+  }
+}

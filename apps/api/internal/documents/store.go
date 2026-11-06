@@ -22,8 +22,9 @@ const MaxUploadBytes = 50 << 20 // 50 MB
 // AllowedContentTypes maps accepted MIME types to canonical extensions.
 var AllowedContentTypes = map[string]string{
 	"application/pdf": ".pdf",
-	"application/vnd.openxmlformats-officedocument.wordprocessingml.document": ".docx",
-	"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":       ".xlsx",
+	"application/vnd.openxmlformats-officedocument.wordprocessingml.document":   ".docx",
+	"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":         ".xlsx",
+	"application/vnd.openxmlformats-officedocument.presentationml.presentation": ".pptx",
 	"text/plain":      ".txt",
 	"text/markdown":   ".md",
 	"text/csv":        ".csv",

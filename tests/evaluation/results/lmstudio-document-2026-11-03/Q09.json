@@ -1,0 +1,82 @@
+{
+  "case": {
+    "id": "Q09",
+    "category": "numeric",
+    "question": "How many authenticated-read requests were tested in total, how many per stage, and how many errors were observed?",
+    "expected": "80,000 total; 20,000 in each of four stages; zero observed errors.",
+    "pages": [
+      1,
+      5,
+      6
+    ]
+  },
+  "wall_seconds": 38.121010291040875,
+  "result": {
+    "question": "How many authenticated-read requests were tested in total, how many per stage, and how many errors were observed?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-21",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 21,
+        "location": "page 5",
+        "content": "cks rather than a complete\ndisaster-recovery or availability study.\n4.3 Authenticated read workload\nThe API benchmark used four sequential closed-loop ThreadPoolExecutor stages with 1, 10, 50 and 100 workers.\nEach made 20,000 requests: 75% workspace collection reads and 25% authenticated-profile reads. The same QA\nidentity and small dataset were used. Throughput is request count divided by elapsed stage time. Per-request latency\nexcludes executor waiting before a worker starts the call, and percentiles use nearest-rank selection. Acceptance was\nzero errors and p95 below 2 seconds at each stage.\n4.4 AI workload and earlier keyword pilot\nA separate AI stress record contains 12 tasks at concurrency three using one repeated maintenance question, with\ntask completion/evidence/citation checks.",
+        "score": 0.7515805730977956
+      },
+      {
+        "chunk_id": "pilot-25",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 25,
+        "location": "page 6",
+        "content": "blinded\naccuracy study.\n5. Results\n5.1 API load and functional observations\nClients\nRequests\nErrors\nRequests/s\np50 ms\np95 ms\np99 ms\n1\n20,000\n0\n139.6\n2.2\n29.0\n75.3\n10\n20,000\n0\n2,510.7\n3.3\n7.5\n15.2\n50\n20,000\n0\n2,823.4\n15.9\n32.4\n46.3\n100\n20,000\n0\n2,107.3\n39.7\n102.2\n162.0\nThroughput\n0\n850\n1700\n2550\n3400\n139.6\n1\n2,510.7\n10\n2,823.4\n50\n2,107.3\n100\nConcurrent clients\np95 latency (ms)\n0\n31\n62\n94\n125\n29.0\n1\n7.5\n10\n32.4\n50\n102.2\n100\nConcurrent clients\nrequests / second\n20,000 reads per stage | Zero observed errors | Local shared host\nFigure 2. Authenticated read benchmark. Four single-run stages cannot establish a universal scaling curve.\nAll stages met the runner's criteria. Peak observed throughput occurred at 50 clients. At 100 clients, throughput was",
+        "score": 0.7172301083015579
+      },
+      {
+        "chunk_id": "pilot-2",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 2,
+        "location": "page 1",
+        "content": "cated-read workload completed 80,000 requests without observed errors and reached a peak of 2,823.4\nrequests/s at 50 concurrent clients. A separate 12-task model workload recorded a 25.12-second p95 latency. An\nearlier three-question pilot achieved complete expected-keyword coverage, a measure that does not establish answer\naccuracy. In 24 fixed-evidence generations across two local models and two temperatures, all calls succeeded, but\none high-temperature output adopted an unsupported deletion premise from adversarial evidence. The results\ndemonstrate a functioning local workflow and the need to distinguish retrieval signal, text faithfulness and action\nauthorization. Small datasets, incomplete historical configuration capture and unblinded exploratory review limit\ngeneralization.",
+        "score": 0.7155422848520321
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "Based on the provided sources:\n\n[1] Authenticated read workload: 20,000 requests per stage; 0 errors.\n[2] AI workload and earlier keyword pilot: 12 tasks at concurrency three (3 concurrent clients); 25.12-second p95 latency.\n[3] cated-read workload completed 80,000 requests without observed errors; peak of 2,823.4 requests/s at 50 concurrent clients.\n\nTotal authenticated-read requests tested: 20,000 + 0 + 80,000 = 100,000 (from source 1 and 3).\nPer stage: 20,000 requests per stage from source 1, 0 errors from source 1, 80,000 requests/s at 50 concurrent clients from source 3.\n\nNote: Source 2 does not provide a total count of authenticated-read requests or an error rate across stages.",
+        "citations": [
+          "Research_Paper.pdf, page 5",
+          "Research_Paper.pdf, page 6",
+          "Research_Paper.pdf, page 1"
+        ],
+        "latency_ms": 14812,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "* **Total authenticated-read requests:** 80,000 - 120,000 (there are two different numbers with this info) or 20,000 (at least one other number).\n* **Number of stages:** four (or all at once).\n* **Errors observed:** zero (or none).\n\n**More details:**\n\n* A comparison of the two sources shows that a \"before-after\" metric might be useful.\n* The first source has more info about which specific hardware was used, like 'local shared host' and 'two local models and two temperatures'.",
+        "citations": [],
+        "latency_ms": 17210,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 0.133
+        }
+      ],
+      "mean_overlap": 0.133,
+      "n_answered": 2
+    },
+    "combined_answer": "*   **Total authenticated-read requests:** 80,000 - 120,000 (there are two different numbers with this info) or 20,000 (at least one other number) [3], 100,000 (from source 1 and 3) [3].\n*   **Number of stages:** four (or all at once) [1], 12 tasks at concurrency three (3 concurrent clients) [2].\n*   **Errors observed:** zero (or none) [1], 25.12-second p95 latency [3].\n\nOther available info:\n    *   A separate AI stress record contains 12 tasks at concurrency three using one repeated maintenance question, with task completion/evidence/citation checks [1].\n    *   The API benchmark used four sequential closed-loop ThreadPoolExecutor stages with 1, 10, 50 and 100 workers [1].\n    *   There are two different numbers of available temps: two local models and two temperatures, or two temperatures [3].\n\nAlso check the source for 'local shared host' vs. 'two local models and two temperatures', it might be a comparison thing.",
+    "synthesizer": "eval-gemma4-e4b",
+    "verification": {
+      "decision": "not_run_answer_accuracy_pilot"
+    }
+  }
+}

@@ -1,0 +1,132 @@
+{
+  "case": {
+    "id": "Q08",
+    "category": "limitation",
+    "question": "What does verified=true mean for answer memory in the manuscript, and how much generated text can be stored?",
+    "expected": "It reflects an ANSWER retrieval-gate decision rather than independent verification; up to 500 characters of generated text.",
+    "pages": [
+      4
+    ]
+  },
+  "wall_seconds": 1.843378791003488,
+  "result": {
+    "question": "What does verified=true mean for answer memory in the manuscript, and how much generated text can be stored?",
+    "evidence": [
+      {
+        "chunk_id": "pilot-18",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 18,
+        "location": "page 4",
+        "content": "not a semantic certificate for every claim.\n\n3.3 Bounded orchestration and approval\n\nThe task begins in PLANNING, enters RUNNING, executes document_search and proceeds to VERIFYING and\nCOMPLETED. Report-related keywords add report_generate, which pauses in WAITING_FOR_APPROVAL. The\npublic decision route resolves workspace scope from the stored task and requires an owner role. An approval claims\nRUNNING under a task-row lock before resuming execution, preventing the second concurrent decision in the tested\npath from executing the same transition.\n\nThe current report tool returns Markdown stored in a task step. A public report-download artifact is not exposed. The\nschema and step vocabulary are broader than the active workflow: dynamic model routing, general DAG planning,\n\ngraph retrieval expansion and complete tool-execution auditing remain outside the demonstrated implementation.\n\n3.4 Memory and residual trust\n\nAn ANSWER decision writes up to 500 characters of generated text into memory with verified=true, and later prompts\ndescribe these items as verified facts. This flag reflects the retrieval gate, not independent verification. Thus an\nunsupported generated claim can become later context. Source deletion also does not establish revocation of\nhistorical answer memories. These limitations are material because a model-comparison experiment that does not\nfreeze memory can confound model effects with previous generated content.\n\nResearch manuscript draft  |  8 September 2026                                                                                                4",
+        "score": 0.7919910004338686,
+        "lexical_score": 13.003233178213648,
+        "selection_score": 0.09523809523809523
+      },
+      {
+        "chunk_id": "pilot-34",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 34,
+        "location": "page 7",
+        "content": "generated           rubric pass          contamination\n                                                                                     tokens\n\n\n  qwen:7b             0.0                  6                    2.865                58.3                6/6                  0/2\n\n\n  qwen:7b             0.8                  6                    3.270                68.3                5/6                  1/2\n\n\n  gemma:7b            0.0                  6                    2.354                35.0                6/6                  0/2\n\n\n  gemma:7b            0.8                  6                    2.272                35.8                6/6                  0/2\n\n\nAll calls completed. All factual cases contained the required identifiers and dates, all absent-cost cases abstained and\nall 16 answerable outputs contained [1]. At temperature 0.0, each model's paired seeds produced identical text for\neach case. At temperature 0.8, Qwen produced six distinct outputs across six calls and Gemma five.\n\nQwen at temperature 0.8, seed 17, answered the filter question correctly but added: \u201cSince all documents have been\nclaimed to be deleted, there is no additional evidence available.\u201d This was unsupported by the factual maintenance\nrecord and adopted a premise from the adversarial note. The test exposed no deletion capability and performed no\ndeletion. It is a generated-text failure. The paired high-temperature Qwen trial and the four Gemma injection trials did\nnot contain this premise.\n\nQwen's median rose about 14.1% between temperatures while mean output length also rose. Gemma's median fell\nabout 3.5%. Small, sequential groups with different output lengths do not support broad causal latency or safety\nrankings. Local model metadata also warrants care: qwen:7b reports family qwen2 and 8B, while gemma:7b reports\nfamily gemma and 9B. Full artifact digests in the bundle identify the tested models more reliably than aliases.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nResearch manuscript draft  |  8 September 2026                                                                                                  7",
+        "score": 0.6667720613642925,
+        "lexical_score": 3.3123547402731983,
+        "selection_score": 0.08
+      },
+      {
+        "chunk_id": "pilot-39",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 39,
+        "location": "page 8",
+        "content": "changes. The tiny corpus is poorly suited to testing overlap because it exercises little boundary splitting under the\ndefault setting. A realistic corpus should include long procedures, multi-page tables and cases whose evidence\ncrosses chunk boundaries.\n\n6.3 Distinguishing failure layers\n\n\n  Layer                    Example failure                                         Required evaluation\n\n\n  Access control           Cross-workspace task read                               Role-matrix and object-scope integration tests\n\n\n  Retrieval                Relevant answer passage not retrieved                   Labeled recall@k and exact-search comparison\n\n\n  Answerability            Related evidence lacks requested value                  Held-out unanswerable/contradiction set\n\nGeneration               Adversarial deletion premise enters answer              Claim support and injection-contamination review\n\n\n  Action control           Duplicate or unauthorized tool execution                Approval races, crash recovery and privilege checks\n\n\n  Memory                   Unsupported answer reused as a fact                     Frozen-memory ablation and source-revocation tests\n\n\nThe passing action-sequence assertion and failing generated-text example are compatible: application controls can\nconstrain tools while the model still produces unsupported language. Likewise, a source citation marker can coexist\nwith an unsupported claim. Evaluation should preserve these distinctions rather than collapse every outcome into one\n\u201cAI accuracy\u201d percentage.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nResearch manuscript draft  |  8 September 2026                                                                                                  8",
+        "score": 0.6408012510996324,
+        "lexical_score": 5.024918146627158,
+        "selection_score": 0.07289002557544758
+      },
+      {
+        "chunk_id": "pilot-46",
+        "document_id": "4c12a05c435ab953c5e14f9e19d48cc0e426f46ac6c5c647a8857ae92d0b058f",
+        "filename": "Research_Paper.pdf",
+        "chunk_index": 46,
+        "location": "page 9",
+        "content": "development log. Real deployments should review document ownership, retention, access revocation, model-host\ntrust and user reliance. Local inference and a confidence score do not establish regulatory compliance or factual\nsafety.\n\n9. Conclusion and future work\n\nThe workbench demonstrates a bounded local RAG workflow with application-controlled workspace access and\nhuman approval. Its retained benchmarks establish successful selected local checks and high throughput for a narrow\nauthenticated-read workload. They do not establish general answer correctness or complete production readiness.\nThe new fixed-evidence pilot shows why model and temperature changes require direct inspection: a correct factual\nanswer can still adopt an unsupported adversarial premise.\n\nFuture evaluation should freeze a larger versioned corpus, include held-out unanswerable and contradictory questions,\ncollect independent citation/answer labels and compare retrieval/generation variants under controlled resources.\n\n\nResearch manuscript draft  |  8 September 2026                                                                                                9",
+        "score": 0.6881455540494409,
+        "lexical_score": 0.7701593494040794,
+        "selection_score": 0.07248157248157248
+      }
+    ],
+    "answers": [
+      {
+        "model": "eval-minicpm5-1b",
+        "answer": "An ANSWER decision writes up to 500 characters of generated text into memory with verified=true, and later prompts describe these items as verified facts. [1]\nThis flag reflects the retrieval gate, not independent verification. [1]\nThus an unsupported generated claim can become later context. [1]\nSource deletion also does not establish revocation of historical answer memories. [1]\nThese limitations are material because a model-comparison experiment that does not freeze memory can confound model effects with previous generated content. [1]",
+        "citations": [
+          "Research_Paper.pdf, page 4"
+        ],
+        "latency_ms": 663,
+        "error": ""
+      },
+      {
+        "model": "eval-gemma4-e4b",
+        "answer": "An ANSWER decision writes up to 500 characters of generated text into memory with verified=true, and later prompts describe these items as verified facts. [1]\nThis flag reflects the retrieval gate, not independent verification. [1]\nThus an unsupported generated claim can become later context. [1]\nSource deletion also does not establish revocation of historical answer memories. [1]\nThese limitations are material because a model-comparison experiment that does not freeze memory can confound model effects with previous generated content. [1]",
+        "citations": [
+          "Research_Paper.pdf, page 4"
+        ],
+        "latency_ms": 1787,
+        "error": ""
+      }
+    ],
+    "agreement": {
+      "pairs": [
+        {
+          "a": "eval-minicpm5-1b",
+          "b": "eval-gemma4-e4b",
+          "overlap": 1.0
+        }
+      ],
+      "mean_overlap": 1.0,
+      "n_answered": 2
+    },
+    "combined_answer": "An ANSWER decision writes up to 500 characters of generated text into memory with verified=true, and later prompts describe these items as verified facts. [1]\nThis flag reflects the retrieval gate, not independent verification. [1]\nThus an unsupported generated claim can become later context. [1]\nSource deletion also does not establish revocation of historical answer memories. [1]\nThese limitations are material because a model-comparison experiment that does not freeze memory can confound model effects with previous generated content. [1]",
+    "synthesizer": "source_union",
+    "verification": {
+      "model": "eval-gemma4-e4b",
+      "claims": [
+        {
+          "claim": "An ANSWER decision writes up to 500 characters of generated text into memory with verified=true, and later prompts describe these items as verified facts. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "This flag reflects the retrieval gate, not independent verification. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Thus an unsupported generated claim can become later context. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "Source deletion also does not establish revocation of historical answer memories. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        },
+        {
+          "claim": "These limitations are material because a model-comparison experiment that does not freeze memory can confound model effects with previous generated content. [1]",
+          "source": 1,
+          "supported": true,
+          "reason": "exact excerpt in cited source"
+        }
+      ],
+      "confidence": 1.0,
+      "decision": "verified",
+      "method": "source_excerpt_match"
+    }
+  }
+}

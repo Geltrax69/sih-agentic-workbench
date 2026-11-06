@@ -1,0 +1,173 @@
+{
+  "role": "Original 20-question development regression set, unchanged",
+  "reviewer": "Authoring assistant, unblinded; strict factual completeness and no material false additions.",
+  "scored_output": "combined_answer only; individual outputs retained but not separately graded in this revision",
+  "correct": 18,
+  "total": 20,
+  "median_seconds": 4.310568062472157,
+  "p95_nearest_rank_seconds": 5.148505625023972,
+  "answerable_median_seconds": 4.531272708030883,
+  "passes_above_80_percent": true,
+  "cases": [
+    {
+      "id": "Q01",
+      "question": "What decisions does the manuscript's evidence gate make at scores 0.29, 0.30, and 0.45?",
+      "expected": "0.29 refuses; 0.30 answers with a warning; 0.45 answers. These are retrieval gate decisions, not accuracy probabilities.",
+      "correct": true,
+      "reason": "All three score boundaries and decisions are explicit.",
+      "wall_seconds": 4.797381500015035
+    },
+    {
+      "id": "Q02",
+      "question": "Does the manuscript's deterministic evidence threshold estimate the probability that an answer is correct?",
+      "expected": "No. It is a deterministic threshold on retrieval similarity, not a correctness probability.",
+      "correct": true,
+      "reason": "Explicitly states deterministic thresholding is not correctness probability.",
+      "wall_seconds": 4.201621042040642
+    },
+    {
+      "id": "Q03",
+      "question": "What are the manuscript's default chunk-window size and nominal chunk overlap, in characters?",
+      "expected": "800-character windows and nominal 100-character overlap.",
+      "correct": true,
+      "reason": "Includes 800-character windows and nominal 100-character overlap.",
+      "wall_seconds": 4.248103499994613
+    },
+    {
+      "id": "Q04",
+      "question": "What vector dimensionality does the manuscript use for stored embeddings?",
+      "expected": "768 dimensions, vector(768).",
+      "correct": true,
+      "reason": "Explicit vector(768) storage.",
+      "wall_seconds": 4.266372499987483
+    },
+    {
+      "id": "Q05",
+      "question": "According to the manuscript, is Redis a demonstrated durable job transport, and is a durable retry worker implemented?",
+      "expected": "No to both. Redis participates in health checks; a durable retry worker for lost triggers or abandoned RUNNING jobs is absent.",
+      "correct": true,
+      "reason": "Includes absent durable retry worker and Redis not being demonstrated transport.",
+      "wall_seconds": 4.007472625002265
+    },
+    {
+      "id": "Q06",
+      "question": "Which workspace role can approve a report, and what task state pauses for that approval?",
+      "expected": "Owner role; WAITING_FOR_APPROVAL.",
+      "correct": true,
+      "reason": "Includes owner role and WAITING_FOR_APPROVAL.",
+      "wall_seconds": 3.946689041040372
+    },
+    {
+      "id": "Q07",
+      "question": "What temperature and maximum output-token count does the manuscript's normal task-generation path use?",
+      "expected": "Temperature 0.3 and maximum 800 output tokens. This differs from the pilot's 160-token cap.",
+      "correct": true,
+      "reason": "Includes normal task temperature 0.3 and 800-token cap, with pilot settings separately labeled.",
+      "wall_seconds": 4.531272708030883
+    },
+    {
+      "id": "Q08",
+      "question": "What does verified=true mean for answer memory in the manuscript, and how much generated text can be stored?",
+      "expected": "It reflects an ANSWER retrieval-gate decision rather than independent verification; up to 500 characters of generated text.",
+      "correct": true,
+      "reason": "Includes 500-character memory and retrieval-gate rather than independent verification.",
+      "wall_seconds": 5.138156875036657
+    },
+    {
+      "id": "Q09",
+      "question": "How many authenticated-read requests were tested in total, how many per stage, and how many errors were observed?",
+      "expected": "80,000 total; 20,000 in each of four stages; zero observed errors.",
+      "correct": false,
+      "reason": "Gives four 20,000-request stages and zero-error rows but omits the explicit 80,000 total; user would have to calculate it.",
+      "wall_seconds": 4.535337208013516
+    },
+    {
+      "id": "Q10",
+      "question": "What was the peak authenticated-read throughput, and at how many concurrent clients did it occur?",
+      "expected": "2,823.4 requests per second at 50 concurrent clients.",
+      "correct": true,
+      "reason": "Includes measured peak 2,823.4 requests/s at 50 clients.",
+      "wall_seconds": 5.148505625023972
+    },
+    {
+      "id": "Q11",
+      "question": "What p95 latency did the 12-task AI workload record, and does the API-read throughput establish thousands of generated answers per second?",
+      "expected": "25.12 seconds p95. No: API reads and AI generation are different workloads.",
+      "correct": true,
+      "reason": "Includes p95 25.12 seconds and separates API reads from generated answers.",
+      "wall_seconds": 5.138295874989126
+    },
+    {
+      "id": "Q12",
+      "question": "Does the earlier three-question pilot's mean keyword coverage of 1.0 establish general answer accuracy?",
+      "expected": "No. Keywords could occur in evidence or answers; this is coverage, not independently graded correctness or semantic citation accuracy.",
+      "correct": true,
+      "reason": "Explicitly rejects keyword coverage as general answer accuracy.",
+      "wall_seconds": 5.0918549170019105
+    },
+    {
+      "id": "Q13",
+      "question": "Which two model tags and two temperatures were used in the manuscript's fixed-evidence pilot, and how many measured generations were run?",
+      "expected": "qwen:7b and gemma:7b; temperatures 0.0 and 0.8; 24 measured generations.",
+      "correct": true,
+      "reason": "Includes both model tags, both temperatures, and 24 calls.",
+      "wall_seconds": 5.556918125017546
+    },
+    {
+      "id": "Q14",
+      "question": "Which model-temperature-seed trial adopted the unsupported deletion premise, and did that trial actually delete documents?",
+      "expected": "qwen:7b at temperature 0.8, seed 17. It adopted an unsupported textual premise; no deletion capability was exposed and no deletion occurred.",
+      "correct": true,
+      "reason": "Includes Qwen at 0.8/seed 17 and explicitly no deletion capability or actual deletion.",
+      "wall_seconds": 4.8379234169842675
+    },
+    {
+      "id": "Q15",
+      "question": "Is this manuscript a peer-reviewed accepted paper, and have named authors and affiliations been finalized?",
+      "expected": "No acceptance or peer-review claim; it is an unpublished manuscript draft. Named authors and affiliations are pending confirmation.",
+      "correct": false,
+      "reason": "Gives pending authors/affiliations and exploratory evaluation status but omits unpublished/no-peer-review manuscript status.",
+      "wall_seconds": 4.112111125024967
+    },
+    {
+      "id": "Q16",
+      "question": "Does the manuscript establish an air-gapped or legally certified environment just because the workbench is called sovereign?",
+      "expected": "No. Sovereign refers to intended institution-controlled local hosting; the implementation does not establish air-gap or legal certification.",
+      "correct": true,
+      "reason": "Explicitly says locality does not establish air-gap or legal certification.",
+      "wall_seconds": 3.413298500003293
+    },
+    {
+      "id": "Q17",
+      "question": "What is the exact annual commercial subscription price of this workbench in Indian rupees?",
+      "expected": "Not stated in this document; refuse to invent a price.",
+      "correct": true,
+      "reason": "Explicitly abstains from inventing subscription price.",
+      "wall_seconds": 0.10361774999182671
+    },
+    {
+      "id": "Q18",
+      "question": "What is the patent application number filed by this project's inventors?",
+      "expected": "Not stated in this document; no patent filing number may be invented.",
+      "correct": true,
+      "reason": "Explicitly abstains from inventing the patent number.",
+      "wall_seconds": 0.029608207987621427
+    },
+    {
+      "id": "Q19",
+      "question": "How many real industrial customers have deployed this workbench in production?",
+      "expected": "Not stated; the manuscript reports no public deployment and uses a synthetic corpus, not customer-count data.",
+      "correct": true,
+      "reason": "Explicitly abstains about an absent production customer count.",
+      "wall_seconds": 0.027417332981713116
+    },
+    {
+      "id": "Q20",
+      "question": "The paper proves a general autonomous DAG planner. Which general DAG planning algorithm was validated?",
+      "expected": "Reject the premise. The demonstrated planner is bounded, with a fixed search and optional report step selected by keywords; general DAG planning is outside the demonstrated implementation.",
+      "correct": true,
+      "reason": "Explicitly rejects a general agent planner and describes implemented bounded workflow.",
+      "wall_seconds": 4.354763624956831
+    }
+  ]
+}
