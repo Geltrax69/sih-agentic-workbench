@@ -20,30 +20,68 @@ into an enterprise workbench. See `docs/forge-migration.md`.
 - **Models** — any OpenAI-compatible local endpoint (Ollama / vLLM / LM Studio); cloud disabled by default
 - **Infra** — Docker Compose, GitHub Actions
 
-## Quick start (development)
+## Run the application
 
-For the configured two-model LM Studio setup on this machine, open LM Studio and run:
+### Full application (recommended)
 
-```bash
-./run.sh
-```
+You need Docker Desktop, LM Studio with its `lms` command-line tool enabled, and
+the three local models used by the default configuration:
 
-The script starts Docker Desktop if needed, loads the existing MiniCPM/Gemma models
-and Nomic embedder, starts LM Studio on port 1234, builds the stack, waits for the
-API/AI/UI, and opens the browser. It preserves `.env` and stored data. Set
-`NO_BROWSER=1 ./run.sh` to skip opening the browser. Stop with `docker compose down`.
+- `minicpm5-1b`
+- `gemma-4-e4b-it-obliterated`
+- `text-embedding-nomic-embed-text-v1.5`
 
-For manual setup:
+Create your local configuration once, then start the full stack:
 
 ```bash
 cp .env.example .env
-make dev        # docker compose up: postgres, redis, minio, api, ai, web
+./run.sh
 ```
 
-Web: http://localhost:3000 — API: http://localhost:8080/healthz
+The script starts Docker Desktop when needed, loads the local models, starts LM
+Studio on port 1234, builds the services, and opens the app. Visit
+http://localhost:3000 and sign in with `BOOTSTRAP_ADMIN_EMAIL` and
+`BOOTSTRAP_ADMIN_PASSWORD` from `.env`.
 
-Default dev bootstrap credentials are in `.env.example` (change for anything
-beyond local development).
+To start without opening a browser:
+
+```bash
+NO_BROWSER=1 ./run.sh
+```
+
+To stop the application while preserving its database and uploaded documents:
+
+```bash
+docker compose down
+```
+
+To also remove local Docker data, run `docker compose down -v`.
+
+### UI preview only
+
+Use this when you only want to view the interface with sample data; it does not
+start Docker, call the API, or require local AI models.
+
+```bash
+cd apps/web
+npm install
+npm run dev -- --host 127.0.0.1
+```
+
+Open http://127.0.0.1:3000/?preview=1. Stop the preview with `Ctrl+C`.
+
+### Manual full-stack startup
+
+If LM Studio is already running and configured in `.env`, start the services with:
+
+```bash
+docker compose up --build
+```
+
+Web: http://localhost:3000 — API health check: http://localhost:8080/healthz
+
+The default development credentials are listed in `.env.example`; change them
+before using any non-local environment.
 
 ## Repository layout
 
